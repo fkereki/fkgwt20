@@ -108,7 +108,7 @@ public class Mvptest implements EntryPoint {
 				String textToServer = nameField.getText();
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer+"ungabunga",
+				greetingService.greetServer(textToServer+"ungabunga orkork",
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
