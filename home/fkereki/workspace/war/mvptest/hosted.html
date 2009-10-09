@@ -1,5 +1,6 @@
 <html>
-<head><script>
+<head>
+<script>
 // TODO(jat): wrap these to reduce namespace issues, and refactor code into
 //    separate functions.
 var $wnd = parent;
@@ -265,9 +266,11 @@ window.fireOnModuleLoadStart = function(className) {
 };
 
 window.__gwt_module_id = 0;
-</script></head>
+</script>
+</head>
 <body>
-<font face='arial' size='-1'>This html file is for hosted mode support.</font>
+<font face='arial' size='-1'>This html file is for hosted mode
+support.</font>
 <script><!--
 // Lightweight metrics
 $stats && $stats({moduleName:$moduleName,subSystem:'startup',evtGroup:'moduleStartup',millis:(new Date()).getTime(),type:'moduleEvalEnd'});
@@ -308,4 +311,6 @@ if (!$legacyHosted) {
 
 query = window.location.search.substring(1);
 if (query && $wnd[query]) setTimeout($wnd[query].onScriptLoad, 1);
---></script></body></html>
+--></script>
+</body>
+</html>
