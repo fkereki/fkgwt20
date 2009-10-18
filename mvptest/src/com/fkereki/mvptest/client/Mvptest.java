@@ -28,11 +28,19 @@ public class Mvptest implements EntryPoint,
 
     DOM.removeChild(RootPanel.getBodyElement(), DOM
       .getElementById("loading"));
+
+    // TODO Add login; get username and password, validate
+    // with server, and also get user type (for menues and
+    // authorization)
+
     RootPanel.get().add(rootDisplay);
     History.addValueChangeHandler(this);
   }
 
   void createMenu(MenuBar mb) {
+    // TODO Add user type parameter, for specific menu
+    // generation
+
     mb.addItem("the", new HistoryCommand("foo"));
     mb.addItem("foo", new HistoryCommand("bar"));
     mb.addItem("menu", new HistoryCommand("baz"));
@@ -40,6 +48,10 @@ public class Mvptest implements EntryPoint,
 
   @Override
   public void onValueChange(ValueChangeEvent<String> event) {
+    // TODO Add security checks, so unauthorized users
+    // cannot get to a function just by entering the
+    // appropriate token
+
     runPanel.clear();
     String token = event.getValue();
     if (token.equals("foo")) {
