@@ -5,6 +5,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
@@ -52,8 +53,15 @@ public class Mvptest implements EntryPoint,
     // cannot get to a function just by entering the
     // appropriate token
 
+    // TODO Check if token includes "?" followed by
+    // something else. If so, pass the extra string to the
+    // new FormXXX() call; that class is assumed to
+    // understand it. FormXXX() must be able to deal with an
+    // empty string, meaning no parameters.
+
     runPanel.clear();
     String token = event.getValue();
+    Window.alert(token);
     if (token.equals("foo")) {
       runPanel.add(new FormTwoLabels());
     } else if (token.equals("bar")) {
