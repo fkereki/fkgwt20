@@ -9,6 +9,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -43,28 +44,40 @@ public class Mvptest implements EntryPoint,
     // TODO Add user type parameter, for specific menu
     // generation
 
-    mb.addItem("the", new HistoryCommand("foo"));
+    mb
+      .addItem("the", new HistoryCommand("foo?pepe=inicio"));
     mb.addItem("foo", new HistoryCommand("bar"));
     mb.addItem("menu", new HistoryCommand("baz"));
   }
 
+
   @Override
   public void onValueChange(ValueChangeEvent<String> event) {
-    String args = null;
-    String token = event.getValue();
+    executeInPanel(runPanel, event.getValue());
+  }
+
+
+  public void executeInPanel(Panel ppp, String token) {
+
+    /*
+     * There could be parameters after the "#token" in the
+     * classic form "?key1=value1&key2=value2..."; for more
+     * on this, check http://www.w3.org/TR/hash-in-uri/.
+     */
+    String args = "";
     int question = token.indexOf("?");
     if (question != -1) {
       args = token.substring(question + 1);
       token = token.substring(0, question);
     }
 
-    runPanel.clear();
+    ppp.clear();
     if (token.equals("foo")) {
-      runPanel.add(new FormTwoLabels(args));
+      ppp.add(new FormTwoLabels(this, args));
     } else if (token.equals("bar")) {
-      runPanel.add(new FormManyFields(args));
+      ppp.add(new FormManyFields(this, args));
     } else if (token.equals("baz")) {
-      runPanel.add(new Label("just bazzing along..."));
+      ppp.add(new Label("just bazzing along..."));
     } else if (token.equals("")) {
       // no need to do anything...
     } else {

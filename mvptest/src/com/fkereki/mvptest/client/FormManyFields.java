@@ -10,11 +10,7 @@ import com.google.gwt.user.client.ui.Label;
 
 
 public class FormManyFields extends Composite {
-  public FormManyFields() {
-    this(null);
-  }
-
-  public FormManyFields(String params) {
+  public FormManyFields(final Mvptest main, String params) {
     FlexTable ft = new FlexTable();
     ft.setWidget(0, 0, new Label("allzero"));
     ft.setWidget(0, 1, new Label("000-111"));
