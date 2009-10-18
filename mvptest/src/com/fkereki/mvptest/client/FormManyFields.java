@@ -4,8 +4,17 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 
+// TODO Add security checks, so unauthorized users
+// cannot get to a function just by entering the
+// appropriate token
+
+
 public class FormManyFields extends Composite {
   public FormManyFields() {
+    this(null);
+  }
+
+  public FormManyFields(String params) {
     FlexTable ft = new FlexTable();
     ft.setWidget(0, 0, new Label("allzero"));
     ft.setWidget(0, 1, new Label("000-111"));

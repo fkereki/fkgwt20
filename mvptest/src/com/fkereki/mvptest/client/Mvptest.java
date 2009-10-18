@@ -18,6 +18,7 @@ public class Mvptest implements EntryPoint,
   final Grid rootDisplay = new Grid(2, 1);
   final MenuBar runMenuBar = new MenuBar();
   final VerticalPanel runPanel = new VerticalPanel();
+  KeyValueMap keyValue;
 
   public void onModuleLoad() {
     runMenuBar.setWidth("100%");
@@ -49,27 +50,25 @@ public class Mvptest implements EntryPoint,
 
   @Override
   public void onValueChange(ValueChangeEvent<String> event) {
-    // TODO Add security checks, so unauthorized users
-    // cannot get to a function just by entering the
-    // appropriate token
-
-    // TODO Check if token includes "?" followed by
-    // something else. If so, pass the extra string to the
-    // new FormXXX() call; that class is assumed to
-    // understand it. FormXXX() must be able to deal with an
-    // empty string, meaning no parameters.
+    String args = null;
+    String token = event.getValue();
+    int question = token.indexOf("?");
+    if (question != -1) {
+      args = token.substring(question + 1);
+      token = token.substring(0, question);
+    }
 
     runPanel.clear();
-    String token = event.getValue();
-    Window.alert(token);
     if (token.equals("foo")) {
-      runPanel.add(new FormTwoLabels());
+      runPanel.add(new FormTwoLabels(args));
     } else if (token.equals("bar")) {
-      runPanel.add(new FormManyFields());
+      runPanel.add(new FormManyFields(args));
     } else if (token.equals("baz")) {
       runPanel.add(new Label("just bazzing along..."));
     } else if (token.equals("")) {
       // no need to do anything...
+    } else {
+      Window.alert("Unrecognized token=" + token);
     }
   }
 }

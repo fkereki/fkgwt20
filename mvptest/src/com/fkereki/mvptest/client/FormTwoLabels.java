@@ -5,8 +5,16 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+// TODO Add security checks, so unauthorized users
+// cannot get to a function just by entering the
+// appropriate token
+
 public class FormTwoLabels extends Composite {
   public FormTwoLabels() {
+    this(null);
+  }
+
+  public FormTwoLabels(String params) {
     VerticalPanel panel = new VerticalPanel();
     panel.add(new Label("uno"));
     panel.add(new Label("dos"));
