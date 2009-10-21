@@ -4,7 +4,9 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
@@ -15,42 +17,52 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class Mvptest implements EntryPoint,
     ValueChangeHandler<String> {
 
+  final Model model = new Model(); // access the Model
+
   final Grid rootDisplay = new Grid(2, 1);
   final MenuBar runMenuBar = new MenuBar();
   final VerticalPanel runPanel = new VerticalPanel();
   KeyValueMap keyValue;
 
-  final Model model = new Model(); // access the Model
+  AsyncCallback<String> LoginCallback = new AsyncCallback<String>() {
+    public void onFailure(Throwable caught) {
+      Window.alert("crash...");
+    }
+
+    public void onSuccess(String result) {
+      Window.alert("llego..." + result);
+      RootPanel.get().clear();
+      setUpApplication();
+    }
+  };
 
   public void onModuleLoad() {
     DOM.removeChild(RootPanel.getBodyElement(), DOM
       .getElementById("loading"));
 
     LoginPresenter loginForm = new LoginPresenter(
-      new LoginView());
-    View xxx = loginForm.getView();
-    Window.alert("333");
+      new LoginView(), LoginCallback);
+    RootPanel.get().add(loginForm.getView());
 
-    RootPanel.get().add(xxx);
+  }
 
-    Window.alert("444");
+  void setUpApplication() {
+    runMenuBar.setWidth("100%");
+    createMenu(runMenuBar);
 
-    // runMenuBar.setWidth("100%");
-    // createMenu(runMenuBar);
-    //
-    // rootDisplay.setWidth("100%");
-    // rootDisplay.setWidget(0, 0, runMenuBar);
-    // rootDisplay.setWidget(1, 0, runPanel);
-    //
-    //
-    // // TODO Add login; get username and password,
+    rootDisplay.setWidth("100%");
+    rootDisplay.setWidget(0, 0, runMenuBar);
+    rootDisplay.setWidget(1, 0, runPanel);
+
+
+    // TODO Add login; get username and password,
     // validate
-    // // with server, and also get user type (for menues
+    // with server, and also get user type (for menues
     // and
-    // // authorization)
-    //
-    // RootPanel.get().add(rootDisplay);
-    // History.addValueChangeHandler(this);
+    // authorization)
+
+    RootPanel.get().add(rootDisplay);
+    History.addValueChangeHandler(this);
   }
 
   void createMenu(MenuBar mb) {
