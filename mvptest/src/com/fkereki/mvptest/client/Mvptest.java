@@ -4,7 +4,6 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
@@ -21,23 +20,37 @@ public class Mvptest implements EntryPoint,
   final VerticalPanel runPanel = new VerticalPanel();
   KeyValueMap keyValue;
 
+  final Model model = new Model(); // access the Model
+
   public void onModuleLoad() {
-    runMenuBar.setWidth("100%");
-    createMenu(runMenuBar);
-
-    rootDisplay.setWidth("100%");
-    rootDisplay.setWidget(0, 0, runMenuBar);
-    rootDisplay.setWidget(1, 0, runPanel);
-
     DOM.removeChild(RootPanel.getBodyElement(), DOM
       .getElementById("loading"));
 
-    // TODO Add login; get username and password, validate
-    // with server, and also get user type (for menues and
-    // authorization)
+    LoginPresenter loginForm = new LoginPresenter(
+      new LoginView());
+    View xxx = loginForm.getView();
+    Window.alert("333");
 
-    RootPanel.get().add(rootDisplay);
-    History.addValueChangeHandler(this);
+    RootPanel.get().add(xxx);
+
+    Window.alert("444");
+
+    // runMenuBar.setWidth("100%");
+    // createMenu(runMenuBar);
+    //
+    // rootDisplay.setWidth("100%");
+    // rootDisplay.setWidget(0, 0, runMenuBar);
+    // rootDisplay.setWidget(1, 0, runPanel);
+    //
+    //
+    // // TODO Add login; get username and password,
+    // validate
+    // // with server, and also get user type (for menues
+    // and
+    // // authorization)
+    //
+    // RootPanel.get().add(rootDisplay);
+    // History.addValueChangeHandler(this);
   }
 
   void createMenu(MenuBar mb) {
