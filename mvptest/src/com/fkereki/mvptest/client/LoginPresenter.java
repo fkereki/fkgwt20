@@ -7,33 +7,23 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasValue;
 
 public class LoginPresenter extends Presenter<String> {
-
   public LoginPresenter(LoginView loginView,
     AsyncCallback<String> callback) {
     super(loginView, callback);
+
     loginView.getLoginButton().addClickHandler(
-      new LoginClickHandler(loginView, callback));
-  }
-
-  private class LoginClickHandler implements ClickHandler {
-    LoginView myView;
-    AsyncCallback<String> myCallback;
-
-    public LoginClickHandler(LoginView aView,
-      AsyncCallback<String> aCallback) {
-      myView = aView;
-      myCallback = aCallback;
-    }
-
-    public void onClick(ClickEvent event) {
-      String name = myView.getNameField().getValue();
-      if (name.isEmpty()) {
-        myCallback.onFailure(new Throwable());
-      } else {
-        myCallback.onSuccess(myView.getNameField()
-          .getValue());
-      }
-    }
+      new ClickHandler() {
+        public void onClick(ClickEvent event) {
+          String name = ((LoginView) LoginPresenter.this.view)
+            .getNameField().getValue();
+          if (name.isEmpty()) {
+            LoginPresenter.this.callback
+              .onFailure(new Throwable());
+          } else {
+            LoginPresenter.this.callback.onSuccess(name);
+          }
+        }
+      });
   }
 
   public interface Display {
