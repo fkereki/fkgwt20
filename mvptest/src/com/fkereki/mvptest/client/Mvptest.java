@@ -30,7 +30,7 @@ public class Mvptest implements EntryPoint,
     }
 
     public void onSuccess(String result) {
-      Window.alert("llego..." + result);
+      Window.alert("llego al main..." + result);
       RootPanel.get().clear();
       setUpApplication();
     }
@@ -54,11 +54,8 @@ public class Mvptest implements EntryPoint,
     rootDisplay.setWidget(0, 0, runMenuBar);
     rootDisplay.setWidget(1, 0, runPanel);
 
-
-    // TODO Add login; get username and password,
-    // validate
-    // with server, and also get user type (for menues
-    // and
+    // TODO Add login; get username and password, validate
+    // with server, and also get user type (for menues and
     // authorization)
 
     RootPanel.get().add(rootDisplay);
