@@ -2,20 +2,19 @@ package com.fkereki.mvptest.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-
 public class Presenter<T> {
-  View view;
-  AsyncCallback<T> callback;
+	View view;
+	AsyncCallback<T> callback;
 
-  public Presenter() {
-  }
+	public Presenter() {
+	}
 
-  public Presenter(View aView, AsyncCallback<T> aCallback) {
-    view = aView;
-    callback = aCallback;
-  }
+	public Presenter(View aView, AsyncCallback<T> aCallback) {
+		view = aView;
+		callback = aCallback;
+	}
 
-  public View getView() {
-    return view;
-  }
+	public View getView() {
+		return view;
+	}
 }
