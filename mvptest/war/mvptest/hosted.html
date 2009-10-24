@@ -1,11 +1,10 @@
 <html>
-<head>
-<script>
+<head><script>
 // TODO(jat): wrap these to reduce namespace issues, and refactor code into
 //    separate functions.
 var $wnd = parent;
 var $doc = $wnd.document;
-var $moduleName, $moduleBase
+var $moduleName, $moduleBase, $entry
 ,$stats = $wnd.__gwtStatsEvent ? function(a) {return $wnd.__gwtStatsEvent(a);} : null;
 // Lightweight metrics
 if ($stats) {
@@ -31,7 +30,16 @@ try {
 function getTopWindow() {
   var topWin = window.top;
   while (topWin.opener) {
-    topWin = topWin.opener.top;
+    // Check that we can access the url of the opener. If we can't, then return
+    // the window up to the current point. This happens with selenium because
+    // the parent window is a file, but the child window is the hosted URL.
+    var nextTopWin = topWin.opener.top;
+    try {
+      nextTopWin.location.href;
+    } catch (e) {
+      return topWin;
+    }
+    topWin = nextTopWin;
   }
   return topWin;
 }
@@ -266,11 +274,9 @@ window.fireOnModuleLoadStart = function(className) {
 };
 
 window.__gwt_module_id = 0;
-</script>
-</head>
+</script></head>
 <body>
-<font face='arial' size='-1'>This html file is for hosted mode
-support.</font>
+<font face='arial' size='-1'>This html file is for hosted mode support.</font>
 <script><!--
 // Lightweight metrics
 $stats && $stats({moduleName:$moduleName,subSystem:'startup',evtGroup:'moduleStartup',millis:(new Date()).getTime(),type:'moduleEvalEnd'});
@@ -311,6 +317,4 @@ if (!$legacyHosted) {
 
 query = window.location.search.substring(1);
 if (query && $wnd[query]) setTimeout($wnd[query].onScriptLoad, 1);
---></script>
-</body>
-</html>
+--></script></body></html>

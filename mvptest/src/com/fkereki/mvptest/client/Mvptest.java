@@ -6,7 +6,6 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
@@ -24,12 +23,9 @@ public class Mvptest implements EntryPoint,
   final VerticalPanel runPanel = new VerticalPanel();
   KeyValueMap keyValue;
 
-  AsyncCallback<String> LoginCallback = new AsyncCallback<String>() {
-    public void onFailure(Throwable caught) {
-      Window.alert("crash...");
-    }
-
-    public void onSuccess(String result) {
+  SimpleCallback<String> LoginCallback = new SimpleCallback<String>() {
+    @Override
+    public void goBack(String result) {
       Window.alert("llego al main..." + result);
       RootPanel.get().clear();
       setUpApplication();
