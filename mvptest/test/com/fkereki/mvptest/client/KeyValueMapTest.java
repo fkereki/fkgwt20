@@ -1,5 +1,9 @@
 package com.fkereki.mvptest.client;
 
+
+import static org.easymock.classextension.EasyMock.createMock;
+import static org.easymock.classextension.EasyMock.replay;
+import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -51,5 +55,14 @@ public class KeyValueMapTest {
     assertTrue(kvmst2.contains("juan=456"));
     assertTrue(kvmst2.contains("luis=7890"));
     assertTrue(kvmst2.contains("\n"));
+  }
+
+  @Test
+  public void testWithEasyMock() {
+    KeyValueMap kvmMock = createMock(KeyValueMap.class);
+    kvmMock.initializeWithString("pepe=123");
+    replay(kvmMock);
+    kvmMock.initializeWithString("pepe=123");
+    verify(kvmMock);
   }
 }

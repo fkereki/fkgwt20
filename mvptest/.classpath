@@ -7,5 +7,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="/home/fkereki/Downloads/gwt20/easymock-2.5.2/easymock-2.5.2.jar"/>
 	<classpathentry kind="lib" path="/home/fkereki/Downloads/gwt20/easymockclassextension2.4/easymockclassextension.jar"/>
+	<classpathentry kind="lib" path="/home/fkereki/Downloads/gwt20/tools/lib/cglib/cglib-2.2.jar"/>
+	<classpathentry kind="lib" path="/home/fkereki/Downloads/gwt20/tools/lib/objectweb/asm-3.1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
