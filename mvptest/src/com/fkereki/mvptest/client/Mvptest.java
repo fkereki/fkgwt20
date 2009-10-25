@@ -23,7 +23,7 @@ public class Mvptest implements EntryPoint,
   final VerticalPanel runPanel = new VerticalPanel();
   KeyValueMap keyValue;
 
-  SimpleCallback<String> LoginCallback = new SimpleCallback<String>() {
+  SimpleCallback<String> loginCallback = new SimpleCallback<String>() {
     @Override
     public void goBack(String result) {
       Window.alert("llego al main..." + result);
@@ -37,7 +37,7 @@ public class Mvptest implements EntryPoint,
       .getElementById("loading"));
 
     LoginPresenter loginForm = new LoginPresenter(
-      new LoginView(), LoginCallback);
+      new LoginView(), loginCallback);
     RootPanel.get().add(loginForm.getView());
 
   }

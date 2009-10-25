@@ -25,6 +25,9 @@ public class KeyValueMapTest {
 
   @Test
   public void testKeyValueMapString() {
+    KeyValueMap kvm1 = new KeyValueMap("pepe=123456");
+    assertEquals(1, kvm1.size());
+
     KeyValueMap kvm2 = new KeyValueMap("pepe=123&juan=456");
     assertEquals(2, kvm2.size());
     assertTrue(kvm2.containsKey("pepe"));
