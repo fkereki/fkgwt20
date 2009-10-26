@@ -37,7 +37,7 @@ public class Mvptest implements EntryPoint,
       .getElementById("loading"));
 
     LoginPresenter loginForm = new LoginPresenter(
-      new LoginView(), loginCallback);
+      new LoginView(), model, loginCallback);
     RootPanel.get().add(loginForm.getView());
 
   }

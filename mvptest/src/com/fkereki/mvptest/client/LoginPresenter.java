@@ -1,12 +1,16 @@
 package com.fkereki.mvptest.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class LoginPresenter extends Presenter<String> {
-  public LoginPresenter(LoginView loginView,
+  public LoginServiceAsync loginService;
+
+  public LoginPresenter(LoginView loginView, Model model,
     SimpleCallback<String> callback) {
-    super(loginView, callback);
+
+    super(loginView, model, callback);
+    loginService = LoginPresenter.this.model
+      .getRemoteLoginService();
 
     loginView.setName("federico");
     loginView.setPassword("eduardo");
@@ -14,9 +18,6 @@ public class LoginPresenter extends Presenter<String> {
       .setLoginCallback(new SimpleCallback<Object>() {
         @Override
         public void goBack(Object result) {
-          LoginServiceAsync loginService = GWT
-            .create(LoginService.class);
-
           String name = ((LoginView) LoginPresenter.this.view)
             .getName();
           String pass = ((LoginView) LoginPresenter.this.view)
