@@ -603,7 +603,7 @@ a,a:visited,a:hover {
 	border: 1px outset #ccc;
 	cursor: default;
 	opacity: .5;
-	filter: alpha(opacity = 40);
+	filter: alpha(opacity =   40);
 	zoom: 1;
 }
 
@@ -629,7 +629,7 @@ a,a:visited,a:hover {
 	border: 1px outset #ccc;
 	cursor: default;
 	opacity: 0.5;
-	filter: alpha(opacity = 40);
+	filter: alpha(opacity =   40);
 	zoom: 1;
 }
 
@@ -1118,7 +1118,7 @@ a,a:visited,a:hover {
 	cursor: default;
 	opacity: .5;
 	zoom: 1;
-	filter: alpha(opacity = 40);
+	filter: alpha(opacity =   40);
 }
 
 .gwt-ToggleButton-down,.gwt-ToggleButton-down-hovering,.gwt-ToggleButton-down-disabled
@@ -1147,7 +1147,7 @@ a,a:visited,a:hover {
 	cursor: default;
 	opacity: .5;
 	zoom: 1;
-	filter: alpha(opacity = 40);
+	filter: alpha(opacity =   40);
 }
 
 .gwt-Tree .gwt-TreeItem {
