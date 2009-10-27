@@ -7,8 +7,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class LoginServiceImpl extends RemoteServiceServlet
     implements LoginService {
 
-  public String getSomething(String name, String pass) {
-    return name + " " + pass;
-  }
+	public String getSomething(String name, String pass) {
+		return name + " " + pass;
+	}
 
 }

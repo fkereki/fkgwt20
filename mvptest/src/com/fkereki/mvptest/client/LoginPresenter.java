@@ -2,47 +2,66 @@ package com.fkereki.mvptest.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class LoginPresenter extends Presenter<String> {
-	public LoginServiceAsync loginService;
+public class LoginPresenter extends Presenter {
+	LoginServiceAsync loginService;
+	SimpleCallback<String> loginSuccessCallback;
 
-	public LoginPresenter(LoginView loginView, Model model,
-			SimpleCallback<String> callback) {
+	static String PLACE = "login";
 
-		super(loginView, model, callback);
-		loginService = LoginPresenter.this.model.getRemoteLoginService();
 
-		loginView.setName("federico");
-		loginView.setPassword("eduardo");
-		loginView.setLoginCallback(new SimpleCallback<Object>() {
-			@Override
-			public void goBack(Object result) {
-				String name = ((LoginView) LoginPresenter.this.view).getName();
-				String pass = ((LoginView) LoginPresenter.this.view)
-						.getPassword();
 
-				loginService.getSomething(name, pass,
-						new AsyncCallback<String>() {
-							public void onFailure(Throwable caught) {
-								LoginPresenter.this.callback
-										.onFailure(new Throwable());
-							}
+	public LoginPresenter(PresenterDisplay loginDisplay,
+	    Model model, SimpleCallback<String> callback) {
 
-							public void onSuccess(String result) {
-								LoginPresenter.this.callback.goBack(result);
-							}
-						});
-			}
-		});
+		super(loginDisplay, model);
+		loginSuccessCallback = callback;
+		loginService = LoginPresenter.this.getModel()
+		    .getRemoteLoginService();
+
+		loginDisplay.setName("federico");
+		loginDisplay.setPassword("eduardo");
+		loginDisplay
+		    .setLoginCallback(new SimpleCallback<Object>() {
+			    @Override
+			    public void goBack(Object result) {
+				    String name = ((PresenterDisplay) LoginPresenter.this
+				        .getDisplay()).getName();
+				    String pass = ((PresenterDisplay) LoginPresenter.this
+				        .getDisplay()).getPassword();
+
+				    loginService.getSomething(name, pass,
+				        new AsyncCallback<String>() {
+					        public void onFailure(Throwable caught) {
+						        loginSuccessCallback
+						            .onFailure(new Throwable());
+					        }
+
+
+
+					        public void onSuccess(String result) {
+						        loginSuccessCallback.goBack(result);
+					        }
+				        });
+			    }
+		    });
 	}
 
-	public interface Display {
+	public interface PresenterDisplay extends Display {
 		public String getName();
+
+
 
 		public void setName(String s);
 
+
+
 		public String getPassword();
 
+
+
 		public void setPassword(String s);
+
+
 
 		public void setLoginCallback(SimpleCallback<Object> acb);
 	}

@@ -14,32 +14,34 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 // appropriate token
 
 public class FormTwoLabels extends Composite {
-  PopupPanel pup = new PopupPanel(true);
+	PopupPanel pup = new PopupPanel(true);
 
-  public FormTwoLabels(final Mvptest main, String params) {
-    KeyValueMap kvm = new KeyValueMap(params);
 
-    VerticalPanel panel = new VerticalPanel();
-    panel.add(new Label("kvm..." + kvm.get("pepe")));
-    panel.add(new Label("dos"));
-    panel.add(new Hyperlink("vamos al foo",
-      "foo?pepe=continua"));
-    panel.add(new Hyperlink("vamos al bar", "bar"));
-    panel.add(new Hyperlink("vamos al baZ", "baz"));
-    panel.add(new Label(""));
 
-    final Button popupOpener = new Button("Click me");
-    panel.add(popupOpener);
+	public FormTwoLabels(final Mvptest main, String params) {
+		KeyValueMap kvm = new KeyValueMap(params);
 
-    popupOpener.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(ClickEvent event) {
-        pup.showRelativeTo(popupOpener);
-        pup.show();
-        main.executeInPanel(pup, "foo?pepe=termina ahora");
-      }
-    });
+		VerticalPanel panel = new VerticalPanel();
+		panel.add(new Label("kvm..." + kvm.get("pepe")));
+		panel.add(new Label("dos"));
+		panel.add(new Hyperlink("vamos al foo",
+		    "foo?pepe=continua"));
+		panel.add(new Hyperlink("vamos al bar", "bar"));
+		panel.add(new Hyperlink("vamos al baZ", "baz"));
+		panel.add(new Label(""));
 
-    initWidget(panel);
-  }
+		final Button popupOpener = new Button("Click me");
+		panel.add(popupOpener);
+
+		popupOpener.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				pup.showRelativeTo(popupOpener);
+				pup.show();
+				main.executeInPanel(pup, "foo?pepe=termina ahora");
+			}
+		});
+
+		initWidget(panel);
+	}
 }
