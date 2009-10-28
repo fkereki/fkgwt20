@@ -26,14 +26,18 @@ public class LoginPresenterTest {
 			}
 		};
 
+		/*
+		 * The following calls are to be expected... We need capture the callback
+		 * for later using it.
+		 */
 		loginViewMock.setName("federico");
-		loginViewMock.setPassword("eduardox");
+		loginViewMock.setPassword("eduardo");
 		Capture<SimpleCallback<Object>> callbackCapture = new Capture<SimpleCallback<Object>>();
 		loginViewMock.setLoginCallback(EasyMock
 		    .capture(callbackCapture));
 		expect(loginViewMock.getName()).andReturn("federico");
-		expect(loginViewMock.getPassword()).andReturn(
-		    "eduardox");
+		expect(loginViewMock.getPassword())
+		    .andReturn("eduardo");
 
 		expect(modelMock.getRemoteLoginService()).andReturn(
 		    loginServiceMock);
