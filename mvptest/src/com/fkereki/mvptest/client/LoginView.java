@@ -10,70 +10,69 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class LoginView extends
-    com.fkereki.mvptest.client.View implements
+public class LoginView extends View implements
     LoginPresenter.PresenterDisplay {
-	AsyncCallback<Object> loginCallback;
-	TextBox nameTextBox;
-	TextBox passwordTextBox;
-	Button loginButton;
-	FlexTable flexTable;
+  AsyncCallback<Object> loginCallback;
+  TextBox nameTextBox;
+  TextBox passwordTextBox;
+  Button loginButton;
+  FlexTable flexTable;
 
 
-	public LoginView() {
-		flexTable = new FlexTable();
-		nameTextBox = new TextBox();
-		passwordTextBox = new PasswordTextBox();
+  public LoginView() {
+    flexTable = new FlexTable();
+    nameTextBox = new TextBox();
+    passwordTextBox = new PasswordTextBox();
 
-		loginButton = new Button("Log in");
-		loginButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				loginCallback.onSuccess(null);
-			}
-		});
+    loginButton = new Button("Log in");
+    loginButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
+        loginCallback.onSuccess(null);
+      }
+    });
 
-		flexTable.setWidget(0, 0, new Label("User name:"));
-		flexTable.setWidget(0, 1, nameTextBox);
-		flexTable.setWidget(1, 0, new Label("Password:"));
-		flexTable.setWidget(1, 1, passwordTextBox);
-		flexTable.setWidget(2, 1, loginButton);
+    flexTable.setWidget(0, 0, new Label("User name:"));
+    flexTable.setWidget(0, 1, nameTextBox);
+    flexTable.setWidget(1, 0, new Label("Password:"));
+    flexTable.setWidget(1, 1, passwordTextBox);
+    flexTable.setWidget(2, 1, loginButton);
 
-		initWidget(flexTable);
-	}
-
-
-	@Override
-	public String getName() {
-		return nameTextBox.getValue();
-	}
+    initWidget(flexTable);
+  }
 
 
-	@Override
-	public String getPassword() {
-		return passwordTextBox.getValue();
-	}
+  @Override
+  public String getName() {
+    return nameTextBox.getValue();
+  }
 
 
-	@Override
-	public void setName(String s) {
-		nameTextBox.setValue(s);
-	}
+  @Override
+  public String getPassword() {
+    return passwordTextBox.getValue();
+  }
 
 
-	@Override
-	public void setPassword(String s) {
-		passwordTextBox.setValue(s);
-	}
+  @Override
+  public void setName(String s) {
+    nameTextBox.setValue(s);
+  }
 
 
-	@Override
-	public void setLoginCallback(SimpleCallback<Object> acb) {
-		loginCallback = acb;
-	}
+  @Override
+  public void setPassword(String s) {
+    passwordTextBox.setValue(s);
+  }
 
 
-	@Override
-	public Widget asWidget() {
-		return LoginView.this;
-	}
+  @Override
+  public void setLoginCallback(SimpleCallback<Object> acb) {
+    loginCallback = acb;
+  }
+
+
+  @Override
+  public Widget asWidget() {
+    return LoginView.this;
+  }
 }

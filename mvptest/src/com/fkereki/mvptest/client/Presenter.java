@@ -1,27 +1,37 @@
 package com.fkereki.mvptest.client;
 
 abstract public class Presenter {
-	Display display;
-	Model model;
+  String params;
+  Display display;
+  Model model;
+  KeyValueMap kvm;
 
 
-	public Presenter() {
-	}
+  public Presenter() {
+  }
 
 
-	public Presenter(Display aDisplay, Model aModel) {
-		super();
-		display = aDisplay;
-		model = aModel;
-	}
+  public Presenter(String someParams, Display aDisplay,
+    Model aModel) {
+    super();
+    params = someParams;
+    display = aDisplay;
+    model = aModel;
+    kvm = new KeyValueMap(params);
+  }
 
 
-	public Model getModel() {
-		return model;
-	}
+  public Model getModel() {
+    return model;
+  }
 
 
-	public Display getDisplay() {
-		return display;
-	}
+  public Display getDisplay() {
+    return display;
+  }
+
+
+  public KeyValueMap getKvm() {
+    return kvm;
+  }
 }
