@@ -5,10 +5,8 @@ abstract public class Presenter {
 	Model model;
 
 
-
 	public Presenter() {
 	}
-
 
 
 	public Presenter(Display aDisplay, Model aModel) {
@@ -18,11 +16,9 @@ abstract public class Presenter {
 	}
 
 
-
 	public Model getModel() {
 		return model;
 	}
-
 
 
 	public Display getDisplay() {

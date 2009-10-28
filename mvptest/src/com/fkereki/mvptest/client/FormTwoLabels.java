@@ -17,7 +17,6 @@ public class FormTwoLabels extends Composite {
 	PopupPanel pup = new PopupPanel(true);
 
 
-
 	public FormTwoLabels(final Mvptest main, String params) {
 		KeyValueMap kvm = new KeyValueMap(params);
 

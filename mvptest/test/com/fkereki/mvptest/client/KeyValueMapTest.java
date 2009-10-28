@@ -17,11 +17,9 @@ public class KeyValueMapTest {
 	}
 
 
-
 	@After
 	public void tearDown() throws Exception {
 	}
-
 
 
 	@Test
@@ -29,7 +27,6 @@ public class KeyValueMapTest {
 		KeyValueMap kvm0 = new KeyValueMap("");
 		assertTrue(kvm0.isEmpty());
 	}
-
 
 
 	@Test
@@ -44,7 +41,6 @@ public class KeyValueMapTest {
 		assertEquals("123", kvm2.get("pepe"));
 		assertEquals("456", kvm2.get("juan"));
 	}
-
 
 
 	@Test
@@ -63,7 +59,6 @@ public class KeyValueMapTest {
 		assertTrue(kvmst2.contains("luis=7890"));
 		assertTrue(kvmst2.contains("\n"));
 	}
-
 
 
 	@Test

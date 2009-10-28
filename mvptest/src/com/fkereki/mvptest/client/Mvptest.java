@@ -24,7 +24,6 @@ public class Mvptest implements EntryPoint,
 	KeyValueMap keyValue;
 
 
-
 	public void onModuleLoad() {
 		DOM.removeChild(RootPanel.getBodyElement(), DOM
 		    .getElementById("loading"));
@@ -33,7 +32,6 @@ public class Mvptest implements EntryPoint,
 		History.newItem(LoginPresenter.PLACE);
 		History.fireCurrentHistoryState();
 	}
-
 
 
 	void showLogin() {
@@ -54,7 +52,6 @@ public class Mvptest implements EntryPoint,
 	}
 
 
-
 	void showMainMenu() {
 		// TODO Use user information for menu configuration
 
@@ -71,7 +68,6 @@ public class Mvptest implements EntryPoint,
 	}
 
 
-
 	void createMenu(MenuBar mb) {
 		// TODO Add user type parameter, for specific menu
 		// generation
@@ -86,12 +82,10 @@ public class Mvptest implements EntryPoint,
 	}
 
 
-
 	@Override
 	public void onValueChange(ValueChangeEvent<String> event) {
 		executeInPanel(runPanel, event.getValue());
 	}
-
 
 
 	public void executeInPanel(Panel ppp, String token) {

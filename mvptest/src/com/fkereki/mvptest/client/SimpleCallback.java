@@ -11,12 +11,10 @@ public abstract class SimpleCallback<T> implements
 	}
 
 
-
 	@Override
 	public final void onSuccess(T result) {
 		goBack(result);
 	}
-
 
 
 	public abstract void goBack(T result);

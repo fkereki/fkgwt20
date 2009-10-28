@@ -10,5 +10,4 @@ public class LoginServiceImpl extends RemoteServiceServlet
 	public String getSomething(String name, String pass) {
 		return name + " " + pass;
 	}
-
 }

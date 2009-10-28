@@ -10,17 +10,14 @@ public class KeyValueMap extends HashMap<String, String> {
 	private static final long serialVersionUID = 5225712868559413562L;
 
 
-
 	public KeyValueMap() {
 		this("");
 	}
 
 
-
 	public KeyValueMap(final String params) {
 		initializeWithString(params);
 	}
-
 
 
 	public void initializeWithString(String params) {
@@ -38,7 +35,6 @@ public class KeyValueMap extends HashMap<String, String> {
 			}
 		}
 	}
-
 
 
 	@Override

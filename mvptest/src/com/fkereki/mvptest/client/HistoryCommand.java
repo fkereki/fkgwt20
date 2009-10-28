@@ -7,11 +7,9 @@ public class HistoryCommand implements Command {
 	String historyToken;
 
 
-
 	public HistoryCommand(final String newToken) {
 		historyToken = newToken;
 	}
-
 
 
 	public void execute() {

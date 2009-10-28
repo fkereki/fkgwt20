@@ -9,7 +9,6 @@ public class LoginPresenter extends Presenter {
 	static String PLACE = "login";
 
 
-
 	public LoginPresenter(PresenterDisplay loginDisplay,
 	    Model model, SimpleCallback<String> callback) {
 
@@ -37,7 +36,6 @@ public class LoginPresenter extends Presenter {
 					        }
 
 
-
 					        public void onSuccess(String result) {
 						        loginSuccessCallback.goBack(result);
 					        }
@@ -50,17 +48,13 @@ public class LoginPresenter extends Presenter {
 		public String getName();
 
 
-
 		public void setName(String s);
-
 
 
 		public String getPassword();
 
 
-
 		public void setPassword(String s);
-
 
 
 		public void setLoginCallback(SimpleCallback<Object> acb);

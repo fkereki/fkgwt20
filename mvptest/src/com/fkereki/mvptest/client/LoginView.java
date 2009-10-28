@@ -20,7 +20,6 @@ public class LoginView extends
 	FlexTable flexTable;
 
 
-
 	public LoginView() {
 		flexTable = new FlexTable();
 		nameTextBox = new TextBox();
@@ -43,12 +42,10 @@ public class LoginView extends
 	}
 
 
-
 	@Override
 	public String getName() {
 		return nameTextBox.getValue();
 	}
-
 
 
 	@Override
@@ -57,12 +54,10 @@ public class LoginView extends
 	}
 
 
-
 	@Override
 	public void setName(String s) {
 		nameTextBox.setValue(s);
 	}
-
 
 
 	@Override
@@ -71,12 +66,10 @@ public class LoginView extends
 	}
 
 
-
 	@Override
 	public void setLoginCallback(SimpleCallback<Object> acb) {
 		loginCallback = acb;
 	}
-
 
 
 	@Override
