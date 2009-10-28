@@ -27,13 +27,13 @@ public class LoginPresenterTest {
 		};
 
 		loginViewMock.setName("federico");
-		loginViewMock.setPassword("eduardo");
+		loginViewMock.setPassword("eduardox");
 		Capture<SimpleCallback<Object>> callbackCapture = new Capture<SimpleCallback<Object>>();
 		loginViewMock.setLoginCallback(EasyMock
 		    .capture(callbackCapture));
 		expect(loginViewMock.getName()).andReturn("federico");
-		expect(loginViewMock.getPassword())
-		    .andReturn("eduardo");
+		expect(loginViewMock.getPassword()).andReturn(
+		    "eduardox");
 
 		expect(modelMock.getRemoteLoginService()).andReturn(
 		    loginServiceMock);
