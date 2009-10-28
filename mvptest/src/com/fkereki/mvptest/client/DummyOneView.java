@@ -15,7 +15,7 @@ public class DummyOneView extends View implements
 
   public DummyOneView() {
     VerticalPanel panel = new VerticalPanel();
-    panel.add(new Label("kvm..." + pepeValue));
+    panel.add(new Label("kvm..."));
     panel.add(new Label("dos"));
     panel.add(new Hyperlink("vamos al foo",
       "foo?pepe=continua"));
@@ -35,6 +35,8 @@ public class DummyOneView extends View implements
         // "foo?pepe=termina ahora");
       }
     });
+
+    initWidget(panel);
   }
 
 

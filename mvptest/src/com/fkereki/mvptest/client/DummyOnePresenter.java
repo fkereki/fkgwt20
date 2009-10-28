@@ -9,6 +9,7 @@ public class DummyOnePresenter extends Presenter {
     DummyOneDisplay dummyOneDisplay, Model model) {
 
     super(params, dummyOneDisplay, model);
+    dummyOneDisplay.setPepeValue(getKvm().get("pepe"));
   }
 
   public interface DummyOneDisplay extends Display {

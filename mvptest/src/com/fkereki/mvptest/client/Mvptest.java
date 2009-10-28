@@ -7,7 +7,6 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -72,10 +71,8 @@ public class Mvptest implements EntryPoint,
     // TODO Add user type parameter, for specific menu
     // generation
 
-    mb
-      .addItem("the", new HistoryCommand("foo?pepe=inicio"));
     mb.addItem("dummy#1", new HistoryCommand(
-      DummyOnePresenter.PLACE));
+      DummyOnePresenter.PLACE + "?pepe=show this"));
     mb.addItem("dummy#2", new HistoryCommand(
       DummyTwoPresenter.PLACE));
     mb.addItem("login", new HistoryCommand(
@@ -115,10 +112,11 @@ public class Mvptest implements EntryPoint,
         .add((new DummyOnePresenter(args,
           new DummyOneView(), model)).getDisplay()
           .asWidget());
-    } else if (token.equals("bar")) {
-      ppp.add(new FormManyFields(this, args));
-    } else if (token.equals("baz")) {
-      ppp.add(new Label("just bazzing along..."));
+    } else if (token.equals(DummyTwoPresenter.PLACE)) {
+      ppp
+        .add((new DummyTwoPresenter(args,
+          new DummyTwoView(), model)).getDisplay()
+          .asWidget());
     } else if (token.equals("")) {
       // no need to do anything...
     } else {
