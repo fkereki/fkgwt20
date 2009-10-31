@@ -1,5 +1,8 @@
 package com.fkereki.mvptest.client;
 
+import java.util.Date;
+
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class LoginPresenter extends Presenter {
@@ -15,8 +18,12 @@ public class LoginPresenter extends Presenter {
 
     super(params, loginDisplay, model);
     loginSuccessCallback = callback;
+    Date xxx1 = new Date();
     loginService = LoginPresenter.this.getModel()
       .getRemoteLoginService();
+    Date xxx2 = new Date();
+    Window.alert("time... "
+      + (xxx2.getTime() - xxx1.getTime()));
 
     loginDisplay.setName("federico");
     loginDisplay.setPassword("eduardo");
