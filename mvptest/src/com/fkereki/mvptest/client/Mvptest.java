@@ -28,8 +28,11 @@ public class Mvptest implements EntryPoint,
       .getElementById("loading"));
 
     History.addValueChangeHandler(this);
-    History.newItem(LoginPresenter.PLACE);
-    History.fireCurrentHistoryState();
+    History.newItem(LoginPresenter.PLACE, true);
+
+    // the "true" as last parameter could be omitted; then,
+    // you would have to History.fireCurrenthistoryState()
+    // on your own.
   }
 
 
