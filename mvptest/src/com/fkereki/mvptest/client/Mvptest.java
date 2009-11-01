@@ -98,7 +98,7 @@ public class Mvptest implements EntryPoint,
     // generation
 
     mb.addItem("dummy#1", new HistoryCommand(
-      DummyOnePresenter.PLACE + "?pepe=show this"));
+      DummyOnePresenter.PLACE + "?parameter=value"));
     mb.addItem("dummy#2", new HistoryCommand(
       DummyTwoPresenter.PLACE));
     mb.addItem("login", new HistoryCommand(
