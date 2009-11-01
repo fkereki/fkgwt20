@@ -3,17 +3,17 @@ package com.fkereki.mvptest.client;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class LoginPresenter extends Presenter {
-  LoginServiceAsync loginService;
-  SimpleCallback<String> loginSuccessCallback;
-
   static String PLACE = "login";
 
+  LoginServiceAsync loginService;
+  SimpleCallback<String> loginSuccessCallback;
 
   public LoginPresenter(String params,
     PresenterDisplay loginDisplay, Model model,
     SimpleCallback<String> callback) {
 
     super(params, loginDisplay, model);
+
     loginSuccessCallback = callback;
     loginService = LoginPresenter.this.getModel()
       .getRemoteLoginService();

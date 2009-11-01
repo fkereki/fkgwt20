@@ -20,19 +20,30 @@ public class Mvptest implements EntryPoint,
   final Grid rootDisplay = new Grid(2, 1);
   final MenuBar runMenuBar = new MenuBar();
   final VerticalPanel runPanel = new VerticalPanel();
-  KeyValueMap keyValue;
 
+  String startingToken = "";
 
   public void onModuleLoad() {
     DOM.removeChild(RootPanel.getBodyElement(), DOM
       .getElementById("loading"));
 
+    /*
+     * If the application is called with a token, we cannot
+     * just jump to it; we need go past the login form
+     * first.
+     * 
+     * After the user has logged in, the showMainMenu(...)
+     * method --called in the login callback-- will take
+     * care of jumping to the appropriate place.
+     */
+    startingToken = History.getToken();
+
+    /*
+     * Set up the history management, and start by showing
+     * the login form.
+     */
     History.addValueChangeHandler(this);
     History.newItem(LoginPresenter.PLACE, true);
-
-    // the "true" as last parameter could be omitted; then,
-    // you would have to History.fireCurrenthistoryState()
-    // on your own.
   }
 
 
@@ -67,6 +78,18 @@ public class Mvptest implements EntryPoint,
 
     RootPanel.get().clear();
     RootPanel.get().add(rootDisplay);
+
+    /*
+     * If the application was started with a token, now that
+     * the user is logged in, it's time to show it.
+     * 
+     * Don't forget to clear startingToken, or after a
+     * logout/login, we will go back again to the token.
+     */
+    if (!startingToken.isEmpty()) {
+      History.newItem(startingToken, true);
+      startingToken = "";
+    }
   }
 
 
@@ -90,7 +113,6 @@ public class Mvptest implements EntryPoint,
 
 
   public void executeInPanel(Panel ppp, String token) {
-
     /*
      * There could be parameters after the "#token" in the
      * classic form "?key1=value1&key2=value2..."; for more
@@ -104,8 +126,7 @@ public class Mvptest implements EntryPoint,
     }
 
     // TODO Check, before running, if the current user is
-    // allowed to run the
-    // program
+    // allowed to run the program
 
     ppp.clear();
     if (token.equals(LoginPresenter.PLACE)) {
