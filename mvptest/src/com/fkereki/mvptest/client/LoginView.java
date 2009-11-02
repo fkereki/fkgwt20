@@ -27,6 +27,8 @@ public class LoginView extends View implements
     loginButton = new Button("Log in");
     loginButton.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
+        System.out.print("clickity!");
+
         loginCallback.onSuccess(null);
       }
     });
