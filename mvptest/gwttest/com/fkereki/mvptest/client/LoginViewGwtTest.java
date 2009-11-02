@@ -11,7 +11,6 @@ public class LoginViewGwtTest extends GWTTestCase {
   }
 
   public void testLoginView() {
-
     LoginView lv = new LoginView();
     lv.setName("unga");
     lv.setPassword("bunga");
@@ -19,8 +18,8 @@ public class LoginViewGwtTest extends GWTTestCase {
 
       @Override
       public void goBack(Object result) {
+        System.out.print("1");
         assertNull(result);
-        assertEquals(1, 2);
         wasCalled = true;
       }
     });
@@ -37,7 +36,16 @@ public class LoginViewGwtTest extends GWTTestCase {
     assertEquals("urk", lv.getName());
     assertEquals("ork", lv.getPassword());
 
+    assertEquals(lv.loginButton.getText(), "Log in");
+
+    // System.out.print("try callback...");
+    // lv.loginCallback.onSuccess(null);
+    // assertTrue(wasCalled);
+
+    System.out.print("0");
     lv.loginButton.click();
+    System.out.print("2");
+    delayTestFinish(1000);
     assertTrue(wasCalled);
   }
 }
