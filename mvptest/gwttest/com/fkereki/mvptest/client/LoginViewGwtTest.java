@@ -18,8 +18,6 @@ public class LoginViewGwtTest extends GWTTestCase {
 
       @Override
       public void goBack(Object result) {
-        System.out.print("1");
-        assertNull(result);
         wasCalled = true;
       }
     });
@@ -30,22 +28,19 @@ public class LoginViewGwtTest extends GWTTestCase {
 
     assertEquals("unga", lv.nameTextBox.getValue());
     assertEquals("bunga", lv.passwordTextBox.getValue());
+    assertEquals(lv.loginButton.getText(), "Log in");
 
     lv.nameTextBox.setValue("urk");
     lv.passwordTextBox.setValue("ork");
     assertEquals("urk", lv.getName());
     assertEquals("ork", lv.getPassword());
 
-    assertEquals(lv.loginButton.getText(), "Log in");
-
-    // System.out.print("try callback...");
+    // wasCalled = false;
     // lv.loginCallback.onSuccess(null);
     // assertTrue(wasCalled);
 
-    System.out.print("0");
+    wasCalled = false;
     lv.loginButton.click();
-    System.out.print("2");
-    delayTestFinish(1000);
     assertTrue(wasCalled);
   }
 }

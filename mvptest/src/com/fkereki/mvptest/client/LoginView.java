@@ -18,7 +18,6 @@ public class LoginView extends View implements
   Button loginButton;
   FlexTable flexTable;
 
-
   public LoginView() {
     flexTable = new FlexTable();
     nameTextBox = new TextBox();
@@ -27,8 +26,6 @@ public class LoginView extends View implements
     loginButton = new Button("Log in");
     loginButton.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
-        System.out.print("clickity!");
-
         loginCallback.onSuccess(null);
       }
     });
