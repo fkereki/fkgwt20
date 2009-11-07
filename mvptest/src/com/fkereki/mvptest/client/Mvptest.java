@@ -129,7 +129,9 @@ public class Mvptest implements EntryPoint,
     // allowed to run the program
 
     ppp.clear();
-    if (token.equals(LoginPresenter.PLACE)) {
+    if (token.isEmpty()) {
+      // no need to do anything...
+    } else if (token.equals(LoginPresenter.PLACE)) {
       showLogin();
     } else if (token.equals(DummyOnePresenter.PLACE)) {
       ppp
@@ -141,8 +143,6 @@ public class Mvptest implements EntryPoint,
         .add((new DummyTwoPresenter(args,
           new DummyTwoView(), model)).getDisplay()
           .asWidget());
-    } else if (token.equals("")) {
-      // no need to do anything...
     } else {
       Window.alert("Unrecognized token=" + token);
     }
