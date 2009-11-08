@@ -18,6 +18,7 @@ public class LoginView extends View implements
   Button loginButton;
   FlexTable flexTable;
 
+
   public LoginView() {
     flexTable = new FlexTable();
     nameTextBox = new TextBox();

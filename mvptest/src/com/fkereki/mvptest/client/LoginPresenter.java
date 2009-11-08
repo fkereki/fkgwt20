@@ -8,11 +8,12 @@ public class LoginPresenter extends Presenter {
   LoginServiceAsync loginService;
   SimpleCallback<String> loginSuccessCallback;
 
+
   public LoginPresenter(String params,
     PresenterDisplay loginDisplay, Model model,
-    SimpleCallback<String> callback) {
+    Environment environment, SimpleCallback<String> callback) {
 
-    super(params, loginDisplay, model);
+    super(params, loginDisplay, model, environment);
 
     loginSuccessCallback = callback;
     loginService = LoginPresenter.this.getModel()
@@ -44,6 +45,7 @@ public class LoginPresenter extends Presenter {
         }
       });
   }
+
 
   public interface PresenterDisplay extends Display {
     public String getName();

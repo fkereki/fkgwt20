@@ -17,6 +17,7 @@ public class DummyTwoView extends View implements
     initWidget(ft);
   }
 
+
   @Override
   public Widget asWidget() {
     return DummyTwoView.this;

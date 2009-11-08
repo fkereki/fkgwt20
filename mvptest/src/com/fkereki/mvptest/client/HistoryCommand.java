@@ -4,15 +4,15 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 
 public class HistoryCommand implements Command {
-	String historyToken;
+  String historyToken;
 
 
-	public HistoryCommand(final String newToken) {
-		historyToken = newToken;
-	}
+  public HistoryCommand(final String newToken) {
+    historyToken = newToken;
+  }
 
 
-	public void execute() {
-		History.newItem(historyToken, true);
-	}
+  public void execute() {
+    History.newItem(historyToken, true);
+  }
 }

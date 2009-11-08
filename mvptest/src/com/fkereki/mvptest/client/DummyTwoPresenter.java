@@ -8,9 +8,10 @@ public class DummyTwoPresenter extends Presenter {
 
 
   public DummyTwoPresenter(String params,
-    DummyTwoPresenterDisplay dummyTwoDisplay, Model model) {
+    DummyTwoPresenterDisplay dummyTwoDisplay, Model model,
+    Environment environment) {
 
-    super(params, dummyTwoDisplay, model);
+    super(params, dummyTwoDisplay, model, environment);
   }
 
 
