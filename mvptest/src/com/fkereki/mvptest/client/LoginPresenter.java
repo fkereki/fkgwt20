@@ -10,14 +10,14 @@ public class LoginPresenter extends Presenter {
 
 
   public LoginPresenter(String params,
-    PresenterDisplay loginDisplay, Model model,
-    Environment environment, SimpleCallback<String> callback) {
+    PresenterDisplay loginDisplay, Environment environment,
+    SimpleCallback<String> callback) {
 
-    super(params, loginDisplay, model, environment);
+    super(params, loginDisplay, environment);
 
     loginSuccessCallback = callback;
-    loginService = LoginPresenter.this.getModel()
-      .getRemoteLoginService();
+    loginService = LoginPresenter.this.getEnvironment()
+      .getModel().getRemoteLoginService();
 
     loginDisplay.setName("federico");
     loginDisplay.setPassword("eduardo");

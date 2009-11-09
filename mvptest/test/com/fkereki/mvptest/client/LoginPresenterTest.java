@@ -16,6 +16,8 @@ public class LoginPresenterTest {
   @Test
   public void testLoginPresenter1() {
     GWTMockUtilities.disarm();
+    Environment environmentMock = createMock(Environment.class);
+
     Model modelMock = createMock(Model.class);
     LoginPresenter.PresenterDisplay loginViewMock = createMock(LoginPresenter.PresenterDisplay.class);
     LoginServiceAsync loginServiceMock = new LoginServiceAsync() {
@@ -39,8 +41,11 @@ public class LoginPresenterTest {
     expect(loginViewMock.getPassword())
       .andReturn("eduardo");
 
+    expect(environmentMock.getModel()).andReturn(modelMock);
+
     expect(modelMock.getRemoteLoginService()).andReturn(
       loginServiceMock);
+
 
     SimpleCallback<String> callbackMock = new SimpleCallback<String>() {
       @Override
@@ -55,9 +60,10 @@ public class LoginPresenterTest {
 
     EasyMock.replay(modelMock);
     EasyMock.replay(loginViewMock);
+    EasyMock.replay(environmentMock);
 
     LoginPresenter lp = new LoginPresenter("",
-      loginViewMock, modelMock, callbackMock);
+      loginViewMock, environmentMock, callbackMock);
 
     assertTrue(callbackCapture.getValue() != null);
     assertTrue(lp.loginService != null);

@@ -9,26 +9,22 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Environment {
-  Model model;
+  final Model model;
+  final Grid rootDisplay = new Grid(2, 1);
+  final MenuBar runMenuBar = new MenuBar();
+  final VerticalPanel runPanel = new VerticalPanel();
   String startingToken;
   String currentUser;
-
-  Grid rootDisplay;
-  MenuBar runMenuBar;
-  VerticalPanel runPanel;
 
 
   public Environment(Model aModel, String aToken) {
     model = aModel;
     startingToken = aToken;
-    rootDisplay = new Grid(2, 1);
-    runMenuBar = new MenuBar();
-    runPanel = new VerticalPanel();
   }
 
 
-  public void showAlert(String s) {
-    Window.alert(s);
+  public void showAlert(String alertText) {
+    Window.alert(alertText);
   }
 
 
@@ -36,8 +32,7 @@ public class Environment {
     currentUser = "";
 
     LoginPresenter loginForm = new LoginPresenter("",
-      new LoginView(), model, this,
-      new SimpleCallback<String>() {
+      new LoginView(), this, new SimpleCallback<String>() {
         @Override
         public void goBack(String result) {
           currentUser = result;
@@ -120,14 +115,17 @@ public class Environment {
       showLogin();
     } else if (token.equals(DummyOnePresenter.PLACE)) {
       ppp.add((new DummyOnePresenter(args,
-        new DummyOneView(), model, this)).getDisplay()
-        .asWidget());
+        new DummyOneView(), this)).getDisplay().asWidget());
     } else if (token.equals(DummyTwoPresenter.PLACE)) {
       ppp.add((new DummyTwoPresenter(args,
-        new DummyTwoView(), model, this)).getDisplay()
-        .asWidget());
+        new DummyTwoView(), this)).getDisplay().asWidget());
     } else {
       Window.alert("Unrecognized token=" + token);
     }
+  }
+
+
+  public Model getModel() {
+    return model;
   }
 }

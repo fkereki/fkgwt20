@@ -4,7 +4,6 @@ abstract public class Presenter {
   String params;
   Display display;
   Environment environment;
-  Model model;
   KeyValueMap kvm;
 
 
@@ -13,18 +12,12 @@ abstract public class Presenter {
 
 
   public Presenter(String someParams, Display aDisplay,
-    Model aModel, Environment anEnvironment) {
+    Environment anEnvironment) {
     super();
     params = someParams;
     display = aDisplay;
-    model = aModel;
     environment = anEnvironment;
     kvm = new KeyValueMap(params);
-  }
-
-
-  public Model getModel() {
-    return model;
   }
 
 

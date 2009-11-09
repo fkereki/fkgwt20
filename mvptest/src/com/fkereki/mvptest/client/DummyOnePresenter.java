@@ -9,10 +9,9 @@ public class DummyOnePresenter extends Presenter {
 
 
   public DummyOnePresenter(String params,
-    DummyOneDisplay dummyOneDisplay, Model model,
-    Environment environment) {
+    DummyOneDisplay dummyOneDisplay, Environment environment) {
 
-    super(params, dummyOneDisplay, model, environment);
+    super(params, dummyOneDisplay, environment);
     dummyOneDisplay.setPepeValue(getKvm().get("pepe"));
     dummyOneDisplay
       .setClickCallback(new SimpleCallback<Object>() {

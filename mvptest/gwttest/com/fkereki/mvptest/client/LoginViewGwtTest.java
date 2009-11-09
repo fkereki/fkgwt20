@@ -5,10 +5,13 @@ import com.google.gwt.junit.client.GWTTestCase;
 public class LoginViewGwtTest extends GWTTestCase {
   boolean wasCalled;
 
+
   @Override
   public String getModuleName() {
     return "com.fkereki.mvptest.Mvptest";
   }
+
+
 
   public void testLoginView() {
     LoginView lv = new LoginView();

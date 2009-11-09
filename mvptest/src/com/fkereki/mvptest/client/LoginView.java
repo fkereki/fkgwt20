@@ -12,19 +12,15 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class LoginView extends View implements
     LoginPresenter.PresenterDisplay {
-  AsyncCallback<Object> loginCallback;
-  TextBox nameTextBox;
-  TextBox passwordTextBox;
-  Button loginButton;
-  FlexTable flexTable;
+
+  protected AsyncCallback<Object> loginCallback;
+  final protected TextBox nameTextBox = new TextBox();
+  final protected TextBox passwordTextBox = new PasswordTextBox();
+  final protected Button loginButton = new Button("Log in");
+  final protected FlexTable flexTable = new FlexTable();
 
 
   public LoginView() {
-    flexTable = new FlexTable();
-    nameTextBox = new TextBox();
-    passwordTextBox = new PasswordTextBox();
-
-    loginButton = new Button("Log in");
     loginButton.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
         loginCallback.onSuccess(null);
