@@ -1,5 +1,6 @@
 package com.fkereki.mvptest.client;
 
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Grid;
@@ -17,9 +18,29 @@ public class Environment {
   String currentUser;
 
 
+  protected class HistoryCommand implements Command {
+    String historyToken;
+
+
+    public HistoryCommand(final String newToken) {
+      historyToken = newToken;
+    }
+
+
+    public void execute() {
+      launch(historyToken);
+    }
+  }
+
+
   public Environment(Model aModel, String aToken) {
     model = aModel;
     startingToken = aToken;
+  }
+
+
+  public Model getModel() {
+    return model;
   }
 
 
@@ -28,7 +49,7 @@ public class Environment {
   }
 
 
-  private void showLogin() {
+  private void showLogin(Panel panel) {
     currentUser = "";
 
     LoginPresenter loginForm = new LoginPresenter("",
@@ -40,8 +61,8 @@ public class Environment {
         }
       });
 
-    RootPanel.get().clear();
-    RootPanel.get().add(loginForm.getDisplay().asWidget());
+    panel.clear();
+    panel.add(loginForm.getDisplay().asWidget());
   }
 
 
@@ -64,10 +85,10 @@ public class Environment {
      * the user is logged in, it's time to show it.
      * 
      * Don't forget to clear startingToken, or after a
-     * logout/login, we will go back again to the token.
+     * logout/login, we will go back again to it.
      */
     if (!startingToken.isEmpty()) {
-      History.newItem(startingToken, true);
+      launch(startingToken);
       startingToken = "";
     }
   }
@@ -86,12 +107,12 @@ public class Environment {
   }
 
 
-  public void executeInPanel(String token) {
-    executeInPanel(token, runPanel);
+  public void launch(String token) {
+    launch(token, null);
   }
 
 
-  public void executeInPanel(String token, Panel ppp) {
+  public void launch(String token, Panel panel) {
     /*
      * There could be parameters after the "#token" in the
      * classic form "?key1=value1&key2=value2..."; for more
@@ -104,28 +125,31 @@ public class Environment {
       token = token.substring(0, question);
     }
 
+    /*
+     * If no panel is given, use the standard runPanel, and
+     * add the token to History.
+     */
+    if (panel == null) {
+      panel = runPanel;
+      History.newItem(token);
+    }
+    panel.clear();
+
     // TODO Check, before running, if the current user is
     // allowed to run the program
-
-    ppp.clear();
 
     if (token.isEmpty()) {
       // no need to do anything...
     } else if (token.equals(LoginPresenter.PLACE)) {
-      showLogin();
+      showLogin(RootPanel.get());
     } else if (token.equals(DummyOnePresenter.PLACE)) {
-      ppp.add((new DummyOnePresenter(args,
+      panel.add((new DummyOnePresenter(args,
         new DummyOneView(), this)).getDisplay().asWidget());
     } else if (token.equals(DummyTwoPresenter.PLACE)) {
-      ppp.add((new DummyTwoPresenter(args,
+      panel.add((new DummyTwoPresenter(args,
         new DummyTwoView(), this)).getDisplay().asWidget());
     } else {
       Window.alert("Unrecognized token=" + token);
     }
-  }
-
-
-  public Model getModel() {
-    return model;
   }
 }

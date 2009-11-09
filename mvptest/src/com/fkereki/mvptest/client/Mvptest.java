@@ -25,12 +25,13 @@ public class Mvptest implements EntryPoint,
      * the login form.
      */
     History.addValueChangeHandler(this);
-    History.newItem(LoginPresenter.PLACE, true);
+    environment.launch(LoginPresenter.PLACE, RootPanel
+      .get());
   }
 
 
   @Override
   public void onValueChange(ValueChangeEvent<String> event) {
-    environment.executeInPanel(event.getValue());
+    environment.launch(event.getValue());
   }
 }

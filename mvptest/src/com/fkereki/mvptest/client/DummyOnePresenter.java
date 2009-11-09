@@ -20,10 +20,9 @@ public class DummyOnePresenter extends Presenter {
         public void goBack(Object result) {
           ((DummyOneDisplay) DummyOnePresenter.this
             .getDisplay()).showPopupPanel();
-          DummyOnePresenter.this.environment
-            .executeInPanel("baz",
-              ((DummyOneDisplay) DummyOnePresenter.this
-                .getDisplay()).getPopupPanel());
+          DummyOnePresenter.this.environment.launch("baz",
+            ((DummyOneDisplay) DummyOnePresenter.this
+              .getDisplay()).getPopupPanel());
         }
       });
   }
