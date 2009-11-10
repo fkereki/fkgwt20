@@ -25,8 +25,7 @@ public class Mvptest implements EntryPoint,
      * the login form.
      */
     History.addValueChangeHandler(this);
-    environment.launch(LoginPresenter.PLACE, RootPanel
-      .get());
+    environment.launch(LoginPresenter.PLACE);
   }
 
 

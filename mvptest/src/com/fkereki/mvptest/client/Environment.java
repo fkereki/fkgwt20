@@ -32,6 +32,13 @@ public class Environment {
     }
   }
 
+  Command sorry = new Command() {
+    @Override
+    public void execute() {
+      showAlert("Sorry, this isn't ready yet.");
+    }
+  };
+
 
   public Environment(Model aModel, String aToken) {
     model = aModel;
@@ -102,6 +109,15 @@ public class Environment {
       DummyOnePresenter.PLACE + "?parameter=value"));
     mb.addItem("dummy#2", new HistoryCommand(
       DummyTwoPresenter.PLACE));
+
+    MenuBar mb2 = new MenuBar(true);
+    mb2.addItem("subitem1", sorry);
+    mb2.addItem("subitem2", sorry);
+    mb2.addItem("subitem3", sorry);
+    mb2.addItem("subitem4", sorry);
+
+    mb.addItem("submenu", mb2);
+
     mb.addItem("login", new HistoryCommand(
       LoginPresenter.PLACE));
   }
