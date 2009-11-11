@@ -18,4 +18,11 @@
 	<!-- Specify the paths for translatable code                    -->
 	<source path='client' />
 
+	<replace-with class="com.fkereki.mvptest.client.HelloBrowserIEImpl">
+		<when-type-is class="com.fkereki.mvptest.client.HelloBrowserStdImpl"/>
+		<any>
+			<when-property-is name="user.agent" value="ie6"/>
+			<when-property-is name="user.agent" value="ie8"/>
+		</any>
+	</replace-with>
 </module>

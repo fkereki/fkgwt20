@@ -5,6 +5,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class Mvptest implements EntryPoint,
@@ -13,7 +14,18 @@ public class Mvptest implements EntryPoint,
   Environment environment;
 
 
+  public static native String getUserAgent() /*-{
+    return navigator.userAgent.toLowerCase();
+  }-*/;
+
+
+
   public void onModuleLoad() {
+    HelloBrowser hb = new HelloBrowser();
+    hb.salute();
+
+    Window.alert(getUserAgent());
+
     DOM.removeChild(RootPanel.getBodyElement(), DOM
       .getElementById("loading"));
 
