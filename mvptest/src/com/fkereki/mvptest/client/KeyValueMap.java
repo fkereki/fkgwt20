@@ -2,6 +2,10 @@ package com.fkereki.mvptest.client;
 
 import java.util.HashMap;
 
+/**
+ * @author fkereki
+ * 
+ */
 public class KeyValueMap extends HashMap<String, String> {
   /**
    * KeyValueMap: a short way of specifying a class that
@@ -10,16 +14,35 @@ public class KeyValueMap extends HashMap<String, String> {
   private static final long serialVersionUID = 5225712868559413562L;
 
 
+  /**
+   * Standard constructor; produces an empty KeyValueMap.
+   */
   public KeyValueMap() {
     this("");
   }
 
 
+  /**
+   * Create a KeyValueMap, and initialize it with the params
+   * string.
+   * 
+   * @param params
+   *          A string with URL-like parameters (see below)
+   */
   public KeyValueMap(final String params) {
     initializeWithString(params);
   }
 
 
+  /**
+   * Initialize a KeyValueMap with a parameters URL-like
+   * string.
+   * 
+   * @param params
+   *          A string formatted like
+   *          param1=value1&param2=value2&... It is assumed
+   *          that the value has been appropriately escaped.
+   */
   public void initializeWithString(String params) {
     clear();
     if ((params != null) && !params.isEmpty()) {
@@ -35,6 +58,7 @@ public class KeyValueMap extends HashMap<String, String> {
       }
     }
   }
+
 
 
   @Override

@@ -4,6 +4,6 @@ import com.google.gwt.user.client.Window;
 
 public class HelloBrowserStdImpl {
   public void sayHello() {
-    Window.alert("Standard hello");
+    Window.alert("You don't have IE.");
   }
 }
