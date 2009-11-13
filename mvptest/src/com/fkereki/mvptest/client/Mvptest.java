@@ -5,7 +5,6 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class Mvptest implements EntryPoint,
@@ -21,10 +20,10 @@ public class Mvptest implements EntryPoint,
 
 
   public void onModuleLoad() {
-    HelloBrowser hb = new HelloBrowser();
-    hb.salute();
-
-    Window.alert(getUserAgent());
+    // HelloBrowser hb = new HelloBrowser();
+    // hb.salute();
+    //
+    // Window.alert(getUserAgent());
 
     DOM.removeChild(RootPanel.getBodyElement(), DOM
       .getElementById("loading"));
@@ -37,7 +36,7 @@ public class Mvptest implements EntryPoint,
      * the login form.
      */
     History.addValueChangeHandler(this);
-    environment.launch(LoginPresenter.PLACE);
+    environment.launch(LoginFormPresenter.PLACE);
   }
 
 

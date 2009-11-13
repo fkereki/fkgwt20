@@ -2,21 +2,21 @@ package com.fkereki.mvptest.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class LoginPresenter extends Presenter {
+public class LoginFormPresenter extends Presenter {
   static String PLACE = "login";
 
   LoginServiceAsync loginService;
   SimpleCallback<String> loginSuccessCallback;
 
 
-  public LoginPresenter(String params,
+  public LoginFormPresenter(String params,
     PresenterDisplay loginDisplay, Environment environment,
     SimpleCallback<String> callback) {
 
     super(params, loginDisplay, environment);
 
     loginSuccessCallback = callback;
-    loginService = LoginPresenter.this.getEnvironment()
+    loginService = LoginFormPresenter.this.getEnvironment()
       .getModel().getRemoteLoginService();
 
     loginDisplay.setName("federico");
@@ -25,9 +25,9 @@ public class LoginPresenter extends Presenter {
       .setLoginCallback(new SimpleCallback<Object>() {
         @Override
         public void goBack(Object result) {
-          String name = ((PresenterDisplay) LoginPresenter.this
+          String name = ((PresenterDisplay) LoginFormPresenter.this
             .getDisplay()).getName();
-          String pass = ((PresenterDisplay) LoginPresenter.this
+          String pass = ((PresenterDisplay) LoginFormPresenter.this
             .getDisplay()).getPassword();
 
           loginService.getSomething(name, pass,

@@ -59,8 +59,9 @@ public class Environment {
   private void showLogin(Panel panel) {
     currentUser = "";
 
-    LoginPresenter loginForm = new LoginPresenter("",
-      new LoginView(), this, new SimpleCallback<String>() {
+    LoginFormPresenter loginForm = new LoginFormPresenter(
+      "", new LoginFormView(), this,
+      new SimpleCallback<String>() {
         @Override
         public void goBack(String result) {
           currentUser = result;
@@ -109,6 +110,8 @@ public class Environment {
       DummyOnePresenter.PLACE + "?parameter=value"));
     mb.addItem("dummy#2", new HistoryCommand(
       DummyTwoPresenter.PLACE));
+    mb.addItem("Clients", new HistoryCommand(
+      ClientDataPresenter.PLACE));
 
     MenuBar mb2 = new MenuBar(true);
     mb2.addItem("subitem1", sorry);
@@ -119,7 +122,7 @@ public class Environment {
     mb.addItem("submenu", mb2);
 
     mb.addItem("login", new HistoryCommand(
-      LoginPresenter.PLACE));
+      LoginFormPresenter.PLACE));
   }
 
 
@@ -156,7 +159,7 @@ public class Environment {
 
     if (token.isEmpty()) {
       // no need to do anything...
-    } else if (token.equals(LoginPresenter.PLACE)) {
+    } else if (token.equals(LoginFormPresenter.PLACE)) {
       showLogin(RootPanel.get());
     } else if (token.equals(DummyOnePresenter.PLACE)) {
       panel.add((new DummyOnePresenter(args,
@@ -164,6 +167,14 @@ public class Environment {
     } else if (token.equals(DummyTwoPresenter.PLACE)) {
       panel.add((new DummyTwoPresenter(args,
         new DummyTwoView(), this)).getDisplay().asWidget());
+    } else if (token.equals(ClientDataPresenter.PLACE)) {
+      panel.add((new ClientDataPresenter(args,
+        new ClientDataView(), this)).getDisplay()
+        .asWidget());
+    } else if (token.equals(ClientSearchPresenter.PLACE)) {
+      panel.add((new ClientSearchPresenter(args,
+        new ClientSearchView(), this)).getDisplay()
+        .asWidget());
     } else {
       Window.alert("Unrecognized token=" + token);
     }
