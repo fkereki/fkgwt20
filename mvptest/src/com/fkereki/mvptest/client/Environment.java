@@ -126,7 +126,7 @@ public class Environment {
   }
 
 
-  public void launch(String token) {
+  public void launch(final String token) {
     launch(token, null);
   }
 

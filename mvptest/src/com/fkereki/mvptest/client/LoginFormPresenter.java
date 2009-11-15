@@ -9,9 +9,10 @@ public class LoginFormPresenter extends Presenter {
   SimpleCallback<String> loginSuccessCallback;
 
 
-  public LoginFormPresenter(String params,
-    PresenterDisplay loginDisplay, Environment environment,
-    SimpleCallback<String> callback) {
+  public LoginFormPresenter(final String params,
+    final PresenterDisplay loginDisplay,
+    final Environment environment,
+    final SimpleCallback<String> callback) {
 
     super(params, loginDisplay, environment);
 
@@ -24,7 +25,7 @@ public class LoginFormPresenter extends Presenter {
     loginDisplay
       .setLoginCallback(new SimpleCallback<Object>() {
         @Override
-        public void goBack(Object result) {
+        public void goBack(final Object result) {
           String name = ((PresenterDisplay) LoginFormPresenter.this
             .getDisplay()).getName();
           String pass = ((PresenterDisplay) LoginFormPresenter.this
@@ -32,13 +33,13 @@ public class LoginFormPresenter extends Presenter {
 
           loginService.getSomething(name, pass,
             new AsyncCallback<String>() {
-              public void onFailure(Throwable caught) {
+              public void onFailure(final Throwable caught) {
                 loginSuccessCallback
                   .onFailure(new Throwable());
               }
 
 
-              public void onSuccess(String result) {
+              public void onSuccess(final String result) {
                 loginSuccessCallback.goBack(result);
               }
             });
@@ -47,19 +48,19 @@ public class LoginFormPresenter extends Presenter {
   }
 
 
-  public interface PresenterDisplay extends Display {
-    public String getName();
+  interface PresenterDisplay extends Display {
+    String getName();
 
 
-    public void setName(String s);
+    void setName(String s);
 
 
-    public String getPassword();
+    String getPassword();
 
 
-    public void setPassword(String s);
+    void setPassword(String s);
 
 
-    public void setLoginCallback(SimpleCallback<Object> acb);
+    void setLoginCallback(SimpleCallback<Object> acb);
   }
 }

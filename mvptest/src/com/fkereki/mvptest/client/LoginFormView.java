@@ -11,20 +11,28 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * Defines a Login Form.
+ */
 public class LoginFormView extends View implements
     LoginFormPresenter.PresenterDisplay {
 
   protected AsyncCallback<Object> loginCallback;
-  final protected TextBox nameTextBox = new TextBox();
-  final protected TextBox passwordTextBox = new PasswordTextBox();
-  final protected Button loginButton = new Button("Log in");
-  final protected FlexTable flex = new FlexTable();
-  final protected DockPanel dock = new DockPanel();
+  protected final TextBox nameTextBox = new TextBox();
+  protected final TextBox passwordTextBox = new PasswordTextBox();
+  protected final Button loginButton = new Button("Log in");
+  protected final FlexTable flex = new FlexTable();
+  protected final DockPanel dock = new DockPanel();
 
 
+  /**
+   * Defines the view for the Login Form. Since this will be
+   * shown in the main screen, we take care of centering the
+   * fields (by using a DockPanel) so it will look nicer.
+   */
   public LoginFormView() {
     loginButton.addClickHandler(new ClickHandler() {
-      public void onClick(ClickEvent event) {
+      public void onClick(final ClickEvent event) {
         loginCallback.onSuccess(null);
       }
     });
@@ -46,37 +54,38 @@ public class LoginFormView extends View implements
 
 
   @Override
-  public String getName() {
+  public final String getName() {
     return nameTextBox.getValue();
   }
 
 
   @Override
-  public String getPassword() {
+  public final String getPassword() {
     return passwordTextBox.getValue();
   }
 
 
   @Override
-  public void setName(String s) {
+  public final void setName(final String s) {
     nameTextBox.setValue(s);
   }
 
 
   @Override
-  public void setPassword(String s) {
+  public final void setPassword(final String s) {
     passwordTextBox.setValue(s);
   }
 
 
   @Override
-  public void setLoginCallback(SimpleCallback<Object> acb) {
+  public final void setLoginCallback(
+    final SimpleCallback<Object> acb) {
     loginCallback = acb;
   }
 
 
   @Override
-  public Widget asWidget() {
+  public final Widget asWidget() {
     return LoginFormView.this;
   }
 }

@@ -43,7 +43,7 @@ public class KeyValueMap extends HashMap<String, String> {
    *          param1=value1&param2=value2&... It is assumed
    *          that the value has been appropriately escaped.
    */
-  public void initializeWithString(String params) {
+  public final void initializeWithString(final String params) {
     clear();
     if ((params != null) && !params.isEmpty()) {
       String[] args = params.split("&");
