@@ -14,7 +14,7 @@ public class LoginViewGwtTest extends GWTTestCase {
 
 
   public void testLoginView() {
-    LoginView lv = new LoginView();
+    LoginFormView lv = new LoginFormView();
     lv.setName("unga");
     lv.setPassword("bunga");
     lv.setLoginCallback(new SimpleCallback<Object>() {
