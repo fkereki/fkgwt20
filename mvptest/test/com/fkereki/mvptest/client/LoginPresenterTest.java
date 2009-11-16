@@ -19,7 +19,7 @@ public class LoginPresenterTest {
     Environment environmentMock = createMock(Environment.class);
 
     Model modelMock = createMock(Model.class);
-    LoginPresenter.PresenterDisplay loginViewMock = createMock(LoginPresenter.PresenterDisplay.class);
+    LoginFormPresenter.PresenterDisplay loginViewMock = createMock(LoginFormPresenter.PresenterDisplay.class);
     LoginServiceAsync loginServiceMock = new LoginServiceAsync() {
       @Override
       public void getSomething(String name, String pass,
@@ -62,7 +62,7 @@ public class LoginPresenterTest {
     EasyMock.replay(loginViewMock);
     EasyMock.replay(environmentMock);
 
-    LoginPresenter lp = new LoginPresenter("",
+    LoginFormPresenter lp = new LoginFormPresenter("",
       loginViewMock, environmentMock, callbackMock);
 
     assertTrue(callbackCapture.getValue() != null);
