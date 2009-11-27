@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="mvptest">
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name='com.google.gwt.user.theme.dark.Dark'/>
+	<entry-point class='com.fkereki.mvptest.client.Mvptest' />
+	<source path='client' />
+	<replace-with class="com.fkereki.mvptest.client.HelloBrowserIEImpl">
+		<when-type-is class="com.fkereki.mvptest.client.HelloBrowserStdImpl"/>
+		<any>
+			<when-property-is name="user.agent" value="ie6"/>
+			<when-property-is name="user.agent" value="ie8"/>
+		</any>
+	</replace-with>
+    <set-property name="user.agent" value="ie8" />
+    <set-property name="locale" value="default" />
+</module>
