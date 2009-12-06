@@ -17,12 +17,12 @@ import com.google.gwt.user.client.ui.Widget;
 public class LoginFormView extends View implements
     LoginFormPresenter.PresenterDisplay {
 
-  protected AsyncCallback<Object> loginCallback;
-  protected final TextBox nameTextBox = new TextBox();
-  protected final TextBox passwordTextBox = new PasswordTextBox();
-  protected final Button loginButton = new Button("Log in");
-  protected final FlexTable flex = new FlexTable();
-  protected final DockPanel dock = new DockPanel();
+  private AsyncCallback<Object> loginCallback;
+  private final TextBox nameTextBox = new TextBox();
+  private final TextBox passwordTextBox = new PasswordTextBox();
+  private final Button loginButton = new Button("Log in");
+  private final FlexTable flex = new FlexTable();
+  private final DockPanel dock = new DockPanel();
 
 
   /**
