@@ -2,14 +2,13 @@ package com.fkereki.mvpproject.client;
 
 
 
-public class ClientSearchPresenter extends Presenter {
+public class ClientSearchPresenter extends Presenter<ClientSearchDisplay> {
 
   static String PLACE = "clientsearch";
 
 
-  public ClientSearchPresenter(String params,
-    ClientSearchDisplay clientSearchDisplay,
-    Environment environment) {
+  public ClientSearchPresenter(final String params,
+    final ClientSearchDisplay clientSearchDisplay, final Environment environment) {
 
     super(params, clientSearchDisplay, environment);
 
@@ -37,10 +36,5 @@ public class ClientSearchPresenter extends Presenter {
     // .getDisplay()).getPopupPanel());
     // }
     // });
-  }
-
-
-  public interface ClientSearchDisplay extends Display {
-
   }
 }

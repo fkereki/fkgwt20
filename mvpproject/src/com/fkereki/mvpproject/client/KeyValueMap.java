@@ -52,8 +52,7 @@ public class KeyValueMap extends HashMap<String, String> {
         if (equalIndex == -1) {
           put(element, "");
         } else {
-          put(element.substring(0, equalIndex), element
-            .substring(equalIndex + 1));
+          put(element.substring(0, equalIndex), element.substring(equalIndex + 1));
         }
       }
     }

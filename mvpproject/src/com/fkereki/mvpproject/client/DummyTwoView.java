@@ -4,8 +4,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DummyTwoView extends View implements
-    DummyTwoPresenter.DummyTwoPresenterDisplay {
+public class DummyTwoView extends View implements DummyTwoDisplay {
 
   public DummyTwoView() {
     FlexTable ft = new FlexTable();
@@ -19,7 +18,7 @@ public class DummyTwoView extends View implements
 
   @Override
   public Widget asWidget() {
+    // TODO Auto-generated method stub
     return DummyTwoView.this;
   }
-
 }

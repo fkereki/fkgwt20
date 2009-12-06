@@ -9,8 +9,7 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DummyOneView extends View implements
-    DummyOnePresenter.DummyOneDisplay {
+public class DummyOneView extends View implements DummyOneDisplay {
 
   SimpleCallback<Object> openPopupPanelCallback;
   String pepeValue = "";
@@ -22,8 +21,7 @@ public class DummyOneView extends View implements
     VerticalPanel panel = new VerticalPanel();
     panel.add(new Label("kvm..."));
     panel.add(new Label("dos"));
-    panel.add(new Hyperlink("vamos al foo",
-      "foo?pepe=continua"));
+    panel.add(new Hyperlink("vamos al foo", "foo?pepe=continua"));
     panel.add(new Hyperlink("vamos al bar", "bar"));
     panel.add(new Hyperlink("vamos al baZ", "baz"));
     panel.add(new Label(""));
@@ -38,13 +36,6 @@ public class DummyOneView extends View implements
         openPopupPanelCallback.goBack(null);
       }
     });
-  }
-
-
-
-  @Override
-  public Widget asWidget() {
-    return DummyOneView.this;
   }
 
 
@@ -74,5 +65,11 @@ public class DummyOneView extends View implements
   public void showPopupPanel() {
     pup.showRelativeTo(popupOpener);
     pup.show();
+  }
+
+
+  @Override
+  public Widget asWidget() {
+    return DummyOneView.this;
   }
 }

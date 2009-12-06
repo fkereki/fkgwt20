@@ -8,8 +8,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ClientSearchView extends View implements
-    ClientSearchPresenter.ClientSearchDisplay {
+public class ClientSearchView extends View implements ClientSearchDisplay {
 
   SimpleCallback<Object> searchClickCallback;
 
@@ -59,6 +58,7 @@ public class ClientSearchView extends View implements
 
   @Override
   public Widget asWidget() {
+    // TODO Auto-generated method stub
     return ClientSearchView.this;
   }
 }

@@ -1,5 +1,7 @@
 package com.fkereki.mvpproject.client;
 
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -14,9 +16,12 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Defines a Login Form.
  */
-public class LoginFormView extends View implements LoginFormDisplay {
+public class LoginFormView2 extends View implements LoginFormDisplay2 {
 
   private AsyncCallback<Object> loginCallback;
+  private AsyncCallback<Object> nameBlurCallback;
+  private AsyncCallback<Object> passwordBlurCallback;
+
   private final TextBox nameTextBox = new TextBox();
   private final TextBox passwordTextBox = new PasswordTextBox();
   private final Button loginButton = new Button("Log in");
@@ -29,10 +34,25 @@ public class LoginFormView extends View implements LoginFormDisplay {
    * shown in the main screen, we take care of centering the
    * fields (by using a DockPanel) so it will look nicer.
    */
-  public LoginFormView() {
+  public LoginFormView2() {
     loginButton.addClickHandler(new ClickHandler() {
+      @Override
       public void onClick(final ClickEvent event) {
         loginCallback.onSuccess(null);
+      }
+    });
+
+    nameTextBox.addBlurHandler(new BlurHandler() {
+      @Override
+      public void onBlur(final BlurEvent event) {
+        nameBlurCallback.onSuccess(null);
+      }
+    });
+
+    passwordTextBox.addBlurHandler(new BlurHandler() {
+      @Override
+      public void onBlur(final BlurEvent event) {
+        passwordBlurCallback.onSuccess(null);
       }
     });
 
@@ -83,7 +103,25 @@ public class LoginFormView extends View implements LoginFormDisplay {
 
 
   @Override
+  public void enableLoginButton(final boolean b) {
+    loginButton.setEnabled(b);
+  }
+
+
+  @Override
+  public void setNameBlurCallback(final SimpleCallback<Object> acb) {
+    nameBlurCallback = acb;
+  }
+
+
+  @Override
+  public void setPasswordBlurCallback(final SimpleCallback<Object> acb) {
+    passwordBlurCallback = acb;
+  }
+
+
+  @Override
   public final Widget asWidget() {
-    return LoginFormView.this;
+    return LoginFormView2.this;
   }
 }
