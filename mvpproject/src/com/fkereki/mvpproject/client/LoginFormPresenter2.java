@@ -16,8 +16,6 @@ public class LoginFormPresenter2 extends Presenter<LoginFormDisplay2> {
     loginSuccessCallback = callback;
     loginService = getEnvironment().getModel().getRemoteLoginService();
 
-    loginDisplay.setName("federico");
-    loginDisplay.setPassword("eduardo");
     final SimpleCallback<Object> commonBlurHandler = new SimpleCallback<Object>() {
       @Override
       public void goBack(final Object result) {
@@ -27,9 +25,12 @@ public class LoginFormPresenter2 extends Presenter<LoginFormDisplay2> {
         (LoginFormPresenter2.this.getDisplay()).enableLoginButton(canLogin);
       }
     };
-
     loginDisplay.setNameBlurCallback(commonBlurHandler);
     loginDisplay.setPasswordBlurCallback(commonBlurHandler);
+
+    loginDisplay.setName("federico");
+    loginDisplay.setPassword("");
+    commonBlurHandler.goBack(null);
 
     loginDisplay.setLoginCallback(new SimpleCallback<Object>() {
       @Override

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+  <g:HTMLPanel>
+    <table>
+      <tr>
+        <td><g:Label text="User Name:"/></td>
+        <td><g:TextBox ui:field='nameTextBox'/></td>
+      </tr>
+      <tr>
+        <td><g:Label text="Password:"/></td>
+        <td><g:PasswordTextBox ui:field='passwordTextBox'/></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><g:Button text='Login' ui:field='loginButton'/></td>
+      </tr>
+    </table>
+  </g:HTMLPanel>
+</ui:UiBinder>
