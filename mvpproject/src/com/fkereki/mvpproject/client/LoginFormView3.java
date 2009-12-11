@@ -17,14 +17,15 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Defines a Login Form.
  */
-public class LoginFormView3 extends View implements LoginFormDisplay2 {
+public class LoginFormView3
+    extends View implements LoginFormDisplay2 {
   @UiTemplate("LoginFormView3.ui.xml")
   interface Binder extends UiBinder<HTMLPanel, LoginFormView3> {
   }
 
-  private AsyncCallback<Object> loginCallback;
-  private AsyncCallback<Object> nameBlurCallback;
-  private AsyncCallback<Object> passwordBlurCallback;
+  AsyncCallback<Object> loginCallback;
+  AsyncCallback<Object> nameBlurCallback;
+  AsyncCallback<Object> passwordBlurCallback;
 
   @UiField
   TextBox nameTextBox;
@@ -33,10 +34,10 @@ public class LoginFormView3 extends View implements LoginFormDisplay2 {
   @UiField
   Button loginButton;
 
-  private static final Binder binder = GWT.create(Binder.class);
+  private static final Binder binder= GWT.create(Binder.class);
 
   public LoginFormView3() {
-    HTMLPanel dlp = binder.createAndBindUi(this);
+    HTMLPanel dlp= binder.createAndBindUi(this);
     initWidget(dlp);
   }
 
@@ -60,24 +61,10 @@ public class LoginFormView3 extends View implements LoginFormDisplay2 {
     return passwordTextBox.getValue();
   }
 
-  @UiHandler("nameTextBox")
-  void onBlurName(BlurEvent event) {
-    nameBlurCallback.onSuccess(null);
-  }
-
-  @UiHandler("passwordTextBox")
-  void onBlurPassword(BlurEvent event) {
-    passwordBlurCallback.onSuccess(null);
-  }
-
-  @UiHandler("loginButton")
-  void onLoginButton(ClickEvent event) {
-    loginCallback.onSuccess(null);
-  }
-
   @Override
-  public final void setLoginCallback(final SimpleCallback<Object> acb) {
-    loginCallback = acb;
+  public final void setLoginCallback(
+      final SimpleCallback<Object> acb) {
+    loginCallback= acb;
   }
 
   @Override
@@ -86,8 +73,9 @@ public class LoginFormView3 extends View implements LoginFormDisplay2 {
   }
 
   @Override
-  public void setNameBlurCallback(final SimpleCallback<Object> acb) {
-    nameBlurCallback = acb;
+  public void setNameBlurCallback(
+      final SimpleCallback<Object> acb) {
+    nameBlurCallback= acb;
   }
 
   @Override
@@ -96,7 +84,23 @@ public class LoginFormView3 extends View implements LoginFormDisplay2 {
   }
 
   @Override
-  public void setPasswordBlurCallback(final SimpleCallback<Object> acb) {
-    passwordBlurCallback = acb;
+  public void setPasswordBlurCallback(
+      final SimpleCallback<Object> acb) {
+    passwordBlurCallback= acb;
+  }
+
+  @UiHandler("nameTextBox")
+  void uiOnBlurName(BlurEvent event) {
+    nameBlurCallback.onSuccess(null);
+  }
+
+  @UiHandler("passwordTextBox")
+  void uiOnBlurPassword(BlurEvent event) {
+    passwordBlurCallback.onSuccess(null);
+  }
+
+  @UiHandler("loginButton")
+  void uiOnLoginButton(ClickEvent event) {
+    loginCallback.onSuccess(null);
   }
 }
