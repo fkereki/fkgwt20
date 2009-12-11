@@ -9,26 +9,26 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DummyOneView extends View implements DummyOneDisplay {
+public class DummyOneView
+    extends View implements DummyOneDisplay {
 
   SimpleCallback<Object> openPopupPanelCallback;
-  String pepeValue = "";
-  final PopupPanel pup = new PopupPanel(true);
-  final Button popupOpener = new Button("Click me");
-
+  String pepeValue= "";
+  final PopupPanel pup= new PopupPanel(true);
+  final Button popupOpener= new Button("Click me");
 
   public DummyOneView() {
-    VerticalPanel panel = new VerticalPanel();
+    VerticalPanel panel= new VerticalPanel();
     panel.add(new Label("kvm..."));
     panel.add(new Label("dos"));
-    panel.add(new Hyperlink("vamos al foo", "foo?pepe=continua"));
+    panel
+        .add(new Hyperlink("vamos al foo", "foo?pepe=continua"));
     panel.add(new Hyperlink("vamos al bar", "bar"));
     panel.add(new Hyperlink("vamos al baZ", "baz"));
     panel.add(new Label(""));
 
     panel.add(popupOpener);
     initWidget(panel);
-
 
     popupOpener.addClickHandler(new ClickHandler() {
       @Override
@@ -38,35 +38,26 @@ public class DummyOneView extends View implements DummyOneDisplay {
     });
   }
 
-
-
   @Override
   public void setPepeValue(String s) {
-    pepeValue = s;
+    pepeValue= s;
   }
-
-
 
   @Override
   public PopupPanel getPopupPanel() {
     return pup;
   }
 
-
-
   @Override
   public void setClickCallback(SimpleCallback<Object> scb) {
-    openPopupPanelCallback = scb;
+    openPopupPanelCallback= scb;
   }
-
-
 
   @Override
   public void showPopupPanel() {
     pup.showRelativeTo(popupOpener);
     pup.show();
   }
-
 
   @Override
   public Widget asWidget() {

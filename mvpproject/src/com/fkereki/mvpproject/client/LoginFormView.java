@@ -14,20 +14,20 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Defines a Login Form.
  */
-public class LoginFormView extends View implements LoginFormDisplay {
+public class LoginFormView
+    extends View implements LoginFormDisplay {
 
   private AsyncCallback<Object> loginCallback;
-  private final TextBox nameTextBox = new TextBox();
-  private final TextBox passwordTextBox = new PasswordTextBox();
-  private final Button loginButton = new Button("Log in");
-  private final FlexTable flex = new FlexTable();
-  private final DockPanel dock = new DockPanel();
-
+  private final TextBox nameTextBox= new TextBox();
+  private final TextBox passwordTextBox= new PasswordTextBox();
+  private final Button loginButton= new Button("Log in");
+  private final FlexTable flex= new FlexTable();
+  private final DockPanel dock= new DockPanel();
 
   /**
-   * Defines the view for the Login Form. Since this will be
-   * shown in the main screen, we take care of centering the
-   * fields (by using a DockPanel) so it will look nicer.
+   * Defines the view for the Login Form. Since this will be shown in the main
+   * screen, we take care of centering the fields (by using a DockPanel) so it
+   * will look nicer.
    */
   public LoginFormView() {
     loginButton.addClickHandler(new ClickHandler() {
@@ -51,36 +51,31 @@ public class LoginFormView extends View implements LoginFormDisplay {
     initWidget(dock);
   }
 
-
   @Override
   public final String getName() {
     return nameTextBox.getValue();
   }
-
 
   @Override
   public final String getPassword() {
     return passwordTextBox.getValue();
   }
 
-
   @Override
   public final void setName(final String s) {
     nameTextBox.setValue(s);
   }
-
 
   @Override
   public final void setPassword(final String s) {
     passwordTextBox.setValue(s);
   }
 
-
   @Override
-  public final void setLoginCallback(final SimpleCallback<Object> acb) {
-    loginCallback = acb;
+  public final void setLoginCallback(
+      final SimpleCallback<Object> acb) {
+    loginCallback= acb;
   }
-
 
   @Override
   public final Widget asWidget() {

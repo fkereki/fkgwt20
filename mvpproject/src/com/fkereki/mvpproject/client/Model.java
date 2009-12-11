@@ -3,9 +3,7 @@ package com.fkereki.mvpproject.client;
 import com.google.gwt.core.client.GWT;
 
 /**
- * 
  * @author fkereki
- * 
  */
 public class Model {
   /**

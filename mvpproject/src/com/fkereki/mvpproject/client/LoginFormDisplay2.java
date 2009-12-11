@@ -8,17 +8,14 @@ public interface LoginFormDisplay2 extends Display {
    */
   String getName();
 
-
   /**
    * Initialize the Name field
    * 
    * @param s
-   *          Set the name field to s; most commonly just ""
-   *          or possibly a saved name from an earlier
-   *          session.
+   *          Set the name field to s; most commonly just "" or possibly a saved
+   *          name from an earlier session.
    */
   void setName(String s);
-
 
   /**
    * Access the Password field
@@ -26,7 +23,6 @@ public interface LoginFormDisplay2 extends Display {
    * @return Whatever the user entered in the Password field
    */
   String getPassword();
-
 
   /**
    * Initialize the Password field
@@ -36,43 +32,37 @@ public interface LoginFormDisplay2 extends Display {
    */
   void setPassword(String s);
 
-
   /**
    * Enable or disable the login button
    * 
    * @param b
-   *          If true, enable the button; otherwise, disable
-   *          it
+   *          If true, enable the button; otherwise, disable it
    */
   void enableLoginButton(boolean b);
 
-
   /**
-   * Initialize the login callback, which shall be executed
-   * when the user clicks the "Login" button
+   * Initialize the login callback, which shall be executed when the user clicks
+   * the "Login" button
    * 
    * @param acb
-   *          Set the login callback to acb. The Presenter
-   *          will have to get the Name and Password fields
-   *          (by using the methods above) and perform the
-   *          needed checks.
+   *          Set the login callback to acb. The Presenter will have to get the
+   *          Name and Password fields (by using the methods above) and perform
+   *          the needed checks.
    */
   void setLoginCallback(SimpleCallback<Object> acb);
 
-
   /**
-   * Initialize the name blur callback, which shall be
-   * executed when the user changes the name textbox.
+   * Initialize the name blur callback, which shall be executed when the user
+   * changes the name textbox.
    * 
    * @param acb
    *          Set the name blur callback to acb.
    */
   void setNameBlurCallback(SimpleCallback<Object> acb);
 
-
   /**
-   * Initialize the password blur callback, which shall be
-   * executed when the user changes the name textbox.
+   * Initialize the password blur callback, which shall be executed when the
+   * user changes the name textbox.
    * 
    * @param acb
    *          Set the password blur callback to acb.

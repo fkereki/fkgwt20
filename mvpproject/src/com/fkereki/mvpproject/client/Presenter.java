@@ -6,29 +6,25 @@ abstract public class Presenter<D> {
   private Environment environment;
   private KeyValueMap kvm;
 
-
   public Presenter() {
   }
 
-
-  public Presenter(String someParams, D aDisplay, Environment anEnvironment) {
+  public Presenter(String someParams, D aDisplay,
+      Environment anEnvironment) {
     super();
-    params = someParams;
-    display = aDisplay;
-    environment = anEnvironment;
-    kvm = new KeyValueMap(params);
+    params= someParams;
+    display= aDisplay;
+    environment= anEnvironment;
+    kvm= new KeyValueMap(params);
   }
-
 
   public Environment getEnvironment() {
     return environment;
   }
 
-
   public D getDisplay() {
     return display;
   }
-
 
   public KeyValueMap getKvm() {
     return kvm;

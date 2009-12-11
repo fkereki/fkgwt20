@@ -14,7 +14,7 @@ public class Environment {
     String historyToken;
 
     public HistoryCommand(final String newToken) {
-      historyToken = newToken;
+      historyToken= newToken;
     }
 
     public void execute() {
@@ -23,14 +23,14 @@ public class Environment {
   }
 
   final Model model;
-  final Grid rootDisplay = new Grid(2, 1);
-  final MenuBar runMenuBar = new MenuBar();
-  final VerticalPanel runPanel = new VerticalPanel();
+  final Grid rootDisplay= new Grid(2, 1);
+  final MenuBar runMenuBar= new MenuBar();
+  final VerticalPanel runPanel= new VerticalPanel();
   String startingToken;
 
   String currentUser;
 
-  Command sorry = new Command() {
+  Command sorry= new Command() {
     @Override
     public void execute() {
       showAlert("Sorry, this isn't ready yet.");
@@ -38,20 +38,22 @@ public class Environment {
   };
 
   public Environment(Model aModel, String aToken) {
-    model = aModel;
-    startingToken = aToken;
+    model= aModel;
+    startingToken= aToken;
   }
 
   private void createMenu(MenuBar mb) {
     // TODO Add user type parameter, for specific menu
     // generation
 
-    mb.addItem("dummy#1", new HistoryCommand(DummyOnePresenter.PLACE
-        + "?parameter=value"));
-    mb.addItem("dummy#2", new HistoryCommand(DummyTwoPresenter.PLACE));
-    mb.addItem("Clients", new HistoryCommand(ClientDataPresenter.PLACE));
+    mb.addItem("dummy#1", new HistoryCommand(
+        DummyOnePresenter.PLACE + "?parameter=value"));
+    mb.addItem("dummy#2", new HistoryCommand(
+        DummyTwoPresenter.PLACE));
+    mb.addItem("Clients", new HistoryCommand(
+        ClientDataPresenter.PLACE));
 
-    MenuBar mb2 = new MenuBar(true);
+    MenuBar mb2= new MenuBar(true);
     mb2.addItem("subitem1", sorry);
     mb2.addItem("subitem2", sorry);
     mb2.addItem("subitem3", sorry);
@@ -59,7 +61,8 @@ public class Environment {
 
     mb.addItem("submenu", mb2);
 
-    mb.addItem("login", new HistoryCommand(LoginFormPresenter.PLACE));
+    mb.addItem("login", new HistoryCommand(
+        LoginFormPresenter.PLACE));
   }
 
   public Model getModel() {
@@ -76,11 +79,11 @@ public class Environment {
      * "?key1=value1&key2=value2..."; for more on this, check
      * http://www.w3.org/TR/hash-in-uri/.
      */
-    String args = "";
-    int question = token.indexOf("?");
+    String args= "";
+    int question= token.indexOf("?");
     if (question != -1) {
-      args = token.substring(question + 1);
-      token = token.substring(0, question);
+      args= token.substring(question + 1);
+      token= token.substring(0, question);
     }
 
     /*
@@ -88,7 +91,7 @@ public class Environment {
      * History.
      */
     if (panel == null) {
-      panel = runPanel;
+      panel= runPanel;
       History.newItem(token);
     }
     panel.clear();
@@ -101,17 +104,17 @@ public class Environment {
     } else if (token.equals(LoginFormPresenter.PLACE)) {
       showLogin(RootPanel.get());
     } else if (token.equals(DummyOnePresenter.PLACE)) {
-      panel.add(new DummyOnePresenter(args, new DummyOneView(), this)
-          .getDisplay().asWidget());
+      panel.add(new DummyOnePresenter(args, new DummyOneView(),
+          this).getDisplay().asWidget());
     } else if (token.equals(DummyTwoPresenter.PLACE)) {
-      panel.add(new DummyTwoPresenter(args, new DummyTwoView(), this)
-          .getDisplay().asWidget());
+      panel.add(new DummyTwoPresenter(args, new DummyTwoView(),
+          this).getDisplay().asWidget());
     } else if (token.equals(ClientDataPresenter.PLACE)) {
-      panel.add(new ClientDataPresenter(args, new ClientDataView(), this)
-          .getDisplay().asWidget());
+      panel.add(new ClientDataPresenter(args,
+          new ClientDataView(), this).getDisplay().asWidget());
     } else if (token.equals(ClientSearchPresenter.PLACE)) {
-      panel.add(new ClientSearchPresenter(args, new ClientSearchView(), this)
-          .getDisplay().asWidget());
+      panel.add(new ClientSearchPresenter(args,
+          new ClientSearchView(), this).getDisplay().asWidget());
     } else {
       Window.alert("Unrecognized token=" + token);
     }
@@ -122,13 +125,14 @@ public class Environment {
   }
 
   private void showLogin(Panel panel) {
-    currentUser = "";
+    currentUser= "";
 
-    LoginFormPresenter2 loginForm = new LoginFormPresenter2("",
-        new LoginFormView3(), this, new SimpleCallback<String>() {
+    LoginFormPresenter2 loginForm= new LoginFormPresenter2("",
+        new LoginFormView3(), this,
+        new SimpleCallback<String>() {
           @Override
           public void goBack(String result) {
-            currentUser = result;
+            currentUser= result;
             showMainMenu();
           }
         });
@@ -153,14 +157,12 @@ public class Environment {
 
     /*
      * If the application was started with a token, now that the user is logged
-     * in, it's time to show it.
-     * 
-     * Don't forget to clear startingToken, or after a logout/login, we will go
-     * back again to it.
+     * in, it's time to show it. Don't forget to clear startingToken, or after a
+     * logout/login, we will go back again to it.
      */
     if (!startingToken.isEmpty()) {
       launch(startingToken);
-      startingToken = "";
+      startingToken= "";
     }
   }
 }
