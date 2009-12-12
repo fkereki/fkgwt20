@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
@@ -17,9 +18,9 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Defines a Login Form.
  */
-public class LoginFormView3 extends View implements LoginFormDisplay2 {
-  @UiTemplate("LoginFormView3.ui.xml")
-  interface Binder extends UiBinder<HTMLPanel, LoginFormView3> {
+public class LoginFormView4 extends View implements LoginFormDisplay2 {
+  @UiTemplate("LoginFormView4.ui.xml")
+  interface Binder extends UiBinder<HTMLPanel, LoginFormView4> {
   }
 
   AsyncCallback<Object> loginCallback;
@@ -30,19 +31,20 @@ public class LoginFormView3 extends View implements LoginFormDisplay2 {
   TextBox nameTextBox;
   @UiField
   PasswordTextBox passwordTextBox;
-  @UiField
+  @UiField(provided = true)
   Button loginButton;
 
   private static final Binder binder = GWT.create(Binder.class);
 
-  public LoginFormView3() {
+  public LoginFormView4() {
+    loginButton = new Button("Ok");
     HTMLPanel dlp = binder.createAndBindUi(this);
     initWidget(dlp);
   }
 
   @Override
   public final Widget asWidget() {
-    return LoginFormView3.this;
+    return LoginFormView4.this;
   }
 
   @Override
@@ -58,6 +60,11 @@ public class LoginFormView3 extends View implements LoginFormDisplay2 {
   @Override
   public final String getPassword() {
     return passwordTextBox.getValue();
+  }
+
+  @UiFactory
+  ReadOnlyTextBox2 makeROTB(String init) {
+    return new ReadOnlyTextBox2(init);
   }
 
   @Override
