@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+<g:VerticalPanel>
+  <g:Label text="hola" />
+ <g:StackLayoutPanel unit='EM'>
+  <g:stack>
+    <g:header size='49'><b>HTML</b> header</g:header>
+    <g:Label>able</g:Label>
+  </g:stack>
+  <g:stack>
+    <g:customHeader size='49'>
+      <g:Label>Custom header</g:Label>
+    </g:customHeader>
+    <g:Label>baker</g:Label>
+  </g:stack>
+ </g:StackLayoutPanel>
+
+
+ <g:Label text="bola"/>
+ </g:VerticalPanel>
+</ui:UiBinder>
