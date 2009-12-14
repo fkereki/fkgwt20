@@ -8,7 +8,7 @@ import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
@@ -36,7 +36,6 @@ public class Demorc2 implements EntryPoint {
     HTMLPanel dl1 = binder1.createAndBindUi(this);
 
     Demorc2c d2c = new Demorc2c();
-    d2c.setHeight("400px");
 
     // tp = new TabPanel();
     // tp.add(dl1, "Login");
@@ -50,6 +49,6 @@ public class Demorc2 implements EntryPoint {
     // tp.setHeight("400px");
 
     // Add it to the root panel.
-    RootPanel.get().add(d2c);
+    RootLayoutPanel.get().add(d2c);
   }
 }
