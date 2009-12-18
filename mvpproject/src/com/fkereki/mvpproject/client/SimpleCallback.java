@@ -2,8 +2,7 @@ package com.fkereki.mvpproject.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public abstract class SimpleCallback<T> implements
-    AsyncCallback<T> {
+public abstract class SimpleCallback<T> implements AsyncCallback<T> {
 
   @Override
   public final void onFailure(Throwable caught) {

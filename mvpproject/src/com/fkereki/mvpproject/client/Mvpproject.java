@@ -1,5 +1,8 @@
 package com.fkereki.mvpproject.client;
 
+import java.util.LinkedHashMap;
+
+import com.fkereki.mvpproject.client.login.LoginFormPresenter;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -7,20 +10,20 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.RootPanel;
 
-public class Mvpproject implements EntryPoint,
-    ValueChangeHandler<String> {
+public class Mvpproject implements EntryPoint, ValueChangeHandler<String> {
 
   public static native String getUserAgent() /*-{
-                                             return navigator.userAgent.toLowerCase();
-                                             }-*/;
+    return navigator.userAgent.toLowerCase();
+  }-*/;
 
   Environment environment;
 
-  public void onModuleLoad() {
-    DOM.removeChild(RootPanel.getBodyElement(), DOM
-        .getElementById("loading"));
+  LinkedHashMap<String, String> countries;
 
-    environment= new Environment(new Model(), History.getToken());
+  public void onModuleLoad() {
+    DOM.removeChild(RootPanel.getBodyElement(), DOM.getElementById("loading"));
+
+    environment = new Environment(new Model(), History.getToken());
 
     /*
      * Set up the history management, and start by showing the login form.

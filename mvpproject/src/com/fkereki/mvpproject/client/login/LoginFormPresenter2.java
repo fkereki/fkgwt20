@@ -1,5 +1,9 @@
-package com.fkereki.mvpproject.client;
+package com.fkereki.mvpproject.client.login;
 
+import com.fkereki.mvpproject.client.Environment;
+import com.fkereki.mvpproject.client.LoginServiceAsync;
+import com.fkereki.mvpproject.client.Presenter;
+import com.fkereki.mvpproject.client.SimpleCallback;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class LoginFormPresenter2

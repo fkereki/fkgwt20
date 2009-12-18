@@ -1,6 +1,9 @@
-package com.fkereki.mvpproject.client;
+package com.fkereki.mvpproject.client.login;
 
-public interface LoginFormDisplay extends Display {
+import com.fkereki.mvpproject.client.Display;
+import com.fkereki.mvpproject.client.SimpleCallback;
+
+public interface LoginFormDisplay2 extends Display {
   /**
    * Access the Name field
    * 
@@ -33,6 +36,14 @@ public interface LoginFormDisplay extends Display {
   void setPassword(String s);
 
   /**
+   * Enable or disable the login button
+   * 
+   * @param b
+   *          If true, enable the button; otherwise, disable it
+   */
+  void enableLoginButton(boolean b);
+
+  /**
    * Initialize the login callback, which shall be executed when the user clicks
    * the "Login" button
    * 
@@ -42,4 +53,22 @@ public interface LoginFormDisplay extends Display {
    *          the needed checks.
    */
   void setLoginCallback(SimpleCallback<Object> acb);
+
+  /**
+   * Initialize the name blur callback, which shall be executed when the user
+   * changes the name textbox.
+   * 
+   * @param acb
+   *          Set the name blur callback to acb.
+   */
+  void setNameBlurCallback(SimpleCallback<Object> acb);
+
+  /**
+   * Initialize the password blur callback, which shall be executed when the
+   * user changes the name textbox.
+   * 
+   * @param acb
+   *          Set the password blur callback to acb.
+   */
+  void setPasswordBlurCallback(SimpleCallback<Object> acb);
 }

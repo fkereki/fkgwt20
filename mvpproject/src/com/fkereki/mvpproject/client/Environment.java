@@ -1,5 +1,16 @@
 package com.fkereki.mvpproject.client;
 
+import com.fkereki.mvpproject.client.clientData.ClientDataPresenter;
+import com.fkereki.mvpproject.client.clientData.ClientDataView;
+import com.fkereki.mvpproject.client.clientSearch.ClientSearchPresenter;
+import com.fkereki.mvpproject.client.clientSearch.ClientSearchView;
+import com.fkereki.mvpproject.client.dummyOne.DummyOnePresenter;
+import com.fkereki.mvpproject.client.dummyOne.DummyOneView;
+import com.fkereki.mvpproject.client.dummyTwo.DummyTwoPresenter;
+import com.fkereki.mvpproject.client.dummyTwo.DummyTwoView;
+import com.fkereki.mvpproject.client.login.LoginFormPresenter;
+import com.fkereki.mvpproject.client.login.LoginFormPresenter2;
+import com.fkereki.mvpproject.client.login.LoginFormView4;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;

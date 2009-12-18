@@ -1,5 +1,6 @@
-package com.fkereki.mvpproject.client;
+package com.fkereki.mvpproject.client.dummyTwo;
 
+import com.fkereki.mvpproject.client.View;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;

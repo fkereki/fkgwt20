@@ -1,5 +1,7 @@
-package com.fkereki.mvpproject.client;
+package com.fkereki.mvpproject.client.dummyOne;
 
+import com.fkereki.mvpproject.client.Display;
+import com.fkereki.mvpproject.client.SimpleCallback;
 import com.google.gwt.user.client.ui.PopupPanel;
 
 public interface DummyOneDisplay extends Display {

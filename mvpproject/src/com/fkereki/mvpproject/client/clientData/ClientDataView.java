@@ -1,5 +1,7 @@
-package com.fkereki.mvpproject.client;
+package com.fkereki.mvpproject.client.clientData;
 
+import com.fkereki.mvpproject.client.SimpleCallback;
+import com.fkereki.mvpproject.client.View;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;

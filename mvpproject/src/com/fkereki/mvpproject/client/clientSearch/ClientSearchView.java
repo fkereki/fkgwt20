@@ -1,5 +1,7 @@
-package com.fkereki.mvpproject.client;
+package com.fkereki.mvpproject.client.clientSearch;
 
+import com.fkereki.mvpproject.client.SimpleCallback;
+import com.fkereki.mvpproject.client.View;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -8,23 +10,22 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ClientSearchView
-    extends View implements ClientSearchDisplay {
+public class ClientSearchView extends View implements ClientSearchDisplay {
 
   SimpleCallback<Object> searchClickCallback;
 
-  final TextBox nameLike= new TextBox();
-  final TextBox addressLike= new TextBox();
-  final TextBox cityLike= new TextBox();
+  final TextBox nameLike = new TextBox();
+  final TextBox addressLike = new TextBox();
+  final TextBox cityLike = new TextBox();
 
-  final ListBox clientResults= new ListBox();
-  final Button searchButton= new Button("Search");
-  final Button returnButton= new Button("Return");
-  final Button cancelButton= new Button("Cancel");
+  final ListBox clientResults = new ListBox();
+  final Button searchButton = new Button("Search");
+  final Button returnButton = new Button("Return");
+  final Button cancelButton = new Button("Cancel");
 
-  final HorizontalPanel horiz= new HorizontalPanel();
-  final FlexTable flex= new FlexTable();
-  final FlexTable flex2= new FlexTable();
+  final HorizontalPanel horiz = new HorizontalPanel();
+  final FlexTable flex = new FlexTable();
+  final FlexTable flex2 = new FlexTable();
 
   public ClientSearchView() {
     clientResults.setWidth("100%");
