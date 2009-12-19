@@ -7,33 +7,45 @@ import java.util.LinkedHashMap;
 
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.View;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
+  @UiTemplate("CitiesBrowserView.ui.xml")
+  interface Binder extends UiBinder<HTMLPanel, CitiesBrowserView> {
+  }
 
   public static final int CITIES_PAGE_SIZE = 20;
 
-  final ListBox countryCode = new ListBox();
-  final ListBox stateCode = new ListBox();
+  private static final Binder binder = GWT.create(Binder.class);
 
-  final VerticalPanel vp = new VerticalPanel();
-  final HorizontalPanel ht1 = new HorizontalPanel();
-  final HorizontalPanel ht2 = new HorizontalPanel();
+  @UiField
+  ListBox countryCode;
 
-  final FlexTable cg = new FlexTable();
-  final Button firstButton = new Button("First " + CITIES_PAGE_SIZE + " cities");
-  final Button previousButton = new Button("Previous " + CITIES_PAGE_SIZE);
-  final Button nextButton = new Button("Next " + CITIES_PAGE_SIZE);
+  @UiField
+  ListBox stateCode;
+
+  @UiField
+  FlexTable cg;
+
+  @UiField(provided = true)
+  Button firstButton = new Button("First " + CITIES_PAGE_SIZE + " cities");
+
+  @UiField(provided = true)
+  Button previousButton = new Button("Previous " + CITIES_PAGE_SIZE);
+
+  @UiField(provided = true)
+  Button nextButton = new Button("Next " + CITIES_PAGE_SIZE);
 
   SimpleCallback<Object> onFirstClickCallback;
   SimpleCallback<Object> onPreviousClickCallback;
@@ -42,53 +54,13 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
 
   public CitiesBrowserView() {
     super();
+    HTMLPanel dlp = binder.createAndBindUi(this);
+    initWidget(dlp);
 
-    cg.setText(0, 0, "City");
+    cg.setText(0, 0, "Name");
     cg.setText(0, 1, "Population");
     cg.setText(0, 2, "Latitude");
     cg.setText(0, 3, "Longitude");
-
-    ht1.add(new Label("Country/State:"));
-    ht1.add(countryCode);
-    ht1.add(stateCode);
-
-    ht2.add(firstButton);
-    ht2.add(previousButton);
-    ht2.add(nextButton);
-
-    vp.add(ht1);
-    vp.add(ht2);
-    vp.add(cg);
-
-    initWidget(vp);
-
-    firstButton.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(ClickEvent event) {
-        onFirstClickCallback.onSuccess(null);
-      }
-    });
-
-    previousButton.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(ClickEvent event) {
-        onPreviousClickCallback.onSuccess(null);
-      }
-    });
-
-    nextButton.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(ClickEvent event) {
-        onNextClickCallback.onSuccess(null);
-      }
-    });
-
-    countryCode.addChangeHandler(new ChangeHandler() {
-      @Override
-      public void onChange(ChangeEvent event) {
-        onCountryChangeCallback.onSuccess(null);
-      }
-    });
   }
 
   @Override
@@ -132,6 +104,7 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
   public void setCountryList(LinkedHashMap<String, String> cl) {
     countryCode.clear();
     if (cl != null) {
+      countryCode.addItem("--Select a country--", "");
       for (final String it : cl.keySet()) {
         countryCode.addItem(cl.get(it), it);
       }
@@ -162,9 +135,30 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
   public void setStateList(LinkedHashMap<String, String> sl) {
     stateCode.clear();
     if (sl != null) {
+      stateCode.addItem("--Select a state--", "");
       for (final String it : sl.keySet()) {
         stateCode.addItem(sl.get(it), it);
       }
     }
+  }
+
+  @UiHandler("countryCode")
+  void uiOnCountryChange(ChangeEvent event) {
+    onCountryChangeCallback.onSuccess(null);
+  }
+
+  @UiHandler("firstButton")
+  void uiOnFirstClick(ClickEvent event) {
+    onFirstClickCallback.onSuccess(null);
+  }
+
+  @UiHandler("nextButton")
+  void uiOnNextClick(ClickEvent event) {
+    onNextClickCallback.onSuccess(null);
+  }
+
+  @UiHandler("previousButton")
+  void uiOnPreviousClick(ClickEvent event) {
+    onPreviousClickCallback.onSuccess(null);
   }
 }
