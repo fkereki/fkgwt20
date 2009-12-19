@@ -17,13 +17,8 @@ public interface CitiesBrowserDisplay extends Display {
 
   String getState();
 
-  void setCityLatitude(final int i, final String n);
-
-  void setCityLongitude(final int i, final String n);
-
-  void setCityName(final int i, final String n);
-
-  void setCityPopulation(final int i, final String n);
+  void setCityData(final int i, final String name, final String pop,
+      final String lat, final String lon);
 
   void setCountryList(LinkedHashMap<String, String> cl);
 
@@ -34,6 +29,8 @@ public interface CitiesBrowserDisplay extends Display {
   void setOnNextClickCallback(SimpleCallback<Object> acb);
 
   void setOnPreviousClickCallback(SimpleCallback<Object> acb);
+
+  void setOnStateChangeCallback(SimpleCallback<Object> acb);
 
   void setStateList(LinkedHashMap<String, String> sl);
 }

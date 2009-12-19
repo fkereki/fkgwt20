@@ -7,14 +7,10 @@ import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.google.gwt.i18n.client.NumberFormat;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
   public static String PLACE = "citybrowse";
 
-  String country = "";
-  String state = "";
   int currentStart = 0;
 
   public CitiesBrowserPresenter(final String params,
@@ -22,6 +18,8 @@ public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
       final Environment environment) {
 
     super(params, citiesBrowserDisplay, environment);
+
+    clearCities();
 
     getDisplay().setOnFirstClickCallback(new SimpleCallback<Object>() {
       @Override
@@ -56,27 +54,31 @@ public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
     getDisplay().setOnCountryChangeCallback(new SimpleCallback<Object>() {
       @Override
       public void goBack(Object result) {
-        currentStart = 0;
-        String country = getDisplay().getCountry();
-        if (country.isEmpty()) {
-          LinkedHashMap<String, String> emptyStatesList = new LinkedHashMap<String, String>();
-          emptyStatesList.put("", "Loading...");
-          getDisplay().setStateList(emptyStatesList);
-        } else {
+        /*
+         * Clear the grid and the states listbox
+         */
+        clearCities();
+        getDisplay().setStateList(null);
 
-          getEnvironment().getModel().getStates(country,
-              new AsyncCallback<LinkedHashMap<String, String>>() {
+        /*
+         * If a country was selected, get and load its states
+         */
+        if (!getDisplay().getCountry().isEmpty()) {
+          getEnvironment().getModel().getStates(getDisplay().getCountry(),
+              new SimpleCallback<LinkedHashMap<String, String>>() {
                 @Override
-                public void onFailure(Throwable caught) {
-                  // ...no countries?...
-                }
-
-                @Override
-                public void onSuccess(LinkedHashMap<String, String> result) {
+                public void goBack(LinkedHashMap<String, String> result) {
                   getDisplay().setStateList(result);
                 }
               });
         }
+      }
+    });
+
+    getDisplay().setOnStateChangeCallback(new SimpleCallback<Object>() {
+      @Override
+      public void goBack(Object result) {
+        clearCities();
       }
     });
 
@@ -88,23 +90,22 @@ public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
     emptyCountriesList.put("", "Loading...");
     getDisplay().setCountryList(emptyCountriesList);
     getEnvironment().getModel().getCountries(
-        new AsyncCallback<LinkedHashMap<String, String>>() {
+        new SimpleCallback<LinkedHashMap<String, String>>() {
           @Override
-          public void onFailure(Throwable caught) {
-            // ...no countries?...
-          }
-
-          @Override
-          public void onSuccess(LinkedHashMap<String, String> result) {
+          public void goBack(LinkedHashMap<String, String> result) {
             getDisplay().setCountryList(result);
           }
         });
   }
 
   boolean checkCountryAndState() {
-    country = getDisplay().getCountry();
-    state = getDisplay().getState();
-    return !country.isEmpty() && !state.isEmpty();
+    return !getDisplay().getCountry().isEmpty()
+        && !getDisplay().getState().isEmpty();
+  }
+
+  void clearCities() {
+    currentStart = 0;
+    displayEmptyCities(0, "");
   }
 
   /**
@@ -122,10 +123,8 @@ public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
     for (final String it : pCitiesList.keySet()) {
       i++;
       final ClientCityData cd = pCitiesList.get(it);
-      getDisplay().setCityName(i, cd.cityName);
-      getDisplay().setCityPopulation(i, nf.format(cd.population));
-      getDisplay().setCityLatitude(i, nf.format(cd.latitude));
-      getDisplay().setCityLongitude(i, nf.format(cd.longitude));
+      getDisplay().setCityData(i, cd.cityName, nf.format(cd.population),
+          nf.format(cd.latitude), nf.format(cd.longitude));
     }
 
     displayEmptyCities(i, "");
@@ -143,10 +142,7 @@ public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
   void displayEmptyCities(int pSince, final String pDisplayText) {
     while (pSince < CitiesBrowserView.CITIES_PAGE_SIZE) {
       pSince++;
-      getDisplay().setCityName(pSince, pDisplayText);
-      getDisplay().setCityPopulation(pSince, "");
-      getDisplay().setCityLatitude(pSince, "");
-      getDisplay().setCityLongitude(pSince, "");
+      getDisplay().setCityData(pSince, pDisplayText, "", "", "");
     }
   }
 
@@ -156,22 +152,15 @@ public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
     }
 
     displayEmptyCities(0, "Loading...");
-    getEnvironment().getModel().getCities(country, state, currentStart,
+    getEnvironment().getModel().getCities(getDisplay().getCountry(),
+        getDisplay().getState(), currentStart,
         CitiesBrowserView.CITIES_PAGE_SIZE,
-        new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
-
+        new SimpleCallback<LinkedHashMap<String, ClientCityData>>() {
           @Override
-          public void onFailure(Throwable caught) {
-            Window.alert("...failure getting cities...");
-          }
-
-          @Override
-          public void onSuccess(LinkedHashMap<String, ClientCityData> result) {
-            // TODO Auto-generated method stub
+          public void goBack(LinkedHashMap<String, ClientCityData> result) {
             displayCities(result);
           }
         });
 
   }
-
 }

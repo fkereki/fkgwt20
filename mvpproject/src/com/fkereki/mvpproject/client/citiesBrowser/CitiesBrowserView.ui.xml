@@ -3,14 +3,18 @@
 <u:UiBinder xmlns:u='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
   <g:HTMLPanel>
-    <g:Label text="Country/State:"/>
-    <g:ListBox u:field="countryCode"/>
-    <g:ListBox u:field="stateCode"/>
+    <table>
+      <tr>
+        <td>Country:</td>
+        <td><g:ListBox u:field="countryCode"/></td>
+      </tr>
+      <tr>
+        <td>State:</td>
+        <td><g:ListBox u:field="stateCode"/></td>
+      </tr>
+    </table>
     <br />
-    <br />
-    <g:Button u:field="firstButton"/>
-    <g:Button u:field="previousButton"/>
-    <g:Button u:field="nextButton"/>
+    <g:Button u:field="firstButton"/><g:Button u:field="previousButton"/><g:Button u:field="nextButton"/>
     <br />
     <br />
     <g:FlexTable u:field="cg"/>

@@ -51,6 +51,7 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
   SimpleCallback<Object> onPreviousClickCallback;
   SimpleCallback<Object> onNextClickCallback;
   SimpleCallback<Object> onCountryChangeCallback;
+  SimpleCallback<Object> onStateChangeCallback;
 
   public CitiesBrowserView() {
     super();
@@ -81,23 +82,11 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
   }
 
   @Override
-  public void setCityLatitude(int i, String n) {
-    cg.setText(i, 2, n);
-  }
-
-  @Override
-  public void setCityLongitude(int i, String n) {
-    cg.setText(i, 3, n);
-  }
-
-  @Override
-  public void setCityName(int i, String n) {
-    cg.setText(i, 0, n);
-  }
-
-  @Override
-  public void setCityPopulation(int i, String n) {
-    cg.setText(i, 1, n);
+  public void setCityData(int i, String name, String pop, String lat, String lon) {
+    cg.setText(i, 0, name);
+    cg.setText(i, 1, pop);
+    cg.setText(i, 2, lat);
+    cg.setText(i, 3, lon);
   }
 
   @Override
@@ -129,6 +118,11 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
   @Override
   public void setOnPreviousClickCallback(SimpleCallback<Object> acb) {
     onPreviousClickCallback = acb;
+  }
+
+  @Override
+  public void setOnStateChangeCallback(SimpleCallback<Object> acb) {
+    onStateChangeCallback = acb;
   }
 
   @Override
