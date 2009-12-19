@@ -103,13 +103,8 @@ public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
 
   boolean checkCountryAndState() {
     country = getDisplay().getCountry();
-    if (!country.isEmpty()) {
-      state = getDisplay().getState();
-      if (!state.isEmpty()) {
-        return true;
-      }
-    }
-    return false;
+    state = getDisplay().getState();
+    return !country.isEmpty() && !state.isEmpty();
   }
 
   /**
@@ -160,6 +155,7 @@ public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
       currentStart = 0;
     }
 
+    displayEmptyCities(0, "Loading...");
     getEnvironment().getModel().getCities(country, state, currentStart,
         CitiesBrowserView.CITIES_PAGE_SIZE,
         new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
