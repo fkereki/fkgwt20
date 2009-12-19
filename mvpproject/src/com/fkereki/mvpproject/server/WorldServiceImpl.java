@@ -202,8 +202,7 @@ public class WorldServiceImpl extends RemoteServiceServlet implements
    *         region codes are used as keys, and region names as values. The map
    *         is ordered by region name, alphabetically.
    */
-  public LinkedHashMap<String, String> getRegions(final String pCountryCode) {
-
+  public LinkedHashMap<String, String> getStates(final String pCountryCode) {
     final LinkedHashMap<String, String> regionsList = new LinkedHashMap<String, String>();
 
     try {

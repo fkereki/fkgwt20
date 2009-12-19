@@ -16,5 +16,5 @@ public interface WorldService extends RemoteService {
 
   public LinkedHashMap<String, String> getCountries();
 
-  public LinkedHashMap<String, String> getRegions(String pCountry);
+  public LinkedHashMap<String, String> getStates(String pCountry);
 }

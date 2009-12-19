@@ -1,5 +1,7 @@
 package com.fkereki.mvpproject.client;
 
+import com.fkereki.mvpproject.client.citiesBrowser.CitiesBrowserPresenter;
+import com.fkereki.mvpproject.client.citiesBrowser.CitiesBrowserView;
 import com.fkereki.mvpproject.client.clientData.ClientDataPresenter;
 import com.fkereki.mvpproject.client.clientData.ClientDataView;
 import com.fkereki.mvpproject.client.clientSearch.ClientSearchPresenter;
@@ -70,6 +72,8 @@ public class Environment {
 
     mb.addItem("submenu", mb2);
 
+    mb.addItem("Cities", new HistoryCommand(CitiesBrowserPresenter.PLACE));
+
     mb.addItem("login", new HistoryCommand(LoginFormPresenter.PLACE));
   }
 
@@ -122,6 +126,9 @@ public class Environment {
           .getDisplay().asWidget());
     } else if (token.equals(ClientSearchPresenter.PLACE)) {
       panel.add(new ClientSearchPresenter(args, new ClientSearchView(), this)
+          .getDisplay().asWidget());
+    } else if (token.equals(CitiesBrowserPresenter.PLACE)) {
+      panel.add(new CitiesBrowserPresenter(args, new CitiesBrowserView(), this)
           .getDisplay().asWidget());
     } else {
       Window.alert("Unrecognized token=" + token);

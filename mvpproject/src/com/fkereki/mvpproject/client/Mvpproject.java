@@ -1,7 +1,5 @@
 package com.fkereki.mvpproject.client;
 
-import java.util.LinkedHashMap;
-
 import com.fkereki.mvpproject.client.login.LoginFormPresenter;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -17,8 +15,6 @@ public class Mvpproject implements EntryPoint, ValueChangeHandler<String> {
   }-*/;
 
   Environment environment;
-
-  LinkedHashMap<String, String> countries;
 
   public void onModuleLoad() {
     DOM.removeChild(RootPanel.getBodyElement(), DOM.getElementById("loading"));

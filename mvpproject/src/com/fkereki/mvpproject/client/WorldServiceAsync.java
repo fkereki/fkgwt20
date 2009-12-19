@@ -17,6 +17,6 @@ public interface WorldServiceAsync {
 
   void getCountries(AsyncCallback<LinkedHashMap<String, String>> ac);
 
-  void getRegions(java.lang.String country,
+  void getStates(java.lang.String country,
       AsyncCallback<LinkedHashMap<String, String>> ac);
 }
