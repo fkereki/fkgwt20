@@ -1,9 +1,9 @@
-package com.fkereki.mvpproject.client.dummyTwo;
+package com.fkereki.mvpproject.client.suggest;
 
 import com.fkereki.mvpproject.client.Display;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 
-public interface DummyTwoDisplay extends Display {
+public interface SuggestDisplay extends Display {
   void setCitiesOracle(MultiWordSuggestOracle oracle);
 
 }

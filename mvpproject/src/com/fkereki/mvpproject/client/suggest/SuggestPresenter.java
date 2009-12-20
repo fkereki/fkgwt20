@@ -1,4 +1,4 @@
-package com.fkereki.mvpproject.client.dummyTwo;
+package com.fkereki.mvpproject.client.suggest;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -10,14 +10,14 @@ import com.fkereki.mvpproject.client.SuggestionItem;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 
-public class DummyTwoPresenter extends Presenter<DummyTwoDisplay> {
+public class SuggestPresenter extends Presenter<SuggestDisplay> {
 
   public static String PLACE = "baz";
 
-  public DummyTwoPresenter(String params, DummyTwoDisplay dummyTwoDisplay,
+  public SuggestPresenter(String params, SuggestDisplay suggestDisplay,
       Environment environment) {
 
-    super(params, dummyTwoDisplay, environment);
+    super(params, suggestDisplay, environment);
 
     getDisplay().setCitiesOracle(new MultiWordSuggestOracle() {
       @Override

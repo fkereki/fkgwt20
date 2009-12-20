@@ -10,10 +10,10 @@ import com.fkereki.mvpproject.client.clientSearch.ClientSearchPresenter;
 import com.fkereki.mvpproject.client.clientSearch.ClientSearchView;
 import com.fkereki.mvpproject.client.dummyOne.DummyOnePresenter;
 import com.fkereki.mvpproject.client.dummyOne.DummyOneView;
-import com.fkereki.mvpproject.client.dummyTwo.DummyTwoPresenter;
-import com.fkereki.mvpproject.client.dummyTwo.DummyTwoView;
 import com.fkereki.mvpproject.client.login4.LoginFormPresenter;
 import com.fkereki.mvpproject.client.login4.LoginFormView;
+import com.fkereki.mvpproject.client.suggest.SuggestPresenter;
+import com.fkereki.mvpproject.client.suggest.SuggestView;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
@@ -62,7 +62,7 @@ public class Environment {
 
     mb.addItem("dummy#1", new HistoryCommand(DummyOnePresenter.PLACE
         + "?parameter=value"));
-    mb.addItem("dummy#2", new HistoryCommand(DummyTwoPresenter.PLACE));
+    mb.addItem("Suggest", new HistoryCommand(SuggestPresenter.PLACE));
     mb.addItem("Clients", new HistoryCommand(ClientDataPresenter.PLACE));
 
     MenuBar mb2 = new MenuBar(true);
@@ -121,8 +121,8 @@ public class Environment {
     } else if (token.equals(DummyOnePresenter.PLACE)) {
       panel.add(new DummyOnePresenter(args, new DummyOneView(), this)
           .getDisplay().asWidget());
-    } else if (token.equals(DummyTwoPresenter.PLACE)) {
-      panel.add(new DummyTwoPresenter(args, new DummyTwoView(), this)
+    } else if (token.equals(SuggestPresenter.PLACE)) {
+      panel.add(new SuggestPresenter(args, new SuggestView(), this)
           .getDisplay().asWidget());
     } else if (token.equals(ClientDataPresenter.PLACE)) {
       panel.add(new ClientDataPresenter(args, new ClientDataView(), this)
