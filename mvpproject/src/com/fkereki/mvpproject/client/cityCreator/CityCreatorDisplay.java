@@ -1,16 +1,16 @@
 package com.fkereki.mvpproject.client.cityCreator;
 
-import java.util.LinkedHashMap;
-
 import com.fkereki.mvpproject.client.Display;
 import com.fkereki.mvpproject.client.SimpleCallback;
+import com.fkereki.mvpproject.client.citiesBrowser2.CountryStateDisplay;
 
 public interface CityCreatorDisplay extends Display {
+
   String getAccentedCityName();
 
   String getCityName();
 
-  String getCountry();
+  CountryStateDisplay getCountryState();
 
   float getLatitude();
 
@@ -18,13 +18,11 @@ public interface CityCreatorDisplay extends Display {
 
   int getPopulation();
 
-  String getState();
-
-  void setCountryList(LinkedHashMap<String, String> cl);
+  void setCityNameCssStyle(String css);
 
   void setOnAddClickCallback(SimpleCallback<Object> acb);
 
-  void setOnCountryChangeCallback(SimpleCallback<Object> acb);
+  void setOnCityNameChangeCallback(SimpleCallback<Object> acb);
 
-  void setStateList(LinkedHashMap<String, String> sl);
+  void setOnCountryStateChangeCallback(SimpleCallback<Object> acb);
 }

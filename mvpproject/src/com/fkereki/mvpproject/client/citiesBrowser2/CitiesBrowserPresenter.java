@@ -21,7 +21,7 @@ public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
 
     super(params, citiesBrowserDisplay, environment);
 
-    csp = new CountryStatePresenter("", citiesBrowserDisplay.getCountryState(),
+    csp = new CountryStatePresenter("", getDisplay().getCountryState(),
         environment);
 
     clearCities();

@@ -1,19 +1,18 @@
 package com.fkereki.mvpproject.client.cityCreator;
 
-import java.util.LinkedHashMap;
-
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.View;
+import com.fkereki.mvpproject.client.citiesBrowser2.CountryStateDisplay;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -23,10 +22,7 @@ public class CityCreatorView extends View implements CityCreatorDisplay {
   }
 
   @UiField
-  ListBox countryCode;
-
-  @UiField
-  ListBox stateCode;
+  CountryStateDisplay countryState;
 
   @UiField
   TextBox cityName;
@@ -47,7 +43,8 @@ public class CityCreatorView extends View implements CityCreatorDisplay {
   Button addCityButton;
 
   SimpleCallback<Object> onAddClickCallback;
-  SimpleCallback<Object> onCountryChangeCallback;
+  SimpleCallback<Object> onCountryStateChangeCallback;
+  SimpleCallback<Object> onCityNameChangeCallback;
 
   private static final Binder binder = GWT.create(Binder.class);
 
@@ -73,9 +70,8 @@ public class CityCreatorView extends View implements CityCreatorDisplay {
   }
 
   @Override
-  public String getCountry() {
-    int current = countryCode.getSelectedIndex();
-    return current == -1 ? "" : countryCode.getValue(current);
+  public CountryStateDisplay getCountryState() {
+    return countryState;
   }
 
   @Override
@@ -94,20 +90,8 @@ public class CityCreatorView extends View implements CityCreatorDisplay {
   }
 
   @Override
-  public String getState() {
-    int current = stateCode.getSelectedIndex();
-    return current == -1 ? "" : stateCode.getValue(current);
-  }
-
-  @Override
-  public void setCountryList(LinkedHashMap<String, String> cl) {
-    countryCode.clear();
-    if (cl != null) {
-      countryCode.addItem("--Select a country--", "");
-      for (final String it : cl.keySet()) {
-        countryCode.addItem(cl.get(it), it);
-      }
-    }
+  public void setCityNameCssStyle(String css) {
+    cityName.setStyleName(css);
   }
 
   @Override
@@ -116,19 +100,13 @@ public class CityCreatorView extends View implements CityCreatorDisplay {
   }
 
   @Override
-  public void setOnCountryChangeCallback(SimpleCallback<Object> acb) {
-    onCountryChangeCallback = acb;
+  public void setOnCityNameChangeCallback(SimpleCallback<Object> acb) {
+    onCityNameChangeCallback = acb;
   }
 
   @Override
-  public void setStateList(LinkedHashMap<String, String> sl) {
-    stateCode.clear();
-    if (sl != null) {
-      stateCode.addItem("--Select a state--", "");
-      for (final String it : sl.keySet()) {
-        stateCode.addItem(sl.get(it), it);
-      }
-    }
+  public void setOnCountryStateChangeCallback(SimpleCallback<Object> acb) {
+    onCountryStateChangeCallback = acb;
   }
 
   @UiHandler("addCityButton")
@@ -136,8 +114,13 @@ public class CityCreatorView extends View implements CityCreatorDisplay {
     onAddClickCallback.onSuccess(null);
   }
 
-  @UiHandler("countryCode")
-  void uiOnCountryChange(ChangeEvent event) {
-    onCountryChangeCallback.onSuccess(null);
+  @UiHandler("countryState")
+  void uiOnChange(ValueChangeEvent<Object> event) {
+    onCountryStateChangeCallback.onSuccess(null);
+  }
+
+  @UiHandler("cityName")
+  void uiOnCityChange(ChangeEvent event) {
+    onCityNameChangeCallback.onSuccess(null);
   }
 }

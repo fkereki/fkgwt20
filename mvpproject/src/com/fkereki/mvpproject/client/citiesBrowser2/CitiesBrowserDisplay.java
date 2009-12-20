@@ -11,7 +11,8 @@ import com.fkereki.mvpproject.client.SimpleCallback;
  * 
  */
 public interface CitiesBrowserDisplay extends Display {
-  CountryStateView getCountryState();
+
+  CountryStateDisplay getCountryState();
 
   void setCityData(final int i, final String name, final String pop,
       final String lat, final String lon);

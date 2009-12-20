@@ -21,8 +21,6 @@ public class Model {
      * region, it won't do anything, and just exit gracefully.
      */
     if (!country.isEmpty() && !state.isEmpty()) {
-      // displayEmptyCities(0, "Loading...");
-
       getRemoteWorldService().getCities(country, state, pStart, pCount,
           new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
             public void onFailure(final Throwable caught) {

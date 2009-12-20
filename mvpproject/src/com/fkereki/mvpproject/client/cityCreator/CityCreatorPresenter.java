@@ -1,39 +1,24 @@
 package com.fkereki.mvpproject.client.cityCreator;
 
-import java.util.LinkedHashMap;
-
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.SimpleCallback;
+import com.fkereki.mvpproject.client.citiesBrowser2.CountryStatePresenter;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class CityCreatorPresenter extends Presenter<CityCreatorDisplay> {
   public static String PLACE = "citycreate";
+
+  CountryStatePresenter csp;
 
   public CityCreatorPresenter(final String params,
       final CityCreatorDisplay cityCreatorDisplay, final Environment environment) {
 
     super(params, cityCreatorDisplay, environment);
 
-    getDisplay().setOnCountryChangeCallback(new SimpleCallback<Object>() {
-      @Override
-      public void goBack(Object result) {
-        getDisplay().setStateList(null);
-
-        /*
-         * If a country was selected, get and load its states
-         */
-        if (!getDisplay().getCountry().isEmpty()) {
-          getEnvironment().getModel().getStates(getDisplay().getCountry(),
-              new SimpleCallback<LinkedHashMap<String, String>>() {
-                @Override
-                public void goBack(LinkedHashMap<String, String> result) {
-                  getDisplay().setStateList(result);
-                }
-              });
-        }
-      }
-    });
+    csp = new CountryStatePresenter("", getDisplay().getCountryState(),
+        environment);
 
     getDisplay().setOnAddClickCallback(new SimpleCallback<Object>() {
       @Override
@@ -42,19 +27,59 @@ public class CityCreatorPresenter extends Presenter<CityCreatorDisplay> {
       }
     });
 
-    /*
-     * Display "Loading..." in lieu of the list of countries, at least until the
-     * actual list comes from the server.
-     */
-    LinkedHashMap<String, String> emptyCountriesList = new LinkedHashMap<String, String>();
-    emptyCountriesList.put("", "Loading...");
-    getDisplay().setCountryList(emptyCountriesList);
-    getEnvironment().getModel().getCountries(
-        new SimpleCallback<LinkedHashMap<String, String>>() {
-          @Override
-          public void goBack(LinkedHashMap<String, String> result) {
-            getDisplay().setCountryList(result);
-          }
-        });
+    SimpleCallback<Object> ch = new SimpleCallback<Object>() {
+      @Override
+      public void goBack(Object result) {
+        final String country = getDisplay().getCountryState().getCountry();
+        final String region = getDisplay().getCountryState().getState();
+        final String city = getDisplay().getCityName();
+
+        if (!country.isEmpty() && !region.isEmpty() && !city.isEmpty()) {
+
+          getEnvironment().getModel().getRemoteWorldService().cityExists(
+              country, region, city, new AsyncCallback<Boolean>() {
+                /*
+                 * In order to prevent spurious or redundant messages or
+                 * actions, let's store the original parameters for the service
+                 * call...
+                 */
+                String originalCountry = country;
+                String originalRegion = region;
+                String originalCityName = city;
+
+                public void onFailure(final Throwable caught) {
+                  Window.alert("Failure checking city: " + caught.getMessage());
+                }
+
+                public void onSuccess(final Boolean result) {
+                  /*
+                   * ...and avoid doing anything unless the parameters still
+                   * match.
+                   */
+                  if (originalCountry.equals(getDisplay().getCountryState()
+                      .getCountry())
+                      && originalRegion.equals(getDisplay().getCountryState()
+                          .getState())
+                      && originalCityName.equals(getDisplay().getCityName())) {
+
+                    if (result.booleanValue()) {
+                      /*
+                       * That city already exists!
+                       */
+                      getEnvironment().showAlert(
+                          "That city is already in the database");
+                      getDisplay().setCityNameCssStyle("gwt-Textbox-Error");
+                    } else {
+                      getDisplay().setCityNameCssStyle("gwt-TextBox");
+                    }
+                  }
+                }
+              });
+        }
+      }
+    };
+
+    getDisplay().setOnCityNameChangeCallback(ch);
+    getDisplay().setOnCountryStateChangeCallback(ch);
   }
 }

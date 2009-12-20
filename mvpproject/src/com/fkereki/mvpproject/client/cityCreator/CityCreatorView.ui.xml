@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <u:UiBinder xmlns:u='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'
+  xmlns:h='urn:import:com.fkereki.mvpproject.client.citiesBrowser2'>
   <g:HTMLPanel>
     <table>
       <tr>
-        <td>Country:</td>
-        <td><g:ListBox u:field="countryCode" /></td>
-      </tr>
-      <tr>
-        <td>State:</td>
-        <td><g:ListBox u:field="stateCode" /></td>
+        <td>Country/State:</td>
+        <td><h:CountryStateView u:field="countryState" /></td>
       </tr>
       <tr>
         <td>Name:</td>
