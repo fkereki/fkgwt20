@@ -1,9 +1,9 @@
-package com.fkereki.mvpproject.client.login;
+package com.fkereki.mvpproject.client.login4;
 
 import com.fkereki.mvpproject.client.Display;
 import com.fkereki.mvpproject.client.SimpleCallback;
 
-public interface LoginFormDisplay2 extends Display {
+public interface LoginFormDisplay extends Display {
   /**
    * Access the Name field
    * 

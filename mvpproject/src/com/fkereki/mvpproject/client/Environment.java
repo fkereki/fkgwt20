@@ -12,9 +12,8 @@ import com.fkereki.mvpproject.client.dummyOne.DummyOnePresenter;
 import com.fkereki.mvpproject.client.dummyOne.DummyOneView;
 import com.fkereki.mvpproject.client.dummyTwo.DummyTwoPresenter;
 import com.fkereki.mvpproject.client.dummyTwo.DummyTwoView;
-import com.fkereki.mvpproject.client.login.LoginFormPresenter;
-import com.fkereki.mvpproject.client.login.LoginFormPresenter2;
-import com.fkereki.mvpproject.client.login.LoginFormView4;
+import com.fkereki.mvpproject.client.login4.LoginFormPresenter;
+import com.fkereki.mvpproject.client.login4.LoginFormView;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
@@ -149,8 +148,8 @@ public class Environment {
   private void showLogin(Panel panel) {
     currentUser = "";
 
-    LoginFormPresenter2 loginForm = new LoginFormPresenter2("",
-        new LoginFormView4(), this, new SimpleCallback<String>() {
+    LoginFormPresenter loginForm = new LoginFormPresenter("",
+        new LoginFormView(), this, new SimpleCallback<String>() {
           @Override
           public void goBack(String result) {
             currentUser = result;

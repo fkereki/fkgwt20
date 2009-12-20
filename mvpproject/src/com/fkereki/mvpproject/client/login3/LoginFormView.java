@@ -1,4 +1,4 @@
-package com.fkereki.mvpproject.client.login;
+package com.fkereki.mvpproject.client.login3;
 
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.View;
@@ -19,9 +19,9 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Defines a Login Form.
  */
-public class LoginFormView3 extends View implements LoginFormDisplay2 {
-  @UiTemplate("LoginFormView3.ui.xml")
-  interface Binder extends UiBinder<HTMLPanel, LoginFormView3> {
+public class LoginFormView extends View implements LoginFormDisplay {
+  @UiTemplate("LoginFormView.ui.xml")
+  interface Binder extends UiBinder<HTMLPanel, LoginFormView> {
   }
 
   AsyncCallback<Object> loginCallback;
@@ -37,14 +37,14 @@ public class LoginFormView3 extends View implements LoginFormDisplay2 {
 
   private static final Binder binder = GWT.create(Binder.class);
 
-  public LoginFormView3() {
+  public LoginFormView() {
     HTMLPanel dlp = binder.createAndBindUi(this);
     initWidget(dlp);
   }
 
   @Override
   public final Widget asWidget() {
-    return LoginFormView3.this;
+    return LoginFormView.this;
   }
 
   @Override

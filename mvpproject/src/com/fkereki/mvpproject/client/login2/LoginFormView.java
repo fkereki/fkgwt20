@@ -1,4 +1,4 @@
-package com.fkereki.mvpproject.client.login;
+package com.fkereki.mvpproject.client.login2;
 
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.View;
@@ -18,8 +18,8 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Defines a Login Form.
  */
-public class LoginFormView2
-    extends View implements LoginFormDisplay2 {
+public class LoginFormView
+    extends View implements LoginFormDisplay {
 
   private AsyncCallback<Object> loginCallback;
   private AsyncCallback<Object> nameBlurCallback;
@@ -36,7 +36,7 @@ public class LoginFormView2
    * screen, we take care of centering the fields (by using a DockPanel) so it
    * will look nicer.
    */
-  public LoginFormView2() {
+  public LoginFormView() {
     loginButton.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -118,6 +118,6 @@ public class LoginFormView2
 
   @Override
   public final Widget asWidget() {
-    return LoginFormView2.this;
+    return LoginFormView.this;
   }
 }
