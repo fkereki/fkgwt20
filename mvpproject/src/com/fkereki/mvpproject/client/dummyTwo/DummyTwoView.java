@@ -3,23 +3,29 @@ package com.fkereki.mvpproject.client.dummyTwo;
 import com.fkereki.mvpproject.client.View;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DummyTwoView
-    extends View implements DummyTwoDisplay {
+public class DummyTwoView extends View implements DummyTwoDisplay {
+
+  FlexTable ft = new FlexTable();
+  SuggestBox sb;
 
   public DummyTwoView() {
-    FlexTable ft= new FlexTable();
-    ft.setWidget(0, 0, new Label("allzero"));
-    ft.setWidget(0, 1, new Label("000-111"));
-    ft.setWidget(1, 0, new Label("10"));
-    ft.setWidget(1, 1, new Label("111111"));
+    ft.setWidget(0, 0, new Label("Pick a New York city:"));
+    ft.setWidget(0, 1, new SuggestBox());
     initWidget(ft);
   }
 
   @Override
   public Widget asWidget() {
-    // TODO Auto-generated method stub
     return DummyTwoView.this;
+  }
+
+  @Override
+  public void setCitiesOracle(MultiWordSuggestOracle oracle) {
+    sb = new SuggestBox(oracle);
+    ft.setWidget(0, 1, sb);
   }
 }

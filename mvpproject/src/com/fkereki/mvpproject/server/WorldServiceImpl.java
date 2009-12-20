@@ -162,6 +162,36 @@ public class WorldServiceImpl extends RemoteServiceServlet implements
     return citiesList;
   }
 
+  public LinkedHashMap<String, ClientCityData> getCitiesStartingWith(
+      String pCountryCode, String pRegionCode, String pStart) {
+
+    final LinkedHashMap<String, ClientCityData> citiesList = new LinkedHashMap<String, ClientCityData>();
+
+    try {
+      connectToDatabase();
+      final Statement stmt = conn.createStatement();
+      final ResultSet rs = stmt
+          .executeQuery("SELECT * FROM cities WHERE countryCode='"
+              + pCountryCode + "' AND regionCode='" + pRegionCode
+              + "' AND cityName LIKE '" + pStart + "%' ORDER BY cityName");
+
+      while (rs.next()) {
+        citiesList.put(rs.getString("cityName"), new ClientCityData(rs
+            .getString("countryCode"), rs.getString("regionCode"), rs
+            .getString("cityName"), rs.getString("cityAccentedName"), rs
+            .getInt("population"), rs.getFloat("latitude"), rs
+            .getFloat("longitude")));
+      }
+
+      stmt.close();
+      disconnectFromDatabase();
+    } catch (final Exception e) {
+      e.printStackTrace();
+    }
+
+    return citiesList;
+  }
+
   /**
    * Returns all countries.
    * 

@@ -14,6 +14,9 @@ public interface WorldService extends RemoteService {
   public LinkedHashMap<String, ClientCityData> getCities(String pCountry,
       String pRegion, int pFrom, int pQuantity);
 
+  public LinkedHashMap<String, ClientCityData> getCitiesStartingWith(
+      String pCountry, String pRegion, String pStart);
+
   public LinkedHashMap<String, String> getCountries();
 
   public LinkedHashMap<String, String> getStates(String pCountry);
