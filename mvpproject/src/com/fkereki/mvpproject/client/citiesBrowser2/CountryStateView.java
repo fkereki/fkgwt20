@@ -6,7 +6,6 @@ import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.View;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -18,8 +17,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class CountryStateView extends View implements CountryStateDisplay,
-    HasValueChangeHandlers<Object> {
+public class CountryStateView extends View implements CountryStateDisplay {
   @UiTemplate("CountryStateView.ui.xml")
   interface Binder extends UiBinder<HTMLPanel, CountryStateView> {
   }

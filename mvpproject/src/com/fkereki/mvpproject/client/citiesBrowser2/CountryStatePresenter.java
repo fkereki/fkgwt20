@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.SimpleCallback;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class CountryStatePresenter extends Presenter<CountryStateDisplay> {
@@ -34,22 +33,14 @@ public class CountryStatePresenter extends Presenter<CountryStateDisplay> {
     getDisplay().setOnCountryChangeCallback(new SimpleCallback<Object>() {
       @Override
       public void goBack(Object result) {
-        /*
-         * Clear the grid and the states listbox
-         */
         getDisplay().setStateList(null);
-
-        /*
-         * If a country was selected, get and load its states
-         */
         if (!getDisplay().getCountry().isEmpty()) {
           getEnvironment().getModel().getStates(getDisplay().getCountry(),
               new SimpleCallback<LinkedHashMap<String, String>>() {
                 @Override
                 public void goBack(LinkedHashMap<String, String> result) {
                   getDisplay().setStateList(result);
-                  ValueChangeEvent.fire(
-                      (HasValueChangeHandlers<Object>) getDisplay(), null);
+                  ValueChangeEvent.fire(getDisplay(), null);
                 }
               });
         }
@@ -59,8 +50,7 @@ public class CountryStatePresenter extends Presenter<CountryStateDisplay> {
     getDisplay().setOnStateChangeCallback(new SimpleCallback<Object>() {
       @Override
       public void goBack(Object result) {
-        ValueChangeEvent.fire((HasValueChangeHandlers<Object>) getDisplay(),
-            null);
+        ValueChangeEvent.fire(getDisplay(), null);
       }
     });
   }

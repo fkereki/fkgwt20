@@ -4,8 +4,11 @@ import java.util.LinkedHashMap;
 
 import com.fkereki.mvpproject.client.Display;
 import com.fkereki.mvpproject.client.SimpleCallback;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 
-public interface CountryStateDisplay extends Display {
+public interface CountryStateDisplay extends Display,
+    HasValueChangeHandlers<Object> {
+
   String getCountry();
 
   String getState();
