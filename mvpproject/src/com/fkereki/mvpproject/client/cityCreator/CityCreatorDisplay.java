@@ -2,7 +2,7 @@ package com.fkereki.mvpproject.client.cityCreator;
 
 import com.fkereki.mvpproject.client.Display;
 import com.fkereki.mvpproject.client.SimpleCallback;
-import com.fkereki.mvpproject.client.citiesBrowser2.CountryStateDisplay;
+import com.fkereki.mvpproject.client.countryState.CountryStateDisplay;
 
 public interface CityCreatorDisplay extends Display {
 

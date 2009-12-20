@@ -3,7 +3,7 @@ package com.fkereki.mvpproject.client.cityCreator;
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.SimpleCallback;
-import com.fkereki.mvpproject.client.citiesBrowser2.CountryStatePresenter;
+import com.fkereki.mvpproject.client.countryState.CountryStatePresenter;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

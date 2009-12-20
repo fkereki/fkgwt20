@@ -1,4 +1,4 @@
-package com.fkereki.mvpproject.client.citiesBrowser2;
+package com.fkereki.mvpproject.client.countryState;
 
 import java.util.LinkedHashMap;
 

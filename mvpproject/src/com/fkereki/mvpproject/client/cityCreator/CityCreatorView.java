@@ -2,7 +2,7 @@ package com.fkereki.mvpproject.client.cityCreator;
 
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.View;
-import com.fkereki.mvpproject.client.citiesBrowser2.CountryStateDisplay;
+import com.fkereki.mvpproject.client.countryState.CountryStateDisplay;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;

@@ -6,6 +6,7 @@ import com.fkereki.mvpproject.client.ClientCityData;
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.SimpleCallback;
+import com.fkereki.mvpproject.client.countryState.CountryStatePresenter;
 import com.google.gwt.i18n.client.NumberFormat;
 
 public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {
