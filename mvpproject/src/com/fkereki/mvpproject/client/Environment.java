@@ -1,7 +1,9 @@
 package com.fkereki.mvpproject.client;
 
-import com.fkereki.mvpproject.client.citiesBrowser.CitiesBrowserPresenter;
-import com.fkereki.mvpproject.client.citiesBrowser.CitiesBrowserView;
+import com.fkereki.mvpproject.client.citiesBrowser2.CitiesBrowserPresenter;
+import com.fkereki.mvpproject.client.citiesBrowser2.CitiesBrowserView;
+import com.fkereki.mvpproject.client.cityCreator.CityCreatorPresenter;
+import com.fkereki.mvpproject.client.cityCreator.CityCreatorView;
 import com.fkereki.mvpproject.client.clientData.ClientDataPresenter;
 import com.fkereki.mvpproject.client.clientData.ClientDataView;
 import com.fkereki.mvpproject.client.clientSearch.ClientSearchPresenter;
@@ -69,10 +71,12 @@ public class Environment {
     mb2.addItem("subitem2", sorry);
     mb2.addItem("subitem3", sorry);
     mb2.addItem("subitem4", sorry);
-
     mb.addItem("submenu", mb2);
 
-    mb.addItem("Cities", new HistoryCommand(CitiesBrowserPresenter.PLACE));
+    MenuBar mb3 = new MenuBar(true);
+    mb3.addItem("Browsing", new HistoryCommand(CitiesBrowserPresenter.PLACE));
+    mb3.addItem("Creating", new HistoryCommand(CityCreatorPresenter.PLACE));
+    mb.addItem("Cities", mb3);
 
     mb.addItem("login", new HistoryCommand(LoginFormPresenter.PLACE));
   }
@@ -129,6 +133,9 @@ public class Environment {
           .getDisplay().asWidget());
     } else if (token.equals(CitiesBrowserPresenter.PLACE)) {
       panel.add(new CitiesBrowserPresenter(args, new CitiesBrowserView(), this)
+          .getDisplay().asWidget());
+    } else if (token.equals(CityCreatorPresenter.PLACE)) {
+      panel.add(new CityCreatorPresenter(args, new CityCreatorView(), this)
           .getDisplay().asWidget());
     } else {
       Window.alert("Unrecognized token=" + token);
