@@ -1,4 +1,4 @@
-package com.fkereki.mvpproject.client;
+package com.fkereki.mvpproject.client.rpc;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

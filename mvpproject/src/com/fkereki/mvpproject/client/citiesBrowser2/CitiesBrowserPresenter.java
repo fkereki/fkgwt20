@@ -2,11 +2,11 @@ package com.fkereki.mvpproject.client.citiesBrowser2;
 
 import java.util.LinkedHashMap;
 
-import com.fkereki.mvpproject.client.ClientCityData;
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.countryState.CountryStatePresenter;
+import com.fkereki.mvpproject.client.rpc.ClientCityData;
 import com.google.gwt.i18n.client.NumberFormat;
 
 public class CitiesBrowserPresenter extends Presenter<CitiesBrowserDisplay> {

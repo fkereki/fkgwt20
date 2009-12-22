@@ -7,7 +7,9 @@ import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SuggestView extends View implements SuggestDisplay {
+public class SuggestView
+    extends View
+    implements SuggestDisplay {
 
   FlexTable ft = new FlexTable();
   SuggestBox sb;
@@ -21,6 +23,11 @@ public class SuggestView extends View implements SuggestDisplay {
   @Override
   public Widget asWidget() {
     return SuggestView.this;
+  }
+
+  @Override
+  public String getCityName() {
+    return sb.getValue();
   }
 
   @Override

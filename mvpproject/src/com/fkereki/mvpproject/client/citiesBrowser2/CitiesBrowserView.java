@@ -5,6 +5,7 @@ package com.fkereki.mvpproject.client.citiesBrowser2;
 
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.View;
+import com.fkereki.mvpproject.client.countryState.CountryStateDisplay;
 import com.fkereki.mvpproject.client.countryState.CountryStateView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,9 +19,12 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
+public class CitiesBrowserView
+    extends View
+    implements CitiesBrowserDisplay {
   @UiTemplate("CitiesBrowserView.ui.xml")
-  interface Binder extends UiBinder<HTMLPanel, CitiesBrowserView> {
+  interface Binder
+      extends UiBinder<HTMLPanel, CitiesBrowserView> {
   }
 
   public static final int CITIES_PAGE_SIZE = 20;
@@ -64,7 +68,7 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
   }
 
   @Override
-  public CountryStateView getCountryState() {
+  public CountryStateDisplay getCountryState() {
     return countryStateView;
   }
 

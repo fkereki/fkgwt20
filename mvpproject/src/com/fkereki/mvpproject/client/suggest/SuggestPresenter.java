@@ -3,10 +3,9 @@ package com.fkereki.mvpproject.client.suggest;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import com.fkereki.mvpproject.client.ClientCityData;
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
-import com.fkereki.mvpproject.client.SuggestionItem;
+import com.fkereki.mvpproject.client.rpc.ClientCityData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 

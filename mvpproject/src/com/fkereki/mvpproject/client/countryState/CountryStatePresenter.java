@@ -7,10 +7,11 @@ import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
-public class CountryStatePresenter extends Presenter<CountryStateDisplay> {
+public class CountryStatePresenter
+    extends Presenter<CountryStateDisplay> {
 
-  public CountryStatePresenter(final String params,
-      final CountryStateDisplay countryStateDisplay,
+  public CountryStatePresenter(
+      final String params, final CountryStateDisplay countryStateDisplay,
       final Environment environment) {
 
     super(params, countryStateDisplay, environment);

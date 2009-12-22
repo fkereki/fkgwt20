@@ -1,6 +1,6 @@
 package com.fkereki.mvpproject.server;
 
-import com.fkereki.mvpproject.client.LoginService;
+import com.fkereki.mvpproject.client.rpc.LoginService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")

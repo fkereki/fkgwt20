@@ -7,12 +7,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedHashMap;
 
-import com.fkereki.mvpproject.client.ClientCityData;
-import com.fkereki.mvpproject.client.WorldService;
+import com.fkereki.mvpproject.client.rpc.ClientCityData;
+import com.fkereki.mvpproject.client.rpc.WorldService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-public class WorldServiceImpl extends RemoteServiceServlet implements
-    WorldService {
+public class WorldServiceImpl
+    extends RemoteServiceServlet
+    implements
+      WorldService {
   private static final long serialVersionUID = 1L;
 
   /*
@@ -74,8 +76,10 @@ public class WorldServiceImpl extends RemoteServiceServlet implements
    * 
    * @return True if pCity is the name of a city in the given country/region
    */
-  public Boolean cityExists(final String pCountryCode,
-      final String pRegionCode, final String pCityName) {
+  public Boolean cityExists(
+      final String pCountryCode,
+      final String pRegionCode,
+      final String pCityName) {
     boolean result = false;
     try {
       connectToDatabase();
@@ -100,7 +104,8 @@ public class WorldServiceImpl extends RemoteServiceServlet implements
   /**
    * Establish a connection to the local database and set up a statement
    */
-  private void connectToDatabase() throws Exception {
+  private void connectToDatabase()
+      throws Exception {
     DriverManager.registerDriver(new com.mysql.jdbc.Driver());
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     conn = DriverManager.getConnection(jdbc_url, mysql_user, mysql_password);
@@ -109,7 +114,8 @@ public class WorldServiceImpl extends RemoteServiceServlet implements
   /**
    * Disconnect from the database, closing everything
    */
-  private void disconnectFromDatabase() throws Exception {
+  private void disconnectFromDatabase()
+      throws Exception {
     conn.close();
   }
 
@@ -132,7 +138,9 @@ public class WorldServiceImpl extends RemoteServiceServlet implements
    *         ordered by city name.
    */
   public LinkedHashMap<String, ClientCityData> getCities(
-      final String pCountryCode, final String pRegionCode, final int pFrom,
+      final String pCountryCode,
+      final String pRegionCode,
+      final int pFrom,
       final int pQuantity) {
 
     final LinkedHashMap<String, ClientCityData> citiesList = new LinkedHashMap<String, ClientCityData>();
@@ -163,7 +171,9 @@ public class WorldServiceImpl extends RemoteServiceServlet implements
   }
 
   public LinkedHashMap<String, ClientCityData> getCitiesStartingWith(
-      String pCountryCode, String pRegionCode, String pStart) {
+      String pCountryCode,
+      String pRegionCode,
+      String pStart) {
 
     final LinkedHashMap<String, ClientCityData> citiesList = new LinkedHashMap<String, ClientCityData>();
 

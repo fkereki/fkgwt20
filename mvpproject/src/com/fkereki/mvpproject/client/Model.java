@@ -2,6 +2,11 @@ package com.fkereki.mvpproject.client;
 
 import java.util.LinkedHashMap;
 
+import com.fkereki.mvpproject.client.rpc.ClientCityData;
+import com.fkereki.mvpproject.client.rpc.LoginService;
+import com.fkereki.mvpproject.client.rpc.LoginServiceAsync;
+import com.fkereki.mvpproject.client.rpc.WorldService;
+import com.fkereki.mvpproject.client.rpc.WorldServiceAsync;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;

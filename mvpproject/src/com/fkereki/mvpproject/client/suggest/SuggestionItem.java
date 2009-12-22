@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fkereki.mvpproject.client;
+package com.fkereki.mvpproject.client.suggest;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;

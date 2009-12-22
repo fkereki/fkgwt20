@@ -1,6 +1,6 @@
 package com.fkereki.mvpproject.server;
 
-import com.fkereki.mvpproject.client.ClientCityData;
+import com.fkereki.mvpproject.client.rpc.ClientCityData;
 
 public class ServerCityData extends ClientCityData {
   /**
