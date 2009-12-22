@@ -18,16 +18,17 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Widget;
 
-public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
+public class CitiesBrowserView
+    extends View implements CitiesBrowserDisplay {
   @UiTemplate("CitiesBrowserView.ui.xml")
-  interface Binder extends UiBinder<HTMLPanel, CitiesBrowserView> {
+  interface Binder extends
+      UiBinder<HTMLPanel, CitiesBrowserView> {
   }
 
-  public static final int CITIES_PAGE_SIZE = 20;
+  public static final int CITIES_PAGE_SIZE= 20;
 
-  private static final Binder binder = GWT.create(Binder.class);
+  private static final Binder binder= GWT.create(Binder.class);
 
   @UiField
   ListBox countryCode;
@@ -38,14 +39,16 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
   @UiField
   FlexTable cg;
 
-  @UiField(provided = true)
-  Button firstButton = new Button("First " + CITIES_PAGE_SIZE + " cities");
+  @UiField(provided= true)
+  Button firstButton= new Button("First " + CITIES_PAGE_SIZE
+      + " cities");
 
-  @UiField(provided = true)
-  Button previousButton = new Button("Previous " + CITIES_PAGE_SIZE);
+  @UiField(provided= true)
+  Button previousButton= new Button("Previous "
+      + CITIES_PAGE_SIZE);
 
-  @UiField(provided = true)
-  Button nextButton = new Button("Next " + CITIES_PAGE_SIZE);
+  @UiField(provided= true)
+  Button nextButton= new Button("Next " + CITIES_PAGE_SIZE);
 
   SimpleCallback<Object> onFirstClickCallback;
   SimpleCallback<Object> onPreviousClickCallback;
@@ -55,7 +58,7 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
 
   public CitiesBrowserView() {
     super();
-    HTMLPanel dlp = binder.createAndBindUi(this);
+    HTMLPanel dlp= binder.createAndBindUi(this);
     initWidget(dlp);
 
     cg.setText(0, 0, "Name");
@@ -65,24 +68,20 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
   }
 
   @Override
-  public Widget asWidget() {
-    return CitiesBrowserView.this;
-  }
-
-  @Override
   public String getCountry() {
-    int current = countryCode.getSelectedIndex();
-    return current == -1 ? "" : countryCode.getValue(current);
+    int current= countryCode.getSelectedIndex();
+    return current == -1? "" : countryCode.getValue(current);
   }
 
   @Override
   public String getState() {
-    int current = stateCode.getSelectedIndex();
-    return current == -1 ? "" : stateCode.getValue(current);
+    int current= stateCode.getSelectedIndex();
+    return current == -1? "" : stateCode.getValue(current);
   }
 
   @Override
-  public void setCityData(int i, String name, String pop, String lat, String lon) {
+  public void setCityData(int i, String name, String pop,
+      String lat, String lon) {
     cg.setText(i, 0, name);
     cg.setText(i, 1, pop);
     cg.setText(i, 2, lat);
@@ -101,28 +100,30 @@ public class CitiesBrowserView extends View implements CitiesBrowserDisplay {
   }
 
   @Override
-  public void setOnCountryChangeCallback(SimpleCallback<Object> acb) {
-    onCountryChangeCallback = acb;
+  public void setOnCountryChangeCallback(
+      SimpleCallback<Object> acb) {
+    onCountryChangeCallback= acb;
   }
 
   @Override
   public void setOnFirstClickCallback(SimpleCallback<Object> acb) {
-    onFirstClickCallback = acb;
+    onFirstClickCallback= acb;
   }
 
   @Override
   public void setOnNextClickCallback(SimpleCallback<Object> acb) {
-    onNextClickCallback = acb;
+    onNextClickCallback= acb;
   }
 
   @Override
-  public void setOnPreviousClickCallback(SimpleCallback<Object> acb) {
-    onPreviousClickCallback = acb;
+  public void setOnPreviousClickCallback(
+      SimpleCallback<Object> acb) {
+    onPreviousClickCallback= acb;
   }
 
   @Override
   public void setOnStateChangeCallback(SimpleCallback<Object> acb) {
-    onStateChangeCallback = acb;
+    onStateChangeCallback= acb;
   }
 
   @Override

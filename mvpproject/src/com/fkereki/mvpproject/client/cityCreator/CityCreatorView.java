@@ -14,9 +14,9 @@ import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
 
-public class CityCreatorView extends View implements CityCreatorDisplay {
+public class CityCreatorView
+    extends View implements CityCreatorDisplay {
   @UiTemplate("CityCreatorView.ui.xml")
   interface Binder extends UiBinder<HTMLPanel, CityCreatorView> {
   }
@@ -46,17 +46,12 @@ public class CityCreatorView extends View implements CityCreatorDisplay {
   SimpleCallback<Object> onCountryStateChangeCallback;
   SimpleCallback<Object> onCityNameChangeCallback;
 
-  private static final Binder binder = GWT.create(Binder.class);
+  private static final Binder binder= GWT.create(Binder.class);
 
   public CityCreatorView() {
     super();
-    HTMLPanel dlp = binder.createAndBindUi(this);
+    HTMLPanel dlp= binder.createAndBindUi(this);
     initWidget(dlp);
-  }
-
-  @Override
-  public Widget asWidget() {
-    return CityCreatorView.this;
   }
 
   @Override
@@ -96,17 +91,19 @@ public class CityCreatorView extends View implements CityCreatorDisplay {
 
   @Override
   public void setOnAddClickCallback(SimpleCallback<Object> acb) {
-    onAddClickCallback = acb;
+    onAddClickCallback= acb;
   }
 
   @Override
-  public void setOnCityNameChangeCallback(SimpleCallback<Object> acb) {
-    onCityNameChangeCallback = acb;
+  public void setOnCityNameChangeCallback(
+      SimpleCallback<Object> acb) {
+    onCityNameChangeCallback= acb;
   }
 
   @Override
-  public void setOnCountryStateChangeCallback(SimpleCallback<Object> acb) {
-    onCountryStateChangeCallback = acb;
+  public void setOnCountryStateChangeCallback(
+      SimpleCallback<Object> acb) {
+    onCountryStateChangeCallback= acb;
   }
 
   @UiHandler("addCityButton")

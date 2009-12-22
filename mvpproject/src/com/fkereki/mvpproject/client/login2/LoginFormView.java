@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Defines a Login Form.
@@ -74,6 +73,11 @@ public class LoginFormView
   }
 
   @Override
+  public void enableLoginButton(final boolean b) {
+    loginButton.setEnabled(b);
+  }
+
+  @Override
   public final String getName() {
     return nameTextBox.getValue();
   }
@@ -84,24 +88,14 @@ public class LoginFormView
   }
 
   @Override
-  public final void setName(final String s) {
-    nameTextBox.setValue(s);
-  }
-
-  @Override
-  public final void setPassword(final String s) {
-    passwordTextBox.setValue(s);
-  }
-
-  @Override
   public final void setLoginCallback(
       final SimpleCallback<Object> acb) {
     loginCallback= acb;
   }
 
   @Override
-  public void enableLoginButton(final boolean b) {
-    loginButton.setEnabled(b);
+  public final void setName(final String s) {
+    nameTextBox.setValue(s);
   }
 
   @Override
@@ -111,13 +105,13 @@ public class LoginFormView
   }
 
   @Override
-  public void setPasswordBlurCallback(
-      final SimpleCallback<Object> acb) {
-    passwordBlurCallback= acb;
+  public final void setPassword(final String s) {
+    passwordTextBox.setValue(s);
   }
 
   @Override
-  public final Widget asWidget() {
-    return LoginFormView.this;
+  public void setPasswordBlurCallback(
+      final SimpleCallback<Object> acb) {
+    passwordBlurCallback= acb;
   }
 }

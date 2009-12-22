@@ -18,38 +18,50 @@ public class Model {
   private LoginServiceAsync loginService;
   private WorldServiceAsync worldService;
 
-  public void getCities(final String country, final String state,
-      final int pStart, final int pCount,
+  public void getCities(
+      final String country,
+      final String state,
+      final int pStart,
+      final int pCount,
       final AsyncCallback<LinkedHashMap<String, ClientCityData>> cb) {
     /*
      * If we call "loadCities(...)" without having selected a country and
      * region, it won't do anything, and just exit gracefully.
      */
     if (!country.isEmpty() && !state.isEmpty()) {
-      getRemoteWorldService().getCities(country, state, pStart, pCount,
-          new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
-            public void onFailure(final Throwable caught) {
-              Window.alert("Failure getting cities: " + caught.getMessage());
-            }
+      getRemoteWorldService()
+          .getCities(
+              country,
+              state,
+              pStart,
+              pCount,
+              new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
+                public void onFailure(final Throwable caught) {
+                  Window.alert("Failure getting cities: "
+                      + caught.getMessage());
+                }
 
-            public void onSuccess(
-                final LinkedHashMap<String, ClientCityData> result) {
-              cb.onSuccess(result);
-            }
-          });
+                public void onSuccess(
+                    final LinkedHashMap<String, ClientCityData> result) {
+                  cb.onSuccess(result);
+                }
+              });
     }
   }
 
-  public void getCountries(final AsyncCallback<LinkedHashMap<String, String>> cb) {
+  public void getCountries(
+      final AsyncCallback<LinkedHashMap<String, String>> cb) {
     getRemoteWorldService().getCountries(
         new AsyncCallback<LinkedHashMap<String, String>>() {
           @Override
           public void onFailure(Throwable caught) {
-            // ...failure...
+            Window.alert("Failure getting cities: "
+                + caught.getMessage());
           }
 
           @Override
-          public void onSuccess(LinkedHashMap<String, String> result) {
+          public void onSuccess(
+              LinkedHashMap<String, String> result) {
             cb.onSuccess(result);
           }
         });
@@ -62,7 +74,7 @@ public class Model {
    */
   public LoginServiceAsync getRemoteLoginService() {
     if (loginService == null) {
-      loginService = GWT.create(LoginService.class);
+      loginService= GWT.create(LoginService.class);
     }
     return loginService;
   }
@@ -74,7 +86,7 @@ public class Model {
    */
   public WorldServiceAsync getRemoteWorldService() {
     if (worldService == null) {
-      worldService = GWT.create(WorldService.class);
+      worldService= GWT.create(WorldService.class);
     }
     return worldService;
   }
@@ -90,7 +102,8 @@ public class Model {
           }
 
           @Override
-          public void onSuccess(LinkedHashMap<String, String> result) {
+          public void onSuccess(
+              LinkedHashMap<String, String> result) {
             cb.onSuccess(result);
           }
         });

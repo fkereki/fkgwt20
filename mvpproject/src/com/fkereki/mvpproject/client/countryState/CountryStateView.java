@@ -15,14 +15,14 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Widget;
 
-public class CountryStateView extends View implements CountryStateDisplay {
+public class CountryStateView
+    extends View implements CountryStateDisplay {
   @UiTemplate("CountryStateView.ui.xml")
   interface Binder extends UiBinder<HTMLPanel, CountryStateView> {
   }
 
-  private static final Binder binder = GWT.create(Binder.class);
+  private static final Binder binder= GWT.create(Binder.class);
 
   @UiField
   ListBox countryCode;
@@ -35,7 +35,7 @@ public class CountryStateView extends View implements CountryStateDisplay {
 
   public CountryStateView() {
     super();
-    HTMLPanel dlp = binder.createAndBindUi(this);
+    HTMLPanel dlp= binder.createAndBindUi(this);
     initWidget(dlp);
   }
 
@@ -46,20 +46,15 @@ public class CountryStateView extends View implements CountryStateDisplay {
   }
 
   @Override
-  public Widget asWidget() {
-    return CountryStateView.this;
-  }
-
-  @Override
   public String getCountry() {
-    int current = countryCode.getSelectedIndex();
-    return current == -1 ? "" : countryCode.getValue(current);
+    int current= countryCode.getSelectedIndex();
+    return current == -1? "" : countryCode.getValue(current);
   }
 
   @Override
   public String getState() {
-    int current = stateCode.getSelectedIndex();
-    return current == -1 ? "" : stateCode.getValue(current);
+    int current= stateCode.getSelectedIndex();
+    return current == -1? "" : stateCode.getValue(current);
   }
 
   @Override
@@ -74,13 +69,14 @@ public class CountryStateView extends View implements CountryStateDisplay {
   }
 
   @Override
-  public void setOnCountryChangeCallback(SimpleCallback<Object> acb) {
-    onCountryChangeCallback = acb;
+  public void setOnCountryChangeCallback(
+      SimpleCallback<Object> acb) {
+    onCountryChangeCallback= acb;
   }
 
   @Override
   public void setOnStateChangeCallback(SimpleCallback<Object> acb) {
-    onStateChangeCallback = acb;
+    onStateChangeCallback= acb;
   }
 
   @Override

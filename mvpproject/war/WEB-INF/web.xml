@@ -16,6 +16,20 @@
 		<url-pattern>/mvpproject/login</url-pattern>
 	</servlet-mapping>
 	  
+
+
+	<servlet>
+		<servlet-name>worldServlet</servlet-name>
+		<servlet-class>com.fkereki.mvpproject.server.WorldServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>worldServlet</servlet-name>
+		<url-pattern>/mvpproject/world</url-pattern>
+	</servlet-mapping>
+
+
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Mvpproject.html</welcome-file>

@@ -9,7 +9,6 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class DummyOneView
     extends View implements DummyOneDisplay {
@@ -41,11 +40,6 @@ public class DummyOneView
   }
 
   @Override
-  public void setPepeValue(String s) {
-    pepeValue= s;
-  }
-
-  @Override
   public PopupPanel getPopupPanel() {
     return pup;
   }
@@ -56,13 +50,13 @@ public class DummyOneView
   }
 
   @Override
-  public void showPopupPanel() {
-    pup.showRelativeTo(popupOpener);
-    pup.show();
+  public void setPepeValue(String s) {
+    pepeValue= s;
   }
 
   @Override
-  public Widget asWidget() {
-    return DummyOneView.this;
+  public void showPopupPanel() {
+    pup.showRelativeTo(popupOpener);
+    pup.show();
   }
 }

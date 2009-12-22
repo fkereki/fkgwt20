@@ -10,7 +10,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
 
 public class ClientDataView
     extends View implements ClientDataDisplay {
@@ -74,12 +73,6 @@ public class ClientDataView
   }
 
   @Override
-  public void showPopupPanel() {
-    clientSearchPanel.showRelativeTo(clientSearchButton);
-    clientSearchPanel.show();
-  }
-
-  @Override
   public String getAddress() {
     return clientAddress.getValue();
   }
@@ -121,6 +114,11 @@ public class ClientDataView
   }
 
   @Override
+  public void hidePopupPanel() {
+    clientSearchPanel.hide();
+  }
+
+  @Override
   public void setAddress(String s) {
     // TODO Auto-generated method stub
 
@@ -151,6 +149,11 @@ public class ClientDataView
   }
 
   @Override
+  public void setSearchClickCallback(SimpleCallback<Object> scb) {
+    searchClickCallback= scb;
+  }
+
+  @Override
   public void setState(String s) {
     // TODO Auto-generated method stub
 
@@ -163,17 +166,8 @@ public class ClientDataView
   }
 
   @Override
-  public void setSearchClickCallback(SimpleCallback<Object> scb) {
-    searchClickCallback= scb;
-  }
-
-  @Override
-  public void hidePopupPanel() {
-    clientSearchPanel.hide();
-  }
-
-  @Override
-  public Widget asWidget() {
-    return ClientDataView.this;
+  public void showPopupPanel() {
+    clientSearchPanel.showRelativeTo(clientSearchButton);
+    clientSearchPanel.show();
   }
 }

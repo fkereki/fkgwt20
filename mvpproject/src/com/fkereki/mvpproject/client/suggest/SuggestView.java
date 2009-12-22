@@ -5,13 +5,11 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.Widget;
 
 public class SuggestView
-    extends View
-    implements SuggestDisplay {
+    extends View implements SuggestDisplay {
 
-  FlexTable ft = new FlexTable();
+  FlexTable ft= new FlexTable();
   SuggestBox sb;
 
   public SuggestView() {
@@ -21,18 +19,13 @@ public class SuggestView
   }
 
   @Override
-  public Widget asWidget() {
-    return SuggestView.this;
-  }
-
-  @Override
   public String getCityName() {
     return sb.getValue();
   }
 
   @Override
   public void setCitiesOracle(MultiWordSuggestOracle oracle) {
-    sb = new SuggestBox(oracle);
+    sb= new SuggestBox(oracle);
     ft.setWidget(0, 1, sb);
   }
 }

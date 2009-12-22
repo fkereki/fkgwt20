@@ -16,12 +16,12 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Defines a Login Form.
  */
-public class LoginFormView extends View implements LoginFormDisplay {
+public class LoginFormView
+    extends View implements LoginFormDisplay {
   @UiTemplate("LoginFormView.ui.xml")
   interface Binder extends UiBinder<HTMLPanel, LoginFormView> {
   }
@@ -34,20 +34,15 @@ public class LoginFormView extends View implements LoginFormDisplay {
   TextBox nameTextBox;
   @UiField
   PasswordTextBox passwordTextBox;
-  @UiField(provided = true)
+  @UiField(provided= true)
   Button loginButton;
 
-  private static final Binder binder = GWT.create(Binder.class);
+  private static final Binder binder= GWT.create(Binder.class);
 
   public LoginFormView() {
-    loginButton = new Button("Ok");
-    HTMLPanel dlp = binder.createAndBindUi(this);
+    loginButton= new Button("Ok");
+    HTMLPanel dlp= binder.createAndBindUi(this);
     initWidget(dlp);
-  }
-
-  @Override
-  public final Widget asWidget() {
-    return LoginFormView.this;
   }
 
   @Override
@@ -71,8 +66,9 @@ public class LoginFormView extends View implements LoginFormDisplay {
   }
 
   @Override
-  public final void setLoginCallback(final SimpleCallback<Object> acb) {
-    loginCallback = acb;
+  public final void setLoginCallback(
+      final SimpleCallback<Object> acb) {
+    loginCallback= acb;
   }
 
   @Override
@@ -81,8 +77,9 @@ public class LoginFormView extends View implements LoginFormDisplay {
   }
 
   @Override
-  public void setNameBlurCallback(final SimpleCallback<Object> acb) {
-    nameBlurCallback = acb;
+  public void setNameBlurCallback(
+      final SimpleCallback<Object> acb) {
+    nameBlurCallback= acb;
   }
 
   @Override
@@ -91,8 +88,9 @@ public class LoginFormView extends View implements LoginFormDisplay {
   }
 
   @Override
-  public void setPasswordBlurCallback(final SimpleCallback<Object> acb) {
-    passwordBlurCallback = acb;
+  public void setPasswordBlurCallback(
+      final SimpleCallback<Object> acb) {
+    passwordBlurCallback= acb;
   }
 
   @UiHandler("nameTextBox")
