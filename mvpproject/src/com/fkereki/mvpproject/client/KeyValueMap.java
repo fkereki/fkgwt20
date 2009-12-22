@@ -8,8 +8,9 @@ import java.util.HashMap;
  * 
  * @author fkereki
  */
-public class KeyValueMap extends HashMap<String, String> {
-  private static final long serialVersionUID = 5225712868559413562L;
+public class KeyValueMap
+    extends HashMap<String, String> {
+  private static final long serialVersionUID= 5225712868559413562L;
 
   /**
    * Standard constructor; produces an empty KeyValueMap.
@@ -38,9 +39,9 @@ public class KeyValueMap extends HashMap<String, String> {
   public final void initializeWithString(final String params) {
     clear();
     if ((params != null) && !params.isEmpty()) {
-      String[] args = params.split("&");
+      String[] args= params.split("&");
       for (String element : args) {
-        int equalIndex = element.indexOf("=");
+        int equalIndex= element.indexOf("=");
         if (equalIndex == -1) {
           put(element, "");
         } else {
@@ -53,11 +54,11 @@ public class KeyValueMap extends HashMap<String, String> {
 
   @Override
   public String toString() {
-    String result = "";
-    String separator = "";
+    String result= "";
+    String separator= "";
     for (String key : keySet()) {
-      result += separator + key + "=" + get(key);
-      separator = "\n";
+      result+= separator + key + "=" + get(key);
+      separator= "\n";
     }
     return result;
   }
