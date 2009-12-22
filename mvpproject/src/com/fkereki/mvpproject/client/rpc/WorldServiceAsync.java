@@ -6,12 +6,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface WorldServiceAsync {
 
-  void addCity(ClientCityData cd, AsyncCallback<String> callback);
+  void addCity(
+      ClientCityData cd, AsyncCallback<String> callback);
 
   void cityExists(
-      String pCountry,
-      String pRegion,
-      String pCity,
+      String pCountry, String pRegion, String pCity,
       AsyncCallback<Boolean> callback);
 
   void getCities(
@@ -27,7 +26,8 @@ public interface WorldServiceAsync {
       String pStart,
       AsyncCallback<LinkedHashMap<String, ClientCityData>> callback);
 
-  void getCountries(AsyncCallback<LinkedHashMap<String, String>> callback);
+  void getCountries(
+      AsyncCallback<LinkedHashMap<String, String>> callback);
 
   void getStates(
       String pCountry,

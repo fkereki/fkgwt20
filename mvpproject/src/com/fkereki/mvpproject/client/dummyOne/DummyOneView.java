@@ -11,7 +11,8 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class DummyOneView
-    extends View implements DummyOneDisplay {
+    extends View
+    implements DummyOneDisplay {
 
   SimpleCallback<Object> openPopupPanelCallback;
   String pepeValue= "";
@@ -33,7 +34,8 @@ public class DummyOneView
 
     popupOpener.addClickHandler(new ClickHandler() {
       @Override
-      public void onClick(ClickEvent event) {
+      public void onClick(
+          ClickEvent event) {
         openPopupPanelCallback.goBack(null);
       }
     });
@@ -45,12 +47,14 @@ public class DummyOneView
   }
 
   @Override
-  public void setClickCallback(SimpleCallback<Object> scb) {
+  public void setClickCallback(
+      SimpleCallback<Object> scb) {
     openPopupPanelCallback= scb;
   }
 
   @Override
-  public void setPepeValue(String s) {
+  public void setPepeValue(
+      String s) {
     pepeValue= s;
   }
 

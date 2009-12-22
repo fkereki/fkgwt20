@@ -4,7 +4,8 @@ import com.fkereki.mvpproject.client.Display;
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.countryState.CountryStateDisplay;
 
-public interface CityCreatorDisplay extends Display {
+public interface CityCreatorDisplay
+    extends Display {
 
   String getAccentedCityName();
 
@@ -18,11 +19,15 @@ public interface CityCreatorDisplay extends Display {
 
   int getPopulation();
 
-  void setCityNameCssStyle(String css);
+  void setCityNameCssStyle(
+      String css);
 
-  void setOnAddClickCallback(SimpleCallback<Object> acb);
+  void setOnAddClickCallback(
+      SimpleCallback<Object> acb);
 
-  void setOnCityNameChangeCallback(SimpleCallback<Object> acb);
+  void setOnCityNameChangeCallback(
+      SimpleCallback<Object> acb);
 
-  void setOnCountryStateChangeCallback(SimpleCallback<Object> acb);
+  void setOnCountryStateChangeCallback(
+      SimpleCallback<Object> acb);
 }

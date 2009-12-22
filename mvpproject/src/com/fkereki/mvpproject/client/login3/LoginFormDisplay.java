@@ -3,7 +3,8 @@ package com.fkereki.mvpproject.client.login3;
 import com.fkereki.mvpproject.client.Display;
 import com.fkereki.mvpproject.client.SimpleCallback;
 
-public interface LoginFormDisplay extends Display {
+public interface LoginFormDisplay
+    extends Display {
   /**
    * Access the Name field
    * 
@@ -18,7 +19,8 @@ public interface LoginFormDisplay extends Display {
    *          Set the name field to s; most commonly just "" or possibly a saved
    *          name from an earlier session.
    */
-  void setName(String s);
+  void setName(
+      String s);
 
   /**
    * Access the Password field
@@ -33,7 +35,8 @@ public interface LoginFormDisplay extends Display {
    * @param s
    *          Set the password field to s; usually just ""
    */
-  void setPassword(String s);
+  void setPassword(
+      String s);
 
   /**
    * Enable or disable the login button
@@ -41,7 +44,8 @@ public interface LoginFormDisplay extends Display {
    * @param b
    *          If true, enable the button; otherwise, disable it
    */
-  void enableLoginButton(boolean b);
+  void enableLoginButton(
+      boolean b);
 
   /**
    * Initialize the login callback, which shall be executed when the user clicks
@@ -52,7 +56,8 @@ public interface LoginFormDisplay extends Display {
    *          Name and Password fields (by using the methods above) and perform
    *          the needed checks.
    */
-  void setLoginCallback(SimpleCallback<Object> acb);
+  void setLoginCallback(
+      SimpleCallback<Object> acb);
 
   /**
    * Initialize the name blur callback, which shall be executed when the user
@@ -61,7 +66,8 @@ public interface LoginFormDisplay extends Display {
    * @param acb
    *          Set the name blur callback to acb.
    */
-  void setNameBlurCallback(SimpleCallback<Object> acb);
+  void setNameBlurCallback(
+      SimpleCallback<Object> acb);
 
   /**
    * Initialize the password blur callback, which shall be executed when the
@@ -70,5 +76,6 @@ public interface LoginFormDisplay extends Display {
    * @param acb
    *          Set the password blur callback to acb.
    */
-  void setPasswordBlurCallback(SimpleCallback<Object> acb);
+  void setPasswordBlurCallback(
+      SimpleCallback<Object> acb);
 }

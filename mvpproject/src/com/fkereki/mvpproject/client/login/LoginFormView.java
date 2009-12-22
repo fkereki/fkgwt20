@@ -16,7 +16,8 @@ import com.google.gwt.user.client.ui.TextBox;
  * Defines a Login Form.
  */
 public class LoginFormView
-    extends View implements LoginFormDisplay {
+    extends View
+    implements LoginFormDisplay {
 
   private AsyncCallback<Object> loginCallback;
   private final TextBox nameTextBox= new TextBox();
@@ -32,7 +33,8 @@ public class LoginFormView
    */
   public LoginFormView() {
     loginButton.addClickHandler(new ClickHandler() {
-      public void onClick(final ClickEvent event) {
+      public void onClick(
+          final ClickEvent event) {
         loginCallback.onSuccess(null);
       }
     });
@@ -69,12 +71,14 @@ public class LoginFormView
   }
 
   @Override
-  public final void setName(final String s) {
+  public final void setName(
+      final String s) {
     nameTextBox.setValue(s);
   }
 
   @Override
-  public final void setPassword(final String s) {
+  public final void setPassword(
+      final String s) {
     passwordTextBox.setValue(s);
   }
 }

@@ -7,7 +7,8 @@ import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
 
 public class SuggestView
-    extends View implements SuggestDisplay {
+    extends View
+    implements SuggestDisplay {
 
   FlexTable ft= new FlexTable();
   SuggestBox sb;
@@ -24,7 +25,8 @@ public class SuggestView
   }
 
   @Override
-  public void setCitiesOracle(MultiWordSuggestOracle oracle) {
+  public void setCitiesOracle(
+      MultiWordSuggestOracle oracle) {
     sb= new SuggestBox(oracle);
     ft.setWidget(0, 1, sb);
   }

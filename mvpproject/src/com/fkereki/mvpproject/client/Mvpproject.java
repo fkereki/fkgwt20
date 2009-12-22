@@ -8,18 +8,20 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.RootPanel;
 
-public class Mvpproject implements EntryPoint, ValueChangeHandler<String> {
+public class Mvpproject
+    implements EntryPoint, ValueChangeHandler<String> {
 
   public static native String getUserAgent() /*-{
-    return navigator.userAgent.toLowerCase();
-  }-*/;
+                                             return navigator.userAgent.toLowerCase();
+                                             }-*/;
 
   Environment environment;
 
   public void onModuleLoad() {
-    DOM.removeChild(RootPanel.getBodyElement(), DOM.getElementById("loading"));
+    DOM.removeChild(RootPanel.getBodyElement(), DOM
+        .getElementById("loading"));
 
-    environment = new Environment(new Model(), History.getToken());
+    environment= new Environment(new Model(), History.getToken());
 
     /*
      * Set up the history management, and start by showing the login form.
@@ -29,7 +31,8 @@ public class Mvpproject implements EntryPoint, ValueChangeHandler<String> {
   }
 
   @Override
-  public void onValueChange(ValueChangeEvent<String> event) {
+  public void onValueChange(
+      ValueChangeEvent<String> event) {
     environment.launch(event.getValue());
   }
 }

@@ -19,9 +19,11 @@ import com.google.gwt.user.client.ui.TextBox;
  * Defines a Login Form.
  */
 public class LoginFormView
-    extends View implements LoginFormDisplay {
+    extends View
+    implements LoginFormDisplay {
   @UiTemplate("LoginFormView.ui.xml")
-  interface Binder extends UiBinder<HTMLPanel, LoginFormView> {
+  interface Binder
+      extends UiBinder<HTMLPanel, LoginFormView> {
   }
 
   AsyncCallback<Object> loginCallback;
@@ -43,7 +45,8 @@ public class LoginFormView
   }
 
   @Override
-  public void enableLoginButton(final boolean b) {
+  public void enableLoginButton(
+      final boolean b) {
     loginButton.setEnabled(b);
   }
 
@@ -64,7 +67,8 @@ public class LoginFormView
   }
 
   @Override
-  public final void setName(final String s) {
+  public final void setName(
+      final String s) {
     nameTextBox.setValue(s);
   }
 
@@ -75,7 +79,8 @@ public class LoginFormView
   }
 
   @Override
-  public final void setPassword(final String s) {
+  public final void setPassword(
+      final String s) {
     passwordTextBox.setValue(s);
   }
 
@@ -86,17 +91,20 @@ public class LoginFormView
   }
 
   @UiHandler("nameTextBox")
-  void uiOnBlurName(BlurEvent event) {
+  void uiOnBlurName(
+      BlurEvent event) {
     nameBlurCallback.onSuccess(null);
   }
 
   @UiHandler("passwordTextBox")
-  void uiOnBlurPassword(BlurEvent event) {
+  void uiOnBlurPassword(
+      BlurEvent event) {
     passwordBlurCallback.onSuccess(null);
   }
 
   @UiHandler("loginButton")
-  void uiOnLoginButton(ClickEvent event) {
+  void uiOnLoginButton(
+      ClickEvent event) {
     loginCallback.onSuccess(null);
   }
 }

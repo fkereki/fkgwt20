@@ -10,12 +10,13 @@ abstract public class Presenter<D> {
   public Presenter() {
   }
 
-  public Presenter(String someParams, D aDisplay, Environment anEnvironment) {
+  public Presenter(
+      String someParams, D aDisplay, Environment anEnvironment) {
     super();
-    params = someParams;
-    display = aDisplay;
-    environment = anEnvironment;
-    kvm = new KeyValueMap(params);
+    params= someParams;
+    display= aDisplay;
+    environment= anEnvironment;
+    kvm= new KeyValueMap(params);
   }
 
   public D getDisplay() {

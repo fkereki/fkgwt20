@@ -11,7 +11,8 @@ import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
  * 
  * @author fkereki
  */
-public class SuggestionItem implements Suggestion, IsSerializable {
+public class SuggestionItem
+    implements Suggestion, IsSerializable {
   private String suggestionText;
 
   /**
@@ -24,9 +25,10 @@ public class SuggestionItem implements Suggestion, IsSerializable {
   /**
    * Simplify the creation of a straight suggestion item
    */
-  public SuggestionItem(String text) {
+  public SuggestionItem(
+      String text) {
     super();
-    suggestionText = text;
+    suggestionText= text;
   }
 
   @Override

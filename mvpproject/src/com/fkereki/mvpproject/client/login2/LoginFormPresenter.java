@@ -13,8 +13,8 @@ public class LoginFormPresenter
   LoginServiceAsync loginService;
   SimpleCallback<String> loginSuccessCallback;
 
-  public LoginFormPresenter(final String params,
-      final LoginFormDisplay loginDisplay,
+  public LoginFormPresenter(
+      final String params, final LoginFormDisplay loginDisplay,
       final Environment environment,
       final SimpleCallback<String> callback) {
 
@@ -25,7 +25,8 @@ public class LoginFormPresenter
 
     final SimpleCallback<Object> commonBlurHandler= new SimpleCallback<Object>() {
       @Override
-      public void goBack(final Object result) {
+      public void goBack(
+          final Object result) {
         final String name= LoginFormPresenter.this.getDisplay()
             .getName();
         final String pass= LoginFormPresenter.this.getDisplay()
@@ -45,7 +46,8 @@ public class LoginFormPresenter
 
     loginDisplay.setLoginCallback(new SimpleCallback<Object>() {
       @Override
-      public void goBack(final Object result) {
+      public void goBack(
+          final Object result) {
         final String name= LoginFormPresenter.this.getDisplay()
             .getName();
         final String pass= LoginFormPresenter.this.getDisplay()
@@ -56,7 +58,8 @@ public class LoginFormPresenter
 
         loginService.getSomething(name, pass,
             new AsyncCallback<String>() {
-              public void onFailure(final Throwable caught) {
+              public void onFailure(
+                  final Throwable caught) {
                 LoginFormPresenter.this.getEnvironment()
                     .showAlert("Failed login");
 
@@ -65,7 +68,8 @@ public class LoginFormPresenter
                 loginSuccessCallback.onFailure(new Throwable());
               }
 
-              public void onSuccess(final String result) {
+              public void onSuccess(
+                  final String result) {
                 loginSuccessCallback.goBack(result);
               }
             });

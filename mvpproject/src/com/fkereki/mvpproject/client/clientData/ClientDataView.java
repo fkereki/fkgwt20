@@ -12,7 +12,8 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
 public class ClientDataView
-    extends View implements ClientDataDisplay {
+    extends View
+    implements ClientDataDisplay {
 
   SimpleCallback<Object> searchClickCallback;
 
@@ -66,7 +67,8 @@ public class ClientDataView
     clientSearchButton.addClickHandler(new ClickHandler() {
 
       @Override
-      public void onClick(ClickEvent event) {
+      public void onClick(
+          ClickEvent event) {
         searchClickCallback.goBack(null);
       }
     });
@@ -119,48 +121,56 @@ public class ClientDataView
   }
 
   @Override
-  public void setAddress(String s) {
+  public void setAddress(
+      String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setCity(String s) {
+  public void setCity(
+      String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setClient(String s) {
+  public void setClient(
+      String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setName(String s) {
+  public void setName(
+      String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setSalute(String s) {
+  public void setSalute(
+      String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setSearchClickCallback(SimpleCallback<Object> scb) {
+  public void setSearchClickCallback(
+      SimpleCallback<Object> scb) {
     searchClickCallback= scb;
   }
 
   @Override
-  public void setState(String s) {
+  public void setState(
+      String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setZip(String s) {
+  public void setZip(
+      String s) {
     // TODO Auto-generated method stub
 
   }

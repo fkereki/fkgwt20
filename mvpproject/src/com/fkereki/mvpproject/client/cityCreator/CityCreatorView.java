@@ -16,9 +16,11 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
 public class CityCreatorView
-    extends View implements CityCreatorDisplay {
+    extends View
+    implements CityCreatorDisplay {
   @UiTemplate("CityCreatorView.ui.xml")
-  interface Binder extends UiBinder<HTMLPanel, CityCreatorView> {
+  interface Binder
+      extends UiBinder<HTMLPanel, CityCreatorView> {
   }
 
   @UiField
@@ -85,12 +87,14 @@ public class CityCreatorView
   }
 
   @Override
-  public void setCityNameCssStyle(String css) {
+  public void setCityNameCssStyle(
+      String css) {
     cityName.setStyleName(css);
   }
 
   @Override
-  public void setOnAddClickCallback(SimpleCallback<Object> acb) {
+  public void setOnAddClickCallback(
+      SimpleCallback<Object> acb) {
     onAddClickCallback= acb;
   }
 
@@ -107,17 +111,20 @@ public class CityCreatorView
   }
 
   @UiHandler("addCityButton")
-  void uiOnAddCityClick(ClickEvent event) {
+  void uiOnAddCityClick(
+      ClickEvent event) {
     onAddClickCallback.onSuccess(null);
   }
 
   @UiHandler("countryState")
-  void uiOnChange(ValueChangeEvent<Object> event) {
+  void uiOnChange(
+      ValueChangeEvent<Object> event) {
     onCountryStateChangeCallback.onSuccess(null);
   }
 
   @UiHandler("cityName")
-  void uiOnCityChange(ChangeEvent event) {
+  void uiOnCityChange(
+      ChangeEvent event) {
     onCityNameChangeCallback.onSuccess(null);
   }
 }

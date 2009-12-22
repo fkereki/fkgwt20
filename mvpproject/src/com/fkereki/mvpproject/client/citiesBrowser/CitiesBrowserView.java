@@ -20,10 +20,11 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.ListBox;
 
 public class CitiesBrowserView
-    extends View implements CitiesBrowserDisplay {
+    extends View
+    implements CitiesBrowserDisplay {
   @UiTemplate("CitiesBrowserView.ui.xml")
-  interface Binder extends
-      UiBinder<HTMLPanel, CitiesBrowserView> {
+  interface Binder
+      extends UiBinder<HTMLPanel, CitiesBrowserView> {
   }
 
   public static final int CITIES_PAGE_SIZE= 20;
@@ -80,8 +81,8 @@ public class CitiesBrowserView
   }
 
   @Override
-  public void setCityData(int i, String name, String pop,
-      String lat, String lon) {
+  public void setCityData(
+      int i, String name, String pop, String lat, String lon) {
     cg.setText(i, 0, name);
     cg.setText(i, 1, pop);
     cg.setText(i, 2, lat);
@@ -89,7 +90,8 @@ public class CitiesBrowserView
   }
 
   @Override
-  public void setCountryList(LinkedHashMap<String, String> cl) {
+  public void setCountryList(
+      LinkedHashMap<String, String> cl) {
     countryCode.clear();
     if (cl != null) {
       countryCode.addItem("--Select a country--", "");
@@ -106,12 +108,14 @@ public class CitiesBrowserView
   }
 
   @Override
-  public void setOnFirstClickCallback(SimpleCallback<Object> acb) {
+  public void setOnFirstClickCallback(
+      SimpleCallback<Object> acb) {
     onFirstClickCallback= acb;
   }
 
   @Override
-  public void setOnNextClickCallback(SimpleCallback<Object> acb) {
+  public void setOnNextClickCallback(
+      SimpleCallback<Object> acb) {
     onNextClickCallback= acb;
   }
 
@@ -122,12 +126,14 @@ public class CitiesBrowserView
   }
 
   @Override
-  public void setOnStateChangeCallback(SimpleCallback<Object> acb) {
+  public void setOnStateChangeCallback(
+      SimpleCallback<Object> acb) {
     onStateChangeCallback= acb;
   }
 
   @Override
-  public void setStateList(LinkedHashMap<String, String> sl) {
+  public void setStateList(
+      LinkedHashMap<String, String> sl) {
     stateCode.clear();
     if (sl != null) {
       stateCode.addItem("--Select a state--", "");
@@ -138,22 +144,26 @@ public class CitiesBrowserView
   }
 
   @UiHandler("countryCode")
-  void uiOnCountryChange(ChangeEvent event) {
+  void uiOnCountryChange(
+      ChangeEvent event) {
     onCountryChangeCallback.onSuccess(null);
   }
 
   @UiHandler("firstButton")
-  void uiOnFirstClick(ClickEvent event) {
+  void uiOnFirstClick(
+      ClickEvent event) {
     onFirstClickCallback.onSuccess(null);
   }
 
   @UiHandler("nextButton")
-  void uiOnNextClick(ClickEvent event) {
+  void uiOnNextClick(
+      ClickEvent event) {
     onNextClickCallback.onSuccess(null);
   }
 
   @UiHandler("previousButton")
-  void uiOnPreviousClick(ClickEvent event) {
+  void uiOnPreviousClick(
+      ClickEvent event) {
     onPreviousClickCallback.onSuccess(null);
   }
 }

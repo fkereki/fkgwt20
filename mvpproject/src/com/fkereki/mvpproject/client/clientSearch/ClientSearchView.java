@@ -10,7 +10,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
 public class ClientSearchView
-    extends View implements ClientSearchDisplay {
+    extends View
+    implements ClientSearchDisplay {
 
   SimpleCallback<Object> searchClickCallback;
 

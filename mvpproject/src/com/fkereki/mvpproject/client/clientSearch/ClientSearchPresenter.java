@@ -3,11 +3,13 @@ package com.fkereki.mvpproject.client.clientSearch;
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 
-public class ClientSearchPresenter extends Presenter<ClientSearchDisplay> {
+public class ClientSearchPresenter
+    extends Presenter<ClientSearchDisplay> {
 
-  public static String PLACE = "clientsearch";
+  public static String PLACE= "clientsearch";
 
-  public ClientSearchPresenter(final String params,
+  public ClientSearchPresenter(
+      final String params,
       final ClientSearchDisplay clientSearchDisplay,
       final Environment environment) {
 

@@ -6,18 +6,22 @@ import com.fkereki.mvpproject.client.Display;
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 
-public interface CountryStateDisplay extends Display,
-    HasValueChangeHandlers<Object> {
+public interface CountryStateDisplay
+    extends Display, HasValueChangeHandlers<Object> {
 
   String getCountry();
 
   String getState();
 
-  void setCountryList(LinkedHashMap<String, String> cl);
+  void setCountryList(
+      LinkedHashMap<String, String> cl);
 
-  void setOnCountryChangeCallback(SimpleCallback<Object> acb);
+  void setOnCountryChangeCallback(
+      SimpleCallback<Object> acb);
 
-  void setOnStateChangeCallback(SimpleCallback<Object> acb);
+  void setOnStateChangeCallback(
+      SimpleCallback<Object> acb);
 
-  void setStateList(LinkedHashMap<String, String> sl);
+  void setStateList(
+      LinkedHashMap<String, String> sl);
 }

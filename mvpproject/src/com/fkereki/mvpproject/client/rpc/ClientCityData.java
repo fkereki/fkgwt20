@@ -2,7 +2,8 @@ package com.fkereki.mvpproject.client.rpc;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class ClientCityData implements IsSerializable {
+public class ClientCityData
+    implements IsSerializable {
   public String countryCode;
   public String regionCode;
   public String cityName;
@@ -13,12 +14,9 @@ public class ClientCityData implements IsSerializable {
 
   /**
    * An empty constructor method is required for serializable classes... see
-   * 
    * <a>http://blog.js-development.com/2008/08/strange-gwt-compiler-error-when-
    * trying.html</a >
-   * 
    * <a>http://code.google.com/p/google-web-toolkit/issues/detail?id=540</a>
-   * 
    */
   public ClientCityData() {
   }
@@ -41,16 +39,18 @@ public class ClientCityData implements IsSerializable {
    * @param pLong
    *          longitude
    */
-  public ClientCityData(final String pCC, final String pRC, final String pCN,
-      final String pCAN, final int pPop, final float pLat, final float pLong) {
+  public ClientCityData(
+      final String pCC, final String pRC, final String pCN,
+      final String pCAN, final int pPop, final float pLat,
+      final float pLong) {
 
-    countryCode = pCC;
-    regionCode = pRC;
-    cityName = pCN;
-    cityAccentedName = pCAN;
-    population = pPop;
-    latitude = pLat;
-    longitude = pLong;
+    countryCode= pCC;
+    regionCode= pRC;
+    cityName= pCN;
+    cityAccentedName= pCAN;
+    population= pPop;
+    latitude= pLat;
+    longitude= pLong;
   }
 
   /**

@@ -18,7 +18,8 @@ import com.google.gwt.user.client.ui.TextBox;
  * Defines a Login Form.
  */
 public class LoginFormView
-    extends View implements LoginFormDisplay {
+    extends View
+    implements LoginFormDisplay {
 
   private AsyncCallback<Object> loginCallback;
   private AsyncCallback<Object> nameBlurCallback;
@@ -38,21 +39,24 @@ public class LoginFormView
   public LoginFormView() {
     loginButton.addClickHandler(new ClickHandler() {
       @Override
-      public void onClick(final ClickEvent event) {
+      public void onClick(
+          final ClickEvent event) {
         loginCallback.onSuccess(null);
       }
     });
 
     nameTextBox.addBlurHandler(new BlurHandler() {
       @Override
-      public void onBlur(final BlurEvent event) {
+      public void onBlur(
+          final BlurEvent event) {
         nameBlurCallback.onSuccess(null);
       }
     });
 
     passwordTextBox.addBlurHandler(new BlurHandler() {
       @Override
-      public void onBlur(final BlurEvent event) {
+      public void onBlur(
+          final BlurEvent event) {
         passwordBlurCallback.onSuccess(null);
       }
     });
@@ -73,7 +77,8 @@ public class LoginFormView
   }
 
   @Override
-  public void enableLoginButton(final boolean b) {
+  public void enableLoginButton(
+      final boolean b) {
     loginButton.setEnabled(b);
   }
 
@@ -94,7 +99,8 @@ public class LoginFormView
   }
 
   @Override
-  public final void setName(final String s) {
+  public final void setName(
+      final String s) {
     nameTextBox.setValue(s);
   }
 
@@ -105,7 +111,8 @@ public class LoginFormView
   }
 
   @Override
-  public final void setPassword(final String s) {
+  public final void setPassword(
+      final String s) {
     passwordTextBox.setValue(s);
   }
 

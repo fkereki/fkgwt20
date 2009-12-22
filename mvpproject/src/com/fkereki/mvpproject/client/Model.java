@@ -36,7 +36,8 @@ public class Model {
               pStart,
               pCount,
               new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
-                public void onFailure(final Throwable caught) {
+                public void onFailure(
+                    final Throwable caught) {
                   Window.alert("Failure getting cities: "
                       + caught.getMessage());
                 }
@@ -54,7 +55,8 @@ public class Model {
     getRemoteWorldService().getCountries(
         new AsyncCallback<LinkedHashMap<String, String>>() {
           @Override
-          public void onFailure(Throwable caught) {
+          public void onFailure(
+              Throwable caught) {
             Window.alert("Failure getting cities: "
                 + caught.getMessage());
           }
@@ -91,13 +93,15 @@ public class Model {
     return worldService;
   }
 
-  public void getStates(final String country,
+  public void getStates(
+      final String country,
       final AsyncCallback<LinkedHashMap<String, String>> cb) {
 
     getRemoteWorldService().getStates(country,
         new AsyncCallback<LinkedHashMap<String, String>>() {
           @Override
-          public void onFailure(Throwable caught) {
+          public void onFailure(
+              Throwable caught) {
             // ...failure...
           }
 
