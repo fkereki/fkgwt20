@@ -1,4 +1,4 @@
-package com.fkereki.mvpproject.client.cityCreator;
+package com.fkereki.mvpproject.client.cityCreator2;
 
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
@@ -40,21 +40,40 @@ public class CityCreatorPresenter
 
           getEnvironment().getModel().getRemoteWorldService().cityExists(
               country, state, city, new AsyncCallback<Boolean>() {
+                /*
+                 * In order to prevent spurious or redundant messages or
+                 * actions, let's store the original parameters for the service
+                 * call...
+                 */
+                String originalCountry = country;
+                String originalState = state;
+                String originalCityName = city;
 
                 public void onFailure(final Throwable caught) {
                   Window.alert("Failure checking city: " + caught.getMessage());
                 }
 
                 public void onSuccess(final Boolean result) {
-                  if (result.booleanValue()) {
-                    /*
-                     * That city already exists!
-                     */
-                    getEnvironment().showAlert(
-                        "That city is already in the database");
-                    getDisplay().setCityNameCssStyle("gwt-Textbox-Error");
-                  } else {
-                    getDisplay().setCityNameCssStyle("gwt-TextBox");
+                  /*
+                   * ...and avoid doing anything unless the parameters still
+                   * match.
+                   */
+                  if (originalCountry.equals(getDisplay().getCountryState()
+                      .getCountry())
+                      && originalState.equals(getDisplay().getCountryState()
+                          .getState())
+                      && originalCityName.equals(getDisplay().getCityName())) {
+
+                    if (result.booleanValue()) {
+                      /*
+                       * That city already exists!
+                       */
+                      getEnvironment().showAlert(
+                          "That city is already in the database");
+                      getDisplay().setCityNameCssStyle("gwt-Textbox-Error");
+                    } else {
+                      getDisplay().setCityNameCssStyle("gwt-TextBox");
+                    }
                   }
                 }
               });
