@@ -14,37 +14,36 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class WorldServiceImpl
     extends RemoteServiceServlet
     implements WorldService {
-  private static final long serialVersionUID= 1L;
+  private static final long serialVersionUID = 1L;
 
   /*
    * MySQL and JDBC related constants and variables
    */
-  static String jdbc_url= "jdbc:mysql://127.0.0.1/gwtdb";
-  static String mysql_user= "gwtuser";
-  static String mysql_password= "gwtpass";
-  private Connection conn= null;
+  static String jdbc_url = "jdbc:mysql://127.0.0.1/gwtdb";
+  static String mysql_user = "gwtuser";
+  static String mysql_password = "gwtpass";
+  private Connection conn = null;
 
   /**
    * Tries to add a new city to the database.
    * 
    * @return "" if the city was added, or an error message otherwise
    */
-  public String addCity(
-      final ClientCityData cd) {
-    final ServerCityData scd= new ServerCityData(cd);
-    final String svp= scd.validationProblems();
+  public String addCity(final ClientCityData cd) {
+    final ServerCityData scd = new ServerCityData(cd);
+    final String svp = scd.validationProblems();
     if (!svp.isEmpty()) {
       return svp;
     } else {
       try {
         connectToDatabase();
-        final PreparedStatement ps= conn
-            .prepareStatement("INSERT INTO cities (countryCode, regionCode, "
+        final PreparedStatement ps = conn
+            .prepareStatement("INSERT INTO cities (countryCode, stateCode, "
                 + "cityName, cityAccentedName, population, latitude, longitude) "
                 + "VALUES (?,?,?,?,?,?,?)");
 
         ps.setString(1, scd.countryCode);
-        ps.setString(2, scd.regionCode);
+        ps.setString(2, scd.stateCode);
         ps.setString(3, scd.cityName);
         ps.setString(4, scd.cityAccentedName);
         ps.setInt(5, scd.population);
@@ -63,34 +62,31 @@ public class WorldServiceImpl
 
   /**
    * Checks whether there already exists a city with a given city name, in a
-   * region of a country.
+   * state of a country.
    * 
    * @param pCountryCode
    *          country identifier
-   * @param pRegionCode
-   *          region identifier
+   * @param pStateCode
+   *          state identifier
    * @param pCityName
    *          A city name
    * @return True if pCity is the name of a city in the given country/region
    */
   public Boolean cityExists(
-      final String pCountryCode, final String pRegionCode,
+      final String pCountryCode,
+      final String pStateCode,
       final String pCityName) {
-    boolean result= false;
+    boolean result = false;
     try {
       connectToDatabase();
-      final Statement stmt= conn.createStatement();
-      final ResultSet rs= stmt
+      final Statement stmt = conn.createStatement();
+      final ResultSet rs = stmt
           .executeQuery("SELECT COUNT(*) FROM cities WHERE countryCode='"
-              + pCountryCode
-              + "' AND regionCode='"
-              + pRegionCode
-              + "' AND cityName='"
-              + pCityName
-              + "'");
+              + pCountryCode + "' AND stateCode='" + pStateCode
+              + "' AND cityName='" + pCityName + "'");
 
       rs.first();
-      result= rs.getInt(1) > 0;
+      result = rs.getInt(1) > 0;
 
       stmt.close();
       disconnectFromDatabase();
@@ -108,8 +104,7 @@ public class WorldServiceImpl
       throws Exception {
     DriverManager.registerDriver(new com.mysql.jdbc.Driver());
     Class.forName("com.mysql.jdbc.Driver").newInstance();
-    conn= DriverManager.getConnection(jdbc_url, mysql_user,
-        mysql_password);
+    conn = DriverManager.getConnection(jdbc_url, mysql_user, mysql_password);
   }
 
   /**
@@ -121,44 +116,41 @@ public class WorldServiceImpl
   }
 
   /**
-   * Returns cities from a region of a country.
+   * Returns cities from a state of a country.
    * 
    * @param pCountryCode
    *          two letters long string, such as "UY" for "URUGUAY"
-   * @param pRegionCode
-   *          two letters long region identifier
+   * @param pStateCode
+   *          two letters long state identifier
    * @param pFrom
-   *          an offset into the list of cities for the given country/region
+   *          an offset into the list of cities for the given country/state
    * @param pQuantity
    *          how many cities to return at once, starting from the given offset
-   * @return A linked hash map with cities from the given country/region, ordered
+   * @return A linked hash map with cities from the given country/state, ordered
    *         by city name.
    */
   public LinkedHashMap<String, ClientCityData> getCities(
-      final String pCountryCode, final String pRegionCode,
-      final int pFrom, final int pQuantity) {
+      final String pCountryCode,
+      final String pStateCode,
+      final int pFrom,
+      final int pQuantity) {
 
-    final LinkedHashMap<String, ClientCityData> citiesList= new LinkedHashMap<String, ClientCityData>();
+    final LinkedHashMap<String, ClientCityData> citiesList = new LinkedHashMap<String, ClientCityData>();
 
     try {
       connectToDatabase();
-      final Statement stmt= conn.createStatement();
-      final ResultSet rs= stmt
+      final Statement stmt = conn.createStatement();
+      final ResultSet rs = stmt
           .executeQuery("SELECT * FROM cities WHERE countryCode='"
-              + pCountryCode
-              + "' AND regionCode='"
-              + pRegionCode
-              + "' ORDER BY cityName LIMIT "
-              + pFrom + "," + pQuantity);
+              + pCountryCode + "' AND stateCode='" + pStateCode
+              + "' ORDER BY cityName LIMIT " + pFrom + "," + pQuantity);
 
       while (rs.next()) {
-        citiesList.put(rs.getString("cityName"),
-            new ClientCityData(rs.getString("countryCode"), rs
-                .getString("regionCode"), rs
-                .getString("cityName"), rs
-                .getString("cityAccentedName"), rs
-                .getInt("population"), rs.getFloat("latitude"),
-                rs.getFloat("longitude")));
+        citiesList.put(rs.getString("cityName"), new ClientCityData(rs
+            .getString("countryCode"), rs.getString("stateCode"), rs
+            .getString("cityName"), rs.getString("cityAccentedName"), rs
+            .getInt("population"), rs.getFloat("latitude"), rs
+            .getFloat("longitude")));
       }
 
       stmt.close();
@@ -171,30 +163,26 @@ public class WorldServiceImpl
   }
 
   public LinkedHashMap<String, ClientCityData> getCitiesStartingWith(
-      String pCountryCode, String pRegionCode, String pStart) {
+      String pCountryCode,
+      String pStateCode,
+      String pStart) {
 
-    final LinkedHashMap<String, ClientCityData> citiesList= new LinkedHashMap<String, ClientCityData>();
+    final LinkedHashMap<String, ClientCityData> citiesList = new LinkedHashMap<String, ClientCityData>();
 
     try {
       connectToDatabase();
-      final Statement stmt= conn.createStatement();
-      final ResultSet rs= stmt
+      final Statement stmt = conn.createStatement();
+      final ResultSet rs = stmt
           .executeQuery("SELECT * FROM cities WHERE countryCode='"
-              + pCountryCode
-              + "' AND regionCode='"
-              + pRegionCode
-              + "' AND cityName LIKE '"
-              + pStart
-              + "%' ORDER BY cityName");
+              + pCountryCode + "' AND stateCode='" + pStateCode
+              + "' AND cityName LIKE '" + pStart + "%' ORDER BY cityName");
 
       while (rs.next()) {
-        citiesList.put(rs.getString("cityName"),
-            new ClientCityData(rs.getString("countryCode"), rs
-                .getString("regionCode"), rs
-                .getString("cityName"), rs
-                .getString("cityAccentedName"), rs
-                .getInt("population"), rs.getFloat("latitude"),
-                rs.getFloat("longitude")));
+        citiesList.put(rs.getString("cityName"), new ClientCityData(rs
+            .getString("countryCode"), rs.getString("stateCode"), rs
+            .getString("cityName"), rs.getString("cityAccentedName"), rs
+            .getInt("population"), rs.getFloat("latitude"), rs
+            .getFloat("longitude")));
       }
 
       stmt.close();
@@ -214,14 +202,13 @@ public class WorldServiceImpl
    *         values. The map is ordered by country name, alphabetically.
    */
   public LinkedHashMap<String, String> getCountries() {
-    final LinkedHashMap<String, String> countriesList= new LinkedHashMap<String, String>();
+    final LinkedHashMap<String, String> countriesList = new LinkedHashMap<String, String>();
 
     try {
       connectToDatabase();
-      final Statement stmt= conn.createStatement();
-      final ResultSet rs= stmt
-          .executeQuery("SELECT countryCode,countryName "
-              + "FROM countries ORDER BY 2");
+      final Statement stmt = conn.createStatement();
+      final ResultSet rs = stmt.executeQuery("SELECT countryCode,countryName "
+          + "FROM countries ORDER BY 2");
 
       while (rs.next()) {
         countriesList.put(rs.getString(1), rs.getString(2));
@@ -237,29 +224,26 @@ public class WorldServiceImpl
   }
 
   /**
-   * Returns all regions from a country.
+   * Returns all states from a country.
    * 
    * @param pCountryCode
    *          two letters long string, such as "UY" for "URUGUAY"
-   * @return A linked hash map with all the regions for the given country; region
-   *         codes are used as keys, and region names as values. The map is
-   *         ordered by region name, alphabetically.
+   * @return A linked hash map with all the states for the given country; region
+   *         codes are used as keys, and state names as values. The map is
+   *         ordered by state name, alphabetically.
    */
-  public LinkedHashMap<String, String> getStates(
-      final String pCountryCode) {
-    final LinkedHashMap<String, String> regionsList= new LinkedHashMap<String, String>();
+  public LinkedHashMap<String, String> getStates(final String pCountryCode) {
+    final LinkedHashMap<String, String> statesList = new LinkedHashMap<String, String>();
 
     try {
       connectToDatabase();
-      final Statement stmt= conn.createStatement();
-      final ResultSet rs= stmt
-          .executeQuery("SELECT regionCode,regionName FROM regions "
-              + "WHERE countryCode='"
-              + pCountryCode
-              + "'  ORDER BY 2");
+      final Statement stmt = conn.createStatement();
+      final ResultSet rs = stmt
+          .executeQuery("SELECT stateCode,stateName FROM states "
+              + "WHERE countryCode='" + pCountryCode + "'  ORDER BY 2");
 
       while (rs.next()) {
-        regionsList.put(rs.getString(1), rs.getString(2));
+        statesList.put(rs.getString(1), rs.getString(2));
       }
 
       stmt.close();
@@ -268,6 +252,6 @@ public class WorldServiceImpl
       e.printStackTrace();
     }
 
-    return regionsList;
+    return statesList;
   }
 }

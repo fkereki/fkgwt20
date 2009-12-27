@@ -5,7 +5,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class ClientCityData
     implements IsSerializable {
   public String countryCode;
-  public String regionCode;
+  public String stateCode;
   public String cityName;
   public String cityAccentedName;
   public int population;
@@ -26,8 +26,8 @@ public class ClientCityData
    * 
    * @param pCC
    *          country code
-   * @param pRC
-   *          region code
+   * @param pSC
+   *          state code
    * @param pCN
    *          city name
    * @param pCAN
@@ -40,17 +40,16 @@ public class ClientCityData
    *          longitude
    */
   public ClientCityData(
-      final String pCC, final String pRC, final String pCN,
-      final String pCAN, final int pPop, final float pLat,
-      final float pLong) {
+      final String pCC, final String pSC, final String pCN, final String pCAN,
+      final int pPop, final float pLat, final float pLong) {
 
-    countryCode= pCC;
-    regionCode= pRC;
-    cityName= pCN;
-    cityAccentedName= pCAN;
-    population= pPop;
-    latitude= pLat;
-    longitude= pLong;
+    countryCode = pCC;
+    stateCode = pSC;
+    cityName = pCN;
+    cityAccentedName = pCAN;
+    population = pPop;
+    latitude = pLat;
+    longitude = pLong;
   }
 
   /**
@@ -62,7 +61,7 @@ public class ClientCityData
   public String validationProblems() {
     if (countryCode.isEmpty()) {
       return "No country specified";
-    } else if (regionCode.isEmpty()) {
+    } else if (stateCode.isEmpty()) {
       return "No region specified";
     } else if (cityName.isEmpty()) {
       return "No city name specified";

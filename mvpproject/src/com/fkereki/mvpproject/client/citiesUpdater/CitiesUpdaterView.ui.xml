@@ -8,7 +8,7 @@
     <g:TextBox u:field="cityNameStart"/>
     <g:Button u:field="getCitiesButton" text="Get Cities"/>
     <g:Button u:field="updateCitiesButton" text="Update Cities"/>
-    <br />
+    <hr />
     <g:FlexTable u:field="cg"/>
   </g:HTMLPanel>
 </u:UiBinder>

@@ -14,19 +14,18 @@ public class ServerCityData
    * @param pObject
    *          A ClientCityData object
    */
-  public ServerCityData(
-      final ClientCityData pObject) {
+  public ServerCityData(final ClientCityData pObject) {
     /*
      * The common fields are easily loaded, and you'd add extra logic for other
      * fields.
      */
-    countryCode= pObject.countryCode;
-    regionCode= pObject.regionCode;
-    cityName= pObject.cityName;
-    cityAccentedName= pObject.cityAccentedName;
-    population= pObject.population;
-    latitude= pObject.latitude;
-    longitude= pObject.longitude;
+    countryCode = pObject.countryCode;
+    stateCode = pObject.stateCode;
+    cityName = pObject.cityName;
+    cityAccentedName = pObject.cityAccentedName;
+    population = pObject.population;
+    latitude = pObject.latitude;
+    longitude = pObject.longitude;
   }
 
   /**
@@ -38,7 +37,7 @@ public class ServerCityData
    * @return A client-side object
    */
   public ClientCityData asCityData() {
-    return new ClientCityData(countryCode, regionCode, cityName,
+    return new ClientCityData(countryCode, stateCode, cityName,
         cityAccentedName, population, latitude, longitude);
   }
 
@@ -49,12 +48,12 @@ public class ServerCityData
    */
   @Override
   public String validationProblems() {
-    final String svp= super.validationProblems();
+    final String svp = super.validationProblems();
     if (!svp.isEmpty()) {
       return svp;
     } else {
-      final WorldServiceImpl wsi= new WorldServiceImpl();
-      if (wsi.cityExists(countryCode, regionCode, cityName)) {
+      final WorldServiceImpl wsi = new WorldServiceImpl();
+      if (wsi.cityExists(countryCode, stateCode, cityName)) {
         return "City exists.";
       } else {
         return "";

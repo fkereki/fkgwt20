@@ -6,10 +6,12 @@ import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.rpc.ClientCityData;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
@@ -34,12 +36,16 @@ public class CitiesUpdaterPresenter
       public void goBack(Object result) {
         clearCities();
 
-        final RequestBuilder rb = new RequestBuilder(RequestBuilder.GET,
-            "http://localhost/xml_php/getcities1.php?city="
-                + getDisplay().getCityNameStart());
+        /*
+         * The HostPageBaseURL looks like http://yourServer:8888/somePath and we
+         * want to rebuild it into http://yourServer:80/otherPath
+         */
+        String baseUrl = GWT.getHostPageBaseURL().split(":")[1];
+        final RequestBuilder rb = new RequestBuilder(RequestBuilder.GET, URL
+            .encode(baseUrl + ":80/bookphp/getcities1.php?city="
+                + getDisplay().getCityNameStart()));
         try {
           rb.sendRequest(null, new RequestCallback() {
-
             @Override
             public void onError(Request request, Throwable exception) {
               getEnvironment().showAlert(exception.getMessage());
@@ -50,7 +56,7 @@ public class CitiesUpdaterPresenter
               loadCities(response.getText());
             }
           });
-        } catch (final Exception e) {
+        } catch (Exception e) {
           Window.alert(e.getMessage());
         }
       }

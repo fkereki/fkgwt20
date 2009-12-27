@@ -6,6 +6,7 @@ package com.fkereki.mvpproject.client.citiesUpdater;
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.View;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -52,7 +53,7 @@ public class CitiesUpdaterView
 
   @Override
   public void clearAllCities() {
-    cg.clear();
+    cg.removeAllRows();
     cg.setText(0, 0, "City");
     cg.setText(0, 1, "Country");
     cg.setText(0, 2, "State");
@@ -89,9 +90,11 @@ public class CitiesUpdaterView
     cg.setText(i, 0, cityName);
     cg.setText(i, 1, countryName);
     cg.setText(i, 2, stateName);
-    cg.setWidget(i, 3, new TextBox());
 
-    ((TextBox) cg.getWidget(i, 3)).setValue("" + population);
+    TextBox popBox = new TextBox();
+    popBox.setTextAlignment(TextBox.ALIGN_RIGHT);
+    popBox.setValue("" + population);
+    cg.setWidget(i, 3, popBox);
   }
 
   @Override
@@ -110,7 +113,7 @@ public class CitiesUpdaterView
   }
 
   @UiHandler("cityNameStart")
-  void uiOnChange(ClickEvent event) {
+  void uiOnChange(ChangeEvent event) {
     onCityNameStartChangeCallback.onSuccess(null);
   }
 
