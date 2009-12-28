@@ -1,4 +1,4 @@
-package com.fkereki.mvpproject.client.citiesUpdater;
+package com.fkereki.mvpproject.client.feedsListing;
 
 import java.util.HashMap;
 
@@ -19,15 +19,15 @@ import com.google.gwt.xml.client.NodeList;
 import com.google.gwt.xml.client.Text;
 import com.google.gwt.xml.client.XMLParser;
 
-public class CitiesUpdaterPresenter
-    extends Presenter<CitiesUpdaterDisplay> {
+public class FeedsListingPresenter
+    extends Presenter<FeedsListingDisplay> {
 
-  public static String PLACE = "cityupdate";
+  public static String PLACE = "feeds";
 
   HashMap<Integer, ClientCityData> cityList = new HashMap<Integer, ClientCityData>();
 
-  public CitiesUpdaterPresenter(
-      final String params, final CitiesUpdaterDisplay citiesUpdaterDisplay,
+  public FeedsListingPresenter(
+      final String params, final FeedsListingDisplay citiesUpdaterDisplay,
       final Environment environment) {
 
     super(params, citiesUpdaterDisplay, environment);
