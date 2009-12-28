@@ -24,32 +24,33 @@ public class ClientCityData
   /**
    * A standard constructor
    * 
-   * @param pCC
+   * @param pCountryCode
    *          country code
-   * @param pSC
+   * @param pStateCode
    *          state code
-   * @param pCN
+   * @param pCityName
    *          city name
-   * @param pCAN
+   * @param pCityAccentedName
    *          city accented name
-   * @param pPop
+   * @param pPopulation
    *          population
-   * @param pLat
+   * @param pLatitude
    *          latitude
-   * @param pLong
+   * @param pLongitude
    *          longitude
    */
   public ClientCityData(
-      final String pCC, final String pSC, final String pCN, final String pCAN,
-      final int pPop, final float pLat, final float pLong) {
+      final String pCountryCode, final String pStateCode,
+      final String pCityName, final String pCityAccentedName,
+      final int pPopulation, final float pLatitude, final float pLongitude) {
 
-    countryCode = pCC;
-    stateCode = pSC;
-    cityName = pCN;
-    cityAccentedName = pCAN;
-    population = pPop;
-    latitude = pLat;
-    longitude = pLong;
+    countryCode = pCountryCode;
+    stateCode = pStateCode;
+    cityName = pCityName;
+    cityAccentedName = pCityAccentedName;
+    population = pPopulation;
+    latitude = pLatitude;
+    longitude = pLongitude;
   }
 
   /**

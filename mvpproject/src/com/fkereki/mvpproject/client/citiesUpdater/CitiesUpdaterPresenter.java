@@ -1,6 +1,6 @@
 package com.fkereki.mvpproject.client.citiesUpdater;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
@@ -23,7 +23,7 @@ public class CitiesUpdaterPresenter
 
   public static String PLACE = "cityupdate";
 
-  ArrayList<ClientCityData> cityList;
+  HashMap<Integer, ClientCityData> cityList = new HashMap<Integer, ClientCityData>();
 
   public CitiesUpdaterPresenter(
       final String params, final CitiesUpdaterDisplay citiesUpdaterDisplay,
@@ -40,7 +40,7 @@ public class CitiesUpdaterPresenter
          * The HostPageBaseURL looks like http://yourServer:8888/somePath and we
          * want to rebuild it into http://yourServer:80/otherPath
          */
-        String baseUrl = GWT.getHostPageBaseURL().split(":")[1];
+        String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
         final RequestBuilder rb = new RequestBuilder(RequestBuilder.GET, URL
             .encode(baseUrl + ":80/bookphp/getcities1.php?city="
                 + getDisplay().getCityNameStart()));
@@ -64,20 +64,40 @@ public class CitiesUpdaterPresenter
 
     getDisplay().setOnUpdateCitiesClickCallback(new SimpleCallback<Object>() {
       @Override
-      public void goBack(Object result) {
+      public void goBack(Object dummy) {
+
         // initialize XML object
         boolean somethingToUpdate = false;
-        if (cityList != null) {
-          for (int i = 0; i < cityList.size(); i++) {
-            int gridPop = getDisplay().getCityPopulation(i);
-            if (cityList.get(i).population != gridPop) {
-              somethingToUpdate = true;
-              // add this city to the XML
-            }
+        String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+
+        result += "<cities>\n";
+        for (int i = 0; i < cityList.size(); i++) {
+          int gridPop = getDisplay().getCityPopulation(i + 1);
+          ClientCityData thisCity = cityList.get(i + 1);
+
+          if (thisCity.population != gridPop) {
+            somethingToUpdate = true;
+
+            /*
+             * In truth, putting latitude and longitude in the XML string isn't
+             * needed; let's do it just for showing how it's done.
+             */
+            result += "<city>\n";
+            result += " <city name=\"" + thisCity.cityName + "\">\n";
+            result += "  <country code=\"" + thisCity.countryCode + "\"/>\n";
+            result += "  <state code=\"" + thisCity.stateCode + "\"/>\n";
+            result += "  <pop>" + gridPop + "</pop>\n";
+            result += "  <coords>\n";
+            result += "   <lat>" + thisCity.latitude + "</lat>\n";
+            result += "   <lon>" + thisCity.longitude + "</lon>\n";
+            result += "  </coords>\n";
+            result += "</city>\n";
           }
         }
+        result += "</cities>\n";
 
         if (somethingToUpdate) {
+          Window.alert(result);
           // if XML object isn't empty
           // use service to update cities
         }
@@ -92,12 +112,25 @@ public class CitiesUpdaterPresenter
     });
   }
 
+  String citiesToXml1() {
+    for (int i : cityList.keySet()) {
+
+    }
+    return "";
+  }
+
+  String citiesToXml2() {
+    return "";
+  }
+
   void clearCities() {
-    cityList = null;
+    cityList.clear();
     getDisplay().clearAllCities();
   }
 
   void loadCities(String xmlCities) {
+    cityList.clear();
+
     if (!xmlCities.isEmpty()) {
       final Document xmlDoc = XMLParser.parse(xmlCities);
       final Element root = xmlDoc.getDocumentElement();
@@ -111,31 +144,35 @@ public class CitiesUpdaterPresenter
 
         final Element country = (Element) city.getElementsByTagName("country")
             .item(0);
+        String countryCode = country.getAttributeNode("code").getValue();
         String countryName = country.getAttributeNode("name").getValue();
 
         final Element state = (Element) city.getElementsByTagName("state")
             .item(0);
+        String stateCode = state.getAttributeNode("code").getValue();
         String stateName = state.getAttributeNode("name").getValue();
 
-        String population = "0";
+        int population = 0;
         Element popElem = (Element) city.getElementsByTagName("pop").item(0);
         if (popElem != null) {
-          population = popElem.getFirstChild().getNodeValue();
+          population = Integer.parseInt(popElem.getFirstChild().getNodeValue());
         }
-        getDisplay().setCityData(i + 1, cityName, countryName, stateName,
-            Integer.parseInt(population));
 
-        /*
-         * We are not using the country and state code, nor latitude and
-         * longitude, but's let's get them anyway, just to see how it's done.
-         */
-        String countryCode = country.getAttributeNode("code").getValue();
-        String stateCode = state.getAttributeNode("code").getValue();
         Element coords = (Element) city.getElementsByTagName("coords").item(0);
         Element lat = (Element) coords.getElementsByTagName("lat").item(0);
         Element lon = (Element) coords.getElementsByTagName("lon").item(0);
-        String latitudeAsString = lat.getFirstChild().getNodeValue();
-        String longitudeAsString = lon.getFirstChild().getNodeValue();
+        float latitude = Float.parseFloat(lat.getFirstChild().getNodeValue());
+        float longitude = Float.parseFloat(lon.getFirstChild().getNodeValue());
+
+        getDisplay().setCityData(i + 1, cityName, countryName, stateName,
+            population);
+
+        /*
+         * Given the usage of cityList, we could have set latitude and longitude
+         * to 0.0
+         */
+        cityList.put(i + 1, new ClientCityData(countryCode, stateCode,
+            cityName, "", population, latitude, longitude));
       }
     }
   }
