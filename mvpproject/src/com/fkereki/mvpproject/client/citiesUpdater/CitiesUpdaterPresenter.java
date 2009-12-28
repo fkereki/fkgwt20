@@ -16,6 +16,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
 import com.google.gwt.xml.client.NodeList;
+import com.google.gwt.xml.client.Text;
 import com.google.gwt.xml.client.XMLParser;
 
 public class CitiesUpdaterPresenter
@@ -65,42 +66,16 @@ public class CitiesUpdaterPresenter
     getDisplay().setOnUpdateCitiesClickCallback(new SimpleCallback<Object>() {
       @Override
       public void goBack(Object dummy) {
-
-        // initialize XML object
-        boolean somethingToUpdate = false;
-        String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-
-        result += "<cities>\n";
-        for (int i = 0; i < cityList.size(); i++) {
-          int gridPop = getDisplay().getCityPopulation(i + 1);
-          ClientCityData thisCity = cityList.get(i + 1);
-
+        HashMap<Integer, ClientCityData> newCityList = new HashMap<Integer, ClientCityData>();
+        for (Integer i : cityList.keySet()) {
+          int gridPop = getDisplay().getCityPopulation(i);
+          ClientCityData thisCity = cityList.get(i);
           if (thisCity.population != gridPop) {
-            somethingToUpdate = true;
-
-            /*
-             * In truth, putting latitude and longitude in the XML string isn't
-             * needed; let's do it just for showing how it's done.
-             */
-            result += "<city>\n";
-            result += " <city name=\"" + thisCity.cityName + "\">\n";
-            result += "  <country code=\"" + thisCity.countryCode + "\"/>\n";
-            result += "  <state code=\"" + thisCity.stateCode + "\"/>\n";
-            result += "  <pop>" + gridPop + "</pop>\n";
-            result += "  <coords>\n";
-            result += "   <lat>" + thisCity.latitude + "</lat>\n";
-            result += "   <lon>" + thisCity.longitude + "</lon>\n";
-            result += "  </coords>\n";
-            result += "</city>\n";
+            cityList.get(i).population = gridPop;
+            newCityList.put(i, cityList.get(i));
           }
         }
-        result += "</cities>\n";
-
-        if (somethingToUpdate) {
-          Window.alert(result);
-          // if XML object isn't empty
-          // use service to update cities
-        }
+        Window.alert(citiesToXml2(newCityList));
       }
     });
 
@@ -112,15 +87,80 @@ public class CitiesUpdaterPresenter
     });
   }
 
-  String citiesToXml1() {
-    for (int i : cityList.keySet()) {
+  String citiesToXml1(HashMap<Integer, ClientCityData> aList) {
+    String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 
+    result += "<cities>\n";
+    for (int i : aList.keySet()) {
+      ClientCityData thisCity = aList.get(i);
+
+      /*
+       * In truth, putting latitude and longitude in the XML string isn't
+       * needed; let's do it just for showing how it's done.
+       */
+      result += "<city>\n";
+      result += " <city name=\"" + thisCity.cityName + "\">\n";
+      result += "  <country code=\"" + thisCity.countryCode + "\"/>\n";
+      result += "  <state code=\"" + thisCity.stateCode + "\"/>\n";
+      result += "  <pop>" + thisCity.population + "</pop>\n";
+      result += "  <coords>\n";
+      result += "   <lat>" + thisCity.latitude + "</lat>\n";
+      result += "   <lon>" + thisCity.longitude + "</lon>\n";
+      result += "  </coords>\n";
+      result += "</city>\n";
     }
-    return "";
+    result += "</cities>\n";
+
+    return result;
   }
 
-  String citiesToXml2() {
-    return "";
+  String citiesToXml2(HashMap<Integer, ClientCityData> aList) {
+
+    Document xml = XMLParser.createDocument();
+    Element cities = xml.createElement("cities");
+    xml.appendChild(cities);
+
+    for (int i : aList.keySet()) {
+      ClientCityData aCity = aList.get(i);
+
+      Element city = xml.createElement("city");
+      city.setAttribute("name", aCity.cityName);
+
+      Element country = xml.createElement("country");
+      country.setAttribute("code", aCity.countryCode);
+      city.appendChild(country);
+
+      Element region = xml.createElement("state");
+      region.setAttribute("code", aCity.stateCode);
+      city.appendChild(region);
+
+      String pop = "" + aCity.population;
+      Element popEl = xml.createElement("pop");
+      Text popText = xml.createTextNode(pop);
+      popEl.appendChild(popText);
+      city.appendChild(popEl);
+
+      Element coords = xml.createElement("coords");
+      Element lat = xml.createElement("lat");
+      Text latText = xml.createTextNode("" + aCity.latitude);
+      lat.appendChild(latText);
+      coords.appendChild(lat);
+
+      /*
+       * If you want to write a little less, you can chain "create" commands;
+       * check out the differences with the "lat" code above.
+       * 
+       * Of course, with such brevity, legibility may suffer...
+       */
+      coords.appendChild(xml.createElement("lon").appendChild(
+          xml.createTextNode("" + aCity.longitude)));
+
+      city.appendChild(coords);
+
+      cities.appendChild(city);
+    }
+
+    return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + xml.toString();
   }
 
   void clearCities() {
