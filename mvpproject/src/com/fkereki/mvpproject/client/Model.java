@@ -7,6 +7,8 @@ import com.fkereki.mvpproject.client.rpc.LoginService;
 import com.fkereki.mvpproject.client.rpc.LoginServiceAsync;
 import com.fkereki.mvpproject.client.rpc.WorldService;
 import com.fkereki.mvpproject.client.rpc.WorldServiceAsync;
+import com.fkereki.mvpproject.client.rpc.XhrProxy;
+import com.fkereki.mvpproject.client.rpc.XhrProxyAsync;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -17,6 +19,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class Model {
   private LoginServiceAsync loginService;
   private WorldServiceAsync worldService;
+  private XhrProxyAsync xhrProxy;
 
   public void getCities(
       final String country,
@@ -29,41 +32,30 @@ public class Model {
      * region, it won't do anything, and just exit gracefully.
      */
     if (!country.isEmpty() && !state.isEmpty()) {
-      getRemoteWorldService()
-          .getCities(
-              country,
-              state,
-              pStart,
-              pCount,
-              new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
-                public void onFailure(
-                    final Throwable caught) {
-                  Window.alert("Failure getting cities: "
-                      + caught.getMessage());
-                }
+      getRemoteWorldService().getCities(country, state, pStart, pCount,
+          new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
+            public void onFailure(final Throwable caught) {
+              Window.alert("Failure getting cities: " + caught.getMessage());
+            }
 
-                public void onSuccess(
-                    final LinkedHashMap<String, ClientCityData> result) {
-                  cb.onSuccess(result);
-                }
-              });
+            public void onSuccess(
+                final LinkedHashMap<String, ClientCityData> result) {
+              cb.onSuccess(result);
+            }
+          });
     }
   }
 
-  public void getCountries(
-      final AsyncCallback<LinkedHashMap<String, String>> cb) {
+  public void getCountries(final AsyncCallback<LinkedHashMap<String, String>> cb) {
     getRemoteWorldService().getCountries(
         new AsyncCallback<LinkedHashMap<String, String>>() {
           @Override
-          public void onFailure(
-              Throwable caught) {
-            Window.alert("Failure getting cities: "
-                + caught.getMessage());
+          public void onFailure(Throwable caught) {
+            Window.alert("Failure getting cities: " + caught.getMessage());
           }
 
           @Override
-          public void onSuccess(
-              LinkedHashMap<String, String> result) {
+          public void onSuccess(LinkedHashMap<String, String> result) {
             cb.onSuccess(result);
           }
         });
@@ -76,7 +68,7 @@ public class Model {
    */
   public LoginServiceAsync getRemoteLoginService() {
     if (loginService == null) {
-      loginService= GWT.create(LoginService.class);
+      loginService = GWT.create(LoginService.class);
     }
     return loginService;
   }
@@ -88,9 +80,21 @@ public class Model {
    */
   public WorldServiceAsync getRemoteWorldService() {
     if (worldService == null) {
-      worldService= GWT.create(WorldService.class);
+      worldService = GWT.create(WorldService.class);
     }
     return worldService;
+  }
+
+  /**
+   * Provide a remote XHR proxy handle; Use lazy evaluation for extra speed.
+   * 
+   * @return
+   */
+  public XhrProxyAsync getRemoteXhrProxy() {
+    if (xhrProxy == null) {
+      xhrProxy = GWT.create(XhrProxy.class);
+    }
+    return xhrProxy;
   }
 
   public void getStates(
@@ -100,14 +104,12 @@ public class Model {
     getRemoteWorldService().getStates(country,
         new AsyncCallback<LinkedHashMap<String, String>>() {
           @Override
-          public void onFailure(
-              Throwable caught) {
+          public void onFailure(Throwable caught) {
             // ...failure...
           }
 
           @Override
-          public void onSuccess(
-              LinkedHashMap<String, String> result) {
+          public void onSuccess(LinkedHashMap<String, String> result) {
             cb.onSuccess(result);
           }
         });
