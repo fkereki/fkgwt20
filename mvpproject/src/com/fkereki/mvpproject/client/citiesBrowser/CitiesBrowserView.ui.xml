@@ -14,10 +14,9 @@
         <td><g:ListBox u:field="stateCode"/></td>
       </tr>
     </table>
-    <br />
+    <hr />
     <g:Button u:field="firstButton"/><g:Button u:field="previousButton"/><g:Button u:field="nextButton"/>
-    <br />
-    <br />
+    <hr />
     <g:FlexTable u:field="cg"/>
   </g:HTMLPanel>
 </u:UiBinder>

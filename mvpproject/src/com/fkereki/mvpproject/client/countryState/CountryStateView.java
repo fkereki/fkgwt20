@@ -24,7 +24,7 @@ public class CountryStateView
       extends UiBinder<HTMLPanel, CountryStateView> {
   }
 
-  private static final Binder binder= GWT.create(Binder.class);
+  private static final Binder binder = GWT.create(Binder.class);
 
   @UiField
   ListBox countryCode;
@@ -37,7 +37,7 @@ public class CountryStateView
 
   public CountryStateView() {
     super();
-    HTMLPanel dlp= binder.createAndBindUi(this);
+    HTMLPanel dlp = binder.createAndBindUi(this);
     initWidget(dlp);
   }
 
@@ -49,19 +49,18 @@ public class CountryStateView
 
   @Override
   public String getCountry() {
-    int current= countryCode.getSelectedIndex();
-    return current == -1? "" : countryCode.getValue(current);
+    int current = countryCode.getSelectedIndex();
+    return current == -1 ? "" : countryCode.getValue(current);
   }
 
   @Override
   public String getState() {
-    int current= stateCode.getSelectedIndex();
-    return current == -1? "" : stateCode.getValue(current);
+    int current = stateCode.getSelectedIndex();
+    return current == -1 ? "" : stateCode.getValue(current);
   }
 
   @Override
-  public void setCountryList(
-      LinkedHashMap<String, String> cl) {
+  public void setCountryList(LinkedHashMap<String, String> cl) {
     countryCode.clear();
     if (cl != null) {
       countryCode.addItem("--Select a country--", "");
@@ -72,20 +71,17 @@ public class CountryStateView
   }
 
   @Override
-  public void setOnCountryChangeCallback(
-      SimpleCallback<Object> acb) {
-    onCountryChangeCallback= acb;
+  public void setOnCountryChangeCallback(SimpleCallback<Object> acb) {
+    onCountryChangeCallback = acb;
   }
 
   @Override
-  public void setOnStateChangeCallback(
-      SimpleCallback<Object> acb) {
-    onStateChangeCallback= acb;
+  public void setOnStateChangeCallback(SimpleCallback<Object> acb) {
+    onStateChangeCallback = acb;
   }
 
   @Override
-  public void setStateList(
-      LinkedHashMap<String, String> sl) {
+  public void setStateList(LinkedHashMap<String, String> sl) {
     stateCode.clear();
     if (sl != null) {
       stateCode.addItem("--Select a state--", "");
@@ -96,14 +92,12 @@ public class CountryStateView
   }
 
   @UiHandler("countryCode")
-  void uiOnCountryChange(
-      ChangeEvent event) {
+  void uiOnCountryChange(ChangeEvent event) {
     onCountryChangeCallback.onSuccess(null);
   }
 
   @UiHandler("stateCode")
-  void uiOnStateChange(
-      ChangeEvent event) {
+  void uiOnStateChange(ChangeEvent event) {
     onStateChangeCallback.onSuccess(null);
   }
 

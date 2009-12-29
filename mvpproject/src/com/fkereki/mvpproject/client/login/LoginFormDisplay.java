@@ -19,8 +19,7 @@ public interface LoginFormDisplay
    *          Set the name field to s; most commonly just "" or possibly a saved
    *          name from an earlier session.
    */
-  void setName(
-      String s);
+  void setName(String s);
 
   /**
    * Access the Password field
@@ -35,8 +34,7 @@ public interface LoginFormDisplay
    * @param s
    *          Set the password field to s; usually just ""
    */
-  void setPassword(
-      String s);
+  void setPassword(String s);
 
   /**
    * Initialize the login callback, which shall be executed when the user clicks
@@ -47,6 +45,5 @@ public interface LoginFormDisplay
    *          Name and Password fields (by using the methods above) and perform
    *          the needed checks.
    */
-  void setLoginCallback(
-      SimpleCallback<Object> acb);
+  void setLoginCallback(SimpleCallback<Object> acb);
 }

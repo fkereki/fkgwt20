@@ -36,20 +36,19 @@ public class LoginFormView
   TextBox nameTextBox;
   @UiField
   PasswordTextBox passwordTextBox;
-  @UiField(provided= true)
+  @UiField(provided = true)
   Button loginButton;
 
-  private static final Binder binder= GWT.create(Binder.class);
+  private static final Binder binder = GWT.create(Binder.class);
 
   public LoginFormView() {
-    loginButton= new Button("Ok");
-    HTMLPanel dlp= binder.createAndBindUi(this);
+    loginButton = new Button("Ok");
+    HTMLPanel dlp = binder.createAndBindUi(this);
     initWidget(dlp);
   }
 
   @Override
-  public void enableLoginButton(
-      final boolean b) {
+  public void enableLoginButton(final boolean b) {
     loginButton.setEnabled(b);
   }
 
@@ -64,56 +63,47 @@ public class LoginFormView
   }
 
   @UiFactory
-  ReadOnlyTextBox2 makeROTB(
-      String init) {
+  ReadOnlyTextBox2 makeROTB(String init) {
     return new ReadOnlyTextBox2(init);
   }
 
   @Override
-  public final void setLoginCallback(
-      final SimpleCallback<Object> acb) {
-    loginCallback= acb;
+  public final void setLoginCallback(final SimpleCallback<Object> acb) {
+    loginCallback = acb;
   }
 
   @Override
-  public final void setName(
-      final String s) {
+  public final void setName(final String s) {
     nameTextBox.setValue(s);
   }
 
   @Override
-  public void setNameBlurCallback(
-      final SimpleCallback<Object> acb) {
-    nameBlurCallback= acb;
+  public void setNameBlurCallback(final SimpleCallback<Object> acb) {
+    nameBlurCallback = acb;
   }
 
   @Override
-  public final void setPassword(
-      final String s) {
+  public final void setPassword(final String s) {
     passwordTextBox.setValue(s);
   }
 
   @Override
-  public void setPasswordBlurCallback(
-      final SimpleCallback<Object> acb) {
-    passwordBlurCallback= acb;
+  public void setPasswordBlurCallback(final SimpleCallback<Object> acb) {
+    passwordBlurCallback = acb;
   }
 
   @UiHandler("nameTextBox")
-  void uiOnBlurName(
-      BlurEvent event) {
+  void uiOnBlurName(BlurEvent event) {
     nameBlurCallback.onSuccess(null);
   }
 
   @UiHandler("passwordTextBox")
-  void uiOnBlurPassword(
-      BlurEvent event) {
+  void uiOnBlurPassword(BlurEvent event) {
     passwordBlurCallback.onSuccess(null);
   }
 
   @UiHandler("loginButton")
-  void uiOnLoginButton(
-      ClickEvent event) {
+  void uiOnLoginButton(ClickEvent event) {
     loginCallback.onSuccess(null);
   }
 }

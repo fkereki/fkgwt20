@@ -25,11 +25,11 @@ public class LoginFormView
   private AsyncCallback<Object> nameBlurCallback;
   private AsyncCallback<Object> passwordBlurCallback;
 
-  private final TextBox nameTextBox= new TextBox();
-  private final TextBox passwordTextBox= new PasswordTextBox();
-  private final Button loginButton= new Button("Log in");
-  private final FlexTable flex= new FlexTable();
-  private final DockPanel dock= new DockPanel();
+  private final TextBox nameTextBox = new TextBox();
+  private final TextBox passwordTextBox = new PasswordTextBox();
+  private final Button loginButton = new Button("Log in");
+  private final FlexTable flex = new FlexTable();
+  private final DockPanel dock = new DockPanel();
 
   /**
    * Defines the view for the Login Form. Since this will be shown in the main
@@ -39,24 +39,21 @@ public class LoginFormView
   public LoginFormView() {
     loginButton.addClickHandler(new ClickHandler() {
       @Override
-      public void onClick(
-          final ClickEvent event) {
+      public void onClick(final ClickEvent event) {
         loginCallback.onSuccess(null);
       }
     });
 
     nameTextBox.addBlurHandler(new BlurHandler() {
       @Override
-      public void onBlur(
-          final BlurEvent event) {
+      public void onBlur(final BlurEvent event) {
         nameBlurCallback.onSuccess(null);
       }
     });
 
     passwordTextBox.addBlurHandler(new BlurHandler() {
       @Override
-      public void onBlur(
-          final BlurEvent event) {
+      public void onBlur(final BlurEvent event) {
         passwordBlurCallback.onSuccess(null);
       }
     });
@@ -77,8 +74,7 @@ public class LoginFormView
   }
 
   @Override
-  public void enableLoginButton(
-      final boolean b) {
+  public void enableLoginButton(final boolean b) {
     loginButton.setEnabled(b);
   }
 
@@ -93,32 +89,27 @@ public class LoginFormView
   }
 
   @Override
-  public final void setLoginCallback(
-      final SimpleCallback<Object> acb) {
-    loginCallback= acb;
+  public final void setLoginCallback(final SimpleCallback<Object> acb) {
+    loginCallback = acb;
   }
 
   @Override
-  public final void setName(
-      final String s) {
+  public final void setName(final String s) {
     nameTextBox.setValue(s);
   }
 
   @Override
-  public void setNameBlurCallback(
-      final SimpleCallback<Object> acb) {
-    nameBlurCallback= acb;
+  public void setNameBlurCallback(final SimpleCallback<Object> acb) {
+    nameBlurCallback = acb;
   }
 
   @Override
-  public final void setPassword(
-      final String s) {
+  public final void setPassword(final String s) {
     passwordTextBox.setValue(s);
   }
 
   @Override
-  public void setPasswordBlurCallback(
-      final SimpleCallback<Object> acb) {
-    passwordBlurCallback= acb;
+  public void setPasswordBlurCallback(final SimpleCallback<Object> acb) {
+    passwordBlurCallback = acb;
   }
 }

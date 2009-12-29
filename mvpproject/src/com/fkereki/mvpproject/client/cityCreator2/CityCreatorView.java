@@ -48,11 +48,11 @@ public class CityCreatorView
   SimpleCallback<Object> onCountryStateChangeCallback;
   SimpleCallback<Object> onCityNameChangeCallback;
 
-  private static final Binder binder= GWT.create(Binder.class);
+  private static final Binder binder = GWT.create(Binder.class);
 
   public CityCreatorView() {
     super();
-    HTMLPanel dlp= binder.createAndBindUi(this);
+    HTMLPanel dlp = binder.createAndBindUi(this);
     initWidget(dlp);
   }
 
@@ -87,44 +87,37 @@ public class CityCreatorView
   }
 
   @Override
-  public void setCityNameCssStyle(
-      String css) {
+  public void setCityNameCssStyle(String css) {
     cityName.setStyleName(css);
   }
 
   @Override
-  public void setOnAddClickCallback(
-      SimpleCallback<Object> acb) {
-    onAddClickCallback= acb;
+  public void setOnAddClickCallback(SimpleCallback<Object> acb) {
+    onAddClickCallback = acb;
   }
 
   @Override
-  public void setOnCityNameChangeCallback(
-      SimpleCallback<Object> acb) {
-    onCityNameChangeCallback= acb;
+  public void setOnCityNameChangeCallback(SimpleCallback<Object> acb) {
+    onCityNameChangeCallback = acb;
   }
 
   @Override
-  public void setOnCountryStateChangeCallback(
-      SimpleCallback<Object> acb) {
-    onCountryStateChangeCallback= acb;
+  public void setOnCountryStateChangeCallback(SimpleCallback<Object> acb) {
+    onCountryStateChangeCallback = acb;
   }
 
   @UiHandler("addCityButton")
-  void uiOnAddCityClick(
-      ClickEvent event) {
+  void uiOnAddCityClick(ClickEvent event) {
     onAddClickCallback.onSuccess(null);
   }
 
   @UiHandler("countryState")
-  void uiOnChange(
-      ValueChangeEvent<Object> event) {
+  void uiOnChange(ValueChangeEvent<Object> event) {
     onCountryStateChangeCallback.onSuccess(null);
   }
 
   @UiHandler("cityName")
-  void uiOnCityChange(
-      ChangeEvent event) {
+  void uiOnCityChange(ChangeEvent event) {
     onCityNameChangeCallback.onSuccess(null);
   }
 }

@@ -10,8 +10,7 @@ public class ReadOnlyTextBox2
    * A simple textbox that just disables itself
    */
   public @UiConstructor
-  ReadOnlyTextBox2(
-      String init) {
+  ReadOnlyTextBox2(String init) {
     super();
     setEnabled(false);
     setValue(init);

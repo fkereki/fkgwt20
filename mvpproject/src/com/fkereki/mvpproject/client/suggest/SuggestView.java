@@ -10,7 +10,7 @@ public class SuggestView
     extends View
     implements SuggestDisplay {
 
-  FlexTable ft= new FlexTable();
+  FlexTable ft = new FlexTable();
   SuggestBox sb;
 
   public SuggestView() {
@@ -25,9 +25,8 @@ public class SuggestView
   }
 
   @Override
-  public void setCitiesOracle(
-      MultiWordSuggestOracle oracle) {
-    sb= new SuggestBox(oracle);
+  public void setCitiesOracle(MultiWordSuggestOracle oracle) {
+    sb = new SuggestBox(oracle);
     ft.setWidget(0, 1, sb);
   }
 }

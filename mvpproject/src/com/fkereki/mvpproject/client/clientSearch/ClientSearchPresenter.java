@@ -6,11 +6,10 @@ import com.fkereki.mvpproject.client.Presenter;
 public class ClientSearchPresenter
     extends Presenter<ClientSearchDisplay> {
 
-  public static String PLACE= "clientsearch";
+  public static String PLACE = "clientsearch";
 
   public ClientSearchPresenter(
-      final String params,
-      final ClientSearchDisplay clientSearchDisplay,
+      final String params, final ClientSearchDisplay clientSearchDisplay,
       final Environment environment) {
 
     super(params, clientSearchDisplay, environment);

@@ -26,9 +26,9 @@ public class CitiesBrowserView
       extends UiBinder<HTMLPanel, CitiesBrowserView> {
   }
 
-  public static final int CITIES_PAGE_SIZE= 20;
+  public static final int CITIES_PAGE_SIZE = 20;
 
-  private static final Binder binder= GWT.create(Binder.class);
+  private static final Binder binder = GWT.create(Binder.class);
 
   @UiField
   CountryStateView countryStateView;
@@ -36,16 +36,14 @@ public class CitiesBrowserView
   @UiField
   FlexTable cg;
 
-  @UiField(provided= true)
-  Button firstButton= new Button("First " + CITIES_PAGE_SIZE
-      + " cities");
+  @UiField(provided = true)
+  Button firstButton = new Button("First " + CITIES_PAGE_SIZE + " cities");
 
-  @UiField(provided= true)
-  Button previousButton= new Button("Previous "
-      + CITIES_PAGE_SIZE);
+  @UiField(provided = true)
+  Button previousButton = new Button("Previous " + CITIES_PAGE_SIZE);
 
-  @UiField(provided= true)
-  Button nextButton= new Button("Next " + CITIES_PAGE_SIZE);
+  @UiField(provided = true)
+  Button nextButton = new Button("Next " + CITIES_PAGE_SIZE);
 
   SimpleCallback<Object> onFirstClickCallback;
   SimpleCallback<Object> onPreviousClickCallback;
@@ -54,7 +52,7 @@ public class CitiesBrowserView
 
   public CitiesBrowserView() {
     super();
-    HTMLPanel dlp= binder.createAndBindUi(this);
+    HTMLPanel dlp = binder.createAndBindUi(this);
     initWidget(dlp);
 
     cg.setText(0, 0, "Name");
@@ -69,8 +67,7 @@ public class CitiesBrowserView
   }
 
   @Override
-  public void setCityData(
-      int i, String name, String pop, String lat, String lon) {
+  public void setCityData(int i, String name, String pop, String lat, String lon) {
     cg.setText(i, 0, name);
     cg.setText(i, 1, pop);
     cg.setText(i, 2, lat);
@@ -78,50 +75,42 @@ public class CitiesBrowserView
   }
 
   @Override
-  public void setOnCountryStateChangeCallback(
-      SimpleCallback<Object> acb) {
-    onCountryStateChangeCallback= acb;
+  public void setOnCountryStateChangeCallback(SimpleCallback<Object> acb) {
+    onCountryStateChangeCallback = acb;
   }
 
   @Override
-  public void setOnFirstClickCallback(
-      SimpleCallback<Object> acb) {
-    onFirstClickCallback= acb;
+  public void setOnFirstClickCallback(SimpleCallback<Object> acb) {
+    onFirstClickCallback = acb;
   }
 
   @Override
-  public void setOnNextClickCallback(
-      SimpleCallback<Object> acb) {
-    onNextClickCallback= acb;
+  public void setOnNextClickCallback(SimpleCallback<Object> acb) {
+    onNextClickCallback = acb;
   }
 
   @Override
-  public void setOnPreviousClickCallback(
-      SimpleCallback<Object> acb) {
-    onPreviousClickCallback= acb;
+  public void setOnPreviousClickCallback(SimpleCallback<Object> acb) {
+    onPreviousClickCallback = acb;
   }
 
   @UiHandler("countryStateView")
-  void uiOnChange(
-      ValueChangeEvent<Object> event) {
+  void uiOnChange(ValueChangeEvent<Object> event) {
     onCountryStateChangeCallback.onSuccess(null);
   }
 
   @UiHandler("firstButton")
-  void uiOnFirstClick(
-      ClickEvent event) {
+  void uiOnFirstClick(ClickEvent event) {
     onFirstClickCallback.onSuccess(null);
   }
 
   @UiHandler("nextButton")
-  void uiOnNextClick(
-      ClickEvent event) {
+  void uiOnNextClick(ClickEvent event) {
     onNextClickCallback.onSuccess(null);
   }
 
   @UiHandler("previousButton")
-  void uiOnPreviousClick(
-      ClickEvent event) {
+  void uiOnPreviousClick(ClickEvent event) {
     onPreviousClickCallback.onSuccess(null);
   }
 }

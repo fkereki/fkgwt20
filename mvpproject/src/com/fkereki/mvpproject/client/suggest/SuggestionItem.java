@@ -25,10 +25,9 @@ public class SuggestionItem
   /**
    * Simplify the creation of a straight suggestion item
    */
-  public SuggestionItem(
-      String text) {
+  public SuggestionItem(String text) {
     super();
-    suggestionText= text;
+    suggestionText = text;
   }
 
   @Override

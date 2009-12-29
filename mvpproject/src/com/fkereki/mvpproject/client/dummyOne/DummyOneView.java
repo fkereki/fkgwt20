@@ -15,16 +15,15 @@ public class DummyOneView
     implements DummyOneDisplay {
 
   SimpleCallback<Object> openPopupPanelCallback;
-  String pepeValue= "";
-  final PopupPanel pup= new PopupPanel(true);
-  final Button popupOpener= new Button("Click me");
+  String pepeValue = "";
+  final PopupPanel pup = new PopupPanel(true);
+  final Button popupOpener = new Button("Click me");
 
   public DummyOneView() {
-    VerticalPanel panel= new VerticalPanel();
+    VerticalPanel panel = new VerticalPanel();
     panel.add(new Label("kvm..."));
     panel.add(new Label("dos"));
-    panel
-        .add(new Hyperlink("vamos al foo", "foo?pepe=continua"));
+    panel.add(new Hyperlink("vamos al foo", "foo?pepe=continua"));
     panel.add(new Hyperlink("vamos al bar", "bar"));
     panel.add(new Hyperlink("vamos al baZ", "baz"));
     panel.add(new Label(""));
@@ -34,8 +33,7 @@ public class DummyOneView
 
     popupOpener.addClickHandler(new ClickHandler() {
       @Override
-      public void onClick(
-          ClickEvent event) {
+      public void onClick(ClickEvent event) {
         openPopupPanelCallback.goBack(null);
       }
     });
@@ -47,15 +45,13 @@ public class DummyOneView
   }
 
   @Override
-  public void setClickCallback(
-      SimpleCallback<Object> scb) {
-    openPopupPanelCallback= scb;
+  public void setClickCallback(SimpleCallback<Object> scb) {
+    openPopupPanelCallback = scb;
   }
 
   @Override
-  public void setPepeValue(
-      String s) {
-    pepeValue= s;
+  public void setPepeValue(String s) {
+    pepeValue = s;
   }
 
   @Override

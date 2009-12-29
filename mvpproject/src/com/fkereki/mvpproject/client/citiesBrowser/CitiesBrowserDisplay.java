@@ -18,27 +18,23 @@ public interface CitiesBrowserDisplay
   String getState();
 
   void setCityData(
-      final int i, final String name, final String pop,
-      final String lat, final String lon);
+      final int i,
+      final String name,
+      final String pop,
+      final String lat,
+      final String lon);
 
-  void setCountryList(
-      LinkedHashMap<String, String> cl);
+  void setCountryList(LinkedHashMap<String, String> cl);
 
-  void setOnCountryChangeCallback(
-      SimpleCallback<Object> acb);
+  void setOnCountryChangeCallback(SimpleCallback<Object> acb);
 
-  void setOnFirstClickCallback(
-      SimpleCallback<Object> acb);
+  void setOnFirstClickCallback(SimpleCallback<Object> acb);
 
-  void setOnNextClickCallback(
-      SimpleCallback<Object> acb);
+  void setOnNextClickCallback(SimpleCallback<Object> acb);
 
-  void setOnPreviousClickCallback(
-      SimpleCallback<Object> acb);
+  void setOnPreviousClickCallback(SimpleCallback<Object> acb);
 
-  void setOnStateChangeCallback(
-      SimpleCallback<Object> acb);
+  void setOnStateChangeCallback(SimpleCallback<Object> acb);
 
-  void setStateList(
-      LinkedHashMap<String, String> sl);
+  void setStateList(LinkedHashMap<String, String> sl);
 }

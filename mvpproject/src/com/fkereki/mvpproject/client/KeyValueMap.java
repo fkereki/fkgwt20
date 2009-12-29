@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class KeyValueMap
     extends HashMap<String, String> {
-  private static final long serialVersionUID= 5225712868559413562L;
+  private static final long serialVersionUID = 5225712868559413562L;
 
   /**
    * Standard constructor; produces an empty KeyValueMap.
@@ -25,8 +25,7 @@ public class KeyValueMap
    * @param params
    *          A string with URL-like parameters (see below)
    */
-  public KeyValueMap(
-      final String params) {
+  public KeyValueMap(final String params) {
     initializeWithString(params);
   }
 
@@ -37,13 +36,12 @@ public class KeyValueMap
    *          A string formatted like param1=value1&param2=value2&... It is
    *          assumed that the value has been appropriately escaped.
    */
-  public final void initializeWithString(
-      final String params) {
+  public final void initializeWithString(final String params) {
     clear();
     if ((params != null) && !params.isEmpty()) {
-      String[] args= params.split("&");
+      String[] args = params.split("&");
       for (String element : args) {
-        int equalIndex= element.indexOf("=");
+        int equalIndex = element.indexOf("=");
         if (equalIndex == -1) {
           put(element, "");
         } else {
@@ -56,11 +54,11 @@ public class KeyValueMap
 
   @Override
   public String toString() {
-    String result= "";
-    String separator= "";
+    String result = "";
+    String separator = "";
     for (String key : keySet()) {
-      result+= separator + key + "=" + get(key);
-      separator= "\n";
+      result += separator + key + "=" + get(key);
+      separator = "\n";
     }
     return result;
   }

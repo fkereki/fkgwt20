@@ -13,15 +13,11 @@ public interface CountryStateDisplay
 
   String getState();
 
-  void setCountryList(
-      LinkedHashMap<String, String> cl);
+  void setCountryList(LinkedHashMap<String, String> cl);
 
-  void setOnCountryChangeCallback(
-      SimpleCallback<Object> acb);
+  void setOnCountryChangeCallback(SimpleCallback<Object> acb);
 
-  void setOnStateChangeCallback(
-      SimpleCallback<Object> acb);
+  void setOnStateChangeCallback(SimpleCallback<Object> acb);
 
-  void setStateList(
-      LinkedHashMap<String, String> sl);
+  void setStateList(LinkedHashMap<String, String> sl);
 }

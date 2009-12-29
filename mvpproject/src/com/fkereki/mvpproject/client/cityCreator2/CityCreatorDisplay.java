@@ -19,15 +19,11 @@ public interface CityCreatorDisplay
 
   int getPopulation();
 
-  void setCityNameCssStyle(
-      String css);
+  void setCityNameCssStyle(String css);
 
-  void setOnAddClickCallback(
-      SimpleCallback<Object> acb);
+  void setOnAddClickCallback(SimpleCallback<Object> acb);
 
-  void setOnCityNameChangeCallback(
-      SimpleCallback<Object> acb);
+  void setOnCityNameChangeCallback(SimpleCallback<Object> acb);
 
-  void setOnCountryStateChangeCallback(
-      SimpleCallback<Object> acb);
+  void setOnCountryStateChangeCallback(SimpleCallback<Object> acb);
 }

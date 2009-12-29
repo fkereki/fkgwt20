@@ -15,18 +15,18 @@ public class ClientSearchView
 
   SimpleCallback<Object> searchClickCallback;
 
-  final TextBox nameLike= new TextBox();
-  final TextBox addressLike= new TextBox();
-  final TextBox cityLike= new TextBox();
+  final TextBox nameLike = new TextBox();
+  final TextBox addressLike = new TextBox();
+  final TextBox cityLike = new TextBox();
 
-  final ListBox clientResults= new ListBox();
-  final Button searchButton= new Button("Search");
-  final Button returnButton= new Button("Return");
-  final Button cancelButton= new Button("Cancel");
+  final ListBox clientResults = new ListBox();
+  final Button searchButton = new Button("Search");
+  final Button returnButton = new Button("Return");
+  final Button cancelButton = new Button("Cancel");
 
-  final HorizontalPanel horiz= new HorizontalPanel();
-  final FlexTable flex= new FlexTable();
-  final FlexTable flex2= new FlexTable();
+  final HorizontalPanel horiz = new HorizontalPanel();
+  final FlexTable flex = new FlexTable();
+  final FlexTable flex2 = new FlexTable();
 
   public ClientSearchView() {
     clientResults.setWidth("100%");

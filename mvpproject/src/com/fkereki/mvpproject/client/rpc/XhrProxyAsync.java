@@ -4,6 +4,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface XhrProxyAsync {
 
-  void getFromUrl(String originalUrl, AsyncCallback<String> callback);
+  void getFromUrl(
+      String originalUrl,
+      String parameters,
+      AsyncCallback<String> callback);
 
+  void postToUrl(
+      final String originalUrl,
+      final String originalPath,
+      final String parameters,
+      AsyncCallback<String> callback);
 }

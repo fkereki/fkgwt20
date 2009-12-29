@@ -6,6 +6,7 @@ import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.rpc.ClientCityData;
+import com.fkereki.mvpproject.client.rpc.XhrProxyAsync;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -13,6 +14,7 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
 import com.google.gwt.xml.client.NodeList;
@@ -36,30 +38,7 @@ public class CitiesUpdaterPresenter
       @Override
       public void goBack(Object result) {
         clearCities();
-
-        /*
-         * The HostPageBaseURL looks like http://yourServer:8888/somePath and we
-         * want to rebuild it into http://yourServer:80/otherPath
-         */
-        String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
-        final RequestBuilder rb = new RequestBuilder(RequestBuilder.GET, URL
-            .encode(baseUrl + ":80/bookphp/getcities1.php?city="
-                + getDisplay().getCityNameStart()));
-        try {
-          rb.sendRequest(null, new RequestCallback() {
-            @Override
-            public void onError(Request request, Throwable exception) {
-              getEnvironment().showAlert(exception.getMessage());
-            }
-
-            @Override
-            public void onResponseReceived(Request request, Response response) {
-              loadCities(response.getText());
-            }
-          });
-        } catch (Exception e) {
-          Window.alert(e.getMessage());
-        }
+        getCitiesViaRequestBuilder();
       }
     });
 
@@ -75,8 +54,11 @@ public class CitiesUpdaterPresenter
             newCityList.put(i, cityList.get(i));
           }
         }
-        Window.alert(citiesToXml2(newCityList));
+        String xmlToSend = citiesToXmlViaDom(newCityList);
+        sendCitiesToServerViaRequestBuilder(xmlToSend);
+        sendCitiesToServerViaProxy(xmlToSend);
       }
+
     });
 
     getDisplay().setOnCityNameStartChangeCallback(new SimpleCallback<Object>() {
@@ -87,34 +69,7 @@ public class CitiesUpdaterPresenter
     });
   }
 
-  String citiesToXml1(HashMap<Integer, ClientCityData> aList) {
-    String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-
-    result += "<cities>\n";
-    for (int i : aList.keySet()) {
-      ClientCityData thisCity = aList.get(i);
-
-      /*
-       * In truth, putting latitude and longitude in the XML string isn't
-       * needed; let's do it just for showing how it's done.
-       */
-      result += "<city>\n";
-      result += " <city name=\"" + thisCity.cityName + "\">\n";
-      result += "  <country code=\"" + thisCity.countryCode + "\"/>\n";
-      result += "  <state code=\"" + thisCity.stateCode + "\"/>\n";
-      result += "  <pop>" + thisCity.population + "</pop>\n";
-      result += "  <coords>\n";
-      result += "   <lat>" + thisCity.latitude + "</lat>\n";
-      result += "   <lon>" + thisCity.longitude + "</lon>\n";
-      result += "  </coords>\n";
-      result += "</city>\n";
-    }
-    result += "</cities>\n";
-
-    return result;
-  }
-
-  String citiesToXml2(HashMap<Integer, ClientCityData> aList) {
+  String citiesToXmlViaDom(HashMap<Integer, ClientCityData> aList) {
 
     Document xml = XMLParser.createDocument();
     Element cities = xml.createElement("cities");
@@ -167,13 +122,40 @@ public class CitiesUpdaterPresenter
     return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + xml.toString();
   }
 
+  String citiesToXmlViaString(HashMap<Integer, ClientCityData> aList) {
+    String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+
+    result += "<cities>\n";
+    for (int i : aList.keySet()) {
+      ClientCityData thisCity = aList.get(i);
+
+      /*
+       * In truth, putting latitude and longitude in the XML string isn't
+       * needed; let's do it just for showing how it's done.
+       */
+      result += "<city>\n";
+      result += " <city name=\"" + thisCity.cityName + "\">\n";
+      result += "  <country code=\"" + thisCity.countryCode + "\"/>\n";
+      result += "  <state code=\"" + thisCity.stateCode + "\"/>\n";
+      result += "  <pop>" + thisCity.population + "</pop>\n";
+      result += "  <coords>\n";
+      result += "   <lat>" + thisCity.latitude + "</lat>\n";
+      result += "   <lon>" + thisCity.longitude + "</lon>\n";
+      result += "  </coords>\n";
+      result += "</city>\n";
+    }
+    result += "</cities>\n";
+
+    return result;
+  }
+
   void clearCities() {
     cityList.clear();
     getDisplay().clearAllCities();
   }
 
-  void loadCities(String xmlCities) {
-    cityList.clear();
+  void displayCities(String xmlCities) {
+    clearCities();
 
     if (!xmlCities.isEmpty()) {
       final Document xmlDoc = XMLParser.parse(xmlCities);
@@ -213,11 +195,111 @@ public class CitiesUpdaterPresenter
 
         /*
          * Given the usage of cityList, we could have set latitude and longitude
-         * to 0.0
+         * to 0.0, and it would have worked all the same...
          */
         cityList.put(i + 1, new ClientCityData(countryCode, stateCode,
             cityName, "", population, latitude, longitude));
       }
     }
+  }
+
+  void getCitiesViaProxy() {
+    /*
+     * The HostPageBaseURL looks like http://yourServer:8888/somePath and we
+     * want to rebuild it into http://yourServer:80/otherPath
+     */
+    final String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
+    final String realUrl = URL.encode(baseUrl + ":80/bookphp/getcities1.php");
+    final String params = URL.encode("city=" + getDisplay().getCityNameStart());
+
+    XhrProxyAsync xhrProxy = getEnvironment().getModel().getRemoteXhrProxy();
+    xhrProxy.getFromUrl(realUrl, params, new AsyncCallback<String>() {
+
+      @Override
+      public void onFailure(Throwable caught) {
+        getEnvironment().showAlert("failure " + caught.getMessage());
+      }
+
+      @Override
+      public void onSuccess(String result) {
+        displayCities(result);
+      }
+    });
+  }
+
+  void getCitiesViaRequestBuilder() {
+    String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
+    final RequestBuilder rb = new RequestBuilder(RequestBuilder.GET, URL
+        .encode(baseUrl + ":80/bookphp/getcities1.php?city="
+            + getDisplay().getCityNameStart()));
+
+    try {
+      rb.sendRequest(null, new RequestCallback() {
+        @Override
+        public void onError(Request request, Throwable exception) {
+          getEnvironment().showAlert(exception.getMessage());
+        }
+
+        @Override
+        public void onResponseReceived(Request request, Response response) {
+          displayCities(response.getText());
+        }
+      });
+    } catch (Exception e) {
+      getEnvironment().showAlert(e.getMessage());
+    }
+  }
+
+  void sendCitiesToServerViaProxy(String xmlToSend) {
+    /*
+     * The HostPageBaseURL looks like http://yourServer:8888/somePath and we
+     * want to rebuild it into http://yourServer:80/otherPath
+     */
+    final String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
+    final String realUrl = URL.encode(baseUrl);
+    final String realPath = URL.encode("bookphp/setc2.php");
+    final String params = URL.encode("xmldata=" + xmlToSend);
+
+    XhrProxyAsync xhrProxy = getEnvironment().getModel().getRemoteXhrProxy();
+    xhrProxy.postToUrl(realUrl, realPath, params, new AsyncCallback<String>() {
+
+      @Override
+      public void onFailure(Throwable caught) {
+        getEnvironment().showAlert("failure " + caught.getMessage());
+      }
+
+      @Override
+      public void onSuccess(String result) {
+        Window.alert(result);
+      }
+    });
+
+  }
+
+  void sendCitiesToServerViaRequestBuilder(String xmlToSend) {
+    /*
+     * The HostPageBaseURL looks like http://yourServer:8888/somePath and we
+     * want to rebuild it into http://yourServer:80/otherPath
+     */
+    String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
+    final RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, URL
+        .encode(baseUrl + ":80/bookphp/setc2.php?" + "xmldata=" + xmlToSend));
+
+    try {
+      rb.sendRequest(null, new RequestCallback() {
+        @Override
+        public void onError(Request request, Throwable exception) {
+          getEnvironment().showAlert(exception.getMessage());
+        }
+
+        @Override
+        public void onResponseReceived(Request request, Response response) {
+          Window.alert("received..." + response.getText());
+        }
+      });
+    } catch (Exception e) {
+      getEnvironment().showAlert(e.getMessage());
+    }
+
   }
 }

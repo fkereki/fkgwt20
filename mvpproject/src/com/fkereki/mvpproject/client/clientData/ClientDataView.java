@@ -17,16 +17,16 @@ public class ClientDataView
 
   SimpleCallback<Object> searchClickCallback;
 
-  final TextBox clientNumber= new TextBox();
-  final Button clientSearchButton= new Button("Search");
-  final PopupPanel clientSearchPanel= new PopupPanel(true);
-  final ListBox clientSalute= new ListBox();
-  final TextBox clientName= new TextBox();
-  final TextBox clientAddress= new TextBox();
-  final TextBox clientCity= new TextBox();
-  final TextBox clientZip= new TextBox();
-  final TextBox clientState= new TextBox();
-  final FlexTable flex= new FlexTable();
+  final TextBox clientNumber = new TextBox();
+  final Button clientSearchButton = new Button("Search");
+  final PopupPanel clientSearchPanel = new PopupPanel(true);
+  final ListBox clientSalute = new ListBox();
+  final TextBox clientName = new TextBox();
+  final TextBox clientAddress = new TextBox();
+  final TextBox clientCity = new TextBox();
+  final TextBox clientZip = new TextBox();
+  final TextBox clientState = new TextBox();
+  final FlexTable flex = new FlexTable();
 
   public ClientDataView() {
     clientSalute.addItem("");
@@ -67,8 +67,7 @@ public class ClientDataView
     clientSearchButton.addClickHandler(new ClickHandler() {
 
       @Override
-      public void onClick(
-          ClickEvent event) {
+      public void onClick(ClickEvent event) {
         searchClickCallback.goBack(null);
       }
     });
@@ -101,8 +100,7 @@ public class ClientDataView
 
   @Override
   public String getSalute() {
-    return clientSalute
-        .getValue(clientSalute.getSelectedIndex());
+    return clientSalute.getValue(clientSalute.getSelectedIndex());
   }
 
   @Override
@@ -121,56 +119,48 @@ public class ClientDataView
   }
 
   @Override
-  public void setAddress(
-      String s) {
+  public void setAddress(String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setCity(
-      String s) {
+  public void setCity(String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setClient(
-      String s) {
+  public void setClient(String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setName(
-      String s) {
+  public void setName(String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setSalute(
-      String s) {
+  public void setSalute(String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setSearchClickCallback(
-      SimpleCallback<Object> scb) {
-    searchClickCallback= scb;
+  public void setSearchClickCallback(SimpleCallback<Object> scb) {
+    searchClickCallback = scb;
   }
 
   @Override
-  public void setState(
-      String s) {
+  public void setState(String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setZip(
-      String s) {
+  public void setZip(String s) {
     // TODO Auto-generated method stub
 
   }

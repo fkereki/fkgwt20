@@ -8,6 +8,5 @@ public interface SuggestDisplay
 
   String getCityName();
 
-  void setCitiesOracle(
-      MultiWordSuggestOracle oracle);
+  void setCitiesOracle(MultiWordSuggestOracle oracle);
 }

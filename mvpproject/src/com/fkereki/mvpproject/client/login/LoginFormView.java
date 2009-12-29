@@ -20,11 +20,11 @@ public class LoginFormView
     implements LoginFormDisplay {
 
   private AsyncCallback<Object> loginCallback;
-  private final TextBox nameTextBox= new TextBox();
-  private final TextBox passwordTextBox= new PasswordTextBox();
-  private final Button loginButton= new Button("Log in");
-  private final FlexTable flex= new FlexTable();
-  private final DockPanel dock= new DockPanel();
+  private final TextBox nameTextBox = new TextBox();
+  private final TextBox passwordTextBox = new PasswordTextBox();
+  private final Button loginButton = new Button("Log in");
+  private final FlexTable flex = new FlexTable();
+  private final DockPanel dock = new DockPanel();
 
   /**
    * Defines the view for the Login Form. Since this will be shown in the main
@@ -33,8 +33,7 @@ public class LoginFormView
    */
   public LoginFormView() {
     loginButton.addClickHandler(new ClickHandler() {
-      public void onClick(
-          final ClickEvent event) {
+      public void onClick(final ClickEvent event) {
         loginCallback.onSuccess(null);
       }
     });
@@ -65,20 +64,17 @@ public class LoginFormView
   }
 
   @Override
-  public final void setLoginCallback(
-      final SimpleCallback<Object> acb) {
-    loginCallback= acb;
+  public final void setLoginCallback(final SimpleCallback<Object> acb) {
+    loginCallback = acb;
   }
 
   @Override
-  public final void setName(
-      final String s) {
+  public final void setName(final String s) {
     nameTextBox.setValue(s);
   }
 
   @Override
-  public final void setPassword(
-      final String s) {
+  public final void setPassword(final String s) {
     passwordTextBox.setValue(s);
   }
 }

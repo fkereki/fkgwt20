@@ -8,33 +8,26 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class LoginFormPresenter
     extends Presenter<LoginFormDisplay> {
-  static String PLACE= "login";
+  static String PLACE = "login";
 
   LoginServiceAsync loginService;
   SimpleCallback<String> loginSuccessCallback;
 
   public LoginFormPresenter(
       final String params, final LoginFormDisplay loginDisplay,
-      final Environment environment,
-      final SimpleCallback<String> callback) {
+      final Environment environment, final SimpleCallback<String> callback) {
 
     super(params, loginDisplay, environment);
-    loginSuccessCallback= callback;
-    loginService= getEnvironment().getModel()
-        .getRemoteLoginService();
+    loginSuccessCallback = callback;
+    loginService = getEnvironment().getModel().getRemoteLoginService();
 
-    final SimpleCallback<Object> commonBlurHandler= new SimpleCallback<Object>() {
+    final SimpleCallback<Object> commonBlurHandler = new SimpleCallback<Object>() {
       @Override
-      public void goBack(
-          final Object result) {
-        final String name= LoginFormPresenter.this.getDisplay()
-            .getName();
-        final String pass= LoginFormPresenter.this.getDisplay()
-            .getPassword();
-        final boolean canLogin= !(name.isEmpty())
-            & !(pass.isEmpty());
-        (LoginFormPresenter.this.getDisplay())
-            .enableLoginButton(canLogin);
+      public void goBack(final Object result) {
+        final String name = LoginFormPresenter.this.getDisplay().getName();
+        final String pass = LoginFormPresenter.this.getDisplay().getPassword();
+        final boolean canLogin = !(name.isEmpty()) & !(pass.isEmpty());
+        (LoginFormPresenter.this.getDisplay()).enableLoginButton(canLogin);
       }
     };
     loginDisplay.setNameBlurCallback(commonBlurHandler);
@@ -46,33 +39,24 @@ public class LoginFormPresenter
 
     loginDisplay.setLoginCallback(new SimpleCallback<Object>() {
       @Override
-      public void goBack(
-          final Object result) {
-        final String name= LoginFormPresenter.this.getDisplay()
-            .getName();
-        final String pass= LoginFormPresenter.this.getDisplay()
-            .getPassword();
+      public void goBack(final Object result) {
+        final String name = LoginFormPresenter.this.getDisplay().getName();
+        final String pass = LoginFormPresenter.this.getDisplay().getPassword();
 
-        LoginFormPresenter.this.getDisplay().enableLoginButton(
-            false);
+        LoginFormPresenter.this.getDisplay().enableLoginButton(false);
 
-        loginService.getSomething(name, pass,
-            new AsyncCallback<String>() {
-              public void onFailure(
-                  final Throwable caught) {
-                LoginFormPresenter.this.getEnvironment()
-                    .showAlert("Failed login");
+        loginService.getSomething(name, pass, new AsyncCallback<String>() {
+          public void onFailure(final Throwable caught) {
+            LoginFormPresenter.this.getEnvironment().showAlert("Failed login");
 
-                LoginFormPresenter.this.getDisplay()
-                    .enableLoginButton(true);
-                loginSuccessCallback.onFailure(new Throwable());
-              }
+            LoginFormPresenter.this.getDisplay().enableLoginButton(true);
+            loginSuccessCallback.onFailure(new Throwable());
+          }
 
-              public void onSuccess(
-                  final String result) {
-                loginSuccessCallback.goBack(result);
-              }
-            });
+          public void onSuccess(final String result) {
+            loginSuccessCallback.goBack(result);
+          }
+        });
       }
     });
   }
