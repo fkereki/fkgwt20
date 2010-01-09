@@ -12,6 +12,20 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class Nixietest
     implements EntryPoint {
 
+  private static native void animateAllLinks() /*-{
+    $wnd.$('a').hover(
+    function() { // mouse in animation
+    $wnd.$(this).stop().animate({fontSize:'150%'}, 250);
+    }, 
+    function() { // mouse out animation
+    $wnd.$(this).stop().animate({fontSize:'100%'}, 250);
+    });
+  }-*/;
+
+  /*
+   * brou 194-97836 caja ahorro $
+   */
+
   private static native String md5(String pText) /*-{
     return $wnd.hex_md5(pText);
   }-*/;
@@ -20,6 +34,7 @@ public class Nixietest
 
   public void onModuleLoad() {
     Window.alert(md5("hola"));
+    animateAllLinks();
 
     NixieDisplay display1 = new NixieDisplay("nd1", 5, "right");
     NixieDisplay display2 = new NixieDisplay("nd2", 10, "left");
