@@ -41,7 +41,8 @@ public class CitiesBrowserView
   FlexTable cg;
 
   @UiField(provided = true)
-  Button firstButton = new Button("First " + CITIES_PAGE_SIZE + " cities");
+  Button firstButton = new Button("First " + CITIES_PAGE_SIZE
+      + " cities");
 
   @UiField(provided = true)
   Button previousButton = new Button("Previous " + CITIES_PAGE_SIZE);
@@ -79,7 +80,12 @@ public class CitiesBrowserView
   }
 
   @Override
-  public void setCityData(int i, String name, String pop, String lat, String lon) {
+  public void setCityData(
+      int i,
+      String name,
+      String pop,
+      String lat,
+      String lon) {
     cg.setText(i, 0, name);
     cg.setText(i, 1, pop);
     cg.setText(i, 2, lat);

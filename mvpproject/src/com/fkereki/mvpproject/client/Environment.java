@@ -14,6 +14,8 @@ import com.fkereki.mvpproject.client.dummyOne.DummyOnePresenter;
 import com.fkereki.mvpproject.client.dummyOne.DummyOneView;
 import com.fkereki.mvpproject.client.login.LoginFormPresenter;
 import com.fkereki.mvpproject.client.login.LoginFormView;
+import com.fkereki.mvpproject.client.newsReader.NewsReaderPresenter;
+import com.fkereki.mvpproject.client.newsReader.NewsReaderView;
 import com.fkereki.mvpproject.client.suggest.SuggestPresenter;
 import com.fkereki.mvpproject.client.suggest.SuggestView;
 import com.google.gwt.user.client.Command;
@@ -66,7 +68,9 @@ public class Environment {
     mb.addItem("dummy#1", new HistoryCommand(DummyOnePresenter.PLACE
         + "?parameter=value"));
     mb.addItem("Suggest", new HistoryCommand(SuggestPresenter.PLACE));
-    mb.addItem("Clients", new HistoryCommand(ClientDataPresenter.PLACE));
+    mb
+        .addItem("Clients", new HistoryCommand(
+            ClientDataPresenter.PLACE));
 
     MenuBar mb2 = new MenuBar(true);
     mb2.addItem("subitem1", sorry);
@@ -76,11 +80,15 @@ public class Environment {
     mb.addItem("submenu", mb2);
 
     MenuBar mb3 = new MenuBar(true);
-    mb3.addItem("Browsing", new HistoryCommand(CitiesBrowserPresenter.PLACE));
-    mb3.addItem("Creating", new HistoryCommand(CityCreatorPresenter.PLACE));
-    mb3.addItem("Updating", new HistoryCommand(CitiesUpdaterPresenter.PLACE));
+    mb3.addItem("Browsing", new HistoryCommand(
+        CitiesBrowserPresenter.PLACE));
+    mb3.addItem("Creating", new HistoryCommand(
+        CityCreatorPresenter.PLACE));
+    mb3.addItem("Updating", new HistoryCommand(
+        CitiesUpdaterPresenter.PLACE));
     mb.addItem("Cities", mb3);
 
+    mb.addItem("News", new HistoryCommand(NewsReaderPresenter.PLACE));
     mb.addItem("login", new HistoryCommand(LoginFormPresenter.PLACE));
   }
 
@@ -129,20 +137,23 @@ public class Environment {
       panel.add(new SuggestPresenter(args, new SuggestView(), this)
           .getDisplay().asWidget());
     } else if (token.equals(ClientDataPresenter.PLACE)) {
-      panel.add(new ClientDataPresenter(args, new ClientDataView(), this)
-          .getDisplay().asWidget());
+      panel.add(new ClientDataPresenter(args, new ClientDataView(),
+          this).getDisplay().asWidget());
     } else if (token.equals(ClientSearchPresenter.PLACE)) {
-      panel.add(new ClientSearchPresenter(args, new ClientSearchView(), this)
-          .getDisplay().asWidget());
+      panel.add(new ClientSearchPresenter(args, new ClientSearchView(),
+          this).getDisplay().asWidget());
     } else if (token.equals(CitiesBrowserPresenter.PLACE)) {
-      panel.add(new CitiesBrowserPresenter(args, new CitiesBrowserView(), this)
-          .getDisplay().asWidget());
+      panel.add(new CitiesBrowserPresenter(args,
+          new CitiesBrowserView(), this).getDisplay().asWidget());
     } else if (token.equals(CityCreatorPresenter.PLACE)) {
-      panel.add(new CityCreatorPresenter(args, new CityCreatorView(), this)
-          .getDisplay().asWidget());
+      panel.add(new CityCreatorPresenter(args, new CityCreatorView(),
+          this).getDisplay().asWidget());
     } else if (token.equals(CitiesUpdaterPresenter.PLACE)) {
-      panel.add(new CitiesUpdaterPresenter(args, new CitiesUpdaterView(), this)
-          .getDisplay().asWidget());
+      panel.add(new CitiesUpdaterPresenter(args,
+          new CitiesUpdaterView(), this).getDisplay().asWidget());
+    } else if (token.equals(NewsReaderPresenter.PLACE)) {
+      panel.add(new NewsReaderPresenter(args, new NewsReaderView(),
+          this).getDisplay().asWidget());
     } else {
       Window.alert("Unrecognized token=" + token);
     }

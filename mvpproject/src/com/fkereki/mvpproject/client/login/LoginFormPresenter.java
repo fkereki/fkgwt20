@@ -15,7 +15,8 @@ public class LoginFormPresenter
 
   public LoginFormPresenter(
       final String params, final LoginFormDisplay loginDisplay,
-      final Environment environment, final SimpleCallback<String> callback) {
+      final Environment environment,
+      final SimpleCallback<String> callback) {
 
     super(params, loginDisplay, environment);
     loginSuccessCallback = callback;
@@ -26,19 +27,23 @@ public class LoginFormPresenter
     loginDisplay.setLoginCallback(new SimpleCallback<Object>() {
       @Override
       public void goBack(final Object result) {
-        final String name = LoginFormPresenter.this.getDisplay().getName();
-        final String pass = LoginFormPresenter.this.getDisplay().getPassword();
+        final String name = LoginFormPresenter.this.getDisplay()
+            .getName();
+        final String pass = LoginFormPresenter.this.getDisplay()
+            .getPassword();
 
-        loginService.getSomething(name, pass, new AsyncCallback<String>() {
-          public void onFailure(final Throwable caught) {
-            LoginFormPresenter.this.getEnvironment().showAlert("Failed login");
-            loginSuccessCallback.onFailure(new Throwable());
-          }
+        loginService.getSomething(name, pass,
+            new AsyncCallback<String>() {
+              public void onFailure(final Throwable caught) {
+                LoginFormPresenter.this.getEnvironment().showAlert(
+                    "Failed login");
+                loginSuccessCallback.onFailure(new Throwable());
+              }
 
-          public void onSuccess(final String result) {
-            loginSuccessCallback.goBack(result);
-          }
-        });
+              public void onSuccess(final String result) {
+                loginSuccessCallback.goBack(result);
+              }
+            });
       }
     });
   }

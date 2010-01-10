@@ -27,7 +27,8 @@ public interface WorldServiceAsync {
       String pStart,
       AsyncCallback<LinkedHashMap<String, ClientCityData>> callback);
 
-  void getCountries(AsyncCallback<LinkedHashMap<String, String>> callback);
+  void getCountries(
+      AsyncCallback<LinkedHashMap<String, String>> callback);
 
   void getStates(
       String pCountry,

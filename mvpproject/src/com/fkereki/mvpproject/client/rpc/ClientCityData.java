@@ -42,7 +42,8 @@ public class ClientCityData
   public ClientCityData(
       final String pCountryCode, final String pStateCode,
       final String pCityName, final String pCityAccentedName,
-      final int pPopulation, final float pLatitude, final float pLongitude) {
+      final int pPopulation, final float pLatitude,
+      final float pLongitude) {
 
     countryCode = pCountryCode;
     stateCode = pStateCode;

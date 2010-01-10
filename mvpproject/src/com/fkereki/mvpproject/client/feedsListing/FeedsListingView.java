@@ -98,7 +98,8 @@ public class FeedsListingView
   }
 
   @Override
-  public void setOnCityNameStartChangeCallback(SimpleCallback<Object> acb) {
+  public void setOnCityNameStartChangeCallback(
+      SimpleCallback<Object> acb) {
     onCityNameStartChangeCallback = acb;
   }
 

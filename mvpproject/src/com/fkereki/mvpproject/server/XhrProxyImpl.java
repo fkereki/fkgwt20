@@ -15,17 +15,20 @@ public class XhrProxyImpl
     implements XhrProxy {
 
   @Override
-  public String getFromUrl(String originalUrl, String parameters) {
+  public String getFromUrl(
+      final String originalUrl,
+      final String originalPath,
+      final String parameters) {
     String result = "";
 
     try {
-      final String urlToGet = originalUrl
+      final String urlToGet = originalUrl + "/" + originalPath
           + (parameters.isEmpty() ? "" : "?" + parameters);
 
       final URL url = new URL(urlToGet);
 
-      final BufferedReader in = new BufferedReader(new InputStreamReader(url
-          .openStream()));
+      final BufferedReader in = new BufferedReader(
+          new InputStreamReader(url.openStream()));
 
       String inputLine;
       while ((inputLine = in.readLine()) != null) {
@@ -55,8 +58,8 @@ public class XhrProxyImpl
       final URLConnection connection = url.openConnection();
       connection.setDoOutput(true);
 
-      final BufferedReader in = new BufferedReader(new InputStreamReader(
-          connection.getInputStream()));
+      final BufferedReader in = new BufferedReader(
+          new InputStreamReader(connection.getInputStream()));
       final OutputStreamWriter out = new OutputStreamWriter(connection
           .getOutputStream());
 
@@ -64,7 +67,9 @@ public class XhrProxyImpl
       out.write("Host: " + originalUrl + ":80" + EOL);
       out.write("Accept-Encoding: identity" + EOL);
       out.write("Connection: close" + EOL);
-      out.write("Content-Type: application/x-www-form-urlencoded" + EOL);
+      out
+          .write("Content-Type: application/x-www-form-urlencoded"
+              + EOL);
       out.write("Content-Length: " + parameters.length() + EOL);
       out.write(EOL);
       out.write(parameters);
@@ -83,31 +88,4 @@ public class XhrProxyImpl
       return "";
     }
   }
-  // $urlToOpen="www.ancelutil.com.uy";
-  // $pathToOpen="/envioSMS";
-  // $portToOpen=8090;
-  // $dataToSend=
-  // "txtCelularNumero=".substr($numero,-7).
-  // "&txtMensaje=".rawurlencode($texto).
-  // "&txtAplicacion=1122".
-  // "&txtNroTramite=".$tramite;
-  // $socket= fsockopen($urlToOpen, $portToOpen, $err1, $err2, 30);
-  // $envio=
-  // "POST $pathToOpen HTTP/1.1"."\r\n".
-  // "Host: $urlToOpen:$portToOpen"."\r\n".
-  // "Accept-Encoding: identity"."\r\n".
-  // "Connection: close"."\r\n".
-  // "Content-Type: application/x-www-form-urlencoded"."\r\n".
-  // "Content-Length: ".strlen($dataToSend)."\r\n".
-  // "\r\n".
-  // $dataToSend.
-  // "\r\n";
-  //
-  // fwrite($socket, $envio);
-  //
-  // $answer= "";
-  // while (!feof($socket)){
-  // $answer.= fread($socket,512);
-  // }
-  // fclose($socket);
 }

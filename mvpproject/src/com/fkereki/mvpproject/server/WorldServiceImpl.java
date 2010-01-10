@@ -82,7 +82,9 @@ public class WorldServiceImpl
       final Statement stmt = conn.createStatement();
       final ResultSet rs = stmt
           .executeQuery("SELECT COUNT(*) FROM cities WHERE countryCode='"
-              + pCountryCode + "' AND stateCode='" + pStateCode
+              + pCountryCode
+              + "' AND stateCode='"
+              + pStateCode
               + "' AND cityName='" + pCityName + "'");
 
       rs.first();
@@ -104,7 +106,8 @@ public class WorldServiceImpl
       throws Exception {
     DriverManager.registerDriver(new com.mysql.jdbc.Driver());
     Class.forName("com.mysql.jdbc.Driver").newInstance();
-    conn = DriverManager.getConnection(jdbc_url, mysql_user, mysql_password);
+    conn = DriverManager.getConnection(jdbc_url, mysql_user,
+        mysql_password);
   }
 
   /**
@@ -148,9 +151,9 @@ public class WorldServiceImpl
       while (rs.next()) {
         citiesList.put(rs.getString("cityName"), new ClientCityData(rs
             .getString("countryCode"), rs.getString("stateCode"), rs
-            .getString("cityName"), rs.getString("cityAccentedName"), rs
-            .getInt("population"), rs.getFloat("latitude"), rs
-            .getFloat("longitude")));
+            .getString("cityName"), rs.getString("cityAccentedName"),
+            rs.getInt("population"), rs.getFloat("latitude"), rs
+                .getFloat("longitude")));
       }
 
       stmt.close();
@@ -175,14 +178,15 @@ public class WorldServiceImpl
       final ResultSet rs = stmt
           .executeQuery("SELECT * FROM cities WHERE countryCode='"
               + pCountryCode + "' AND stateCode='" + pStateCode
-              + "' AND cityName LIKE '" + pStart + "%' ORDER BY cityName");
+              + "' AND cityName LIKE '" + pStart
+              + "%' ORDER BY cityName");
 
       while (rs.next()) {
         citiesList.put(rs.getString("cityName"), new ClientCityData(rs
             .getString("countryCode"), rs.getString("stateCode"), rs
-            .getString("cityName"), rs.getString("cityAccentedName"), rs
-            .getInt("population"), rs.getFloat("latitude"), rs
-            .getFloat("longitude")));
+            .getString("cityName"), rs.getString("cityAccentedName"),
+            rs.getInt("population"), rs.getFloat("latitude"), rs
+                .getFloat("longitude")));
       }
 
       stmt.close();
@@ -207,8 +211,9 @@ public class WorldServiceImpl
     try {
       connectToDatabase();
       final Statement stmt = conn.createStatement();
-      final ResultSet rs = stmt.executeQuery("SELECT countryCode,countryName "
-          + "FROM countries ORDER BY 2");
+      final ResultSet rs = stmt
+          .executeQuery("SELECT countryCode,countryName "
+              + "FROM countries ORDER BY 2");
 
       while (rs.next()) {
         countriesList.put(rs.getString(1), rs.getString(2));
@@ -232,7 +237,8 @@ public class WorldServiceImpl
    *         codes are used as keys, and state names as values. The map is
    *         ordered by state name, alphabetically.
    */
-  public LinkedHashMap<String, String> getStates(final String pCountryCode) {
+  public LinkedHashMap<String, String> getStates(
+      final String pCountryCode) {
     final LinkedHashMap<String, String> statesList = new LinkedHashMap<String, String>();
 
     try {

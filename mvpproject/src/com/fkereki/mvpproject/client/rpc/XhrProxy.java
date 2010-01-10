@@ -7,7 +7,10 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface XhrProxy
     extends RemoteService {
 
-  public String getFromUrl(final String originalUrl, final String parameters);
+  public String getFromUrl(
+      final String originalUrl,
+      final String originalPath,
+      final String parameters);
 
   public String postToUrl(
       final String originalUrl,

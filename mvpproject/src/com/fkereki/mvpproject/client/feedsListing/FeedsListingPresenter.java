@@ -27,64 +27,72 @@ public class FeedsListingPresenter
   HashMap<Integer, ClientCityData> cityList = new HashMap<Integer, ClientCityData>();
 
   public FeedsListingPresenter(
-      final String params, final FeedsListingDisplay citiesUpdaterDisplay,
+      final String params,
+      final FeedsListingDisplay citiesUpdaterDisplay,
       final Environment environment) {
 
     super(params, citiesUpdaterDisplay, environment);
 
-    getDisplay().setOnGetCitiesClickCallback(new SimpleCallback<Object>() {
-      @Override
-      public void goBack(Object result) {
-        clearCities();
+    getDisplay().setOnGetCitiesClickCallback(
+        new SimpleCallback<Object>() {
+          @Override
+          public void goBack(Object result) {
+            clearCities();
 
-        /*
-         * The HostPageBaseURL looks like http://yourServer:8888/somePath and we
-         * want to rebuild it into http://yourServer:80/otherPath
-         */
-        String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
-        final RequestBuilder rb = new RequestBuilder(RequestBuilder.GET, URL
-            .encode(baseUrl + ":80/bookphp/getcities1.php?city="
-                + getDisplay().getCityNameStart()));
-        try {
-          rb.sendRequest(null, new RequestCallback() {
-            @Override
-            public void onError(Request request, Throwable exception) {
-              getEnvironment().showAlert(exception.getMessage());
+            /*
+             * The HostPageBaseURL looks like http://yourServer:8888/somePath
+             * and we want to rebuild it into http://yourServer:80/otherPath
+             */
+            String baseUrl = "http:"
+                + GWT.getHostPageBaseURL().split(":")[1];
+            final RequestBuilder rb = new RequestBuilder(
+                RequestBuilder.GET, URL.encode(baseUrl
+                    + ":80/bookphp/getcities1.php?city="
+                    + getDisplay().getCityNameStart()));
+            try {
+              rb.sendRequest(null, new RequestCallback() {
+                @Override
+                public void onError(Request request, Throwable exception) {
+                  getEnvironment().showAlert(exception.getMessage());
+                }
+
+                @Override
+                public void onResponseReceived(
+                    Request request,
+                    Response response) {
+                  loadCities(response.getText());
+                }
+              });
+            } catch (Exception e) {
+              Window.alert(e.getMessage());
             }
-
-            @Override
-            public void onResponseReceived(Request request, Response response) {
-              loadCities(response.getText());
-            }
-          });
-        } catch (Exception e) {
-          Window.alert(e.getMessage());
-        }
-      }
-    });
-
-    getDisplay().setOnUpdateCitiesClickCallback(new SimpleCallback<Object>() {
-      @Override
-      public void goBack(Object dummy) {
-        HashMap<Integer, ClientCityData> newCityList = new HashMap<Integer, ClientCityData>();
-        for (Integer i : cityList.keySet()) {
-          int gridPop = getDisplay().getCityPopulation(i);
-          ClientCityData thisCity = cityList.get(i);
-          if (thisCity.population != gridPop) {
-            cityList.get(i).population = gridPop;
-            newCityList.put(i, cityList.get(i));
           }
-        }
-        Window.alert(citiesToXml2(newCityList));
-      }
-    });
+        });
 
-    getDisplay().setOnCityNameStartChangeCallback(new SimpleCallback<Object>() {
-      @Override
-      public void goBack(Object result) {
-        clearCities();
-      }
-    });
+    getDisplay().setOnUpdateCitiesClickCallback(
+        new SimpleCallback<Object>() {
+          @Override
+          public void goBack(Object dummy) {
+            HashMap<Integer, ClientCityData> newCityList = new HashMap<Integer, ClientCityData>();
+            for (Integer i : cityList.keySet()) {
+              int gridPop = getDisplay().getCityPopulation(i);
+              ClientCityData thisCity = cityList.get(i);
+              if (thisCity.population != gridPop) {
+                cityList.get(i).population = gridPop;
+                newCityList.put(i, cityList.get(i));
+              }
+            }
+            Window.alert(citiesToXml2(newCityList));
+          }
+        });
+
+    getDisplay().setOnCityNameStartChangeCallback(
+        new SimpleCallback<Object>() {
+          @Override
+          public void goBack(Object result) {
+            clearCities();
+          }
+        });
   }
 
   String citiesToXml1(HashMap<Integer, ClientCityData> aList) {
@@ -164,7 +172,8 @@ public class FeedsListingPresenter
       cities.appendChild(city);
     }
 
-    return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + xml.toString();
+    return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+        + xml.toString();
   }
 
   void clearCities() {
@@ -186,30 +195,39 @@ public class FeedsListingPresenter
         final Element city = (Element) cities.item(i);
         String cityName = city.getAttributeNode("name").getValue();
 
-        final Element country = (Element) city.getElementsByTagName("country")
-            .item(0);
-        String countryCode = country.getAttributeNode("code").getValue();
-        String countryName = country.getAttributeNode("name").getValue();
+        final Element country = (Element) city.getElementsByTagName(
+            "country").item(0);
+        String countryCode = country.getAttributeNode("code")
+            .getValue();
+        String countryName = country.getAttributeNode("name")
+            .getValue();
 
-        final Element state = (Element) city.getElementsByTagName("state")
-            .item(0);
+        final Element state = (Element) city.getElementsByTagName(
+            "state").item(0);
         String stateCode = state.getAttributeNode("code").getValue();
         String stateName = state.getAttributeNode("name").getValue();
 
         int population = 0;
-        Element popElem = (Element) city.getElementsByTagName("pop").item(0);
+        Element popElem = (Element) city.getElementsByTagName("pop")
+            .item(0);
         if (popElem != null) {
-          population = Integer.parseInt(popElem.getFirstChild().getNodeValue());
+          population = Integer.parseInt(popElem.getFirstChild()
+              .getNodeValue());
         }
 
-        Element coords = (Element) city.getElementsByTagName("coords").item(0);
-        Element lat = (Element) coords.getElementsByTagName("lat").item(0);
-        Element lon = (Element) coords.getElementsByTagName("lon").item(0);
-        float latitude = Float.parseFloat(lat.getFirstChild().getNodeValue());
-        float longitude = Float.parseFloat(lon.getFirstChild().getNodeValue());
+        Element coords = (Element) city.getElementsByTagName("coords")
+            .item(0);
+        Element lat = (Element) coords.getElementsByTagName("lat")
+            .item(0);
+        Element lon = (Element) coords.getElementsByTagName("lon")
+            .item(0);
+        float latitude = Float.parseFloat(lat.getFirstChild()
+            .getNodeValue());
+        float longitude = Float.parseFloat(lon.getFirstChild()
+            .getNodeValue());
 
-        getDisplay().setCityData(i + 1, cityName, countryName, stateName,
-            population);
+        getDisplay().setCityData(i + 1, cityName, countryName,
+            stateName, population);
 
         /*
          * Given the usage of cityList, we could have set latitude and longitude

@@ -29,44 +29,60 @@ public class CitiesUpdaterPresenter
   HashMap<Integer, ClientCityData> cityList = new HashMap<Integer, ClientCityData>();
 
   public CitiesUpdaterPresenter(
-      final String params, final CitiesUpdaterDisplay citiesUpdaterDisplay,
+      final String params,
+      final CitiesUpdaterDisplay citiesUpdaterDisplay,
       final Environment environment) {
 
     super(params, citiesUpdaterDisplay, environment);
 
-    getDisplay().setOnGetCitiesClickCallback(new SimpleCallback<Object>() {
-      @Override
-      public void goBack(Object result) {
-        clearCities();
-        getCitiesViaRequestBuilder();
-      }
-    });
-
-    getDisplay().setOnUpdateCitiesClickCallback(new SimpleCallback<Object>() {
-      @Override
-      public void goBack(Object dummy) {
-        HashMap<Integer, ClientCityData> newCityList = new HashMap<Integer, ClientCityData>();
-        for (Integer i : cityList.keySet()) {
-          int gridPop = getDisplay().getCityPopulation(i);
-          ClientCityData thisCity = cityList.get(i);
-          if (thisCity.population != gridPop) {
-            cityList.get(i).population = gridPop;
-            newCityList.put(i, cityList.get(i));
+    getDisplay().setOnGetCitiesClickCallback(
+        new SimpleCallback<Object>() {
+          @Override
+          public void goBack(Object result) {
+            clearCities();
+            getCitiesViaRequestBuilder();
           }
-        }
-        String xmlToSend = citiesToXmlViaDom(newCityList);
-        sendCitiesToServerViaRequestBuilder(xmlToSend);
-        sendCitiesToServerViaProxy(xmlToSend);
-      }
+        });
 
-    });
+    getDisplay().setOnUpdateCitiesClickCallback(
+        new SimpleCallback<Object>() {
+          @Override
+          public void goBack(Object dummy) {
+            HashMap<Integer, ClientCityData> newCityList = new HashMap<Integer, ClientCityData>();
+            for (Integer i : cityList.keySet()) {
+              int gridPop = getDisplay().getCityPopulation(i);
+              ClientCityData thisCity = cityList.get(i);
+              if (thisCity.population != gridPop) {
+                cityList.get(i).population = gridPop;
+                newCityList.put(i, cityList.get(i));
+              }
+            }
 
-    getDisplay().setOnCityNameStartChangeCallback(new SimpleCallback<Object>() {
-      @Override
-      public void goBack(Object result) {
-        clearCities();
-      }
-    });
+            String xmlToSend;
+            /*
+             * Create the XMl to send via any of the two following calls (but
+             * not both!)
+             */
+            xmlToSend = citiesToXmlViaDom(newCityList);
+            xmlToSend = citiesToXmlViaString(newCityList);
+
+            /*
+             * ...and then pick one of the two following sentences to send the
+             * data to the server
+             */
+            sendCitiesToServerViaRequestBuilder(xmlToSend);
+            sendCitiesToServerViaProxy(xmlToSend);
+          }
+
+        });
+
+    getDisplay().setOnCityNameStartChangeCallback(
+        new SimpleCallback<Object>() {
+          @Override
+          public void goBack(Object result) {
+            clearCities();
+          }
+        });
   }
 
   String citiesToXmlViaDom(HashMap<Integer, ClientCityData> aList) {
@@ -119,7 +135,8 @@ public class CitiesUpdaterPresenter
       cities.appendChild(city);
     }
 
-    return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + xml.toString();
+    return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+        + xml.toString();
   }
 
   String citiesToXmlViaString(HashMap<Integer, ClientCityData> aList) {
@@ -168,30 +185,39 @@ public class CitiesUpdaterPresenter
         final Element city = (Element) cities.item(i);
         String cityName = city.getAttributeNode("name").getValue();
 
-        final Element country = (Element) city.getElementsByTagName("country")
-            .item(0);
-        String countryCode = country.getAttributeNode("code").getValue();
-        String countryName = country.getAttributeNode("name").getValue();
+        final Element country = (Element) city.getElementsByTagName(
+            "country").item(0);
+        String countryCode = country.getAttributeNode("code")
+            .getValue();
+        String countryName = country.getAttributeNode("name")
+            .getValue();
 
-        final Element state = (Element) city.getElementsByTagName("state")
-            .item(0);
+        final Element state = (Element) city.getElementsByTagName(
+            "state").item(0);
         String stateCode = state.getAttributeNode("code").getValue();
         String stateName = state.getAttributeNode("name").getValue();
 
         int population = 0;
-        Element popElem = (Element) city.getElementsByTagName("pop").item(0);
+        Element popElem = (Element) city.getElementsByTagName("pop")
+            .item(0);
         if (popElem != null) {
-          population = Integer.parseInt(popElem.getFirstChild().getNodeValue());
+          population = Integer.parseInt(popElem.getFirstChild()
+              .getNodeValue());
         }
 
-        Element coords = (Element) city.getElementsByTagName("coords").item(0);
-        Element lat = (Element) coords.getElementsByTagName("lat").item(0);
-        Element lon = (Element) coords.getElementsByTagName("lon").item(0);
-        float latitude = Float.parseFloat(lat.getFirstChild().getNodeValue());
-        float longitude = Float.parseFloat(lon.getFirstChild().getNodeValue());
+        Element coords = (Element) city.getElementsByTagName("coords")
+            .item(0);
+        Element lat = (Element) coords.getElementsByTagName("lat")
+            .item(0);
+        Element lon = (Element) coords.getElementsByTagName("lon")
+            .item(0);
+        float latitude = Float.parseFloat(lat.getFirstChild()
+            .getNodeValue());
+        float longitude = Float.parseFloat(lon.getFirstChild()
+            .getNodeValue());
 
-        getDisplay().setCityData(i + 1, cityName, countryName, stateName,
-            population);
+        getDisplay().setCityData(i + 1, cityName, countryName,
+            stateName, population);
 
         /*
          * Given the usage of cityList, we could have set latitude and longitude
@@ -208,29 +234,35 @@ public class CitiesUpdaterPresenter
      * The HostPageBaseURL looks like http://yourServer:8888/somePath and we
      * want to rebuild it into http://yourServer:80/otherPath
      */
-    final String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
-    final String realUrl = URL.encode(baseUrl + ":80/bookphp/getcities1.php");
-    final String params = URL.encode("city=" + getDisplay().getCityNameStart());
+    final String baseUrl = "http:"
+        + GWT.getHostPageBaseURL().split(":")[1];
+    final String realUrl = baseUrl + ":80";
+    final String realPath = "bookphp/getcities1.php";
+    final String params = URL.encode("city="
+        + getDisplay().getCityNameStart());
 
-    XhrProxyAsync xhrProxy = getEnvironment().getModel().getRemoteXhrProxy();
-    xhrProxy.getFromUrl(realUrl, params, new AsyncCallback<String>() {
+    XhrProxyAsync xhrProxy = getEnvironment().getModel()
+        .getRemoteXhrProxy();
+    xhrProxy.getFromUrl(realUrl, realPath, params,
+        new AsyncCallback<String>() {
 
-      @Override
-      public void onFailure(Throwable caught) {
-        getEnvironment().showAlert("failure " + caught.getMessage());
-      }
+          @Override
+          public void onFailure(Throwable caught) {
+            getEnvironment()
+                .showAlert("failure " + caught.getMessage());
+          }
 
-      @Override
-      public void onSuccess(String result) {
-        displayCities(result);
-      }
-    });
+          @Override
+          public void onSuccess(String result) {
+            displayCities(result);
+          }
+        });
   }
 
   void getCitiesViaRequestBuilder() {
     String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
-    final RequestBuilder rb = new RequestBuilder(RequestBuilder.GET, URL
-        .encode(baseUrl + ":80/bookphp/getcities1.php?city="
+    final RequestBuilder rb = new RequestBuilder(RequestBuilder.GET,
+        URL.encode(baseUrl + ":80/bookphp/getcities1.php?city="
             + getDisplay().getCityNameStart()));
 
     try {
@@ -241,7 +273,9 @@ public class CitiesUpdaterPresenter
         }
 
         @Override
-        public void onResponseReceived(Request request, Response response) {
+        public void onResponseReceived(
+            Request request,
+            Response response) {
           displayCities(response.getText());
         }
       });
@@ -255,24 +289,28 @@ public class CitiesUpdaterPresenter
      * The HostPageBaseURL looks like http://yourServer:8888/somePath and we
      * want to rebuild it into http://yourServer:80/otherPath
      */
-    final String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
+    final String baseUrl = "http:"
+        + GWT.getHostPageBaseURL().split(":")[1];
     final String realUrl = URL.encode(baseUrl);
     final String realPath = URL.encode("bookphp/setc2.php");
     final String params = URL.encode("xmldata=" + xmlToSend);
 
-    XhrProxyAsync xhrProxy = getEnvironment().getModel().getRemoteXhrProxy();
-    xhrProxy.postToUrl(realUrl, realPath, params, new AsyncCallback<String>() {
+    XhrProxyAsync xhrProxy = getEnvironment().getModel()
+        .getRemoteXhrProxy();
+    xhrProxy.postToUrl(realUrl, realPath, params,
+        new AsyncCallback<String>() {
 
-      @Override
-      public void onFailure(Throwable caught) {
-        getEnvironment().showAlert("failure " + caught.getMessage());
-      }
+          @Override
+          public void onFailure(Throwable caught) {
+            getEnvironment()
+                .showAlert("failure " + caught.getMessage());
+          }
 
-      @Override
-      public void onSuccess(String result) {
-        Window.alert(result);
-      }
-    });
+          @Override
+          public void onSuccess(String result) {
+            Window.alert(result);
+          }
+        });
 
   }
 
@@ -282,8 +320,9 @@ public class CitiesUpdaterPresenter
      * want to rebuild it into http://yourServer:80/otherPath
      */
     String baseUrl = "http:" + GWT.getHostPageBaseURL().split(":")[1];
-    final RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, URL
-        .encode(baseUrl + ":80/bookphp/setc2.php?" + "xmldata=" + xmlToSend));
+    final RequestBuilder rb = new RequestBuilder(RequestBuilder.POST,
+        URL.encode(baseUrl + ":80/bookphp/setc2.php?" + "xmldata="
+            + xmlToSend));
 
     try {
       rb.sendRequest(null, new RequestCallback() {
@@ -293,7 +332,9 @@ public class CitiesUpdaterPresenter
         }
 
         @Override
-        public void onResponseReceived(Request request, Response response) {
+        public void onResponseReceived(
+            Request request,
+            Response response) {
           Window.alert("received..." + response.getText());
         }
       });

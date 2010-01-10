@@ -15,7 +15,8 @@ public class SuggestPresenter
   public static String PLACE = "baz";
 
   public SuggestPresenter(
-      String params, SuggestDisplay suggestDisplay, Environment environment) {
+      String params, SuggestDisplay suggestDisplay,
+      Environment environment) {
 
     super(params, suggestDisplay, environment);
 
@@ -34,13 +35,19 @@ public class SuggestPresenter
          */
         String beginning = request.getQuery();
         if (beginning.length() > 2) {
-          getEnvironment().getModel().getRemoteWorldService()
-              .getCitiesStartingWith("US", "NY", request.getQuery(),
+          getEnvironment()
+              .getModel()
+              .getRemoteWorldService()
+              .getCitiesStartingWith(
+                  "US",
+                  "NY",
+                  request.getQuery(),
                   new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
                     @Override
                     public void onFailure(Throwable caught) {
                       response.setSuggestions(suggestionsList);
-                      savedCallback.onSuggestionsReady(savedRequest, response);
+                      savedCallback.onSuggestionsReady(savedRequest,
+                          response);
                     }
 
                     @Override
@@ -48,11 +55,12 @@ public class SuggestPresenter
                         LinkedHashMap<String, ClientCityData> result) {
 
                       for (final String it : result.keySet()) {
-                        suggestionsList.add(new SuggestionItem(
-                            result.get(it).cityName));
+                        suggestionsList.add(new SuggestionItem(result
+                            .get(it).cityName));
                       }
                       response.setSuggestions(suggestionsList);
-                      savedCallback.onSuggestionsReady(savedRequest, response);
+                      savedCallback.onSuggestionsReady(savedRequest,
+                          response);
                     }
                   });
         } else {

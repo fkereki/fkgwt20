@@ -10,7 +10,10 @@ public interface WorldService
     extends RemoteService {
   public String addCity(ClientCityData cd);
 
-  public Boolean cityExists(String pCountry, String pRegion, String pCity);
+  public Boolean cityExists(
+      String pCountry,
+      String pRegion,
+      String pCity);
 
   public LinkedHashMap<String, ClientCityData> getCities(
       String pCountry,

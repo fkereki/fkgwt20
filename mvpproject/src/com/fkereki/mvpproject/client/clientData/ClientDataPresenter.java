@@ -11,7 +11,8 @@ public class ClientDataPresenter
   public static String PLACE = "client";
 
   public ClientDataPresenter(
-      String params, ClientDataDisplay clientDisplay, Environment environment) {
+      String params, ClientDataDisplay clientDisplay,
+      Environment environment) {
 
     super(params, clientDisplay, environment);
 

@@ -11,7 +11,8 @@ public class CountryStatePresenter
     extends Presenter<CountryStateDisplay> {
 
   public CountryStatePresenter(
-      final String params, final CountryStateDisplay countryStateDisplay,
+      final String params,
+      final CountryStateDisplay countryStateDisplay,
       final Environment environment) {
 
     super(params, countryStateDisplay, environment);
@@ -31,22 +32,25 @@ public class CountryStatePresenter
           }
         });
 
-    getDisplay().setOnCountryChangeCallback(new SimpleCallback<Object>() {
-      @Override
-      public void goBack(Object result) {
-        getDisplay().setStateList(null);
-        if (!getDisplay().getCountry().isEmpty()) {
-          getEnvironment().getModel().getStates(getDisplay().getCountry(),
-              new SimpleCallback<LinkedHashMap<String, String>>() {
-                @Override
-                public void goBack(LinkedHashMap<String, String> result) {
-                  getDisplay().setStateList(result);
-                  ValueChangeEvent.fire(getDisplay(), null);
-                }
-              });
-        }
-      }
-    });
+    getDisplay().setOnCountryChangeCallback(
+        new SimpleCallback<Object>() {
+          @Override
+          public void goBack(Object result) {
+            getDisplay().setStateList(null);
+            if (!getDisplay().getCountry().isEmpty()) {
+              getEnvironment().getModel().getStates(
+                  getDisplay().getCountry(),
+                  new SimpleCallback<LinkedHashMap<String, String>>() {
+                    @Override
+                    public void goBack(
+                        LinkedHashMap<String, String> result) {
+                      getDisplay().setStateList(result);
+                      ValueChangeEvent.fire(getDisplay(), null);
+                    }
+                  });
+            }
+          }
+        });
 
     getDisplay().setOnStateChangeCallback(new SimpleCallback<Object>() {
       @Override

@@ -10,7 +10,8 @@ abstract public class Presenter<D> {
   public Presenter() {
   }
 
-  public Presenter(String someParams, D aDisplay, Environment anEnvironment) {
+  public Presenter(
+      String someParams, D aDisplay, Environment anEnvironment) {
     super();
     params = someParams;
     display = aDisplay;

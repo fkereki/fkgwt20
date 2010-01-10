@@ -18,7 +18,8 @@ public class CitiesBrowserPresenter
   CountryStatePresenter csp;
 
   public CitiesBrowserPresenter(
-      final String params, final CitiesBrowserDisplay citiesBrowserDisplay,
+      final String params,
+      final CitiesBrowserDisplay citiesBrowserDisplay,
       final Environment environment) {
 
     super(params, citiesBrowserDisplay, environment);
@@ -38,15 +39,16 @@ public class CitiesBrowserPresenter
       }
     });
 
-    getDisplay().setOnPreviousClickCallback(new SimpleCallback<Object>() {
-      @Override
-      public void goBack(Object result) {
-        if (checkCountryAndState()) {
-          currentStart -= CitiesBrowserView.CITIES_PAGE_SIZE;
-          getAndDisplayCities();
-        }
-      }
-    });
+    getDisplay().setOnPreviousClickCallback(
+        new SimpleCallback<Object>() {
+          @Override
+          public void goBack(Object result) {
+            if (checkCountryAndState()) {
+              currentStart -= CitiesBrowserView.CITIES_PAGE_SIZE;
+              getAndDisplayCities();
+            }
+          }
+        });
 
     getDisplay().setOnNextClickCallback(new SimpleCallback<Object>() {
       @Override
@@ -58,12 +60,13 @@ public class CitiesBrowserPresenter
       }
     });
 
-    getDisplay().setOnCountryStateChangeCallback(new SimpleCallback<Object>() {
-      @Override
-      public void goBack(Object result) {
-        clearCities();
-      }
-    });
+    getDisplay().setOnCountryStateChangeCallback(
+        new SimpleCallback<Object>() {
+          @Override
+          public void goBack(Object result) {
+            clearCities();
+          }
+        });
   }
 
   boolean checkCountryAndState() {
@@ -84,15 +87,17 @@ public class CitiesBrowserPresenter
    *          Hash map ordered alphabetically by city name, with up to
    *          CITIES_PAGE_SIZE cities.
    */
-  void displayCities(final LinkedHashMap<String, ClientCityData> pCitiesList) {
+  void displayCities(
+      final LinkedHashMap<String, ClientCityData> pCitiesList) {
     final NumberFormat nf = NumberFormat.getDecimalFormat();
 
     int i = 0;
     for (final String it : pCitiesList.keySet()) {
       i++;
       final ClientCityData cd = pCitiesList.get(it);
-      getDisplay().setCityData(i, cd.cityName, nf.format(cd.population),
-          nf.format(cd.latitude), nf.format(cd.longitude));
+      getDisplay().setCityData(i, cd.cityName,
+          nf.format(cd.population), nf.format(cd.latitude),
+          nf.format(cd.longitude));
     }
 
     displayEmptyCities(i, "");
@@ -125,7 +130,8 @@ public class CitiesBrowserPresenter
         CitiesBrowserView.CITIES_PAGE_SIZE,
         new SimpleCallback<LinkedHashMap<String, ClientCityData>>() {
           @Override
-          public void goBack(LinkedHashMap<String, ClientCityData> result) {
+          public void goBack(
+              LinkedHashMap<String, ClientCityData> result) {
             displayCities(result);
           }
         });

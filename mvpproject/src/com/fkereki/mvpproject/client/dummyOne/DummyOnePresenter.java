@@ -9,7 +9,8 @@ public class DummyOnePresenter
   public static String PLACE = "foo";
 
   public DummyOnePresenter(
-      String params, DummyOneDisplay dummyOneDisplay, Environment environment) {
+      String params, DummyOneDisplay dummyOneDisplay,
+      Environment environment) {
 
     super(params, dummyOneDisplay, environment);
     dummyOneDisplay.setPepeValue(getKvm().get("pepe"));

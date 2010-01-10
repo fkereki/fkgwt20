@@ -18,7 +18,9 @@ public class Mvpproject
   Environment environment;
 
   public void onModuleLoad() {
-    DOM.removeChild(RootPanel.getBodyElement(), DOM.getElementById("loading"));
+
+    DOM.removeChild(RootPanel.getBodyElement(), DOM
+        .getElementById("loading"));
 
     environment = new Environment(new Model(), History.getToken());
 
