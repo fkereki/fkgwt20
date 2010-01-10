@@ -40,9 +40,9 @@ public class NewsReaderPresenter
 
   void getNewsViaJsonp() {
     final String newsUrl = "http://search.yahooapis.com/"
-        + "NewsSearchService/V1/newsSearch?" + "appid=YahooDemo&query="
+        + "NewsSearchService/V1/newsSearch?appid=YahooDemo&query="
         + URL.encode(getDisplay().getTextToSearchFor())
-        + "&results=5&language=en" + "&output=json";
+        + "&results=5&language=en&output=json";
 
     final JsonpRequestBuilder jsonp = new JsonpRequestBuilder();
     jsonp.requestObject(newsUrl, new AsyncCallback<NewsFeed>() {
