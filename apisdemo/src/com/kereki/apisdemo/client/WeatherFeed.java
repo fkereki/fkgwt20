@@ -9,8 +9,6 @@ public class WeatherFeed
   }
 
   public final native String getTitle() /*-{
-    alert("33");
-    //return this.feed.title;
-    return "titletitletitle";
+    return this.feed.title;
   }-*/;
 }
