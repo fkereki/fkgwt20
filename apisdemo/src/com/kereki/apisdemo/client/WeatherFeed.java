@@ -20,23 +20,19 @@ public class WeatherFeed
   protected WeatherFeed() {
   }
 
-  public final native String getFeedTitle() /*-{
-    return this.feed.title;
+  public final native String getFeedDescription() /*-{
+    return this.feed.description;
   }-*/;
 
-  public final native String getItemContent(int i) /*-{
-    return this.feed.entries[i].content;
+  public final native String getItemContent() /*-{
+    return this.feed.entries[0].content;
   }-*/;
 
-  public final native String getItemLink(final int i) /*-{
-    return this.feed.entries[i].link;
+  public final native String getItemLink() /*-{
+    return this.feed.entries[0].link;
   }-*/;
 
-  public final native String getItemTitle(int i) /*-{
-    return this.feed.entries[i].title;
-  }-*/;
-
-  public final native int getNumberOfEntries() /*-{
-    return this.feed.entries.length;
+  public final native String getItemTitle() /*-{
+    return this.feed.entries[0].title;
   }-*/;
 }
