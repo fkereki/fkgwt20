@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/fkereki/Downloads/gwt20/gwt-ajaxloader-1.0.0/gwt-ajaxloader.jar"/>
+	<classpathentry kind="lib" path="/home/fkereki/Downloads/gwt20/gwt-visualization-1.0.2/gwt-visualization.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
