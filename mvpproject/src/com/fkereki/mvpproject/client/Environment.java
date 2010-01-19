@@ -14,6 +14,8 @@ import com.fkereki.mvpproject.client.dummyOne.DummyOnePresenter;
 import com.fkereki.mvpproject.client.dummyOne.DummyOneView;
 import com.fkereki.mvpproject.client.login.LoginFormPresenter;
 import com.fkereki.mvpproject.client.login.LoginFormView;
+import com.fkereki.mvpproject.client.map1.MapPresenter;
+import com.fkereki.mvpproject.client.map1.MapView;
 import com.fkereki.mvpproject.client.newsReader.NewsReaderPresenter;
 import com.fkereki.mvpproject.client.newsReader.NewsReaderView;
 import com.fkereki.mvpproject.client.suggest.SuggestPresenter;
@@ -56,12 +58,12 @@ public class Environment {
     }
   };
 
-  public Environment(Model aModel, String aToken) {
+  public Environment(final Model aModel, final String aToken) {
     model = aModel;
     startingToken = aToken;
   }
 
-  private void createMenu(MenuBar mb) {
+  private void createMenu(final MenuBar mb) {
     // TODO Add user type parameter, for specific menu
     // generation
 
@@ -72,20 +74,23 @@ public class Environment {
         .addItem("Clients", new HistoryCommand(
             ClientDataPresenter.PLACE));
 
-    MenuBar mb2 = new MenuBar(true);
+    final MenuBar mb2 = new MenuBar(true);
     mb2.addItem("subitem1", sorry);
     mb2.addItem("subitem2", sorry);
     mb2.addItem("subitem3", sorry);
     mb2.addItem("subitem4", sorry);
     mb.addItem("submenu", mb2);
 
-    MenuBar mb3 = new MenuBar(true);
+    final MenuBar mb3 = new MenuBar(true);
     mb3.addItem("Browsing", new HistoryCommand(
         CitiesBrowserPresenter.PLACE));
     mb3.addItem("Creating", new HistoryCommand(
         CityCreatorPresenter.PLACE));
     mb3.addItem("Updating", new HistoryCommand(
         CitiesUpdaterPresenter.PLACE));
+    mb3.addItem("Interactive Map", new HistoryCommand(
+        MapPresenter.PLACE));
+
     mb.addItem("Cities", mb3);
 
     mb.addItem("News", new HistoryCommand(NewsReaderPresenter.PLACE));
@@ -107,7 +112,7 @@ public class Environment {
      * http://www.w3.org/TR/hash-in-uri/.
      */
     String args = "";
-    int question = token.indexOf("?");
+    final int question = token.indexOf("?");
     if (question != -1) {
       args = token.substring(question + 1);
       token = token.substring(0, question);
@@ -116,10 +121,13 @@ public class Environment {
     /*
      * If no panel is given, use the standard runPanel, and add the token to
      * History.
+     * 
+     * Be careful not to forget the "false" parameter in newItem(...), or
+     * programs will be called twice!
      */
     if (panel == null) {
       panel = runPanel;
-      History.newItem(token);
+      History.newItem(token, false);
     }
     panel.clear();
 
@@ -151,6 +159,9 @@ public class Environment {
     } else if (token.equals(CitiesUpdaterPresenter.PLACE)) {
       panel.add(new CitiesUpdaterPresenter(args,
           new CitiesUpdaterView(), this).getDisplay().asWidget());
+    } else if (token.equals(MapPresenter.PLACE)) {
+      panel.add(new MapPresenter(args, new MapView(), this)
+          .getDisplay().asWidget());
     } else if (token.equals(NewsReaderPresenter.PLACE)) {
       panel.add(new NewsReaderPresenter(args, new NewsReaderView(),
           this).getDisplay().asWidget());
@@ -159,17 +170,17 @@ public class Environment {
     }
   }
 
-  public void showAlert(String alertText) {
+  public void showAlert(final String alertText) {
     Window.alert(alertText);
   }
 
-  private void showLogin(Panel panel) {
+  private void showLogin(final Panel panel) {
     currentUser = "";
 
-    LoginFormPresenter loginForm = new LoginFormPresenter("",
+    final LoginFormPresenter loginForm = new LoginFormPresenter("",
         new LoginFormView(), this, new SimpleCallback<String>() {
           @Override
-          public void goBack(String result) {
+          public void goBack(final String result) {
             currentUser = result;
             showMainMenu();
           }
