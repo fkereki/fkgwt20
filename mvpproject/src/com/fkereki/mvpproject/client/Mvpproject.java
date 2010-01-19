@@ -12,13 +12,12 @@ public class Mvpproject
     implements EntryPoint, ValueChangeHandler<String> {
 
   public static native String getUserAgent() /*-{
-                                             return navigator.userAgent.toLowerCase();
-                                             }-*/;
+    return navigator.userAgent.toLowerCase();
+  }-*/;
 
   Environment environment;
 
   public void onModuleLoad() {
-
     DOM.removeChild(RootPanel.getBodyElement(), DOM
         .getElementById("loading"));
 
@@ -32,7 +31,7 @@ public class Mvpproject
   }
 
   @Override
-  public void onValueChange(ValueChangeEvent<String> event) {
+  public void onValueChange(final ValueChangeEvent<String> event) {
     environment.launch(event.getValue());
   }
 }

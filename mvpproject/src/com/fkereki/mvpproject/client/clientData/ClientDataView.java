@@ -67,7 +67,7 @@ public class ClientDataView
     clientSearchButton.addClickHandler(new ClickHandler() {
 
       @Override
-      public void onClick(ClickEvent event) {
+      public void onClick(final ClickEvent event) {
         searchClickCallback.goBack(null);
       }
     });
@@ -119,48 +119,48 @@ public class ClientDataView
   }
 
   @Override
-  public void setAddress(String s) {
+  public void setAddress(final String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setCity(String s) {
+  public void setCity(final String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setClient(String s) {
+  public void setClient(final String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setName(String s) {
+  public void setName(final String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setSalute(String s) {
+  public void setSalute(final String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setSearchClickCallback(SimpleCallback<Object> scb) {
+  public void setSearchClickCallback(final SimpleCallback<Object> scb) {
     searchClickCallback = scb;
   }
 
   @Override
-  public void setState(String s) {
+  public void setState(final String s) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setZip(String s) {
+  public void setZip(final String s) {
     // TODO Auto-generated method stub
 
   }
