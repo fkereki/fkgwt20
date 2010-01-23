@@ -1,29 +1,42 @@
 package com.kereki.security.client;
 
+import com.google.gwt.user.client.Random;
+
 public class rc4java {
-  final public static native String byteStringToHexString(String s)
-  /*-{
-    var i= 0;
-    var r= '';
-    for (i=0; i<s.length; i++) {
-    r+= byteToHexChars(s.charCodeAt(i));
+  final public static String byteStringToHexString(final String s) {
+    String r = "";
+    for (int i = 0; i < s.length(); i++) {
+      r += byteToHexChars(s.charAt(i));
     }
     return r;
+  }
 
-    function byteToHexChars(n) {
-    return ("0"+n.toString(16)).substr(-2);
-    }
-  }-*/;
+  final public static String byteToHexChars(final int i) {
+    final String s = "0" + Integer.toHexString(i);
+    return s.substring(s.length() - 2);
+  }
 
-  final public static native String hexStringToByteString(String s)
-  /*-{
-    var i= 0;
-    var r= '';
-    for (i=0; i<s.length; i+=2) {
-         r+= String.fromCharCode(parseInt(s.substr(i,2), 16));
+  final public static String hexStringToByteString(final String s) {
+    String r = "";
+    for (int i = 0; i < s.length(); i += 2) {
+      r += (char) Integer.parseInt(s.substring(i, i + 2), 16);
     }
     return r;
-  }-*/;
+  }
+
+  /**
+   * Generates a string of 32 letters (A to Z). For server side code, you might
+   * also consider using RandomStringUtils.randomAlphabetic(32)
+   * 
+   * @return
+   */
+  final public static String randomCharString() {
+    String r = "";
+    for (int i = 0; i < 32; i++) {
+      r += (char) ('A' + Random.nextInt(26));
+    }
+    return r;
+  }
 
   final public static String rc4CodeDecode(
       final String key,

@@ -15,6 +15,9 @@ public class Security
       .create(GreetingService.class);
 
   public void onModuleLoad() {
+    Window.alert(rc4jsni.randomCharString());
+    Window.alert(rc4java.randomCharString());
+
     final String key = rc4jsni
         .hexStringToByteString("0123456789abcdef");
     final String input = "FEDERICO KEREKI";
@@ -24,18 +27,31 @@ public class Security
         + rc4jsni.byteStringToHexString(output) + "\ndecoded="
         + decoded);
 
-    final String key1 = rc4jsni
-        .hexStringToByteString("0123456789abcdef");
-    final String input1 = rc4jsni
-        .hexStringToByteString("0000000000000000");
-    final String output1 = rc4java.rc4CodeDecode(key1, input1);
-    Window.alert("input=0000000000000000"
-        + "\ncoded="
-        + rc4jsni.byteStringToHexString(output1)
-        + "\nexpected=7494c2e7104b0879"
-        + "\ndecoded="
-        + rc4jsni.byteStringToHexString(rc4java.rc4CodeDecode(key1,
-            output1)));
+    // final String key1 = rc4jsni
+    // .hexStringToByteString("0123456789abcdef");
+    // final String input1 = rc4java
+    // .hexStringToByteString("0000000000000000");
+    // final String output1 = rc4jsni.rc4CodeDecode(key1, input1);
+    // Window.alert("input=0000000000000000"
+    // + "\ncoded="
+    // + rc4java.byteStringToHexString(output1)
+    // + "\nexpected=7494c2e7104b0879"
+    // + "\ndecoded="
+    // + rc4jsni.byteStringToHexString(rc4java.rc4CodeDecode(key1,
+    // output1)));
+
+    // final String key1b = rc4java
+    // .hexStringToByteString("0123456789abcdef");
+    // final String input1b = rc4jsni
+    // .hexStringToByteString("0000000000000000");
+    // final String output1b = rc4java.rc4CodeDecode(key1b, input1b);
+    // Window.alert("input=0000000000000000"
+    // + "\ncoded="
+    // + rc4jsni.byteStringToHexString(output1b)
+    // + "\nexpected=7494c2e7104b0879"
+    // + "\ndecoded="
+    // + rc4java.byteStringToHexString(rc4java.rc4CodeDecode(key1b,
+    // output1b)));
 
     final AsyncCallback<Void> nada = new AsyncCallback<Void>() {
       @Override
@@ -80,7 +96,7 @@ public class Security
     gs.calcMD5("message digest", algo);
     // = f96b697d7cb7938d525a2f31aaf161d0
 
-    gs.calcMD5("abcdefghijklmnopqrstuvwxyz", algo);
+    // gs.calcMD5("abcdefghijklmnopqrstuvwxyz", algo);
     // = c3fcd3d76192e4007dfb496cca67e13b
 
     gs.storePair("007", "James Bond", nada);
