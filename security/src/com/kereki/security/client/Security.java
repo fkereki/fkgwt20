@@ -83,9 +83,9 @@ public class Security
     gs.calcMD5("abcdefghijklmnopqrstuvwxyz", algo);
     // = c3fcd3d76192e4007dfb496cca67e13b
 
-    // gs.storePair("007", "James Bond", nada);
-    // gs.storePair("1809", "Lincoln", nada);
-    // gs.storePair("7", "Wonders of the Ancient World", nada);
+    gs.storePair("007", "James Bond", nada);
+    gs.storePair("1809", "Lincoln", nada);
+    gs.storePair("7", "Wonders of the Ancient World", nada);
 
     gs.getValueForKey("7", algo);
 
