@@ -70,9 +70,8 @@ public class RC4Java {
   /**
    * Assuming everything was set up earlier, encode plaintext. This can be done
    * in stream fashion; sequential calls to this routine will be the same as a
-   * single call with a longer parameter. In other words,
-   * codeDecode("SOMETHING ")+codeDecode("ELSE") equals
-   * codeDecode("SOMETHING ELSE")
+   * single call with a longer parameter. In other words, as Benny Hill had it,
+   * codeDecode("THE")+codeDecode("RAPIST") equals codeDecode("THERAPIST")
    * 
    * @param plaintext
    *          Text to encode
@@ -89,6 +88,7 @@ public class RC4Java {
       x = sbox[i];
       sbox[i] = sbox[j];
       sbox[j] = x;
+
       r += (char) (plaintext.charAt(k) ^ sbox[sbox[i] + sbox[j] & 0xff] & 0xff);
     }
     return r;
