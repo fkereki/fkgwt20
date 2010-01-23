@@ -15,30 +15,35 @@ public class Security
       .create(GreetingService.class);
 
   public void onModuleLoad() {
-    Window.alert(rc4jsni.randomCharString());
-    Window.alert(rc4java.randomCharString());
+    Window.alert(RC4Java.randomCharString());
 
-    final String key = rc4jsni
+    final String key = RC4Java
         .hexStringToByteString("0123456789abcdef");
     final String input = "FEDERICO KEREKI";
-    final String output = rc4java.rc4CodeDecode(key, input);
-    final String decoded = rc4jsni.rc4CodeDecode(key, output);
+
+    final RC4Java rc4 = new RC4Java();
+
+    rc4.setUp(key);
+    final String outputx = rc4.codeDecode("FEDERICO");
+    final String outputy = rc4.codeDecode(" ");
+    final String outputz = rc4.codeDecode("KEREKI");
+    final String output = outputx + outputy + outputz;
+    final String decoded = rc4.codeDecode(key, output);
     Window.alert("input=" + input + "\ncoded="
-        + rc4jsni.byteStringToHexString(output) + "\ndecoded="
+        + RC4Java.byteStringToHexString(output) + "\ndecoded="
         + decoded);
 
-    // final String key1 = rc4jsni
-    // .hexStringToByteString("0123456789abcdef");
-    // final String input1 = rc4java
-    // .hexStringToByteString("0000000000000000");
-    // final String output1 = rc4jsni.rc4CodeDecode(key1, input1);
-    // Window.alert("input=0000000000000000"
-    // + "\ncoded="
-    // + rc4java.byteStringToHexString(output1)
-    // + "\nexpected=7494c2e7104b0879"
-    // + "\ndecoded="
-    // + rc4jsni.byteStringToHexString(rc4java.rc4CodeDecode(key1,
-    // output1)));
+    final String key1 = RC4Java
+        .hexStringToByteString("0123456789abcdef");
+    final String input1 = RC4Java
+        .hexStringToByteString("0000000000000000");
+
+    rc4.setUp(key1);
+    final String output1 = rc4.codeDecode(input1);
+    Window.alert("input=0000000000000000" + "\ncoded="
+        + RC4Java.byteStringToHexString(output1)
+        + "\nexpected=7494c2e7104b0879" + "\ndecoded="
+        + RC4Java.byteStringToHexString(rc4.codeDecode(key1, output1)));
 
     // final String key1b = rc4java
     // .hexStringToByteString("0123456789abcdef");
