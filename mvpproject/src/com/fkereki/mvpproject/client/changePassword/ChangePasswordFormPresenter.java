@@ -5,7 +5,6 @@ import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.Security;
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.rpc.LoginServiceAsync;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ChangePasswordFormPresenter
@@ -76,10 +75,6 @@ public class ChangePasswordFormPresenter
                 + visibleEncryptedPass1
                 + environment.getCurrentSessionKey());
 
-            Window.alert("user=" + currentUser + " nonce=" + nonce
-                + " new visible encrypted pass="
-                + visibleEncryptedPass1 + " hash=" + hashPassword);
-
             loginService.changePassword(currentUser,
                 visibleEncryptedPass1, nonce, hashPassword,
                 new AsyncCallback<Void>() {
@@ -90,11 +85,17 @@ public class ChangePasswordFormPresenter
 
                     ChangePasswordFormPresenter.this.getDisplay()
                         .enableChangePasswordButton(true);
-                    Window.alert("not changed!");
                   }
 
                   public void onSuccess(final Void result) {
-                    Window.alert("GOT REALLY changed!");
+                    ChangePasswordFormPresenter.this.getEnvironment()
+                        .showAlert("Password was changed");
+
+                    ChangePasswordFormPresenter.this.getEnvironment()
+                        .setCurrentUserPassword(pass1);
+
+                    ChangePasswordFormPresenter.this.getDisplay()
+                        .enableChangePasswordButton(true);
                   }
                 });
           }

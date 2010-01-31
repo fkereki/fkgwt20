@@ -1,8 +1,10 @@
 package com.fkereki.mvpproject.server;
 
+import javax.security.auth.login.FailedLoginException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.fkereki.mvpproject.client.exceptions.PasswordNotChangedException;
 import com.fkereki.mvpproject.client.rpc.LoginService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -18,9 +20,8 @@ public class LoginServiceImpl
       final String name,
       final String encryptedNewPassword,
       final String nonce,
-      final String parametersHash) {
-
-    final String unencryptedPassword = "";
+      final String parametersHash)
+      throws PasswordNotChangedException {
 
     // get the session key for the given user name
     // (alternative: get it from the DB)
@@ -39,16 +40,20 @@ public class LoginServiceImpl
         + encryptedNewPassword + sessionKey);
 
     if (calculatedHash.equals(parametersHash)) {
-      System.out.print("\n\nMATCH!! " + calculatedHash + "\n\n");
+
+      // if so, decrypt encryptedNewPassword with nonce+password+sessionKey
+      // store the new password at the DB
+      final String encryptedPass = Security
+          .hexStringToByteString(encryptedNewPassword);
+      final Security sc = new Security();
+      final String unencryptedPassword = sc.codeDecode(nonce + password
+          + sessionKey, encryptedPass);
+
+      // save password in DB
     } else {
-      System.out.print("\n\nPROBLEM... \n\n");
+      // raise Exception
+      throw new PasswordNotChangedException();
     }
-
-    // if so, decrypt encryptedNewPassword with nonce+password+sessionKey
-    // store the new password at the DB
-
-    System.out.print("\n\nPassword changed to ***"
-        + unencryptedPassword + "***\n\n");
   }
 
   @Override
@@ -56,16 +61,11 @@ public class LoginServiceImpl
       final String name,
       final String nonce,
       final String passHash)
-      throws Exception {
+      throws FailedLoginException {
 
     final String password = "kereki"; // get it from DB!
 
-    System.out.print("\nRECEIVED " + name + " " + nonce + " "
-        + passHash + "\n\n");
-
     final String calculatedHash = Security.md5(password + nonce);
-
-    System.out.print("\nCALCULATED " + calculatedHash);
 
     if (passHash.equals(calculatedHash)) {
       final String sessionKey = Security.randomCharString()
@@ -84,7 +84,7 @@ public class LoginServiceImpl
       final String hexCoded = Security.byteStringToHexString(coded);
       return hexCoded;
     } else {
-      throw new Exception("not valid login attempt");
+      throw new FailedLoginException();
     }
   }
 

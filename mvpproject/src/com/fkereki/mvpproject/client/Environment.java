@@ -191,21 +191,33 @@ public class Environment {
     }
   }
 
+  public void setCurrentSessionKey(final String s) {
+    currentKey = s;
+  }
+
+  public void setCurrentUserName(final String s) {
+    currentUser = s;
+  }
+
+  public void setCurrentUserPassword(final String s) {
+    currentPassword = s;
+  }
+
   public void showAlert(final String alertText) {
     Window.alert(alertText);
   }
 
   private void showLogin(final Panel panel) {
-    currentUser = "";
+    setCurrentUserName("");
 
     final LoginFormPresenter loginForm = new LoginFormPresenter("",
         new LoginFormView(), this,
         new SimpleCallback<DtoUserPassKey>() {
           @Override
           public void goBack(final DtoUserPassKey result) {
-            currentUser = result.user;
-            currentPassword = result.pass;
-            currentKey = result.key;
+            setCurrentUserName(result.user);
+            setCurrentUserPassword(result.pass);
+            setCurrentSessionKey(result.key);
 
             Window.alert("user=" + result.user + " pass=" + result.pass
                 + " key=" + result.key);
