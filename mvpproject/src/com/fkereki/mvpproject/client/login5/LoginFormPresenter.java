@@ -1,5 +1,6 @@
 package com.fkereki.mvpproject.client.login5;
 
+import com.fkereki.mvpproject.client.DtoUserPassKey;
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.Security;
@@ -13,16 +14,20 @@ public class LoginFormPresenter
 
   LoginServiceAsync loginService;
 
-  SimpleCallback<String> loginSuccessCallback;
+  SimpleCallback<DtoUserPassKey> loginSuccessCallback;
 
   public LoginFormPresenter(
       final String params, final LoginFormDisplay loginDisplay,
       final Environment environment,
-      final SimpleCallback<String> callback) {
+      final SimpleCallback<DtoUserPassKey> callback) {
 
     super(params, loginDisplay, environment);
     loginSuccessCallback = callback;
     loginService = getEnvironment().getModel().getRemoteLoginService();
+
+    // final TextBox xx = new TextBox();
+    // xx.setEnabled(enabled);
+    // xx.setR
 
     final SimpleCallback<Object> commonBlurHandler = new SimpleCallback<Object>() {
       @Override
@@ -53,8 +58,7 @@ public class LoginFormPresenter
         final String pass = LoginFormPresenter.this.getDisplay()
             .getPassword();
         final String nonce = Security.randomCharString();
-        final String hashPassword = LoginFormPresenter.this.md5(pass
-            + nonce);
+        final String hashPassword = Security.md5(pass + nonce);
 
         loginService.getSessionKey(name, nonce, hashPassword,
             new AsyncCallback<String>() {
@@ -70,24 +74,13 @@ public class LoginFormPresenter
               public void onSuccess(final String result) {
                 final Security secure = new Security();
                 final String sessionKey = secure.codeDecode(pass
-                    + nonce, result);
+                    + nonce, Security.hexStringToByteString(result));
 
-                loginSuccessCallback.goBack(sessionKey);
+                loginSuccessCallback.goBack(new DtoUserPassKey(name,
+                    pass, sessionKey));
               }
             });
       }
     });
   }
-
-  /**
-   * Calculate the MD5 hash value for a given string.
-   * 
-   * @param pText
-   *          String for hash calculation
-   * @return The calculated hash
-   */
-  private native String md5(String pText)
-  /*-{
-    return $wnd.hex_md5(pText);
-  }-*/;
 }

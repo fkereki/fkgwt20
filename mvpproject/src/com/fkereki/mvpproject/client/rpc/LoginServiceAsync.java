@@ -5,6 +5,14 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("login")
 public interface LoginServiceAsync {
+
+  void changePassword(
+      String name,
+      String encryptedNewPassword,
+      String nonce,
+      String parametersHash,
+      AsyncCallback<Void> callback);
+
   void getSessionKey(
       String name,
       String nonce,

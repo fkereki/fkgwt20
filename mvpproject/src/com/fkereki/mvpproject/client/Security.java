@@ -3,6 +3,7 @@ package com.fkereki.mvpproject.client;
 import com.google.gwt.user.client.Random;
 
 public class Security {
+
   /**
    * Convert any String into an Hex equivalent; for example, "AtoZ" becomes
    * "41746f5a". This is intended to produce a legible, pure ASCII, equivalent
@@ -48,6 +49,18 @@ public class Security {
     }
     return r;
   }
+
+  /**
+   * Calculate the MD5 hash value for a given string.
+   * 
+   * @param pText
+   *          String for hash calculation
+   * @return The calculated hash
+   */
+  public static native String md5(String pText)
+  /*-{
+    return $wnd.hex_md5(pText);
+  }-*/;
 
   /**
    * Generates a string of 32 letters (A to Z) in a way similar to

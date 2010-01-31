@@ -1,5 +1,7 @@
 package com.fkereki.mvpproject.client;
 
+import com.fkereki.mvpproject.client.changePassword.ChangePasswordFormPresenter;
+import com.fkereki.mvpproject.client.changePassword.ChangePasswordFormView;
 import com.fkereki.mvpproject.client.citiesBrowser2.CitiesBrowserPresenter;
 import com.fkereki.mvpproject.client.citiesBrowser2.CitiesBrowserView;
 import com.fkereki.mvpproject.client.citiesUpdater.CitiesUpdaterPresenter;
@@ -50,6 +52,8 @@ public class Environment {
   String startingToken;
 
   String currentUser;
+  String currentKey;
+  String currentPassword;
 
   Command sorry = new Command() {
     @Override
@@ -95,6 +99,20 @@ public class Environment {
 
     mb.addItem("News", new HistoryCommand(NewsReaderPresenter.PLACE));
     mb.addItem("login", new HistoryCommand(LoginFormPresenter.PLACE));
+    mb.addItem("Change Password", new HistoryCommand(
+        ChangePasswordFormPresenter.PLACE));
+  }
+
+  public String getCurrentSessionKey() {
+    return currentKey;
+  }
+
+  public String getCurrentUserName() {
+    return currentUser;
+  }
+
+  public String getCurrentUserPassword() {
+    return currentPassword;
   }
 
   public Model getModel() {
@@ -165,6 +183,9 @@ public class Environment {
     } else if (token.equals(NewsReaderPresenter.PLACE)) {
       panel.add(new NewsReaderPresenter(args, new NewsReaderView(),
           this).getDisplay().asWidget());
+    } else if (token.equals(ChangePasswordFormPresenter.PLACE)) {
+      panel.add(new ChangePasswordFormPresenter(args,
+          new ChangePasswordFormView(), this).getDisplay().asWidget());
     } else {
       Window.alert("Unrecognized token=" + token);
     }
@@ -178,10 +199,17 @@ public class Environment {
     currentUser = "";
 
     final LoginFormPresenter loginForm = new LoginFormPresenter("",
-        new LoginFormView(), this, new SimpleCallback<String>() {
+        new LoginFormView(), this,
+        new SimpleCallback<DtoUserPassKey>() {
           @Override
-          public void goBack(final String result) {
-            currentUser = result;
+          public void goBack(final DtoUserPassKey result) {
+            currentUser = result.user;
+            currentPassword = result.pass;
+            currentKey = result.key;
+
+            Window.alert("user=" + result.user + " pass=" + result.pass
+                + " key=" + result.key);
+
             showMainMenu();
           }
         });
