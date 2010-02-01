@@ -12,6 +12,7 @@ import com.fkereki.mvpproject.client.clientData.ClientDataPresenter;
 import com.fkereki.mvpproject.client.clientData.ClientDataView;
 import com.fkereki.mvpproject.client.clientSearch.ClientSearchPresenter;
 import com.fkereki.mvpproject.client.clientSearch.ClientSearchView;
+import com.fkereki.mvpproject.client.dtos.UserPassKeyDto;
 import com.fkereki.mvpproject.client.dummyOne.DummyOnePresenter;
 import com.fkereki.mvpproject.client.dummyOne.DummyOneView;
 import com.fkereki.mvpproject.client.login5.LoginFormPresenter;
@@ -98,9 +99,13 @@ public class Environment {
     mb.addItem("Cities", mb3);
 
     mb.addItem("News", new HistoryCommand(NewsReaderPresenter.PLACE));
-    mb.addItem("login", new HistoryCommand(LoginFormPresenter.PLACE));
-    mb.addItem("Change Password", new HistoryCommand(
+
+    final MenuBar mbLogin = new MenuBar(true);
+    mbLogin.addItem("Change Password", new HistoryCommand(
         ChangePasswordFormPresenter.PLACE));
+    mbLogin.addItem("Login again", new HistoryCommand(
+        LoginFormPresenter.PLACE));
+    mb.addItem("Login", mbLogin);
   }
 
   public String getCurrentSessionKey() {
@@ -212,16 +217,12 @@ public class Environment {
 
     final LoginFormPresenter loginForm = new LoginFormPresenter("",
         new LoginFormView(), this,
-        new SimpleCallback<DtoUserPassKey>() {
+        new SimpleCallback<UserPassKeyDto>() {
           @Override
-          public void goBack(final DtoUserPassKey result) {
+          public void goBack(final UserPassKeyDto result) {
             setCurrentUserName(result.user);
             setCurrentUserPassword(result.pass);
             setCurrentSessionKey(result.key);
-
-            Window.alert("user=" + result.user + " pass=" + result.pass
-                + " key=" + result.key);
-
             showMainMenu();
           }
         });

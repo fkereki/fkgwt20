@@ -1,5 +1,7 @@
 package com.fkereki.mvpproject.client.rpc;
 
+import com.fkereki.mvpproject.client.dtos.SessionKeyServiceReturnDto;
+import com.fkereki.mvpproject.client.exceptions.FailedLoginException;
 import com.fkereki.mvpproject.client.exceptions.PasswordNotChangedException;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -14,8 +16,11 @@ public interface LoginService
       String parametersHash)
       throws PasswordNotChangedException;
 
-  String getSessionKey(String name, String nonce, String passHash)
-      throws Exception;
+  SessionKeyServiceReturnDto getSessionKey(
+      String name,
+      String nonce,
+      String passHash)
+      throws FailedLoginException;
 
   String getSomething(String name, String pass);
 }

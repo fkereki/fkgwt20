@@ -1,5 +1,6 @@
 package com.fkereki.mvpproject.client.rpc;
 
+import com.fkereki.mvpproject.client.dtos.SessionKeyServiceReturnDto;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -17,7 +18,7 @@ public interface LoginServiceAsync {
       String name,
       String nonce,
       String passHash,
-      AsyncCallback<String> callback);
+      AsyncCallback<SessionKeyServiceReturnDto> callback);
 
   void getSomething(
       String name,

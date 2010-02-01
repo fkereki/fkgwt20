@@ -1,10 +1,11 @@
 package com.fkereki.mvpproject.client.login5;
 
-import com.fkereki.mvpproject.client.DtoUserPassKey;
 import com.fkereki.mvpproject.client.Environment;
 import com.fkereki.mvpproject.client.Presenter;
 import com.fkereki.mvpproject.client.Security;
 import com.fkereki.mvpproject.client.SimpleCallback;
+import com.fkereki.mvpproject.client.dtos.SessionKeyServiceReturnDto;
+import com.fkereki.mvpproject.client.dtos.UserPassKeyDto;
 import com.fkereki.mvpproject.client.rpc.LoginServiceAsync;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -14,20 +15,16 @@ public class LoginFormPresenter
 
   LoginServiceAsync loginService;
 
-  SimpleCallback<DtoUserPassKey> loginSuccessCallback;
+  SimpleCallback<UserPassKeyDto> loginSuccessCallback;
 
   public LoginFormPresenter(
       final String params, final LoginFormDisplay loginDisplay,
       final Environment environment,
-      final SimpleCallback<DtoUserPassKey> callback) {
+      final SimpleCallback<UserPassKeyDto> callback) {
 
     super(params, loginDisplay, environment);
     loginSuccessCallback = callback;
     loginService = getEnvironment().getModel().getRemoteLoginService();
-
-    // final TextBox xx = new TextBox();
-    // xx.setEnabled(enabled);
-    // xx.setR
 
     final SimpleCallback<Object> commonBlurHandler = new SimpleCallback<Object>() {
       @Override
@@ -58,26 +55,42 @@ public class LoginFormPresenter
         final String pass = LoginFormPresenter.this.getDisplay()
             .getPassword();
         final String nonce = Security.randomCharString();
-        final String hashPassword = Security.md5(pass + nonce);
+        final String hashPassword = Security.md5(nonce + pass);
 
         loginService.getSessionKey(name, nonce, hashPassword,
-            new AsyncCallback<String>() {
+            new AsyncCallback<SessionKeyServiceReturnDto>() {
+              @Override
               public void onFailure(final Throwable caught) {
                 LoginFormPresenter.this.getEnvironment().showAlert(
                     "Failed login");
-
                 LoginFormPresenter.this.getDisplay().enableLoginButton(
                     true);
                 loginSuccessCallback.onFailure(new Throwable());
               }
 
-              public void onSuccess(final String result) {
-                final Security secure = new Security();
-                final String sessionKey = secure.codeDecode(pass
-                    + nonce, Security.hexStringToByteString(result));
+              @Override
+              public void onSuccess(
+                  final SessionKeyServiceReturnDto result) {
 
-                loginSuccessCallback.goBack(new DtoUserPassKey(name,
-                    pass, sessionKey));
+                final String calculatedHash = Security.md5(nonce
+                    + result.encryptedSessionKey);
+                if (result.hash.equals(calculatedHash)) {
+                  final Security secure = new Security();
+                  final String sessionKey = secure
+                      .codeDecode(
+                          pass + nonce,
+                          Security
+                              .hexStringToByteString(result.encryptedSessionKey));
+
+                  loginSuccessCallback.goBack(new UserPassKeyDto(name,
+                      pass, sessionKey));
+                } else {
+                  LoginFormPresenter.this.getEnvironment().showAlert(
+                      "Wrong data - problem in communication!");
+                  LoginFormPresenter.this.getDisplay()
+                      .enableLoginButton(true);
+                  loginSuccessCallback.onFailure(new Throwable());
+                }
               }
             });
       }

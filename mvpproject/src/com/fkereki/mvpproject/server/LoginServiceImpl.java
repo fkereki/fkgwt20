@@ -1,9 +1,10 @@
 package com.fkereki.mvpproject.server;
 
-import javax.security.auth.login.FailedLoginException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.fkereki.mvpproject.client.dtos.SessionKeyServiceReturnDto;
+import com.fkereki.mvpproject.client.exceptions.FailedLoginException;
 import com.fkereki.mvpproject.client.exceptions.PasswordNotChangedException;
 import com.fkereki.mvpproject.client.rpc.LoginService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -57,23 +58,25 @@ public class LoginServiceImpl
   }
 
   @Override
-  public String getSessionKey(
+  public SessionKeyServiceReturnDto getSessionKey(
       final String name,
       final String nonce,
       final String passHash)
       throws FailedLoginException {
 
-    final String password = "kereki"; // get it from DB!
+    // get the password from the DB, not as here!
+    final String password = "kereki";
 
-    final String calculatedHash = Security.md5(password + nonce);
+    // check the received data by means of the hash
+    final String calculatedHash = Security.md5(nonce + password);
 
+    // if there's a match, create a sessionKey and send it back
     if (passHash.equals(calculatedHash)) {
       final String sessionKey = Security.randomCharString()
           .toLowerCase();
 
       // store the session key from the session
-      // alternative: store the key at the DB
-
+      // (alternative: store the key at the DB)
       final HttpServletRequest request = getThreadLocalRequest();
       final HttpSession session = request.getSession();
       session.setAttribute(SESSION_KEY_ID, sessionKey);
@@ -82,7 +85,15 @@ public class LoginServiceImpl
       final String coded = secure.codeDecode(password + nonce,
           sessionKey);
       final String hexCoded = Security.byteStringToHexString(coded);
-      return hexCoded;
+
+      final SessionKeyServiceReturnDto sk = new SessionKeyServiceReturnDto();
+      sk.encryptedSessionKey = hexCoded;
+      sk.hash = Security.md5(nonce + hexCoded);
+
+      System.out.print("data=" + sk.encryptedSessionKey + " nonce="
+          + nonce + " hash=" + sk.hash + "\n\n");
+
+      return sk;
     } else {
       throw new FailedLoginException();
     }
