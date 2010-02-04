@@ -40,7 +40,7 @@ public class ChangePasswordFormPresenter
     final String currentUser = environment.getCurrentUserName();
     final String currentKey = environment.getCurrentSessionKey();
     final String currentPass = environment.getCurrentUserPassword();
-    ;
+
     loginDisplay.setName(currentUser);
 
     // get the session key for the given user name

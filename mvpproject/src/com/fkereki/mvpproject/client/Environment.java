@@ -15,6 +15,8 @@ import com.fkereki.mvpproject.client.clientSearch.ClientSearchView;
 import com.fkereki.mvpproject.client.dtos.UserPassKeyDto;
 import com.fkereki.mvpproject.client.dummyOne.DummyOnePresenter;
 import com.fkereki.mvpproject.client.dummyOne.DummyOneView;
+import com.fkereki.mvpproject.client.fileUpload.FileUploadPresenter;
+import com.fkereki.mvpproject.client.fileUpload.FileUploadView;
 import com.fkereki.mvpproject.client.login5.LoginFormPresenter;
 import com.fkereki.mvpproject.client.login5.LoginFormView;
 import com.fkereki.mvpproject.client.map1.MapPresenter;
@@ -99,6 +101,12 @@ public class Environment {
     mb.addItem("Cities", mb3);
 
     mb.addItem("News", new HistoryCommand(NewsReaderPresenter.PLACE));
+
+    final MenuBar mb4 = new MenuBar(true);
+    mb4.addItem("File Upload", new HistoryCommand(
+        FileUploadPresenter.PLACE));
+    mb4.addItem("File Download", sorry);
+    mb.addItem("Files", mb4);
 
     final MenuBar mbLogin = new MenuBar(true);
     mbLogin.addItem("Change Password", new HistoryCommand(
@@ -191,6 +199,9 @@ public class Environment {
     } else if (token.equals(ChangePasswordFormPresenter.PLACE)) {
       panel.add(new ChangePasswordFormPresenter(args,
           new ChangePasswordFormView(), this).getDisplay().asWidget());
+    } else if (token.equals(FileUploadPresenter.PLACE)) {
+      panel.add(new FileUploadPresenter(args, new FileUploadView(),
+          this).getDisplay().asWidget());
     } else {
       Window.alert("Unrecognized token=" + token);
     }
