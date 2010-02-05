@@ -90,9 +90,6 @@ public class LoginServiceImpl
       sk.encryptedSessionKey = hexCoded;
       sk.hash = Security.md5(nonce + hexCoded);
 
-      System.out.print("data=" + sk.encryptedSessionKey + " nonce="
-          + nonce + " hash=" + sk.hash + "\n\n");
-
       return sk;
     } else {
       throw new FailedLoginException();

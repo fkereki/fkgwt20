@@ -11,7 +11,7 @@
           <td><g:Label text='File to Upload:'/></td>
           <td>
             <g:FormPanel u:field="uploadForm">
-              <g:FileUpload u:field="fileToUpload"/>
+              <g:FileUpload u:field="fileToUpload" name="uploadedfile" />
             </g:FormPanel>
           </td>
         </tr>

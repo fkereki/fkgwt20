@@ -37,7 +37,7 @@ public class FileUploadPresenter
           @Override
           public void goBack(final SubmitEvent result) {
             Window.alert("event!");
-            result.cancel();
+            // result.cancel();
           }
         });
 
@@ -46,7 +46,7 @@ public class FileUploadPresenter
 
           @Override
           public void goBack(final SubmitCompleteEvent result) {
-            Window.alert("complete!");
+            Window.alert("complete!" + result.getResults());
           }
         });
   }

@@ -43,7 +43,7 @@ public class FileUploadView
     final HTMLPanel dlp = binder.createAndBindUi(this);
     initWidget(dlp);
 
-    uploadForm.setAction("/myFormHandler");
+    uploadForm.setAction("/mvpproject/fileprocess");
     uploadForm.setEncoding(FormPanel.ENCODING_MULTIPART);
     uploadForm.setMethod(FormPanel.METHOD_POST);
   }
