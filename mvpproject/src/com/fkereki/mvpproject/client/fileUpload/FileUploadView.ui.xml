@@ -4,21 +4,25 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:h='urn:import:com.fkereki.mvpproject.client'            
              >
-  <g:HTMLPanel>
-    <h1>FileUploadView</h1>
+  <g:FormPanel u:field="uploadForm">
+    <g:HTMLPanel>
+      <h1>FileUploadView</h1>
       <table>
         <tr>
-          <td><g:Label text='File to Upload:'/></td>
           <td>
-            <g:FormPanel u:field="uploadForm">
-              <g:FileUpload u:field="fileToUpload" name="uploadedfile" />
-            </g:FormPanel>
+            <g:Label text='File to Upload:' />
+          </td>
+          <td>
+            <g:FileUpload u:field="fileToUpload" name="uploadedfile" />
           </td>
         </tr>
         <tr>
           <td></td>
-          <td><g:Button u:field="uploadButton" text='Upload it'/></td>
+          <td>
+            <g:Button u:field="uploadButton" text='Upload it' />
+          </td>
         </tr>
       </table>
-  </g:HTMLPanel>
+    </g:HTMLPanel>
+  </g:FormPanel>
 </u:UiBinder>

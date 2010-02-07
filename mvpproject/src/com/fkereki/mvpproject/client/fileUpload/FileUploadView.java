@@ -11,7 +11,6 @@ import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
 
@@ -21,7 +20,7 @@ public class FileUploadView
 
   @UiTemplate("FileUploadView.ui.xml")
   interface Binder
-      extends UiBinder<HTMLPanel, FileUploadView> {
+      extends UiBinder<FormPanel, FileUploadView> {
   }
 
   @UiField
@@ -40,7 +39,7 @@ public class FileUploadView
   private static final Binder binder = GWT.create(Binder.class);
 
   public FileUploadView() {
-    final HTMLPanel dlp = binder.createAndBindUi(this);
+    final FormPanel dlp = binder.createAndBindUi(this);
     initWidget(dlp);
 
     uploadForm.setAction("/mvpproject/fileprocess");

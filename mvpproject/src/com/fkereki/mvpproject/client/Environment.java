@@ -15,6 +15,8 @@ import com.fkereki.mvpproject.client.clientSearch.ClientSearchView;
 import com.fkereki.mvpproject.client.dtos.UserPassKeyDto;
 import com.fkereki.mvpproject.client.dummyOne.DummyOnePresenter;
 import com.fkereki.mvpproject.client.dummyOne.DummyOneView;
+import com.fkereki.mvpproject.client.fileDownload.FileDownloadPresenter;
+import com.fkereki.mvpproject.client.fileDownload.FileDownloadView;
 import com.fkereki.mvpproject.client.fileUpload.FileUploadPresenter;
 import com.fkereki.mvpproject.client.fileUpload.FileUploadView;
 import com.fkereki.mvpproject.client.login5.LoginFormPresenter;
@@ -105,7 +107,8 @@ public class Environment {
     final MenuBar mb4 = new MenuBar(true);
     mb4.addItem("File Upload", new HistoryCommand(
         FileUploadPresenter.PLACE));
-    mb4.addItem("File Download", sorry);
+    mb4.addItem("File Download", new HistoryCommand(
+        FileDownloadPresenter.PLACE));
     mb.addItem("Files", mb4);
 
     final MenuBar mbLogin = new MenuBar(true);
@@ -201,6 +204,9 @@ public class Environment {
           new ChangePasswordFormView(), this).getDisplay().asWidget());
     } else if (token.equals(FileUploadPresenter.PLACE)) {
       panel.add(new FileUploadPresenter(args, new FileUploadView(),
+          this).getDisplay().asWidget());
+    } else if (token.equals(FileDownloadPresenter.PLACE)) {
+      panel.add(new FileDownloadPresenter(args, new FileDownloadView(),
           this).getDisplay().asWidget());
     } else {
       Window.alert("Unrecognized token=" + token);

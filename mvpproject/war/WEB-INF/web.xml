@@ -39,6 +39,26 @@
 	</servlet-mapping>
 
 
+	<servlet>
+		<servlet-name>fileProcess</servlet-name>
+		<servlet-class>com.fkereki.mvpproject.server.FileProcess</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>fileProcess</servlet-name>
+		<url-pattern>/mvpproject/fileprocess</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>fileProduce</servlet-name>
+		<servlet-class>com.fkereki.mvpproject.server.FileProduce</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>fileProduce</servlet-name>
+		<url-pattern>/mvpproject/fileproduce</url-pattern>
+	</servlet-mapping>
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Mvpproject.html</welcome-file>
