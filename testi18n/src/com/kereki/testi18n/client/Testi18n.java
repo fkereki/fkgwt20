@@ -12,9 +12,15 @@ public class Testi18n
 
   @Override
   public void onModuleLoad() {
-    final Texts texts = GWT.create(Texts.class);
+    // final Texts texts = GWT.create(Texts.class);
+    //
+    // Window.alert(texts.helloWorld() + " " + texts.howAreYou() + " "
+    // + texts.random() + texts.outOfFile());
 
-    Window.alert(texts.helloWorld() + " " + texts.howAreYou() + " "
-        + texts.random() + texts.outOfFile());
+    final MyMessages myme = GWT.create(MyMessages.class);
+
+    Window.alert(myme.howMany(0) + "/" + myme.howMany(1) + "/"
+        + myme.howMany(2) + "/" + myme.howMany(3));
+
   }
 }
