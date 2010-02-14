@@ -16,7 +16,7 @@ public class Testi18n
 
     Window.alert(greet.genericHello() + " " + greet.specificQuery());
 
-    Window.alert(greet.getString("howAreYou"));
+    Window.alert(greet.getString("kindOfUsers"));
 
     final MyMessages myme = GWT.create(MyMessages.class);
 
