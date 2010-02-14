@@ -12,13 +12,18 @@ public class Testi18n
 
   @Override
   public void onModuleLoad() {
-    final Greet greet = GWT.create(Greet.class);
-
-    Window.alert(greet.genericHello() + " " + greet.specificQuery());
-
-    Window.alert(greet.getString("kindOfUsers"));
+    // final Greet greet = GWT.create(Greet.class);
+    //
+    // Window.alert(greet.genericHello() + " " + greet.specificQuery());
+    //
+    // Window.alert(greet.getString("kindOfUsers"));
 
     final MyMessages myme = GWT.create(MyMessages.class);
+
+    Window.alert(myme.sayGoodbye("Mr Chips"));
+
+    Window.alert(myme.sayAge2(1960, 49));
+    Window.alert(myme.sayAge2(2008, 1));
 
     Window.alert(myme.howMany(0) + "/" + myme.howMany(1) + "/"
         + myme.howMany(2) + "/" + myme.howMany(3));
