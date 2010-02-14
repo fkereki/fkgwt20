@@ -12,8 +12,8 @@
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
   
   <extend-property name="locale" values="en" />
+  <extend-property name="locale" values="en_GB" />
   <extend-property name="locale" values="es" />
-  <extend-property name="locale" values="es_UY" />
 
   <!-- Other module inherits                                      -->
 

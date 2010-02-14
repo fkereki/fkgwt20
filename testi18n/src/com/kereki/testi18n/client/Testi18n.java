@@ -12,10 +12,11 @@ public class Testi18n
 
   @Override
   public void onModuleLoad() {
-    // final Texts texts = GWT.create(Texts.class);
-    //
-    // Window.alert(texts.helloWorld() + " " + texts.howAreYou() + " "
-    // + texts.random() + texts.outOfFile());
+    final Greet greet = GWT.create(Greet.class);
+
+    Window.alert(greet.genericHello() + " " + greet.specificQuery());
+
+    Window.alert(greet.getString("howAreYou"));
 
     final MyMessages myme = GWT.create(MyMessages.class);
 
