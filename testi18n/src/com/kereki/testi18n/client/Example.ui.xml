@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<u:UiBinder xmlns:u='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui' u:defaultLocale="en"
+  u:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+  u:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+  u:generateLocales="default">
+  <g:HTMLPanel>
+
+    <div>
+      <u:msg key="example.salute" description="Greeting">Hello, world, how
+        are you feeling today?</u:msg>
+    </div>
+
+    <g:Button u:field="aButton">
+      <u:msg key="button.text" description='Button text'>Please will you do it</u:msg>
+    </g:Button>
+
+    <u:msg key="reconsideration" description="Urge to reconsider">
+      We
+      <b>strongly</b>
+      urge you to reconsider.
+    </u:msg>
+
+    <u:msg>
+      Please input a value:
+      <g:TextBox />
+    </u:msg>
+
+  </g:HTMLPanel>
+</u:UiBinder>
