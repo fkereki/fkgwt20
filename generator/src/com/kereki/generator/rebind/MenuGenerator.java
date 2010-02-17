@@ -21,7 +21,6 @@ public class MenuGenerator
       final GeneratorContext context,
       final String typeName) {
 
-    System.out.println("createClass " + typeName);
     final JClassType originalType;
     final String packageName;
     final TypeOracle typeOracle = context.getTypeOracle();
@@ -29,25 +28,21 @@ public class MenuGenerator
       originalType = typeOracle.getType(typeName);
       packageName = originalType.getPackage().getName();
 
-      System.out.println("packageName " + packageName);
-
       final String originalClassName = originalType
           .getSimpleSourceName();
 
-      System.out.println("originalClassName " + originalClassName);
-
       final String generatedClassName = originalClassName + "Gen";
-      System.out.println("generatedClassName " + generatedClassName);
 
       final SourceWriter sourceWriter = getSourceWriter(logger,
           context, originalType, packageName, generatedClassName);
+
       if (sourceWriter != null) {
         writeClass(logger, originalType, sourceWriter);
       }
+
       return originalType.getParameterizedQualifiedSourceName() + "Gen";
 
     } catch (final Exception e) {
-      System.out.println(e.getMessage());
       return null;
     }
   }
