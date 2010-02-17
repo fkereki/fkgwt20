@@ -1,6 +1,8 @@
 package com.kereki.generator.rebind;
 
+import java.io.File;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -27,9 +29,16 @@ public class MenuGenerator
       originalType = typeOracle.getType(typeName);
       packageName = originalType.getPackage().getName();
 
+      System.out.println("packageName " + packageName);
+
       final String originalClassName = originalType
           .getSimpleSourceName();
+
+      System.out.println("originalClassName " + originalClassName);
+
       final String generatedClassName = originalClassName + "Gen";
+      System.out.println("generatedClassName " + generatedClassName);
+
       final SourceWriter sourceWriter = getSourceWriter(logger,
           context, originalType, packageName, generatedClassName);
       if (sourceWriter != null) {
@@ -67,7 +76,9 @@ public class MenuGenerator
 
     final ClassSourceFileComposerFactory classFactory = new ClassSourceFileComposerFactory(
         packageName, generatedClassName);
+
     classFactory.addImport("com.google.gwt.user.client.ui.MenuBar");
+    classFactory.addImport("com.google.gwt.user.client.Command");
     classFactory.addImplementedInterface(originalType.getName());
 
     final PrintWriter printWriter = context.tryCreate(logger,
@@ -81,17 +92,70 @@ public class MenuGenerator
     return sourceWriter;
   }
 
+  // mb3.addItem("Updating", new HistoryCommand(string));
+
   private void writeClass(
       final TreeLogger logger,
       final JClassType originalType,
       final SourceWriter sourceWriter) {
-    logger.log(TreeLogger.ALL, "testing logger");
-    sourceWriter
-        .println("public com.google.gwt.user.client.ui.MenuBar createMenu() {");
-    sourceWriter
-        .println("com.google.gwt.user.client.ui.MenuBar mb2 = new com.google.gwt.user.client.ui.MenuBar(true);");
-    sourceWriter.println("return mb2;");
-    sourceWriter.println("}");
+
+    final File inFile = new File(
+        "/home/fkereki/NetBeansProjects/scannerTest/src/sample.menu");
+    Scanner scanner;
+    try {
+      scanner = new Scanner(inFile);
+      String first;
+      String second;
+      String third;
+
+      sourceWriter.println("public MenuBar createMenu() {");
+
+      int level = 0;
+      sourceWriter.println("MenuBar stack[]= new MenuBar[20];");
+      sourceWriter.println("stack[0]= new MenuBar();");
+
+      while (scanner.hasNext()) {
+        first = scanner.next();
+
+        if (first.equals("menu")) {
+          second = scanner.nextLine().trim();
+          level++;
+          sourceWriter.println("stack[" + level
+              + "]= new MenuBar(true);");
+          sourceWriter.println("stack[" + (level - 1) + "].addItem(\""
+              + second + "\", stack[" + level + "]);");
+
+        } else if (first.equals("command")) {
+          second = scanner.next();
+          third = scanner.nextLine().trim();
+          // sourceWriter.println("stack[" + level + "].addItem(\""
+          // + third + "\", new HistoryCommand(" + second
+          // + ".PLACE));");
+
+          sourceWriter.println("stack[" + level + "].addItem(\""
+              + third + "\", (Command) null);");
+
+        } else /* first.equals("endmenu") assumed */{
+          level--;
+        }
+      }
+      scanner.close();
+      sourceWriter.println("return stack[0];");
+      sourceWriter.println("}");
+
+    } catch (final Exception e) {
+      System.out.println("ouch..." + e.getMessage());
+    }
+
+    // sourceWriter
+    // .println("public com.google.gwt.user.client.ui.MenuBar createMenu() {");
+    // sourceWriter.println("MenuBar mb2 = new MenuBar(true);");
+    // sourceWriter
+    // .println("mb2.addItem(\"nulasdfsfdsity\", (com.google.gwt.user.client.Command) null);");
+    // sourceWriter
+    // .println("mb2.addItem(\"unbagunba\", (com.google.gwt.user.client.Command) null);");
+    // sourceWriter.println("return mb2;");
+    // sourceWriter.println("}");
     sourceWriter.commit(logger);
   }
 }
