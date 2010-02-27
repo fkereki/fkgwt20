@@ -21,15 +21,15 @@ public class LoginFormView
     extends View
     implements LoginFormDisplay {
 
-  private AsyncCallback<Object> loginCallback;
-  private AsyncCallback<Object> nameBlurCallback;
-  private AsyncCallback<Object> passwordBlurCallback;
+  AsyncCallback<Object> loginCallback;
+  AsyncCallback<Object> nameBlurCallback;
+  AsyncCallback<Object> passwordBlurCallback;
 
-  private final TextBox nameTextBox = new TextBox();
-  private final TextBox passwordTextBox = new PasswordTextBox();
-  private final Button loginButton = new Button("Log in");
-  private final FlexTable flex = new FlexTable();
-  private final DockPanel dock = new DockPanel();
+  final TextBox nameTextBox = new TextBox();
+  final TextBox passwordTextBox = new PasswordTextBox();
+  final Button loginButton = new Button("Log in");
+  final FlexTable flex = new FlexTable();
+  final DockPanel dock = new DockPanel();
 
   /**
    * Defines the view for the Login Form. Since this will be shown in the main

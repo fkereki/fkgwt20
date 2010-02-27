@@ -1,7 +1,5 @@
 package com.fkereki.mvpproject.client.changePassword;
 
-import java.awt.Button;
-
 import com.fkereki.mvpproject.client.SimpleCallback;
 import com.fkereki.mvpproject.client.View;
 import com.google.gwt.core.client.GWT;
@@ -12,6 +10,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
