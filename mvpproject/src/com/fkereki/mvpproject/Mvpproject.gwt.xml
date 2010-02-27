@@ -18,6 +18,9 @@
 
   <!-- Other module inherits                                      -->
 
+  <servlet path='/world' class='com.fkereki.mvpproject.server.WorldServiceImpl'/>
+
+
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.fkereki.mvpproject.client.Mvpproject'/>
 
