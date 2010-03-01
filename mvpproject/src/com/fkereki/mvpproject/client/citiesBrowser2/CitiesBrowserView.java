@@ -53,7 +53,7 @@ public class CitiesBrowserView
 
   public CitiesBrowserView() {
     super();
-    HTMLPanel dlp = binder.createAndBindUi(this);
+    final HTMLPanel dlp = binder.createAndBindUi(this);
     initWidget(dlp);
 
     cg.setText(0, 0, "Name");
@@ -69,11 +69,11 @@ public class CitiesBrowserView
 
   @Override
   public void setCityData(
-      int i,
-      String name,
-      String pop,
-      String lat,
-      String lon) {
+      final int i,
+      final String name,
+      final String pop,
+      final String lat,
+      final String lon) {
     cg.setText(i, 0, name);
     cg.setText(i, 1, pop);
     cg.setText(i, 2, lat);
@@ -81,42 +81,44 @@ public class CitiesBrowserView
   }
 
   @Override
-  public void setOnCountryStateChangeCallback(SimpleCallback<Object> acb) {
+  public void setOnCountryStateChangeCallback(
+      final SimpleCallback<Object> acb) {
     onCountryStateChangeCallback = acb;
   }
 
   @Override
-  public void setOnFirstClickCallback(SimpleCallback<Object> acb) {
+  public void setOnFirstClickCallback(final SimpleCallback<Object> acb) {
     onFirstClickCallback = acb;
   }
 
   @Override
-  public void setOnNextClickCallback(SimpleCallback<Object> acb) {
+  public void setOnNextClickCallback(final SimpleCallback<Object> acb) {
     onNextClickCallback = acb;
   }
 
   @Override
-  public void setOnPreviousClickCallback(SimpleCallback<Object> acb) {
+  public void setOnPreviousClickCallback(
+      final SimpleCallback<Object> acb) {
     onPreviousClickCallback = acb;
   }
 
   @UiHandler("countryStateView")
-  void uiOnChange(ValueChangeEvent<Object> event) {
+  void uiOnChange(final ValueChangeEvent<Object> event) {
     onCountryStateChangeCallback.onSuccess(null);
   }
 
   @UiHandler("firstButton")
-  void uiOnFirstClick(ClickEvent event) {
+  void uiOnFirstClick(final ClickEvent event) {
     onFirstClickCallback.onSuccess(null);
   }
 
   @UiHandler("nextButton")
-  void uiOnNextClick(ClickEvent event) {
+  void uiOnNextClick(final ClickEvent event) {
     onNextClickCallback.onSuccess(null);
   }
 
   @UiHandler("previousButton")
-  void uiOnPreviousClick(ClickEvent event) {
+  void uiOnPreviousClick(final ClickEvent event) {
     onPreviousClickCallback.onSuccess(null);
   }
 }

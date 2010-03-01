@@ -13,7 +13,7 @@
       </tr>
       <tr>
         <td><g:Label text="Password:"/></td>
-        <td><g:PasswordTextBox u:field='passwordTextBox'/></td>
+        <td><g:PasswordTextBox u:field='passwordTextBox' /></td>
       </tr>
       <tr>
         <td></td>
