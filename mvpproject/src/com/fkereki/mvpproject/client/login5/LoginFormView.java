@@ -11,6 +11,7 @@ import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -45,6 +46,10 @@ public class LoginFormView
     loginButton = new Button("Ok");
     final HTMLPanel dlp = binder.createAndBindUi(this);
     initWidget(dlp);
+
+    DOM
+        .setElementAttribute(loginButton.getElement(), "id",
+            "my_own_id");
   }
 
   @Override
