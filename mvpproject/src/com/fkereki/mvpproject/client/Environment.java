@@ -2,8 +2,8 @@ package com.fkereki.mvpproject.client;
 
 import com.fkereki.mvpproject.client.changePassword.ChangePasswordFormPresenter;
 import com.fkereki.mvpproject.client.changePassword.ChangePasswordFormView;
-import com.fkereki.mvpproject.client.citiesBrowser2.CitiesBrowserPresenter;
-import com.fkereki.mvpproject.client.citiesBrowser2.CitiesBrowserView;
+import com.fkereki.mvpproject.client.citiesBrowser4.CitiesBrowserPresenter;
+import com.fkereki.mvpproject.client.citiesBrowser4.CitiesBrowserView;
 import com.fkereki.mvpproject.client.citiesUpdater.CitiesUpdaterPresenter;
 import com.fkereki.mvpproject.client.citiesUpdater.CitiesUpdaterView;
 import com.fkereki.mvpproject.client.cityCreator.CityCreatorPresenter;
