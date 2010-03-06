@@ -21,7 +21,7 @@ public class Model {
   private WorldServiceAsync worldService;
   private XhrProxyAsync xhrProxy;
 
-  public void getCities(
+  public void getCities_nocache(
       final String country,
       final String state,
       final int pStart,
@@ -47,21 +47,151 @@ public class Model {
     }
   }
 
-  public void getCountries(
+  /*
+   * The cache key is COUNTRY:REGION:STARTING_CITY_NUMBER and the associated
+   * value is a LinkedHashMap<String,ClientCityData>
+   */
+  static LinkedHashMap<String, LinkedHashMap<String, ClientCityData>> citiesCache = new LinkedHashMap<String, LinkedHashMap<String, ClientCityData>>();
+
+  public void getCities_withCache_withoutPrefetching(
+      final String country,
+      final String state,
+      final int pStart,
+      final int pCount,
+      final AsyncCallback<LinkedHashMap<String, ClientCityData>> cb) {
+    /*
+     * If we call "loadCities(...)" without having selected a country and
+     * region, it won't do anything, and just exit gracefully.
+     */
+    if (!country.isEmpty() && !state.isEmpty()) {
+
+      if (!citiesCache
+          .containsKey(country + ":" + state + ":" + pStart)) {
+        getRemoteWorldService().getCities(country, state, pStart,
+            pCount,
+            new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
+              public void onFailure(final Throwable caught) {
+                Window.alert("Failure getting cities: "
+                    + caught.getMessage());
+              }
+
+              public void onSuccess(
+                  final LinkedHashMap<String, ClientCityData> result) {
+
+                citiesCache.put(country + ":" + state + ":" + pStart,
+                    result);
+                cb.onSuccess(result);
+              }
+            });
+      } else {
+        /*
+         * Data were already loaded, so just display them
+         */
+        cb.onSuccess(citiesCache.get(country + ":" + state + ":"
+            + pStart));
+
+      }
+    }
+  }
+
+  public void getCities(
+      final String country,
+      final String state,
+      final int pStart,
+      final int pCount,
+      final AsyncCallback<LinkedHashMap<String, ClientCityData>> cb) {
+
+    if (!country.isEmpty() && !state.isEmpty()) {
+
+      if (!citiesCache.containsKey(country + ":" + state + ":"
+          + (pStart + pCount))) {
+
+        getRemoteWorldService().getCities(country, state,
+            pStart + pCount, pCount,
+            new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
+              public void onFailure(final Throwable caught) {
+                // ...error...
+              }
+
+              public void onSuccess(
+                  final LinkedHashMap<String, ClientCityData> result) {
+
+                citiesCache.put(country + ":" + state + ":"
+                    + (pStart + pCount), result);
+              }
+            });
+      }
+
+      if (!citiesCache
+          .containsKey(country + ":" + state + ":" + pStart)) {
+
+        getRemoteWorldService().getCities(country, state, pStart,
+            pCount,
+            new AsyncCallback<LinkedHashMap<String, ClientCityData>>() {
+              public void onFailure(final Throwable caught) {
+                // ...error...
+              }
+
+              public void onSuccess(
+                  final LinkedHashMap<String, ClientCityData> result) {
+
+                citiesCache.put(country + ":" + state + ":" + pStart,
+                    result);
+                cb.onSuccess(result);
+              }
+            });
+
+      } else {
+        cb.onSuccess(citiesCache.get(country + ":" + state + ":"
+            + pStart));
+
+      }
+    }
+  }
+
+  public void getCountries_nocache(
       final AsyncCallback<LinkedHashMap<String, String>> cb) {
     getRemoteWorldService().getCountries(
         new AsyncCallback<LinkedHashMap<String, String>>() {
           @Override
-          public void onFailure(Throwable caught) {
+          public void onFailure(final Throwable caught) {
             Window.alert("Failure getting cities: "
                 + caught.getMessage());
           }
 
           @Override
-          public void onSuccess(LinkedHashMap<String, String> result) {
+          public void onSuccess(
+              final LinkedHashMap<String, String> result) {
             cb.onSuccess(result);
           }
         });
+  }
+
+  static LinkedHashMap<String, String> countriesCache = null;
+
+  public void getCountries(
+      final AsyncCallback<LinkedHashMap<String, String>> cb) {
+
+    if (countriesCache == null) {
+      getRemoteWorldService().getCountries(
+          new AsyncCallback<LinkedHashMap<String, String>>() {
+            @Override
+            public void onFailure(final Throwable caught) {
+              Window.alert("Failure getting cities: "
+                  + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(
+                final LinkedHashMap<String, String> result) {
+
+              countriesCache = result;
+              cb.onSuccess(result);
+            }
+          });
+    } else {
+      cb.onSuccess(countriesCache);
+    }
   }
 
   /**
@@ -100,21 +230,49 @@ public class Model {
     return xhrProxy;
   }
 
-  public void getStates(
+  public void getStates_nocache(
       final String country,
       final AsyncCallback<LinkedHashMap<String, String>> cb) {
 
     getRemoteWorldService().getStates(country,
         new AsyncCallback<LinkedHashMap<String, String>>() {
           @Override
-          public void onFailure(Throwable caught) {
+          public void onFailure(final Throwable caught) {
             // ...failure...
           }
 
           @Override
-          public void onSuccess(LinkedHashMap<String, String> result) {
+          public void onSuccess(
+              final LinkedHashMap<String, String> result) {
             cb.onSuccess(result);
           }
         });
+  }
+
+  static LinkedHashMap<String, LinkedHashMap<String, String>> statesCache = new LinkedHashMap<String, LinkedHashMap<String, String>>();
+
+  public void getStates(
+      final String country,
+      final AsyncCallback<LinkedHashMap<String, String>> cb) {
+
+    if (!statesCache.containsKey(country)) {
+      getRemoteWorldService().getStates(country,
+          new AsyncCallback<LinkedHashMap<String, String>>() {
+            @Override
+            public void onFailure(final Throwable caught) {
+              // ...failure...
+            }
+
+            @Override
+            public void onSuccess(
+                final LinkedHashMap<String, String> result) {
+
+              statesCache.put(country, result);
+              cb.onSuccess(result);
+            }
+          });
+    } else {
+      cb.onSuccess(statesCache.get(country));
+    }
   }
 }
