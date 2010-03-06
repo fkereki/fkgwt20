@@ -33,7 +33,6 @@ public class WorldServiceGWTTest
           }
         });
 
-    assertTrue(true);
     delayTestFinish(5000);
   }
 
