@@ -53,6 +53,14 @@ public class LoginFormViewGWTTest
     assertEquals("", lv.getPassword());
 
     /*
+     * Let's see if the login button is enabled/disabled
+     */
+    lv.enableLoginButton(false);
+    assertFalse(lv.loginButton.isEnabled());
+    lv.enableLoginButton(true);
+    assertTrue(lv.loginButton.isEnabled());
+
+    /*
      * Let's test the blur handlers
      */
     final Document doc = com.google.gwt.dom.client.Document.get();
