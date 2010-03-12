@@ -27,6 +27,8 @@ import com.fkereki.mvpproject.client.newsReader.NewsReaderPresenter;
 import com.fkereki.mvpproject.client.newsReader.NewsReaderView;
 import com.fkereki.mvpproject.client.suggest.SuggestPresenter;
 import com.fkereki.mvpproject.client.suggest.SuggestView;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
@@ -59,6 +61,30 @@ public class Environment {
   String currentUser;
   String currentKey;
   String currentPassword;
+
+  abstract class MyRunAsyncCallback
+      implements RunAsyncCallback {
+
+    String myOwnArgs;
+    Panel myOwnPanel;
+    Environment myOwnEnvironment;
+    String myOwnErrorMessage;
+
+    public MyRunAsyncCallback(
+        final String args, final Panel panel,
+        final Environment environment, final String errorMessage) {
+
+      myOwnArgs = args;
+      myOwnPanel = panel;
+      myOwnEnvironment = environment;
+      myOwnErrorMessage = errorMessage;
+    }
+
+    @Override
+    public void onFailure(final Throwable reason) {
+      myOwnEnvironment.showAlert(myOwnErrorMessage);
+    }
+  }
 
   Command sorry = new Command() {
     @Override
@@ -101,6 +127,8 @@ public class Environment {
         MapPresenter.PLACE));
 
     mb.addItem("Cities", mb3);
+
+    mb.addItem("Hello", new HistoryCommand("SAYHELLO"));
 
     mb.addItem("News", new HistoryCommand(NewsReaderPresenter.PLACE));
 
@@ -172,6 +200,9 @@ public class Environment {
       // no need to do anything...
     } else if (token.equals(LoginFormPresenter.PLACE)) {
       showLogin(RootPanel.get());
+    } else if (token.equals("SAYHELLO")) {
+      final HelloBrowser hb = new HelloBrowser();
+      hb.salute();
     } else if (token.equals(DummyOnePresenter.PLACE)) {
       panel.add(new DummyOnePresenter(args, new DummyOneView(), this)
           .getDisplay().asWidget());
@@ -185,11 +216,31 @@ public class Environment {
       panel.add(new ClientSearchPresenter(args, new ClientSearchView(),
           this).getDisplay().asWidget());
     } else if (token.equals(CitiesBrowserPresenter.PLACE)) {
-      panel.add(new CitiesBrowserPresenter(args,
-          new CitiesBrowserView(), this).getDisplay().asWidget());
+      // panel.add(new CitiesBrowserPresenter(args, new CitiesBrowserView(),
+      // this).getDisplay().asWidget());
+
+      GWT.runAsync(new MyRunAsyncCallback(args, panel, this,
+          "Couldn't load the cities browser code") {
+        public void onSuccess() {
+          myOwnPanel.add(new CitiesBrowserPresenter(myOwnArgs,
+              new CitiesBrowserView(), myOwnEnvironment).getDisplay()
+              .asWidget());
+        }
+      });
+
     } else if (token.equals(CityCreatorPresenter.PLACE)) {
-      panel.add(new CityCreatorPresenter(args, new CityCreatorView(),
-          this).getDisplay().asWidget());
+      // panel.add(new CityCreatorPresenter(args, new CityCreatorView(),
+      // this).getDisplay().asWidget());
+
+      GWT.runAsync(new MyRunAsyncCallback(args, panel, this,
+          "Couldn't load the cities browser code") {
+        public void onSuccess() {
+          myOwnPanel.add(new CityCreatorPresenter(myOwnArgs,
+              new CityCreatorView(), myOwnEnvironment).getDisplay()
+              .asWidget());
+        }
+      });
+
     } else if (token.equals(CitiesUpdaterPresenter.PLACE)) {
       panel.add(new CitiesUpdaterPresenter(args,
           new CitiesUpdaterView(), this).getDisplay().asWidget());

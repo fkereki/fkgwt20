@@ -8,6 +8,8 @@
   <inherits name="com.google.gwt.json.JSON" />
   <inherits name="com.google.gwt.jsonp.Jsonp" />
   <inherits name="com.google.gwt.ajaxloader.AjaxLoader" />
+  <inherits name="com.google.gwt.i18n.I18N" />
+  
 
   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->
@@ -20,6 +22,10 @@
 
   <servlet path='/world' class='com.fkereki.mvpproject.server.WorldServiceImpl'/>
 
+  <extend-property name="locale" values="en" />
+  <extend-property name="locale" values="en_GB" />
+  <extend-property name="locale" values="es" />
+
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.fkereki.mvpproject.client.Mvpproject'/>
@@ -27,4 +33,11 @@
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
 
+	<replace-with class="com.fkereki.mvptest.client.HelloBrowserIEImpl">
+		<when-type-is class="com.fkereki.mvptest.client.HelloBrowserStdImpl"/>
+		<any>
+			<when-property-is name="user.agent" value="ie6"/>
+			<when-property-is name="user.agent" value="ie8"/>
+		</any>
+	</replace-with>
 </module>
