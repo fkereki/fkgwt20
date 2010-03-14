@@ -19,6 +19,8 @@ import com.fkereki.mvpproject.client.fileDownload.FileDownloadPresenter;
 import com.fkereki.mvpproject.client.fileDownload.FileDownloadView;
 import com.fkereki.mvpproject.client.fileUpload.FileUploadPresenter;
 import com.fkereki.mvpproject.client.fileUpload.FileUploadView;
+import com.fkereki.mvpproject.client.i18n.I18nPresenter;
+import com.fkereki.mvpproject.client.i18n.I18nView;
 import com.fkereki.mvpproject.client.login5.LoginFormPresenter;
 import com.fkereki.mvpproject.client.login5.LoginFormView;
 import com.fkereki.mvpproject.client.map1.MapPresenter;
@@ -129,6 +131,9 @@ public class Environment {
     mb.addItem("Cities", mb3);
 
     mb.addItem("Hello", new HistoryCommand("SAYHELLO"));
+
+    mb.addItem("Internationalization", new HistoryCommand(
+        I18nPresenter.PLACE));
 
     mb.addItem("News", new HistoryCommand(NewsReaderPresenter.PLACE));
 
@@ -253,6 +258,9 @@ public class Environment {
     } else if (token.equals(ChangePasswordFormPresenter.PLACE)) {
       panel.add(new ChangePasswordFormPresenter(args,
           new ChangePasswordFormView(), this).getDisplay().asWidget());
+    } else if (token.equals(I18nPresenter.PLACE)) {
+      panel.add(new I18nPresenter(args, new I18nView(), this)
+          .getDisplay().asWidget());
     } else if (token.equals(FileUploadPresenter.PLACE)) {
       panel.add(new FileUploadPresenter(args, new FileUploadView(),
           this).getDisplay().asWidget());
