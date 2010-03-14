@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <u:UiBinder xmlns:u='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:h='urn:import:com.fkereki.mvpproject.client'>
+  xmlns:g='urn:import:com.google.gwt.user.client.ui' 
+  xmlns:h='urn:import:com.fkereki.mvpproject.client'>
+  
   <g:FormPanel u:field="downloadForm">
     <g:HTMLPanel>
       <h1>FileDownloadView</h1>

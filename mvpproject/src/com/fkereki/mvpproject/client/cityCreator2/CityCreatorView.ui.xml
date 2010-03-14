@@ -4,6 +4,7 @@
   xmlns:g='urn:import:com.google.gwt.user.client.ui'
   xmlns:h='urn:import:com.fkereki.mvpproject.client.countryState'>
   <g:HTMLPanel>
+    <h1>City Creator 2</h1>
     <table>
       <tr>
         <td>Country/State:</td>
