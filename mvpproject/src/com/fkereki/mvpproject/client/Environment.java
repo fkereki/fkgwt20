@@ -54,16 +54,6 @@ public class Environment {
     }
   }
 
-  final Model model;
-  final Grid rootDisplay = new Grid(2, 1);
-  final MenuBar runMenuBar = new MenuBar();
-  final VerticalPanel runPanel = new VerticalPanel();
-  String startingToken;
-
-  String currentUser;
-  String currentKey;
-  String currentPassword;
-
   abstract class MyRunAsyncCallback
       implements RunAsyncCallback {
 
@@ -87,6 +77,17 @@ public class Environment {
       myOwnEnvironment.showAlert(myOwnErrorMessage);
     }
   }
+
+  final Model model;
+  final Grid rootDisplay = new Grid(2, 1);
+  final MenuBar runMenuBar = new MenuBar();
+  final VerticalPanel runPanel = new VerticalPanel();
+
+  String startingToken;
+  String currentUser;
+  String currentKey;
+
+  String currentPassword;
 
   Command sorry = new Command() {
     @Override
@@ -224,13 +225,23 @@ public class Environment {
       // panel.add(new CitiesBrowserPresenter(args, new CitiesBrowserView(),
       // this).getDisplay().asWidget());
 
-      GWT.runAsync(new MyRunAsyncCallback(args, panel, this,
-          "Couldn't load the cities browser code") {
+      final Panel myPanel = panel;
+      final String myArgs = args;
+
+      GWT.runAsync(new RunAsyncCallback() {
+
+        @Override
+        public void onFailure(final Throwable reason) {
+          Environment.this
+              .showAlert("Couldn't run the Cities Browser code!");
+        }
+
         public void onSuccess() {
-          myOwnPanel.add(new CitiesBrowserPresenter(myOwnArgs,
-              new CitiesBrowserView(), myOwnEnvironment).getDisplay()
+          myPanel.add(new CitiesBrowserPresenter(myArgs,
+              new CitiesBrowserView(), Environment.this).getDisplay()
               .asWidget());
         }
+
       });
 
     } else if (token.equals(CityCreatorPresenter.PLACE)) {
@@ -239,6 +250,8 @@ public class Environment {
 
       GWT.runAsync(new MyRunAsyncCallback(args, panel, this,
           "Couldn't load the cities browser code") {
+
+        @Override
         public void onSuccess() {
           myOwnPanel.add(new CityCreatorPresenter(myOwnArgs,
               new CityCreatorView(), myOwnEnvironment).getDisplay()
