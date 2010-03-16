@@ -21,11 +21,10 @@
   <!-- Other module inherits                                      -->
 
   <servlet path='/world' class='com.fkereki.mvpproject.server.WorldServiceImpl'/>
-<!--
+
   <extend-property name="locale" values="en" />
   <extend-property name="locale" values="en_GB" />
   <extend-property name="locale" values="es" />
--->
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.fkereki.mvpproject.client.Mvpproject'/>
@@ -40,4 +39,9 @@
 			<when-property-is name="user.agent" value="ie8"/>
 		</any>
 	</replace-with>
+	
+<!-- Use the following to speed up a compile	
+  <set-property name="user.agent" value="gecko"/>
+  <set-property name="locale" value="en" />
+-->
 </module>
