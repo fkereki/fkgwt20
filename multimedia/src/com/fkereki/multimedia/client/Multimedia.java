@@ -7,7 +7,6 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -24,16 +23,26 @@ public class Multimedia implements EntryPoint {
 		 * loop="0"></embed>
 		 */
 
-		final HTML audio1= new HTML("<audio id='audioelement' src='TYPING_t.wav' />");
-		RootPanel.get().add(audio1);
+		final Html5AudioElement audio1= new Html5AudioElement("TYPING_t.wav");
 		final Button playAudioButton1= new Button("Play Audio (Typing) Through HTML5 via JSNI");
 		vp.add(playAudioButton1);
 		playAudioButton1.addClickHandler(new ClickHandler() {
 			@Override
-			public native void onClick(final ClickEvent event) /*-{
-		$doc.getElementById("audioelement").play();
-	}-*/;
+			public void onClick(final ClickEvent event) {
+				audio1.play();
+			}
 		});
+
+		// final HTML audio1= new HTML("<audio id='audioelement' src='TYPING_t.wav' />");
+		// RootPanel.get().add(audio1);
+		// final Button playAudioButton1= new Button("Play Audio (Typing) Through HTML5 via JSNI");
+		// vp.add(playAudioButton1);
+		// playAudioButton1.addClickHandler(new ClickHandler() {
+		// @Override
+		// public native void onClick(final ClickEvent event) /*-{
+		// $doc.getElementById("audioelement").play();
+		// }-*/;
+		// });
 
 		final Audio audio2= new Audio("fax2.wav");
 		final Button playAudioButton2= new Button("Play Audio (Fax) Through gwt_html5_media");
