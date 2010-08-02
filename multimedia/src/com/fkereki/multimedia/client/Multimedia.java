@@ -23,13 +23,23 @@ public class Multimedia implements EntryPoint {
 		 * loop="0"></embed>
 		 */
 
-		final Html5AudioElement audio1= new Html5AudioElement("TYPING_t.wav");
-		final Button playAudioButton1= new Button("Play Audio (Typing) Through HTML5 via JSNI");
-		vp.add(playAudioButton1);
-		playAudioButton1.addClickHandler(new ClickHandler() {
+		final Html5AudioElement audio1a= new Html5AudioElement("TYPING_t.wav");
+		final Button playAudioButton1a= new Button("Play Audio (Typing) Through HTML5 via JSNI");
+		vp.add(playAudioButton1a);
+		playAudioButton1a.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(final ClickEvent event) {
-				audio1.play();
+				audio1a.play();
+			}
+		});
+
+		final EmbedAudioElement audio1b= new EmbedAudioElement("TYPING_t.wav");
+		final Button playAudioButton1b= new Button("Play Audio (Typing) Through Embedded object");
+		vp.add(playAudioButton1b);
+		playAudioButton1b.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(final ClickEvent event) {
+				audio1b.play();
 			}
 		});
 
