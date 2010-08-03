@@ -7,9 +7,9 @@ public class GwtVoicesAudioElement extends AudioElement {
 	final SoundController soundController= new SoundController();
 	final Sound sound;
 
-	public GwtVoicesAudioElement(final String url) {
-		super(url);
-		sound= soundController.createSound(Sound.MIME_TYPE_AUDIO_MPEG, url);
+	public GwtVoicesAudioElement(final String audioUrl) {
+		super(audioUrl);
+		sound= soundController.createSound(Sound.MIME_TYPE_AUDIO_MPEG, audioUrl);
 	}
 
 	@Override

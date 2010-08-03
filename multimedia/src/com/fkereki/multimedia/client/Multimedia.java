@@ -35,7 +35,7 @@ public class Multimedia implements EntryPoint {
 		});
 
 		final GwtHtml5MediaAudioElement audio2= new GwtHtml5MediaAudioElement("fax2.wav");
-		final Button playAudioButton2= new Button("xx Play Audio (Fax) Through gwt_html5_media");
+		final Button playAudioButton2= new Button("Play Audio (Fax) Through gwt_html5_media");
 		vp.add(playAudioButton2);
 		playAudioButton2.addClickHandler(new ClickHandler() {
 			@Override

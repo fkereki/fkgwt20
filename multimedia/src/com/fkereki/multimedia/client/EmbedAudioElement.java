@@ -3,7 +3,7 @@ package com.fkereki.multimedia.client;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 
-public class EmbedAudioElement extends HtmlAudioElement {
+public class EmbedAudioElement extends BrowserAudioElement {
 	public EmbedAudioElement(final String audioUrl) {
 		super(audioUrl);
 		final HTML audio1= new HTML("<embed id='" + generateId() + "' src='" + audioUrl
