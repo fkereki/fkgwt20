@@ -1,6 +1,6 @@
 package com.fkereki.multimedia.client;
 
-public class HtmlAudioElement extends AudioElement {
+public abstract class BrowserAudioElement extends AudioElement {
 	static int audioCounter= 22960;
 	int selfCounter= 0;
 
@@ -8,7 +8,7 @@ public class HtmlAudioElement extends AudioElement {
 		return "audioelement" + selfCounter;
 	}
 
-	public HtmlAudioElement(final String audioUrl) {
+	public BrowserAudioElement(final String audioUrl) {
 		super(audioUrl);
 		audioCounter++;
 		selfCounter= audioCounter;
@@ -16,7 +16,7 @@ public class HtmlAudioElement extends AudioElement {
 
 	@Override
 	public native void play() /*-{
-		id= this.@com.fkereki.multimedia.client.HtmlAudioElement::generateId()();
+		id= this.@com.fkereki.multimedia.client.BrowserAudioElement::generateId()();
 		$doc.getElementById(id).play();
 	}-*/;
 }
