@@ -35,12 +35,12 @@ public class Domousage implements EntryPoint {
 		drawGraphButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(final ClickEvent event) {
-				llamadaJSNI(vectorcito);
+				llamadaJSNI("newchart", vectorcito);
 			}
 		});
 	}
 
-	public native void llamadaJSNI(JsArrayNumber vvvv) /*-{
-		$wnd.drawLineChart("newchart", vvvv);
+	public native void llamadaJSNI(String divName, JsArrayNumber vvvv) /*-{
+		$wnd.drawLineChart(divName, vvvv);
 	}-*/;
 }
