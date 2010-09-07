@@ -41,6 +41,6 @@ public class Domousage implements EntryPoint {
 	}
 
 	public native void llamadaJSNI(JsArrayNumber vvvv) /*-{
-		$wnd.drawChart("newchart", vvvv);
+		$wnd.drawLineChart("newchart", vvvv);
 	}-*/;
 }

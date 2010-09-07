@@ -15,7 +15,6 @@
     	
 
   </head>
-
   <body>
     <!-- OPTIONAL: include this if you want history support -->
     <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
@@ -29,9 +28,6 @@
     </noscript>
 
 
-<!-- div id="simplechart" style="width: 250px; height: 150px;"></div -->
-
-
 <script type="text/javascript" language="javascript" >
 /*
  * cuidado con el orden!
@@ -42,7 +38,7 @@ dojo.require("dojox.charting.Chart2D");
 dojo.addOnLoad(drawChart);
 */
 
-function drawChart(itemName, vvvv) {
+function drawLineChart(itemName, vvvv) {
 	var item= document.getElementById(itemName);
 	var chart1 = new dojox.charting.Chart2D(item);
 	chart1.addPlot("default", {type: "Lines"});
