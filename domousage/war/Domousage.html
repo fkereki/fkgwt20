@@ -29,7 +29,7 @@
     </noscript>
 
 
-<div id="simplechart" style="width: 250px; height: 150px;"></div>
+<!-- div id="simplechart" style="width: 250px; height: 150px;"></div -->
 
 
 <script type="text/javascript" language="javascript" >
@@ -42,13 +42,13 @@ dojo.require("dojox.charting.Chart2D");
 dojo.addOnLoad(drawChart);
 */
 
-function drawChart(itemName) {
+function drawChart(itemName, vvvv) {
 	var item= document.getElementById(itemName);
 	var chart1 = new dojox.charting.Chart2D(item);
 	chart1.addPlot("default", {type: "Lines"});
 	chart1.addAxis("x");
 	chart1.addAxis("y", {vertical: true});
-	chart1.addSeries("Series 1", [1, 2, 2, 3, 4, 5, 5, 7]);
+	chart1.addSeries("Series 1", vvvv.slice());	// note need for slice() !
 	chart1.render();
 }
 </script>
