@@ -18,6 +18,7 @@ public class HugoActivity extends AbstractActivity implements HugoView.Presenter
 	public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
 		HugoView hv= environment.getNewHugoView();
 		hv.setName("unga hugo bunga");
+		// hv.setLink(LuisPlace.Tokenizer.getToken());
 		panel.setWidget(hv);
 	}
 
