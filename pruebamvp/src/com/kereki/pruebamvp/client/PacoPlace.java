@@ -5,16 +5,16 @@ import com.google.gwt.place.shared.PlaceTokenizer;
 
 public class PacoPlace extends Place {
 
-	public static class Tokenizer implements PlaceTokenizer<HugoPlace> {
+	public static class Tokenizer implements PlaceTokenizer<PacoPlace> {
 
 		@Override
-		public HugoPlace getPlace(final String token) {
+		public PacoPlace getPlace(final String token) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public String getToken(final HugoPlace place) {
+		public String getToken(final PacoPlace place) {
 			// TODO Auto-generated method stub
 			return null;
 		}
