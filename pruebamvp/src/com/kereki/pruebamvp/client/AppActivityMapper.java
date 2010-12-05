@@ -20,6 +20,8 @@ public class AppActivityMapper implements ActivityMapper {
 			return new LuisActivity(place, this.environment);
 		} else if (place instanceof PacoPlace) {
 			return new PacoActivity(place, this.environment);
+		} else {
+			return null;
 		}
 	}
 
