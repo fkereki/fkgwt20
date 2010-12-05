@@ -1,48 +1,38 @@
 package com.kereki.pruebamvp.client;
 
+import com.google.gwt.activity.shared.ActivityManager;
+import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.place.shared.Place;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Pruebamvp implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be
-	 * reached or returns an error.
-	 */
-	/**
-	 * This is the entry point method.
-	 */
+	private final Place defaultPlace= new HugoPlace("defaultdehugo");
+	private final SimplePanel appWidget= new SimplePanel();
+
 	@Override
 	public void onModuleLoad() {
-		final VerticalPanel vp= new VerticalPanel();
-		final Label labelEnter= new Label("Enter something:");
-		final Button sendButton= new Button("Send");
-		final TextBox nameField= new TextBox();
+		Environment environment= new Environment();
+		EventBus eventBus= environment.eventBus;
+		PlaceController placeController= environment.placeController;
 
-		vp.add(labelEnter);
-		vp.add(nameField);
-		vp.add(sendButton);
+		ActivityMapper activityMapper= new AppActivityMapper(environment);
+		ActivityManager activityManager= new ActivityManager(activityMapper, eventBus);
+		activityManager.setDisplay(appWidget);
 
-		RootPanel.get().add(vp);
+		AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
+		PlaceHistoryHandler historyHandler= new PlaceHistoryHandler(historyMapper);
+		historyHandler.register(placeController, eventBus, defaultPlace);
 
-		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
-
-		sendButton.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(final ClickEvent event) {
-				Window.alert("clickity!!");
-			}
-		});
+		RootPanel.get().add(appWidget);
+		historyHandler.handleCurrentHistory();
 	}
 }
