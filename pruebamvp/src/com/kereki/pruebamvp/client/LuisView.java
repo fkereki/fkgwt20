@@ -9,5 +9,4 @@ public interface LuisView extends IsWidget {
 	public interface Presenter {
 		void goTo(Place place);
 	}
-
 }
