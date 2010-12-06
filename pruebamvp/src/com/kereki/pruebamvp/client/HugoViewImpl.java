@@ -15,6 +15,7 @@ public class HugoViewImpl extends Composite implements HugoView {
 	public HugoViewImpl() {
 		vp.add(label);
 		vp.add(tb);
+		vp.add(hl);
 		initWidget(vp);
 	}
 
