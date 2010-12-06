@@ -29,5 +29,4 @@ public class AppActivityMapper implements ActivityMapper {
 			return null;
 		}
 	}
-
 }
