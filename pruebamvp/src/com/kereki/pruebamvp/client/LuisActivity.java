@@ -3,6 +3,7 @@ package com.kereki.pruebamvp.client;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class LuisActivity extends AbstractActivity implements LuisView.Presenter {
@@ -21,6 +22,15 @@ public class LuisActivity extends AbstractActivity implements LuisView.Presenter
 		LuisView lv= environment.getNewLuisView();
 		lv.setSomething("kreegah", "bundolo!");
 		panel.setWidget(lv);
+	}
+
+	@Override
+	public String mayStop() {
+		if (!Window.confirm("Quiere salir?")) {
+			return "No quiere salir...";
+		} else {
+			return null;
+		}
 	}
 
 	@Override
