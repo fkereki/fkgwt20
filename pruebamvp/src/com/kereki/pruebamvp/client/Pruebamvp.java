@@ -61,6 +61,7 @@ public class Pruebamvp implements EntryPoint {
 		menuBar.addItem(menuHugo);
 		menuBar.addItem(menuPaco);
 		menuBar.addItem(menuLuis);
+		RootPanel.get().add(menuBar);
 
 		RootPanel.get().add(appWidget);
 		historyHandler.handleCurrentHistory();
