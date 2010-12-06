@@ -20,7 +20,6 @@ public class LuisPlace extends Place {
 
 		@Override
 		public String getToken(final LuisPlace place) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 	}

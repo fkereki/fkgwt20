@@ -2,8 +2,12 @@ package com.kereki.pruebamvp.client;
 
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
+import com.google.gwt.user.client.Window;
 
 public class PacoPlace extends Place {
+	public PacoPlace(final String token) {
+		Window.alert("pacoplace constructor >>" + token + "<<");
+	}
 
 	public static class Tokenizer implements PlaceTokenizer<PacoPlace> {
 
