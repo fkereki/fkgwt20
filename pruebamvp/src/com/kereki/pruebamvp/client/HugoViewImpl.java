@@ -22,7 +22,6 @@ public class HugoViewImpl extends Composite implements HugoView {
 	@Override
 	public void setName(final String aString) {
 		tb.setText(aString);
-
 	}
 
 	@Override

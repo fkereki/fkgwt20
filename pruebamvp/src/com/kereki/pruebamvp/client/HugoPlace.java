@@ -8,6 +8,7 @@ public class HugoPlace extends Place {
 	private final String hugoName;
 
 	public HugoPlace(final String token) {
+		Window.alert("hugoplace constructor >>" + token + "<<");
 		this.hugoName= token;
 	}
 
@@ -20,8 +21,7 @@ public class HugoPlace extends Place {
 		@Override
 		public HugoPlace getPlace(final String token) {
 			Window.alert("hugoplace tokenizer getplace token >>" + token + " <<");
-			// TODO Auto-generated method stub
-			return null;
+			return new HugoPlace(token);
 		}
 
 		@Override
