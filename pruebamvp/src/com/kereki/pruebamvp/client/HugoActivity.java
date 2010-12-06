@@ -11,6 +11,7 @@ public class HugoActivity extends AbstractActivity implements HugoView.Presenter
 	private final Place place;
 
 	public HugoActivity(final Place place, final Environment environment) {
+		Window.alert("hugoactivity constructor");
 		this.place= place;
 		this.environment= environment;
 	}
@@ -27,6 +28,7 @@ public class HugoActivity extends AbstractActivity implements HugoView.Presenter
 
 	@Override
 	public void goTo(final Place place) {
+		Window.alert("hugoactivity goto");
 		environment.placeController.goTo(place);
 	}
 }

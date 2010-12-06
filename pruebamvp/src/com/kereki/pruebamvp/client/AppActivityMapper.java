@@ -18,10 +18,10 @@ public class AppActivityMapper implements ActivityMapper {
 		Window.alert("appactivitymapper getactivity");
 
 		if (place instanceof HugoPlace) {
-			Window.alert("hugoplace");
+			Window.alert("getactivity hugoplace");
 			return new HugoActivity(place, this.environment);
 		} else if (place instanceof LuisPlace) {
-			Window.alert("luisplace");
+			Window.alert("getactivity luisplace");
 			return new LuisActivity(place, this.environment);
 		} else if (place instanceof PacoPlace) {
 			Window.alert("pacoplace");
