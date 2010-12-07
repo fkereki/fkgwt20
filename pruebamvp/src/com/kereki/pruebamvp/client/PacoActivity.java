@@ -18,8 +18,8 @@ public class PacoActivity extends AbstractActivity implements PacoView.Presenter
 	@Override
 	public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
 		pv= environment.getNewPacoView();
-		pv.setPresenter(this);
 		panel.setWidget(pv);
+		pv.setPresenter(this);
 	}
 
 	@Override
