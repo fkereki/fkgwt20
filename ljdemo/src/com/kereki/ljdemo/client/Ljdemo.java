@@ -4,12 +4,12 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class Ljdemo implements EntryPoint {
-	private Environment ownEnvironment;
+	private final Environment ownEnvironment= new Environment();
 
 	@Override
 	public void onModuleLoad() {
 		MainFormView formView= new MainFormView();
-		MainFormPresenter presenter= new MainFormPresenter(ownEnvironment, formView);
+		new MainFormPresenter(ownEnvironment, formView);
 		RootPanel.get().add(formView);
 	}
 }
