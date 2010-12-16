@@ -17,18 +17,19 @@ public class MainFormView extends Composite implements MainFormPresenter.ViewInt
 	private final Button btn= new Button("Average");
 
 	@Override
-	public int getFirstNumber() {
-		return Integer.parseInt(tf1.getValue());
+	public String getFirstText() {
+		return tf1.getValue();
 	}
 
 	@Override
-	public int getSecondNumber() {
-		return Integer.parseInt(tf2.getValue());
+	public String getSecondText() {
+		// TODO Auto-generated method stub
+		return tf2.getValue();
 	}
 
 	@Override
-	public int getThirdNumber() {
-		return Integer.parseInt(tf3.getValue());
+	public String getThirdText() {
+		return tf3.getValue();
 	}
 
 	@Override

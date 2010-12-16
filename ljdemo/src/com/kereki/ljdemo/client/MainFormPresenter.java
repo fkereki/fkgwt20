@@ -1,6 +1,5 @@
 package com.kereki.ljdemo.client;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class MainFormPresenter {
@@ -8,30 +7,29 @@ public class MainFormPresenter {
 	private final MainFormView ownView;
 
 	public interface ViewInterface {
-		int getFirstNumber();
+		String getFirstText();
 
-		int getSecondNumber();
+		String getSecondText();
 
-		int getThirdNumber();
+		String getThirdText();
 
 		void setPresenter(MainFormPresenter aPresenter);
 	}
 
 	public void onAverageClick() {
-		int n1, n2, n3;
-		n1= ownView.getFirstNumber();
-		n2= ownView.getSecondNumber();
-		n3= ownView.getThirdNumber();
-		ownEnvironment.calculateAverage(n1, n2, n3, new AsyncCallback<Integer>() {
-
+		String s1, s2, s3;
+		s1= ownView.getFirstText();
+		s2= ownView.getSecondText();
+		s3= ownView.getThirdText();
+		ownEnvironment.calculateAverage(s1, s2, s3, new AsyncCallback<Integer>() {
 			@Override
 			public void onFailure(final Throwable caught) {
-				// TODO Auto-generated method stub
+				ownEnvironment.showMessage("Please enter three numbers!");
 			}
 
 			@Override
 			public void onSuccess(final Integer result) {
-				Window.alert("Exito " + result);
+				ownEnvironment.showMessage("Calculated average is " + result);
 			}
 		});
 	};
