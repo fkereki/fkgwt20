@@ -8,13 +8,15 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class MainFormView extends Composite implements MainFormPresenter.ViewInterface {
+public class MainFormView extends Composite implements
+        MainFormPresenter.ViewInterface {
 	private MainFormPresenter ownPresenter;
 	private final FlexTable ft= new FlexTable();
 	private final TextBox tf1= new TextBox();
 	private final TextBox tf2= new TextBox();
 	private final TextBox tf3= new TextBox();
 	private final Button btn= new Button("Average");
+	private final TextBox tavg= new TextBox();
 
 	@Override
 	public String getFirstText() {
@@ -33,6 +35,11 @@ public class MainFormView extends Composite implements MainFormPresenter.ViewInt
 	}
 
 	@Override
+	public void setResult(final int aValue) {
+		tavg.setValue("" + aValue);
+	}
+
+	@Override
 	public void setPresenter(final MainFormPresenter aPresenter) {
 		this.ownPresenter= aPresenter;
 	}
@@ -45,8 +52,11 @@ public class MainFormView extends Composite implements MainFormPresenter.ViewInt
 		ft.setWidget(1, 1, tf2);
 		ft.setWidget(2, 0, new Label("Third number:"));
 		ft.setWidget(2, 1, tf3);
-		ft.setWidget(3, 1, btn);
+		ft.setWidget(3, 0, btn);
+		ft.setWidget(3, 1, tavg);
 		initWidget(ft);
+
+		tavg.setReadOnly(true);
 
 		btn.addClickHandler(new ClickHandler() {
 			@Override

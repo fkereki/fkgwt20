@@ -1,22 +1,52 @@
 package com.kereki.ljdemo.client;
 
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class Environment {
-	public void calculateAverage(final String s1, final String s2, final String s3, final AsyncCallback<Integer> cb) {
+public class Environment implements EnvironmentInterface {
+	@Override
+	public void calculateAverage(final String s1, final String s2,
+	        final String s3, final AsyncCallback<Integer> cb) {
+
+		final RequestBuilder rb= new RequestBuilder(RequestBuilder.GET,
+		        "http://127.0.0.1/average.php?first=" + s1 + "&second=" + s2
+		                + "&third=" + s3);
+
 		try {
-			int n1= Integer.parseInt(s1);
-			int n2= Integer.parseInt(s2);
-			int n3= Integer.parseInt(s3);
-			int avg= (n1 + n2 + n3) / 3;
-			cb.onSuccess(avg);
+			rb.sendRequest(null, new RequestCallback() {
+
+				@Override
+				public void onResponseReceived(final Request request,
+				        final Response response) {
+
+					/*
+					 * Successful return? If so, send the result back;
+					 * otherwise, it's a failure.
+					 */
+					if (response.getStatusCode() == 200) {
+						cb.onSuccess(Integer.parseInt(response.getText()));
+					} else {
+						cb.onFailure(new Throwable(response.getStatusText()));
+					}
+				}
+
+				@Override
+				public void onError(final Request request,
+				        final Throwable exception) {
+					cb.onFailure(exception);
+				}
+			});
 		}
 		catch (Exception e) {
-			cb.onFailure(null);
+			cb.onFailure(e);
 		}
 	}
 
+	@Override
 	public void showMessage(final String text) {
 		Window.alert(text);
 	}

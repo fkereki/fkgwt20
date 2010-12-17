@@ -13,6 +13,8 @@ public class MainFormPresenter {
 
 		String getThirdText();
 
+		void setResult(int aValue);
+
 		void setPresenter(MainFormPresenter aPresenter);
 	}
 
@@ -21,20 +23,23 @@ public class MainFormPresenter {
 		s1= ownView.getFirstText();
 		s2= ownView.getSecondText();
 		s3= ownView.getThirdText();
-		ownEnvironment.calculateAverage(s1, s2, s3, new AsyncCallback<Integer>() {
-			@Override
-			public void onFailure(final Throwable caught) {
-				ownEnvironment.showMessage("Please enter three numbers!");
-			}
+		ownEnvironment.calculateAverage(s1, s2, s3,
+		        new AsyncCallback<Integer>() {
+			        @Override
+			        public void onFailure(final Throwable caught) {
+				        ownEnvironment
+				                .showMessage("Please enter three numbers!");
+			        }
 
-			@Override
-			public void onSuccess(final Integer result) {
-				ownEnvironment.showMessage("Calculated average is " + result);
-			}
-		});
+			        @Override
+			        public void onSuccess(final Integer result) {
+				        ownView.setResult(result);
+			        }
+		        });
 	};
 
-	public MainFormPresenter(final Environment anEnvironment, final MainFormView aView) {
+	public MainFormPresenter(final Environment anEnvironment,
+	        final MainFormView aView) {
 		super();
 		this.ownEnvironment= anEnvironment;
 		this.ownView= aView;
