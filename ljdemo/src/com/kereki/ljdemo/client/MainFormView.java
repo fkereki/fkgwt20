@@ -1,5 +1,7 @@
 package com.kereki.ljdemo.client;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -35,8 +37,8 @@ public class MainFormView extends Composite implements
 	}
 
 	@Override
-	public void setResult(final int aValue) {
-		tavg.setValue("" + aValue);
+	public void setResult(final String aValue) {
+		tavg.setValue(aValue);
 	}
 
 	@Override
@@ -64,5 +66,16 @@ public class MainFormView extends Composite implements
 				ownPresenter.onAverageClick();
 			}
 		});
+
+		ChangeHandler ch= new ChangeHandler() {
+			@Override
+			public void onChange(final ChangeEvent event) {
+				ownPresenter.onAnyChange();
+			}
+		};
+
+		tf1.addChangeHandler(ch);
+		tf2.addChangeHandler(ch);
+		tf3.addChangeHandler(ch);
 	}
 }
