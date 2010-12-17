@@ -13,9 +13,13 @@ public class MainFormPresenter {
 
 		String getThirdText();
 
-		void setResult(int aValue);
+		void setResult(String aValue);
 
 		void setPresenter(MainFormPresenter aPresenter);
+	}
+
+	public void onAnyChange() {
+		ownView.setResult("--press to calculate--");
 	}
 
 	public void onAverageClick() {
@@ -33,16 +37,16 @@ public class MainFormPresenter {
 
 			        @Override
 			        public void onSuccess(final Integer result) {
-				        ownView.setResult(result);
+				        ownView.setResult("" + result);
 			        }
 		        });
 	};
 
 	public MainFormPresenter(final Environment anEnvironment,
 	        final MainFormView aView) {
-		super();
-		this.ownEnvironment= anEnvironment;
-		this.ownView= aView;
+
+		ownEnvironment= anEnvironment;
+		ownView= aView;
 		aView.setPresenter(this);
 	}
 }
