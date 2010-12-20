@@ -2,6 +2,8 @@
 <module rename-to='ljdemo'>
   <inherits name='com.google.gwt.user.User'/>
   <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+  <inherits name="com.google.gwt.junit.JUnit"/>
+
   <entry-point class='com.kereki.ljdemo.client.Ljdemo'/>
 
   <!-- Specify the paths for translatable code                    -->

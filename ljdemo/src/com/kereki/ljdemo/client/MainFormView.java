@@ -27,7 +27,6 @@ public class MainFormView extends Composite implements
 
 	@Override
 	public String getSecondText() {
-		// TODO Auto-generated method stub
 		return tf2.getValue();
 	}
 
