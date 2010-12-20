@@ -5,6 +5,15 @@
 
 <web-app>
   <!-- Servlets -->
+
+<servlet>
+  <servlet-name>jUnitHostImpl</servlet-name>
+  <servlet-class>com.google.gwt.junit.server.JUnitHostImpl</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>jUnitHostImpl</servlet-name>
+  <url-pattern>/ljdemo/junithost/*</url-pattern>
+</servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>

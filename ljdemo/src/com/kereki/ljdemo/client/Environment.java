@@ -13,7 +13,7 @@ public class Environment implements EnvironmentInterface {
 	        final String s3, final AsyncCallback<Integer> cb) {
 
 		final RequestBuilder rb= new RequestBuilder(RequestBuilder.GET,
-		        "http://127.0.0.1/average.php?first=" + s1 + "&second=" + s2
+		        "http://127.0.0.1/average3ws.php?first=" + s1 + "&second=" + s2
 		                + "&third=" + s3);
 
 		try {
