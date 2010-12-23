@@ -16,7 +16,7 @@ public class MainFormViewTest extends GWTTestCase {
 		public boolean onAnyChangeCalled= false;
 		public boolean onAverageClickCalled= false;
 
-		public FakeFormPresenter(final Environment anEnvironment,
+		public FakeFormPresenter(final Model anEnvironment,
 		        final MainFormView aView) {
 			super(anEnvironment, aView);
 		}

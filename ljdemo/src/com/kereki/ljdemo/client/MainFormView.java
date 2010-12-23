@@ -10,37 +10,31 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class MainFormView extends Composite implements
-        MainFormPresenter.ViewInterface {
-	private MainFormPresenter ownPresenter;
-	private final FlexTable ft= new FlexTable();
-	private final TextBox tf1= new TextBox();
-	private final TextBox tf2= new TextBox();
-	private final TextBox tf3= new TextBox();
-	private final Button btn= new Button("Average");
-	private final TextBox tavg= new TextBox();
+public class MainFormView extends Composite {
+	protected MainFormPresenter ownPresenter;
+	protected final FlexTable ft= new FlexTable();
+	protected final TextBox tf1= new TextBox();
+	protected final TextBox tf2= new TextBox();
+	protected final TextBox tf3= new TextBox();
+	protected final Button btn= new Button("Average");
+	protected final TextBox tavg= new TextBox();
 
-	@Override
 	public String getFirstText() {
 		return tf1.getValue();
 	}
 
-	@Override
 	public String getSecondText() {
 		return tf2.getValue();
 	}
 
-	@Override
 	public String getThirdText() {
 		return tf3.getValue();
 	}
 
-	@Override
 	public void setResult(final String aValue) {
 		tavg.setValue(aValue);
 	}
 
-	@Override
 	public void setPresenter(final MainFormPresenter aPresenter) {
 		this.ownPresenter= aPresenter;
 	}
