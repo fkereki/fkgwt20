@@ -10,8 +10,8 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class MainFormView extends Composite {
-	protected MainFormPresenter ownPresenter;
+public class FormView extends Composite {
+	protected FormPresenter ownPresenter;
 	protected final FlexTable ft= new FlexTable();
 	protected final TextBox tf1= new TextBox();
 	protected final TextBox tf2= new TextBox();
@@ -35,11 +35,11 @@ public class MainFormView extends Composite {
 		tavg.setValue(aValue);
 	}
 
-	public void setPresenter(final MainFormPresenter aPresenter) {
+	public void setPresenter(final FormPresenter aPresenter) {
 		this.ownPresenter= aPresenter;
 	}
 
-	public MainFormView() {
+	public FormView() {
 		super();
 		ft.setWidget(0, 0, new Label("First number:"));
 		ft.setWidget(0, 1, tf1);
