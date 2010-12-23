@@ -7,8 +7,8 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class Environment implements EnvironmentInterface {
-	@Override
+public class Model {
+
 	public void calculateAverage(final String s1, final String s2,
 	        final String s3, final AsyncCallback<Integer> cb) {
 
@@ -46,7 +46,6 @@ public class Environment implements EnvironmentInterface {
 		}
 	}
 
-	@Override
 	public void showMessage(final String text) {
 		Window.alert(text);
 	}

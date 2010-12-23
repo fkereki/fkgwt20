@@ -3,20 +3,8 @@ package com.kereki.ljdemo.client;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class MainFormPresenter {
-	private final Environment ownEnvironment;
+	private final Model ownModel;
 	private final MainFormView ownView;
-
-	public interface ViewInterface {
-		String getFirstText();
-
-		String getSecondText();
-
-		String getThirdText();
-
-		void setResult(String aValue);
-
-		void setPresenter(MainFormPresenter aPresenter);
-	}
 
 	public void onAnyChange() {
 		ownView.setResult("--press to calculate--");
@@ -27,11 +15,11 @@ public class MainFormPresenter {
 		s1= ownView.getFirstText();
 		s2= ownView.getSecondText();
 		s3= ownView.getThirdText();
-		ownEnvironment.calculateAverage(s1, s2, s3,
+		ownModel.calculateAverage(s1, s2, s3,
 		        new AsyncCallback<Integer>() {
 			        @Override
 			        public void onFailure(final Throwable caught) {
-				        ownEnvironment
+				        ownModel
 				                .showMessage("Please enter three numbers!");
 			        }
 
@@ -42,10 +30,10 @@ public class MainFormPresenter {
 		        });
 	};
 
-	public MainFormPresenter(final Environment anEnvironment,
+	public MainFormPresenter(final Model aModel,
 	        final MainFormView aView) {
 
-		ownEnvironment= anEnvironment;
+		ownModel= aModel;
 		ownView= aView;
 		aView.setPresenter(this);
 	}
