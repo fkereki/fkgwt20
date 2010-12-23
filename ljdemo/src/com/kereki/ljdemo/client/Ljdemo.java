@@ -8,8 +8,8 @@ public class Ljdemo implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-		MainFormView formView= new MainFormView();
-		new MainFormPresenter(ownModel, formView);
+		FormView formView= new FormView();
+		new FormPresenter(ownModel, formView);
 		RootPanel.get().add(formView);
 	}
 }
