@@ -1,6 +1,10 @@
 package com.kereki.ljdemo.client;
 
-import com.google.gwt.http.client.*;
+import static com.google.gwt.core.client.GWT.getHostPageBaseURL;
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -10,8 +14,8 @@ public class Model {
             final String s3, final AsyncCallback<Integer> cb) {
 
         final RequestBuilder rb= new RequestBuilder(RequestBuilder.GET,
-                "http://127.0.0.1/average3ws.php?first=" + s1 + "&second=" + s2
-                        + "&third=" + s3);
+                getHostPageBaseURL() + "average3ws.php" + "?first=" + s1
+                        + "&second=" + s2 + "&third=" + s3);
 
         try {
             rb.sendRequest(null, new RequestCallback() {
