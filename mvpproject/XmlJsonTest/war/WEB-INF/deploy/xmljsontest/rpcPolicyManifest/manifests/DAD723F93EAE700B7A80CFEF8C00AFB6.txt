@@ -1,0 +1,2 @@
+serviceClass: com.google.gwt.kereki.xmlJsonTest.client.ServerProxy
+path: 65F652E271C20DBF8EE6AC1105BDD3B1.gwt.rpc

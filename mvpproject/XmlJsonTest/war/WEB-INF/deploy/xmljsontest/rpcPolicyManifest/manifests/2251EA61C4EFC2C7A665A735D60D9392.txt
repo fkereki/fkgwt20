@@ -1,0 +1,2 @@
+serviceClass: com.google.gwt.kereki.xmlJsonTest.client.GreetingService
+path: 65E0010EDB9547451BE01EF3784D20BE.gwt.rpc
