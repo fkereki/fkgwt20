@@ -201,12 +201,12 @@ public class XmlJsonTest implements EntryPoint {
 
         String detailedAddress= "";
 
-        for (int i= 0; i < gd3.getAddressPartsLength(); i++) {
+        for (int i= 0; i < gd3.getAddressComponentsLength(); i++) {
             String separator= "";
 
-            for (int j= 0; j < gd3.getAddressPartsTypeLength(i); j++) {
+            for (int j= 0; j < gd3.getAddressComponentTypeLength(i); j++) {
                 detailedAddress= detailedAddress + separator
-                    + gd3.getAddressPartsType(i, j);
+                    + gd3.getAddressComponentType(i, j);
                 separator= ", ";
             }
 
